@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" href="favicon.png?v=4">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261018_manejadores_v1">
+  <link rel="stylesheet" href="styles.css?v=20261018_v3">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
 
   <!-- Main Navigation Bar -->
   <nav class="navbar">
-    <a href="#home" class="nav-brand" id="main-nav-brand" onclick="switchView('public')">
+    <a href="#home" class="nav-brand" id="main-nav-brand" onclick="navigateRoute('#home')">
       <div id="navbar-logo-container" style="display: flex; align-items: center; justify-content: center;">
         <img src="logo_emblem.png" alt="Los Manejadores Emblem" class="navbar-logo-img" />
       </div>
@@ -43,12 +43,12 @@
 
     <div class="nav-controls">
       <ul class="nav-links" id="public-nav-links">
-        <li><a href="#home">Inicio</a></li>
-        <li><a href="#roster">Influencers</a></li>
-        <li><a href="#musica" style="color: #fbbf24; font-weight: 600;"><i class="fa-solid fa-compact-disc" style="color: #00f5d4; margin-right: 4px;"></i> Música</a></li>
-        <li><a href="#youtube">YouTube</a></li>
-        <li><a href="#empresas">Empresas</a></li>
-        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#home" onclick="navigateRoute('#home')">Inicio</a></li>
+        <li><a href="#roster" onclick="navigateRoute('#roster')">Influencers</a></li>
+        <li><a href="#musica" onclick="navigateRoute('#musica')" style="color: #fbbf24; font-weight: 600;"><i class="fa-solid fa-compact-disc" style="color: #00f5d4; margin-right: 4px;"></i> Música</a></li>
+        <li><a href="#youtube" onclick="navigateRoute('#youtube')">YouTube</a></li>
+        <li><a href="#empresas" onclick="navigateRoute('#empresas')">Empresas</a></li>
+        <li><a href="#cursos" onclick="navigateRoute('#cursos')">Cursos</a></li>
       </ul>
 
       <div class="nav-actions-group">
@@ -93,20 +93,20 @@
         </p>
         
         <!-- Acceso Rápido a Secciones Principales -->
-        <div class="hero-actions" style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;">
-          <a href="#roster" class="btn btn-primary">
+        <div class="hero-actions" style="margin-top: 1.5rem; display: flex; flex-wrap: gap; gap: 0.75rem; justify-content: center;">
+          <a href="#roster" onclick="navigateRoute('#roster')" class="btn btn-primary">
             <i class="fa-solid fa-gem"></i> Influencers IA
           </a>
-          <a href="#musica" class="btn btn-secondary" style="border-color: rgba(255, 183, 3, 0.6); color: #fbbf24; background: rgba(255, 183, 3, 0.08);">
+          <a href="#musica" onclick="navigateRoute('#musica')" class="btn btn-secondary" style="border-color: rgba(255, 183, 3, 0.6); color: #fbbf24; background: rgba(255, 183, 3, 0.08);">
             <i class="fa-solid fa-compact-disc" style="color: #00f5d4;"></i> Música & Audio Branding
           </a>
-          <a href="#youtube" class="btn btn-secondary" style="border-color: rgba(168, 85, 247, 0.5); color: #d8b4fe;">
+          <a href="#youtube" onclick="navigateRoute('#youtube')" class="btn btn-secondary" style="border-color: rgba(168, 85, 247, 0.5); color: #d8b4fe;">
             <i class="fa-brands fa-youtube" style="color: #c084fc;"></i> YouTube & Arcano
           </a>
-          <a href="#empresas" class="btn btn-secondary" style="border-color: rgba(6, 182, 212, 0.5); color: #67e8f9;">
+          <a href="#empresas" onclick="navigateRoute('#empresas')" class="btn btn-secondary" style="border-color: rgba(6, 182, 212, 0.5); color: #67e8f9;">
             <i class="fa-solid fa-building" style="color: var(--cyan);"></i> Soluciones Empresas
           </a>
-          <a href="#cursos" class="btn btn-secondary" style="border-color: rgba(245, 158, 11, 0.5); color: #fde68a;">
+          <a href="#cursos" onclick="navigateRoute('#cursos')" class="btn btn-secondary" style="border-color: rgba(245, 158, 11, 0.5); color: #fde68a;">
             <i class="fa-solid fa-graduation-cap" style="color: #fbbf24;"></i> Cursos IA
           </a>
         </div>
@@ -2308,6 +2308,6 @@ Agenda consulta gratuita hoy."</div>
   </footer>
 
   <!-- App JS JavaScript -->
-  <script src="app.js?v=20261018_manejadores_v1"></script>
+  <script src="app.js?v=20261018_v3"></script>
 </body>
 </html>

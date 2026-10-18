@@ -2164,8 +2164,17 @@ function updateWorldClocks() {
 
 // --- 4. ROUTER & PAGE RENDERERS ---
 
+function navigateRoute(route) {
+  if (window.location.hash === route) {
+    handleRoute();
+  } else {
+    window.location.hash = route;
+  }
+}
+
 function initRouter() {
   window.addEventListener('hashchange', handleRoute);
+  window.addEventListener('popstate', handleRoute);
   window.addEventListener('load', handleRoute);
   handleRoute();
   setInterval(updateWorldClocks, 1000);
@@ -2490,9 +2499,18 @@ function showDynamicView() {
   const teamView = document.getElementById('view-team');
   const archiveView = document.getElementById('view-archive');
 
-  if (publicView) publicView.style.display = 'none';
-  if (teamView) teamView.style.display = 'none';
-  if (archiveView) archiveView.style.display = 'none';
+  if (publicView) {
+    publicView.style.display = 'none';
+    publicView.classList.remove('active-view');
+  }
+  if (teamView) {
+    teamView.style.display = 'none';
+    teamView.classList.remove('active-view');
+  }
+  if (archiveView) {
+    archiveView.style.display = 'none';
+    archiveView.classList.remove('active-view');
+  }
   if (dynamicView) {
     dynamicView.style.display = 'block';
     dynamicView.classList.add('active-view');
@@ -2506,9 +2524,18 @@ function showPublicView() {
   const teamView = document.getElementById('view-team');
   const archiveView = document.getElementById('view-archive');
 
-  if (dynamicView) dynamicView.style.display = 'none';
-  if (teamView) teamView.style.display = 'none';
-  if (archiveView) archiveView.style.display = 'none';
+  if (dynamicView) {
+    dynamicView.style.display = 'none';
+    dynamicView.classList.remove('active-view');
+  }
+  if (teamView) {
+    teamView.style.display = 'none';
+    teamView.classList.remove('active-view');
+  }
+  if (archiveView) {
+    archiveView.style.display = 'none';
+    archiveView.classList.remove('active-view');
+  }
   if (publicView) {
     publicView.style.display = 'block';
     publicView.classList.add('active-view');
