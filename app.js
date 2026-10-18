@@ -2152,6 +2152,9 @@ function handleRoute() {
   } else if (hash === '#comercial' || hash === '#clientes' || hash === '#pitch' || hash === '#showcase') {
     renderCommercialPage();
     showDynamicView();
+  } else if (hash === '#musica' || hash === '#musica-comercial' || hash === '#soundforge') {
+    renderMusicaPage();
+    showDynamicView();
   } else if (hash === '#logos' || hash === '#copys') {
     if (isTeamAuthenticated()) {
       showTeamView('copys');
@@ -8237,6 +8240,768 @@ function handleClientsContactSubmit(e) {
   const name = document.getElementById('client-name')?.value || '';
   const company = document.getElementById('client-company')?.value || '';
   alert(`¡Gracias ${name}! Hemos registrado tu solicitud para ${company}. El equipo fundador (Daniel, Pancho y Wladimir) se pondrá en contacto a la brevedad.`);
+  e.target.reset();
+}
+
+// ============================================================================
+// RENDER: MÚSICA • SECTOR COMERCIAL & PRODUCCIÓN SONORA PARA MARCAS
+// ============================================================================
+let activeCommercialAudio = null;
+
+function renderMusicaPage() {
+  const container = document.getElementById('view-dynamic');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="breadcrumb-bar">
+      <div class="breadcrumbs">
+        <a href="#home">Inicio</a>
+        <span class="separator"><i class="fa-solid fa-chevron-right"></i></span>
+        <span class="current">Música • Producción Sonora & Audio Branding para Marcas</span>
+      </div>
+      <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver a Inicio</a>
+    </div>
+
+    <!-- Header Hero Comercial de Música -->
+    <div class="section-header" style="text-align: center; max-width: 900px; margin: 0 auto 3rem auto;">
+      <span class="section-subtitle" style="color: #fbbf24;"><i class="fa-solid fa-compact-disc"></i> SECTOR COMERCIAL • MÚSICA & AUDIO BRANDING</span>
+      <h1 class="section-title" style="font-size: 2.8rem; margin-top: 0.5rem;">
+        Música Original, Bandas Sonoras & Audio Branding para Clientes
+      </h1>
+      <p class="section-description" style="margin-top: 0.85rem; line-height: 1.7; font-size: 1.05rem;">
+        Componemos y producimos música de alta fidelidad para videojuegos, campañas publicitarias, intros de YouTube, podcasts y series.
+        Masters estéreo en 24-bit 48kHz, entrega de stems por instrumentos y <strong>licencia comercial perpetua 100% libre de reclamos de copyright (Royalty-Free)</strong> en menos de 48 horas.
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+        <a href="#music-demos" class="btn btn-primary" style="background: linear-gradient(135deg, #f59e0b, #d97706); border: none;">
+          <i class="fa-solid fa-headphones"></i> Escuchar Demos Comerciales
+        </a>
+        <a href="#music-simulator" class="btn btn-secondary">
+          <i class="fa-solid fa-calculator"></i> Cotizador de Producción Musical
+        </a>
+        <a href="#music-plans" class="btn btn-secondary">
+          <i class="fa-solid fa-tags"></i> Tarifas & Licencias
+        </a>
+        <a href="#music-contact" class="btn btn-secondary">
+          <i class="fa-solid fa-envelope"></i> Solicitar Muestra en 48h
+        </a>
+      </div>
+    </div>
+
+    <!-- BLOQUE 1: LAS 4 LÍNEAS DE PRODUCCIÓN MUSICAL COMERCIAL -->
+    <section class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-subtitle" style="color: var(--cyan);"><i class="fa-solid fa-layer-group"></i> Servicios de Producción Sonora</span>
+        <h2 class="section-title" style="font-size: 2rem;">Soluciones Musicales a Medida de tu Proyecto</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Línea 1: Videojuegos & Cine -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(245, 158, 11, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #fbbf24; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-dragon"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Bandas Sonoras (OST) & Videojuegos</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Música orquestal épica, dark fantasy y texturas híbridas diseñadas para bandas sonoras de videojuegos indie, cortometrajes y trailers cinematográficos.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Seamless loops (bucles sin fin para motores Unity/Unreal)</li>
+              <li>Stems por capas de intensidad (exploración vs batalla)</li>
+              <li>Afinación armónica 432Hz o 440Hz según estética</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Banda Sonora OST Videojuego')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+            Cotizar Banda Sonora
+          </button>
+        </div>
+
+        <!-- Línea 2: Audio Branding & Jingles -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(6, 182, 212, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(6, 182, 212, 0.15); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Audio Branding & Sound Logos</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Diseñamos la firma acústica de tu marca (audio logos de 2 a 5 segundos), jingles publicitarios y sonidos de interfaz para apps móviles que maximizan el recuerdo de marca.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Identidad sonora exclusiva no reutilizable</li>
+              <li>Formatos adaptados a spots de TV, radio y TikTok</li>
+              <li>Manual de identidad y directrices de uso acústico</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Audio Branding & Sound Logo')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: var(--cyan); border-color: rgba(6, 182, 212, 0.4);">
+            Cotizar Audio Branding
+          </button>
+        </div>
+
+        <!-- Línea 3: Creadores & YouTube (Cero Copyright) -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(139, 92, 246, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(139, 92, 246, 0.15); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Música para Canales (Cero Content ID)</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Packs musicales exclusivos de fondo (lo-fi hip hop, ambient textural y synth retro) con garantía legal contra desmonetizaciones o reclamos de derechos en YouTube y Twitch.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Cero reclamaciones por Content ID garantizadas</li>
+              <li>Pistas de intro, outro, transiciones y fondos largos</li>
+              <li>Licencia perpetua sin renovación mensual obligatoria</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Pack Música para YouTube / Canales')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: var(--purple); border-color: rgba(139, 92, 246, 0.4);">
+            Solicitar Pack Creador
+          </button>
+        </div>
+
+        <!-- Línea 4: Artistas Virtuales (Voz Lírica e Hiperrealista) -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(236, 72, 153, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(236, 72, 153, 0.15); color: #ec4899; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-microphone-lines"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Canciones con Vocalistas Virtuales</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Producimos temas completos integrando a nuestras artistas virtuales consagradas: la voz lírica de <strong>Freja Lindholm</strong> (dark fantasy/arcano) o el ritmo popular de <strong>Maite Valenzuela</strong>.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Letras en español, inglés o latín litúrgico místico</li>
+              <li>Mezcla profesional con calidad discográfica en streaming</li>
+              <li>Integración del avatar en videos musicales y visualizers</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Canción Completa con Vocalista Virtual')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: #ec4899; border-color: rgba(236, 72, 153, 0.4);">
+            Contratar Vocalista Virtual
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: SHOWCASE INTERACTIVO DE DEMOS SONORAS (PLAYER) -->
+    <section id="music-demos" class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="glass-card" style="padding: 2.5rem; border-color: rgba(255, 183, 3, 0.5); background: radial-gradient(circle at top left, rgba(255, 183, 3, 0.1) 0%, rgba(15, 18, 30, 0.98) 100%); border-radius: var(--radius-lg);">
+        
+        <div style="text-align: center; max-width: 750px; margin: 0 auto 2rem auto;">
+          <span class="section-subtitle" style="color: #fbbf24;"><i class="fa-solid fa-headphones"></i> Escucha Activa</span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: #fff; margin: 0.5rem 0;">
+            Muestras & Demos Sonoras Comerciales
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Presiona reproducir para escuchar maquetas sintetizadas en vivo directamente en tu navegador o solicita muestras personalizadas en 48 horas.
+          </p>
+        </div>
+
+        <!-- Contenedor del Reproductor de Demos -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+          
+          <!-- Pista 1 -->
+          <div class="glass-card music-demo-card" id="demo-card-dragon" style="padding: 1.25rem; border-color: rgba(245, 158, 11, 0.3); background: rgba(10, 12, 22, 0.8);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.72rem; color: #fbbf24; font-weight: 700; text-transform: uppercase;">Dark Fantasy • Épica</span>
+                <h4 style="color: #fff; font-size: 1.05rem; margin: 0.2rem 0;">El Dragón Astral</h4>
+                <span style="font-size: 0.75rem; color: var(--text-dim); font-family: monospace;">D Dorian • 74 BPM • Cuerdas & Coro</span>
+              </div>
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(245, 158, 11, 0.2); color: #fbbf24; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                <i class="fa-solid fa-music"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">
+              Arreglo para trailers cinematográficos, batallas de videojuegos y narrativas místicas. Cuerdas oscuras y coro litúrgico.
+            </p>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button onclick="playMusicCommercialDemo('dragon', this)" class="btn btn-primary btn-sm btn-play-demo" style="flex: 1; justify-content: center; font-size: 0.8rem; background: #f59e0b; border: none; color: #000; font-weight: 700;">
+                <i class="fa-solid fa-play"></i> Escuchar Demo
+              </button>
+              <button onclick="prefillMusicQuote('Estilo El Dragón Astral (Dark Fantasy)')" class="btn btn-secondary btn-sm" title="Cotizar estilo similar" style="font-size: 0.8rem; padding: 0.4rem 0.6rem;">
+                <i class="fa-solid fa-tag"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pista 2 -->
+          <div class="glass-card music-demo-card" id="demo-card-cyber" style="padding: 1.25rem; border-color: rgba(6, 182, 212, 0.3); background: rgba(10, 12, 22, 0.8);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 700; text-transform: uppercase;">Cyberpunk • Tech Beat</span>
+                <h4 style="color: #fff; font-size: 1.05rem; margin: 0.2rem 0;">Neon Horizon 2088</h4>
+                <span style="font-size: 0.75rem; color: var(--text-dim); font-family: monospace;">A Minor • 110 BPM • Analógico</span>
+              </div>
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(6, 182, 212, 0.2); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">
+              Sintetizadores analógicos retro y bajos contundentes. Ideal para lanzamientos de productos tecnológicos y videojuegos futuristas.
+            </p>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button onclick="playMusicCommercialDemo('cyber', this)" class="btn btn-primary btn-sm btn-play-demo" style="flex: 1; justify-content: center; font-size: 0.8rem; background: var(--cyan); border: none; color: #000; font-weight: 700;">
+                <i class="fa-solid fa-play"></i> Escuchar Demo
+              </button>
+              <button onclick="prefillMusicQuote('Estilo Neon Horizon (Cyberpunk Synthwave)')" class="btn btn-secondary btn-sm" title="Cotizar estilo similar" style="font-size: 0.8rem; padding: 0.4rem 0.6rem;">
+                <i class="fa-solid fa-tag"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pista 3 -->
+          <div class="glass-card music-demo-card" id="demo-card-acoustic" style="padding: 1.25rem; border-color: rgba(16, 185, 129, 0.3); background: rgba(10, 12, 22, 0.8);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.72rem; color: var(--green); font-weight: 700; text-transform: uppercase;">Corporate • Clean Sound</span>
+                <h4 style="color: #fff; font-size: 1.05rem; margin: 0.2rem 0;">Minimal Brand Pulse</h4>
+                <span style="font-size: 0.75rem; color: var(--text-dim); font-family: monospace;">C Major • 120 BPM • Piano & Atmos</span>
+              </div>
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                <i class="fa-solid fa-building"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">
+              Identidad sonora corporativa moderna y optimista. Perfecta para spots de marcas B2B, SaaS, banca y startups.
+            </p>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button onclick="playMusicCommercialDemo('acoustic', this)" class="btn btn-primary btn-sm btn-play-demo" style="flex: 1; justify-content: center; font-size: 0.8rem; background: var(--green); border: none; color: #000; font-weight: 700;">
+                <i class="fa-solid fa-play"></i> Escuchar Demo
+              </button>
+              <button onclick="prefillMusicQuote('Estilo Minimal Brand Pulse (Corporate Tech)')" class="btn btn-secondary btn-sm" title="Cotizar estilo similar" style="font-size: 0.8rem; padding: 0.4rem 0.6rem;">
+                <i class="fa-solid fa-tag"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pista 4 -->
+          <div class="glass-card music-demo-card" id="demo-card-lofi" style="padding: 1.25rem; border-color: rgba(139, 92, 246, 0.3); background: rgba(10, 12, 22, 0.8);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div>
+                <span style="font-size: 0.72rem; color: var(--purple); font-weight: 700; text-transform: uppercase;">Lo-Fi • YouTube Sanctuary</span>
+                <h4 style="color: #fff; font-size: 1.05rem; margin: 0.2rem 0;">Midnight Rain Sanctuary</h4>
+                <span style="font-size: 0.75rem; color: var(--text-dim); font-family: monospace;">F Minor • 72 BPM • Vinilo & Rhodes</span>
+              </div>
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(139, 92, 246, 0.2); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                <i class="fa-solid fa-cloud-rain"></i>
+              </div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">
+              Base instrumental relajante sin copyright. Diseñada para mantener la retención de audiencia en podcasts y videos largos de YouTube.
+            </p>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button onclick="playMusicCommercialDemo('lofi', this)" class="btn btn-primary btn-sm btn-play-demo" style="flex: 1; justify-content: center; font-size: 0.8rem; background: var(--purple); border: none; color: #fff; font-weight: 700;">
+                <i class="fa-solid fa-play"></i> Escuchar Demo
+              </button>
+              <button onclick="prefillMusicQuote('Estilo Midnight Rain (Lo-Fi YouTube/Podcast)')" class="btn btn-secondary btn-sm" title="Cotizar estilo similar" style="font-size: 0.8rem; padding: 0.4rem 0.6rem;">
+                <i class="fa-solid fa-tag"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Indicador de Reproducción Activa -->
+        <div id="music-player-status-bar" style="margin-top: 1.5rem; background: rgba(0,0,0,0.5); padding: 0.75rem 1.25rem; border-radius: 30px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-glass);">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div id="music-status-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #6b7280;"></div>
+            <span id="music-status-text" style="font-size: 0.82rem; color: var(--text-muted);">Haz clic en cualquier demo para escuchar</span>
+          </div>
+          <button onclick="stopMusicCommercialDemo()" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: #f87171;">
+            <i class="fa-solid fa-stop"></i> Detener
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 3: SIMULADOR DE PRODUCCIÓN MUSICAL & COTIZADOR -->
+    <section id="music-simulator" class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="glass-card" style="padding: 2.5rem; border-color: rgba(245, 158, 11, 0.4); background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.12) 0%, rgba(15, 18, 30, 0.98) 100%); border-radius: var(--radius-lg);">
+        
+        <div style="text-align: center; max-width: 750px; margin: 0 auto 2rem auto;">
+          <span class="section-subtitle" style="color: #fbbf24;"><i class="fa-solid fa-calculator"></i> Cotizador Transparente</span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: #fff; margin: 0.5rem 0;">
+            Simulador de Producción Musical & Presupuesto
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Selecciona el tipo de obra sonora que necesitas y calcula al instante la inversión, ahorro y entregables.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center;">
+          
+          <!-- Controles del Simulador Musical -->
+          <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+            
+            <div style="margin-bottom: 1.25rem;">
+              <label style="font-size: 0.85rem; color: #fff; font-weight: 600; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-compact-disc" style="color: #fbbf24; margin-right: 0.35rem;"></i> Tipo de Proyecto Sonoro:
+              </label>
+              <select id="sim-music-type" onchange="updateMusicSimulator()" class="form-input" style="background: #0d111e; color: #fff; font-size: 0.88rem;">
+                <option value="ost">Banda Sonora Original (OST Videojuego o Serie)</option>
+                <option value="single" selected>Track Comercial Único / Jingle Publicitario</option>
+                <option value="podcast">Pack de Identidad para YouTube / Podcast (5 Tracks)</option>
+                <option value="vocal">Canción Completa con Artista Virtual (Freja / Maite)</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #fff; font-weight: 600; margin-bottom: 0.4rem;">
+                <span><i class="fa-solid fa-sliders" style="color: var(--cyan); margin-right: 0.35rem;"></i> Cantidad de Pistas / Duración:</span>
+                <span id="sim-music-tracks-label" style="color: #fbbf24; font-family: monospace;">1 Pista Maestra (Hasta 3 min)</span>
+              </div>
+              <input type="range" id="sim-music-tracks" min="1" max="10" value="1" oninput="updateMusicSimulator()" style="width: 100%; accent-color: #fbbf24;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim); margin-top: 0.2rem;">
+                <span>1 Track (Single)</span>
+                <span>5 Tracks (EP / Pack)</span>
+                <span>10 Tracks (OST Álbum)</span>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label style="font-size: 0.85rem; color: #fff; font-weight: 600; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-file-contract" style="color: var(--purple); margin-right: 0.35rem;"></i> Alcance de Licencia Comercial:
+              </label>
+              <select id="sim-music-license" onchange="updateMusicSimulator()" class="form-input" style="background: #0d111e; color: #fff; font-size: 0.88rem;">
+                <option value="digital" selected>Digital Mundial (Redes Sociales, Web, YouTube)</option>
+                <option value="game">Videojuego Comercial / App Móvil (Monetizable)</option>
+                <option value="broadcast">Televisión, Cine & Streaming Masivo</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size: 0.85rem; color: #fff; font-weight: 600; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-layer-group" style="color: var(--green); margin-right: 0.35rem;"></i> Entregables Adicionales:
+              </label>
+              <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.8rem; color: var(--text-muted);">
+                <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="sim-chk-stems" checked onchange="updateMusicSimulator()" style="accent-color: #fbbf24;">
+                  <span>Incluir Stems Separados (Batería, Bajo, Melodías)</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="sim-chk-loops" checked onchange="updateMusicSimulator()" style="accent-color: #fbbf24;">
+                  <span>Versiones Loop sin fin (Seamless loops)</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Resultados de Cotización Musical -->
+          <div style="background: rgba(18, 22, 36, 0.9); padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid rgba(245, 158, 11, 0.4);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">
+              Presupuesto & Entregables de Producción
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Inversión en Manejadores:</span>
+                <span id="sim-music-cost" style="font-size: 1.6rem; font-weight: 800; color: #fbbf24; font-family: monospace;">$180 USD</span>
+                <span style="font-size: 0.7rem; color: var(--text-dim); display: block;">Todo incluido / Royalty-Free</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Costo Estudio Tradicional:</span>
+                <span id="sim-music-traditional" style="font-size: 1.6rem; font-weight: 800; color: #f87171; font-family: monospace; text-decoration: line-through;">$950 USD</span>
+                <span style="font-size: 0.7rem; color: #f87171; display: block;">Compositor + horas de estudio</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.9rem; border-radius: 8px; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="font-size: 0.8rem; color: var(--green); font-weight: 700; display: block;">Ahorro Directo Garantizado:</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Reducción de coste sin sacrificar masterización profesional</span>
+              </div>
+              <span id="sim-music-savings" style="font-size: 1.5rem; font-weight: 900; color: var(--green); font-family: monospace;">-81%</span>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-glass); padding-top: 1rem; margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.35rem;">
+                <span style="color: var(--text-muted);">Formato de Master:</span>
+                <strong style="color: #fff;">WAV 24-bit 48kHz sin compresión</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.35rem;">
+                <span style="color: var(--text-muted);">Tiempo de Entrega:</span>
+                <strong style="color: var(--cyan);">48 a 72 Horas</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+                <span style="color: var(--text-muted);">Regalías Futuras:</span>
+                <strong style="color: var(--green);">0% (100% tuyas a perpetuidad)</strong>
+              </div>
+            </div>
+
+            <button onclick="applyMusicSimulationToQuote()" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.85rem; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: #000; font-weight: 700;">
+              <i class="fa-solid fa-paper-plane"></i> Solicitar Esta Producción Sonora
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 4: PLANES Y TARIFAS DE MÚSICA -->
+    <section id="music-plans" class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-subtitle" style="color: #fbbf24;"><i class="fa-solid fa-tags"></i> Precios Transparentes</span>
+        <h2 class="section-title" style="font-size: 2rem;">Tarifas de Producción Musical para Marcas</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Tarifa 1 -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Pista Individual</span>
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.25rem 0 0.5rem 0;">Single Comercial / Jingle</h3>
+            <div style="font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 1rem; font-family: monospace;">
+              $180 <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">USD</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Un tema original de hasta 3 minutos para spots publicitarios, videos de producto o identidad acústica de marca.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; line-height: 1.8;">
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> Master estéreo en WAV 24-bit 48kHz</li>
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> 2 Rondas de ajustes y ecualización</li>
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> Licencia comercial perpetua mundial</li>
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> Entrega en 48 horas garantizada</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Plan Single Comercial ($180 USD)')" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
+            Contratar Single Comercial
+          </button>
+        </div>
+
+        <!-- Tarifa 2 (Destacado) -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(245, 158, 11, 0.6); background: radial-gradient(circle at top, rgba(245, 158, 11, 0.15) 0%, rgba(18, 22, 36, 0.95) 100%); display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+          <div style="position: absolute; top: -12px; right: 20px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-size: 0.72rem; font-weight: 800; padding: 0.25rem 0.75rem; border-radius: 20px; text-transform: uppercase;">
+            Más Popular Creadores
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; color: #fbbf24; font-weight: 700; text-transform: uppercase;">Canales & Podcasts</span>
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.25rem 0 0.5rem 0;">Pack Creador (5 Tracks)</h3>
+            <div style="font-size: 2rem; font-weight: 900; color: #fbbf24; margin-bottom: 1rem; font-family: monospace;">
+              $450 <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">USD</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Set completo de audio para canales de YouTube o podcasts: intro, outro de alto impacto y 3 fondos temáticos sin copyright.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-muted); padding-left: 1rem; line-height: 1.8;">
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> <strong>5 Pistas exclusivas sin copyright</strong></li>
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> Intro de 15s + Outro + 3 Fondos largos</li>
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> Stems separados para edición flexible</li>
+              <li><i class="fa-solid fa-check" style="color: #fbbf24; margin-right: 0.35rem;"></i> Blindaje total contra reclamos de YouTube</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Plan Pack Creador 5 Tracks ($450 USD)')" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; justify-content: center; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: #000; font-weight: 700;">
+            Comenzar Pack Creador
+          </button>
+        </div>
+
+        <!-- Tarifa 3 -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(139, 92, 246, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-size: 0.75rem; color: var(--purple); font-weight: 700; text-transform: uppercase;">Videojuegos & Series</span>
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.25rem 0 0.5rem 0;">Banda Sonora Completa (OST)</h3>
+            <div style="font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 1rem; font-family: monospace;">
+              $1,200 <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">USD</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Score temático integral de hasta 10 pistas para videojuegos indie, sagas audiovisuales o producciones de streaming.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; line-height: 1.8;">
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> <strong>Hasta 10 Pistas temáticas originales</strong></li>
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> Seamless loops interactivos listos para Unity</li>
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> Entrega completa de stems multitrack</li>
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> Cesión total de derechos comerciales</li>
+            </ul>
+          </div>
+          <button onclick="prefillMusicQuote('Plan Banda Sonora Completa OST ($1,200 USD)')" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
+            Encargar Banda Sonora
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 5: FORMULARIO DE CONTACTO PARA ENCARGOS MUSICALES -->
+    <div class="clients-contact-section" id="music-contact" style="margin-top: 3rem;">
+      <div style="text-align: center; max-width: 750px; margin: 0 auto 2.5rem auto;">
+        <span class="detail-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); font-size: 0.75rem;">
+          <i class="fa-solid fa-sliders"></i> PRODUCCIÓN SONORA A MEDIDA
+        </span>
+        <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: #fff; margin: 0.6rem 0 0.4rem 0;">
+          Solicita tu Maqueta o Presupuesto Musical
+        </h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+          Cuéntanos sobre tu videojuego, marca, canal o serie. Te enviaremos una propuesta formal con referencias y primera muestra en 48 horas.
+        </p>
+      </div>
+
+      <div class="glass-card" style="margin-top: 2rem; padding: 2.25rem; border-color: rgba(245, 158, 11, 0.4);">
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-music" style="color: #fbbf24;"></i> Encargo de Producción Musical
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem;">
+          Trato directo y confidencial con el equipo de producción sonora de Manejadores.
+        </p>
+
+        <form onsubmit="handleMusicContactSubmit(event)">
+          <div class="b2b-form-grid">
+            <div class="b2b-form-group">
+              <label>Nombre y Apellido *</label>
+              <input type="text" id="music-client-name" placeholder="Tu nombre" required>
+            </div>
+            <div class="b2b-form-group">
+              <label>Marca, Estudio o Canal *</label>
+              <input type="text" id="music-client-company" placeholder="Nombre de tu proyecto o empresa" required>
+            </div>
+            <div class="b2b-form-group">
+              <label>Correo Electrónico *</label>
+              <input type="email" id="music-client-email" placeholder="correo@proyecto.com" required>
+            </div>
+            <div class="b2b-form-group">
+              <label>Tipo de Encargo Musical *</label>
+              <select id="music-client-type" required>
+                <option value="Single Comercial / Jingle ($180 USD)">Single Comercial / Jingle ($180 USD)</option>
+                <option value="Pack Creador 5 Tracks ($450 USD)" selected>Pack Creador / Podcast 5 Tracks ($450 USD)</option>
+                <option value="Banda Sonora Completa OST ($1,200 USD)">Banda Sonora Completa OST Videojuego ($1,200 USD)</option>
+                <option value="Audio Branding & Sound Logo">Audio Branding & Sound Logo Corporativo</option>
+                <option value="Canción con Vocalista Virtual">Canción Completa con Vocalista Virtual (Freja / Maite)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="b2b-form-group" style="margin-top: 1.25rem;">
+            <label>Detalle del Estilo Musical Deseado & Referencias *</label>
+            <textarea id="music-client-message" rows="3" placeholder="Describe el ambiente sonoro, tempo aproximado (BPM), instrumentos que imaginas o enlaces de referencia..." required></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem;">
+            <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.8rem; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: #000; font-weight: 700;">
+              <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud Musical
+            </button>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> Propuesta y primera maqueta en 48 horas
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+
+  // Inicializar simulador musical
+  setTimeout(() => {
+    updateMusicSimulator();
+  }, 40);
+}
+
+// ============================================================================
+// HELPERS DEL REPRODUCTOR Y COTIZADOR MUSICAL
+// ============================================================================
+
+function stopMusicCommercialDemo() {
+  if (activeCommercialAudio) {
+    try {
+      activeCommercialAudio.stop();
+      if (activeCommercialAudio.context) {
+        activeCommercialAudio.context.close();
+      }
+    } catch (e) {}
+    activeCommercialAudio = null;
+  }
+
+  const allBtns = document.querySelectorAll('.btn-play-demo');
+  allBtns.forEach(b => {
+    b.innerHTML = '<i class="fa-solid fa-play"></i> Escuchar Demo';
+  });
+
+  const dot = document.getElementById('music-status-dot');
+  const text = document.getElementById('music-status-text');
+  if (dot) dot.style.background = '#6b7280';
+  if (text) text.textContent = 'Reproducción detenida. Haz clic en cualquier demo para escuchar.';
+}
+
+function playMusicCommercialDemo(demoId, btn) {
+  // Si ya estaba sonando este botón, detener
+  if (activeCommercialAudio && activeCommercialAudio.id === demoId) {
+    stopMusicCommercialDemo();
+    return;
+  }
+
+  stopMusicCommercialDemo();
+
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) {
+      alert("Tu navegador no soporta Web Audio API. Por favor actualiza a un navegador moderno.");
+      return;
+    }
+
+    const ctx = new AudioContext();
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.25, ctx.currentTime);
+    masterGain.connect(ctx.destination);
+
+    let chordFrequencies = [];
+    let label = '';
+
+    if (demoId === 'dragon') {
+      // D Dorian: D3, F3, A3, C4, E4
+      chordFrequencies = [146.83, 174.61, 220.00, 261.63, 329.63];
+      label = 'Reproduciendo: «El Dragón Astral» (Dark Fantasy • D Dorian)';
+    } else if (demoId === 'cyber') {
+      // A Minor Synthwave: A2, C3, E3, G3, B3
+      chordFrequencies = [110.00, 130.81, 164.81, 196.00, 246.94];
+      label = 'Reproduciendo: «Neon Horizon 2088» (Cyberpunk Synthwave)';
+    } else if (demoId === 'acoustic') {
+      // C Major Corporate: C3, E3, G3, B3, D4
+      chordFrequencies = [130.81, 164.81, 196.00, 246.94, 293.66];
+      label = 'Reproduciendo: «Minimal Brand Pulse» (Audio Branding Tech)';
+    } else {
+      // F Minor Lo-Fi: F2, Ab2, C3, Eb3, G3
+      chordFrequencies = [87.31, 103.83, 130.81, 155.56, 196.00];
+      label = 'Reproduciendo: «Midnight Rain Sanctuary» (Lo-Fi YouTube Ambient)';
+    }
+
+    const oscillators = [];
+
+    chordFrequencies.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = demoId === 'cyber' ? 'sawtooth' : (demoId === 'dragon' ? 'triangle' : 'sine');
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+      // Ligero detune para dar riqueza espacial analógica
+      osc.detune.setValueAtTime((idx - 2) * 4, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.18 / chordFrequencies.length, ctx.currentTime + 0.3);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start();
+      oscillators.push(osc);
+    });
+
+    activeCommercialAudio = {
+      id: demoId,
+      context: ctx,
+      stop: () => {
+        oscillators.forEach(o => {
+          try { o.stop(); } catch(e){}
+        });
+      }
+    };
+
+    if (btn) btn.innerHTML = '<i class="fa-solid fa-stop"></i> Detener Demo';
+
+    const dot = document.getElementById('music-status-dot');
+    const text = document.getElementById('music-status-text');
+    if (dot) dot.style.background = '#10b981';
+    if (text) text.textContent = `🔊 ${label}`;
+
+    // Auto-detener después de 20 segundos para no saturar
+    setTimeout(() => {
+      if (activeCommercialAudio && activeCommercialAudio.id === demoId) {
+        stopMusicCommercialDemo();
+      }
+    }, 20000);
+
+  } catch(err) {
+    console.error("Error al reproducir audio demo:", err);
+  }
+}
+
+function updateMusicSimulator() {
+  const typeEl = document.getElementById('sim-music-type');
+  const tracksEl = document.getElementById('sim-music-tracks');
+  const licenseEl = document.getElementById('sim-music-license');
+  const tracksLabel = document.getElementById('sim-music-tracks-label');
+  const costEl = document.getElementById('sim-music-cost');
+  const tradEl = document.getElementById('sim-music-traditional');
+  const savingsEl = document.getElementById('sim-music-savings');
+  const stemsChk = document.getElementById('sim-chk-stems');
+
+  if (!tracksEl) return;
+
+  const tracks = parseInt(tracksEl.value, 10);
+  const type = typeEl ? typeEl.value : 'single';
+  const license = licenseEl ? licenseEl.value : 'digital';
+  const hasStems = stemsChk ? stemsChk.checked : true;
+
+  if (tracksLabel) {
+    if (tracks === 1) tracksLabel.textContent = '1 Pista Maestra (Hasta 3 min)';
+    else tracksLabel.textContent = `${tracks} Pistas Maestras (Pack Completo)`;
+  }
+
+  // Tarifa base por pista según escala
+  let unitCost = 180;
+  if (tracks >= 8) unitCost = 120;
+  else if (tracks >= 4) unitCost = 145;
+
+  let totalCost = tracks * unitCost;
+
+  if (type === 'vocal') totalCost += 120 * tracks; // Recargo de vocalista virtual lírica
+  if (license === 'broadcast') totalCost += 250;
+  if (!hasStems) totalCost -= (tracks * 15);
+
+  const finalCost = Math.max(150, Math.round(totalCost));
+  const traditionalCost = Math.round(finalCost * 4.6);
+  const savingsPct = Math.round(((traditionalCost - finalCost) / traditionalCost) * 100);
+
+  if (costEl) costEl.textContent = `$${finalCost.toLocaleString()} USD`;
+  if (tradEl) tradEl.textContent = `$${traditionalCost.toLocaleString()} USD`;
+  if (savingsEl) savingsEl.textContent = `-${savingsPct}%`;
+}
+
+function prefillMusicQuote(serviceOrStyle) {
+  const typeSelect = document.getElementById('music-client-type');
+  const msgArea = document.getElementById('music-client-message');
+  const contactSec = document.getElementById('music-contact');
+
+  if (typeSelect) {
+    for (let opt of typeSelect.options) {
+      if (opt.value.toLowerCase().includes(serviceOrStyle.toLowerCase())) {
+        typeSelect.value = opt.value;
+        break;
+      }
+    }
+  }
+
+  if (msgArea) {
+    msgArea.value = `Hola equipo de Música de Manejadores,\nNos interesa cotizar producción sonora orientada al estilo: «${serviceOrStyle}».\nPor favor envíennos opciones de presupuesto y entrega de maqueta.`;
+  }
+
+  if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+}
+
+function applyMusicSimulationToQuote() {
+  const typeEl = document.getElementById('sim-music-type');
+  const tracksEl = document.getElementById('sim-music-tracks');
+  const costEl = document.getElementById('sim-music-cost');
+  const msgArea = document.getElementById('music-client-message');
+  const contactSec = document.getElementById('music-contact');
+
+  const tracks = tracksEl ? tracksEl.value : 1;
+  const typeName = typeEl ? typeEl.options[typeEl.selectedIndex].text : 'Producción Musical';
+  const cost = costEl ? costEl.textContent : '';
+
+  if (msgArea) {
+    msgArea.value = `Hola equipo de Música de Manejadores,\nHe configurado en el cotizador el proyecto «${typeName}» con ${tracks} pista(s) (${cost}).\nQuisiera coordinar la producción y entrega de la primera maqueta en 48 horas.`;
+  }
+  if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleMusicContactSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('music-client-name')?.value || '';
+  const project = document.getElementById('music-client-company')?.value || '';
+  alert(`¡Gracias ${name}! Hemos recibido tu solicitud para ${project}. El equipo de producción sonora de Manejadores preparará tu propuesta y maqueta a la brevedad.`);
   e.target.reset();
 }
 
