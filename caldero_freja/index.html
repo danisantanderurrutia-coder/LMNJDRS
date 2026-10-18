@@ -178,9 +178,19 @@
       box-shadow: 
         0 2px 0 #0d1017,
         0 4px 8px rgba(0,0,0,0.8),
-        inset 0 0 20px var(--pad-color, #00f5d4);
+        inset 0 0 25px var(--pad-color, #00f5d4);
       border-color: var(--pad-color, #00f5d4);
     }
+    .mpc-pad.guide-pulse {
+      animation: padGuidePulse 0.8s infinite alternate ease-in-out;
+      border-color: #ffb703;
+      box-shadow: 0 0 20px #ffb703, inset 0 0 15px #ffb703;
+    }
+    @keyframes padGuidePulse {
+      0% { transform: scale(1); filter: brightness(1); }
+      100% { transform: scale(1.05); filter: brightness(1.5); }
+    }
+
     .mpc-pad-indicator {
       position: absolute;
       top: 6px;
@@ -278,6 +288,32 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* STEP SEQUENCER LEDS */
+    .step-led {
+      height: 18px;
+      border-radius: 4px;
+      background: #171d27;
+      border: 1px solid #2d3748;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #718096;
+      transition: all 0.08s ease;
+    }
+    .step-led.active-step {
+      background: #ff5400;
+      border-color: #ffb703;
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff5400;
+    }
+    .step-led.has-hit {
+      border-color: #00f5d4;
+      color: #00f5d4;
+    }
+
     /* TELEPROMPTER & LYRIC FLOW */
     .teleprompter-line {
       transition: all 0.2s ease;
@@ -290,15 +326,6 @@
       color: #ffffff;
       font-weight: 600;
       box-shadow: 0 0 15px rgba(255, 84, 0, 0.25);
-    }
-
-    /* VFD SCREEN READOUT */
-    .vfd-panel {
-      background: #020b08;
-      border: 1px solid #005f4b;
-      box-shadow: inset 0 0 10px rgba(0, 245, 212, 0.2);
-      color: var(--vfd-cyan);
-      letter-spacing: 1px;
     }
 
     /* CUSTOM SCROLLBAR */
@@ -355,17 +382,90 @@
         </div>
       </div>
 
-      <!-- WORKSPACE SELECTOR SWITCHES (MPC STYLE BUTTONS) -->
-      <div class="flex items-center gap-3 bg-black/50 p-1.5 rounded-xl border border-white/10 w-full sm:w-auto">
-        <button id="btnSwitchRap" class="flex-1 sm:flex-none px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/60 text-amber-200 shadow-[0_0_15px_rgba(255,183,3,0.3)]">
-          <span class="text-base">🎙️</span> MI RAP PERSONAL (LETRAS & BEATS)
+      <!-- WORKSPACE SELECTOR & TUTORIAL MODAL BUTTON -->
+      <div class="flex flex-wrap items-center gap-2.5 bg-black/50 p-1.5 rounded-xl border border-white/10 w-full sm:w-auto">
+        <button id="btnOpenTutorial" class="px-3 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider bg-zinc-800 hover:bg-zinc-700 text-cyan-300 border border-cyan-500/40 transition flex items-center gap-1.5">
+          <span>📖</span> GUÍA DE ESTUDIO
         </button>
-        <button id="btnSwitchFreja" class="flex-1 sm:flex-none px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-slate-900 border border-slate-700/60 text-slate-400 hover:text-pink-300 hover:border-pink-500/40">
-          <span class="text-base">🎻</span> FREJA & EL GRAN ARCANO
+        <button id="btnSwitchRap" class="flex-1 sm:flex-none px-4 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/60 text-amber-200 shadow-[0_0_15px_rgba(255,183,3,0.3)]">
+          <span>🎙️</span> RAP & BEATS
+        </button>
+        <button id="btnSwitchFreja" class="flex-1 sm:flex-none px-4 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-slate-900 border border-slate-700/60 text-slate-400 hover:text-pink-300 hover:border-pink-500/40">
+          <span>🎻</span> FREJA & ARCANO
         </button>
       </div>
 
     </header>
+
+    <!-- MODAL POPUP: GUÍA RÁPIDA DE HERRAMIENTAS (TUTORIAL COMPLETO) -->
+    <div id="tutorialModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+      <div class="chassis-rack max-w-3xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border-cyan-500/30">
+        
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🎓</span>
+            <div>
+              <h2 class="font-orbitron text-base sm:text-lg font-extrabold text-cyan-300 tracking-wider">
+                MANUAL DEL ESTUDIO: DE CERO A PRODUCTOR EN 5 PASOS
+              </h2>
+              <p class="text-xs text-slate-400">Cómo aprovechar cada herramienta aunque nunca antes hayas hecho música.</p>
+            </div>
+          </div>
+          <button id="btnCloseTutorial" class="text-slate-400 hover:text-white text-xl font-bold px-2 py-1 bg-zinc-800 rounded-lg">✕</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-300">
+          
+          <div class="bg-black/50 p-4 rounded-xl border border-white/5 space-y-2">
+            <div class="font-orbitron font-bold text-amber-400 flex items-center gap-2">
+              <span>1. 🎛️</span> EL MINI-MIDI (PADS 1 AL 8)
+            </div>
+            <p>
+              Los pads reproducen los instrumentos esenciales de un ritmo de hip hop. La regla de oro es: 
+              <br>• Pulsa <kbd class="px-1 rounded bg-zinc-800 text-amber-300 font-mono">[1]</kbd> (Bombo) en el tiempo 1.
+              <br>• Pulsa <kbd class="px-1 rounded bg-zinc-800 text-pink-300 font-mono">[2]</kbd> (Caja) en el tiempo 2.
+              <br>• Rellena con <kbd class="px-1 rounded bg-zinc-800 text-cyan-300 font-mono">[3]</kbd> (Hi-Hat) constantemente.
+            </p>
+          </div>
+
+          <div class="bg-black/50 p-4 rounded-xl border border-white/5 space-y-2">
+            <div class="font-orbitron font-bold text-orange-400 flex items-center gap-2">
+              <span>2. 🎮</span> ACADEMIA DE RECORRIDOS (TUTORIALES)
+            </div>
+            <p>
+              Si no sabes qué tocar, ve al panel <strong>"Academia de Ritmos"</strong>. Elige una canción, pulsa <strong>"Ver Recorrido Automático"</strong> para ver cómo se mueven las teclas solas, o activa el <strong>"Modo Práctica"</strong> para que el sistema te enseñe paso a paso qué tecla tocar como en un juego de ritmo.
+            </p>
+          </div>
+
+          <div class="bg-black/50 p-4 rounded-xl border border-white/5 space-y-2">
+            <div class="font-orbitron font-bold text-red-400 flex items-center gap-2">
+              <span>3. 🎙️</span> CABINA VOCAL & 16 BARRAS
+            </div>
+            <p>
+              El cuadro de texto ya incluye 16 barras de rap introspectivo de ejemplo. Puedes activar el <strong>Metrónomo</strong> para oír el compás a 90 BPM, darle al botón rojo <strong>"Grabar Toma Vocal"</strong> y rimar con tu micrófono. Al terminar, descargas tu archivo de audio limpio (.webm).
+            </p>
+          </div>
+
+          <div class="bg-black/50 p-4 rounded-xl border border-white/5 space-y-2">
+            <div class="font-orbitron font-bold text-purple-400 flex items-center gap-2">
+              <span>4. ⚡</span> GENERADOR DE BEATS (SUNO & UDIO)
+            </div>
+            <p>
+              Para que la IA no invente voces robóticas y deje espacio a tu voz real, copia el prompt generado en la caja de <strong>Suno v3.5/v4</strong> o <strong>Udio</strong>. Generará una instrumental pura con espacio acústico libre en 1kHz-4kHz diseñada para que tu voz brille.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="p-3 bg-cyan-950/40 rounded-xl border border-cyan-500/30 text-xs text-cyan-200 font-mono flex items-center justify-between">
+          <span>💡 Consejo Pro: Toca con el teclado físico usando los números 1 al 8. Es infinitamente más rápido y divertido que el ratón.</span>
+          <button id="btnGotItTutorial" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-bold font-orbitron">
+            ¡ENTENDIDO, A PRODUCIR!
+          </button>
+        </div>
+
+      </div>
+    </div>
 
     <!-- ===================================================================== -->
     <!-- MODO 1: MI RAP PERSONAL (TUS LETRAS & TU VOZ & MPC BEATMAKER)         -->
@@ -465,6 +565,106 @@
 
       </section>
 
+      <!-- ===================================================================== -->
+      <!-- NUEVO: ACADEMIA DE RITMOS & TUTORIAL INTERACTIVO DE TECLAS            -->
+      <!-- ===================================================================== -->
+      <section class="chassis-rack p-4 sm:p-6 space-y-4 border-amber-500/30">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🎮</span>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[9px] font-orbitron font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                  TUTORIAL INTERACTIVO
+                </span>
+                <h2 class="font-orbitron text-sm font-bold tracking-wider text-slate-100">
+                  ACADEMIA DE RECORRIDO DE TECLAS
+                </h2>
+              </div>
+              <p class="text-xs text-slate-400">
+                Aprende el mapa de teclas para reproducir los ritmos de nuestras canciones. ¡No necesitas saber solfeo!
+              </p>
+            </div>
+          </div>
+
+          <!-- SELECTOR DE CANCIÓN / RECORRIDO -->
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <span class="text-xs font-mono text-slate-400">Canción:</span>
+            <select id="lessonSongSelect" class="flex-1 sm:flex-none bg-black/80 border border-amber-500/40 text-amber-300 font-mono text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-amber-400">
+              <option value="song1">💿 Track 1: "Niebla en el Asfalto" (Boom Bap 90s)</option>
+              <option value="song2">☕ Track 2: "Café de Medianoche" (Lo-Fi Chill & Rhodes)</option>
+              <option value="song3">⚔️ Track 3: "El Dragón de Obsidiana" (Dark Trap 808)</option>
+              <option value="song4">🎻 Track 4: "El Gran Arcano" (Marcha Épica Freja)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- GUÍA VISUAL DEL RECORRIDO DE TECLAS -->
+        <div class="bg-black/60 p-4 rounded-xl border border-white/10 space-y-3">
+          
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+              <div class="text-[10px] font-orbitron uppercase text-amber-400 font-bold" id="lessonSongTitle">
+                RECORRIDO DE TECLAS: BOOM BAP CLÁSICO (COMPÁS 4/4)
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5" id="lessonSongDesc">
+                Secuencia rítmica: Bombo en 1, Caja en 2, Platillo cerrado marcando el pulso continuo.
+              </p>
+            </div>
+
+            <!-- CONTROLES DEL TUTORIAL (DEMO & PRÁCTICA) -->
+            <div class="flex items-center gap-2">
+              <button id="btnAutoDemo" class="px-4 py-2 rounded-xl font-orbitron text-xs font-bold bg-amber-500 hover:bg-amber-400 text-black shadow-[0_0_15px_rgba(255,183,3,0.3)] transition flex items-center gap-1.5">
+                <span id="demoIcon">▶️</span> <span id="demoLabel">Ver Recorrido Automático</span>
+              </button>
+              <button id="btnPracticeMode" class="px-4 py-2 rounded-xl font-orbitron text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-[0_0_15px_rgba(0,245,212,0.3)] transition flex items-center gap-1.5">
+                <span id="practiceIcon">🎮</span> <span id="practiceLabel">Modo Práctica (Toca Tú)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- MAPA SECUENCIAL DE TECLAS A TOCAR (BADGES INTERACTIVOS) -->
+          <div id="keyPathContainer" class="flex flex-wrap items-center gap-1.5 pt-1">
+            <!-- Inserted dynamically by JS -->
+          </div>
+
+          <!-- STEP SEQUENCER LED BAR (16 PASOS) -->
+          <div class="space-y-1 pt-1">
+            <div class="flex items-center justify-between text-[9px] font-mono text-slate-500 px-1">
+              <span>PASO 01 (BEAT 1)</span>
+              <span>PASO 05 (BEAT 2)</span>
+              <span>PASO 09 (BEAT 3)</span>
+              <span>PASO 13 (BEAT 4)</span>
+            </div>
+            <div id="stepLedsBar" class="grid grid-cols-16 gap-1">
+              <!-- 16 leds generated by JS -->
+            </div>
+          </div>
+
+          <!-- PANEL DE FEEDBACK DE MODO PRÁCTICA -->
+          <div id="practiceStatusBox" class="hidden p-3 bg-cyan-950/40 rounded-lg border border-cyan-500/40 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="text-xl" id="practiceStatusIcon">🎯</span>
+              <div>
+                <div class="font-orbitron font-bold text-xs text-cyan-300" id="practiceTargetText">
+                  ¡Toca la tecla [1] (808 KICK)!
+                </div>
+                <div class="text-[10px] font-mono text-slate-300" id="practiceFeedbackText">
+                  Sigue el orden de la secuencia destacada en amarillo arriba.
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[9px] font-orbitron text-slate-400">PUNTUACIÓN / COMBO</div>
+              <div id="practiceScore" class="text-sm font-mono font-bold text-amber-300">0 Pts (x0)</div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
       <!-- TACTILE MPC DRUM PAD SAMPLER: 8 REAL AUDIO TRIGGER PADS -->
       <section class="chassis-rack p-4 sm:p-6 space-y-4">
         
@@ -476,14 +676,14 @@
                 AKAI/SP-404 TACTILE DRUM PADS
               </h2>
               <p class="text-xs text-slate-400">
-                Toca con el ratón o usa las teclas numéricas del teclado <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-amber-300 font-mono text-[10px]">1 - 8</kbd> para disparar percusiones reales sintetizadas en tu navegador.
+                Pads de silicona con respuesta física: toca con el ratón o directamente con las teclas <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-amber-300 font-mono text-[10px]">1 - 8</kbd>.
               </p>
             </div>
           </div>
 
           <!-- PRESET RAP SELECTOR -->
           <div class="flex items-center gap-2">
-            <span class="text-xs font-mono text-slate-400">PRESET:</span>
+            <span class="text-xs font-mono text-slate-400">PRESET DE SONIDO:</span>
             <select id="presetRapSelect" class="bg-black/80 border border-slate-700 text-amber-300 font-mono text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-amber-400">
               <option value="boombap">💿 90s Boom Bap (Chopin MPC3000)</option>
               <option value="lofi">☕ Lo-Fi Chill (Erik Satie SP-404)</option>
@@ -498,7 +698,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           
           <!-- PAD 1: KICK -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="1" data-sound="kick" style="--pad-color:#ff5400;">
+          <div id="pad1" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="1" data-sound="kick" style="--pad-color:#ff5400;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[1] KEY</div>
             <div>
@@ -508,7 +708,7 @@
           </div>
 
           <!-- PAD 2: SNARE -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="2" data-sound="snare" style="--pad-color:#ff2a85;">
+          <div id="pad2" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="2" data-sound="snare" style="--pad-color:#ff2a85;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[2] KEY</div>
             <div>
@@ -518,7 +718,7 @@
           </div>
 
           <!-- PAD 3: CLOSED HAT -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="3" data-sound="hihat_closed" style="--pad-color:#00f5d4;">
+          <div id="pad3" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="3" data-sound="hihat_closed" style="--pad-color:#00f5d4;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[3] KEY</div>
             <div>
@@ -528,7 +728,7 @@
           </div>
 
           <!-- PAD 4: OPEN HAT -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="4" data-sound="hihat_open" style="--pad-color:#22ffee;">
+          <div id="pad4" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="4" data-sound="hihat_open" style="--pad-color:#22ffee;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[4] KEY</div>
             <div>
@@ -538,7 +738,7 @@
           </div>
 
           <!-- PAD 5: VINYL SCRATCH -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="5" data-sound="vinyl" style="--pad-color:#ffb703;">
+          <div id="pad5" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="5" data-sound="vinyl" style="--pad-color:#ffb703;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[5] KEY</div>
             <div>
@@ -548,7 +748,7 @@
           </div>
 
           <!-- PAD 6: SUB BASS -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="6" data-sound="sub" style="--pad-color:#9d4edd;">
+          <div id="pad6" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="6" data-sound="sub" style="--pad-color:#9d4edd;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[6] KEY</div>
             <div>
@@ -558,7 +758,7 @@
           </div>
 
           <!-- PAD 7: RHODES CHORD -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="7" data-sound="rhodes" style="--pad-color:#ff70a6;">
+          <div id="pad7" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="7" data-sound="rhodes" style="--pad-color:#ff70a6;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[7] KEY</div>
             <div>
@@ -568,7 +768,7 @@
           </div>
 
           <!-- PAD 8: VOCAL STAB -->
-          <div class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="8" data-sound="vocal" style="--pad-color:#10b981;">
+          <div id="pad8" class="mpc-pad p-3 h-28 flex flex-col justify-between" data-pad="8" data-sound="vocal" style="--pad-color:#10b981;">
             <div class="mpc-pad-indicator"></div>
             <div class="text-[10px] font-mono text-slate-400">[8] KEY</div>
             <div>
@@ -1022,7 +1222,7 @@
 
   </div>
 
-  <!-- JAVASCRIPT: WEB AUDIO SYNTHESIS, VISUALIZER, VU METERS & LOGIC -->
+  <!-- JAVASCRIPT: WEB AUDIO SYNTHESIS, LESSON ENGINE, STEP SEQUENCER & LOGIC -->
   <script>
     // PROFILE SWITCHER
     const btnSwitchRap = document.getElementById('btnSwitchRap');
@@ -1031,18 +1231,28 @@
     const workspaceFreja = document.getElementById('workspaceFreja');
 
     btnSwitchRap.addEventListener('click', () => {
-      btnSwitchRap.className = "flex-1 sm:flex-none px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/60 text-amber-200 shadow-[0_0_15px_rgba(255,183,3,0.3)]";
-      btnSwitchFreja.className = "flex-1 sm:flex-none px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-slate-900 border border-slate-700/60 text-slate-400 hover:text-pink-300";
+      btnSwitchRap.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/60 text-amber-200 shadow-[0_0_15px_rgba(255,183,3,0.3)]";
+      btnSwitchFreja.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-slate-900 border border-slate-700/60 text-slate-400 hover:text-pink-300";
       workspaceRap.classList.remove('hidden');
       workspaceFreja.classList.add('hidden');
     });
 
     btnSwitchFreja.addEventListener('click', () => {
-      btnSwitchFreja.className = "flex-1 sm:flex-none px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/60 text-pink-200 shadow-[0_0_15px_rgba(255,42,133,0.4)]";
-      btnSwitchRap.className = "flex-1 sm:flex-none px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-slate-900 border border-slate-700/60 text-slate-400 hover:text-amber-300";
+      btnSwitchFreja.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/60 text-pink-200 shadow-[0_0_15px_rgba(255,42,133,0.4)]";
+      btnSwitchRap.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg font-orbitron text-xs font-bold tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-slate-900 border border-slate-700/60 text-slate-400 hover:text-amber-300";
       workspaceFreja.classList.remove('hidden');
       workspaceRap.classList.add('hidden');
     });
+
+    // TUTORIAL MODAL HANDLERS
+    const tutorialModal = document.getElementById('tutorialModal');
+    const btnOpenTutorial = document.getElementById('btnOpenTutorial');
+    const btnCloseTutorial = document.getElementById('btnCloseTutorial');
+    const btnGotItTutorial = document.getElementById('btnGotItTutorial');
+
+    btnOpenTutorial.addEventListener('click', () => tutorialModal.classList.remove('hidden'));
+    btnCloseTutorial.addEventListener('click', () => tutorialModal.classList.add('hidden'));
+    btnGotItTutorial.addEventListener('click', () => tutorialModal.classList.add('hidden'));
 
     // ====================================================================
     // WEB AUDIO SYNTHESIZER ENGINE (FOR TACTILE PADS)
@@ -1075,7 +1285,6 @@
         osc.start();
         osc.stop(ctx.currentTime + 0.35);
       } else if (soundType === 'snare') {
-        // Noise burst + pop
         const bufferSize = ctx.sampleRate * 0.2;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
@@ -1202,25 +1411,336 @@
     const pads = document.querySelectorAll('.mpc-pad');
     pads.forEach(pad => {
       pad.addEventListener('mousedown', () => {
-        const sound = pad.dataset.sound;
-        pad.classList.add('pad-hit');
-        playPadSound(sound);
-        setTimeout(() => pad.classList.remove('pad-hit'), 150);
+        const padNum = parseInt(pad.dataset.pad);
+        handleUserPadHit(padNum);
       });
     });
 
     window.addEventListener('keydown', (e) => {
-      const keyMap = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7 };
+      const keyMap = { '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8 };
       if (keyMap[e.key] !== undefined && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'INPUT') {
-        const padIndex = keyMap[e.key];
-        const pad = pads[padIndex];
-        if (pad) {
-          pad.classList.add('pad-hit');
-          playPadSound(pad.dataset.sound);
-          setTimeout(() => pad.classList.remove('pad-hit'), 150);
-        }
+        handleUserPadHit(keyMap[e.key]);
       }
     });
+
+    function triggerPadVisual(padNum) {
+      const pad = document.getElementById(`pad${padNum}`);
+      if (pad) {
+        pad.classList.add('pad-hit');
+        playPadSound(pad.dataset.sound);
+        setTimeout(() => pad.classList.remove('pad-hit'), 150);
+      }
+    }
+
+    // ====================================================================
+    // ACADEMIA DE RITMOS: CANCIONES & TUTORIALES DE RECORRIDO DE TECLAS
+    // ====================================================================
+    const lessonSongs = {
+      song1: {
+        title: 'RECORRIDO DE TECLAS: "NIEBLA EN EL ASFALTO" (BOOM BAP 90s)',
+        desc: 'El ritmo clásico de la época dorada: Bombo en [1], Caja en [2] y Platillo [3] marcando el pulso.',
+        bpm: 90,
+        // Array of 16 steps, each can have multiple pad numbers
+        steps: [
+          [1, 3, 5], [], [3], [],
+          [2, 3],    [], [3], [],
+          [1, 3],    [], [1, 3], [],
+          [2, 4],    [], [3], []
+        ],
+        // The sequential sequence of keys for practice mode
+        keyPath: [
+          { key: 1, name: 'KICK 808' },
+          { key: 3, name: 'CLOSED HAT' },
+          { key: 2, name: 'CRISP SNARE' },
+          { key: 3, name: 'CLOSED HAT' },
+          { key: 1, name: 'KICK 808' },
+          { key: 1, name: 'KICK (DOBLE)' },
+          { key: 2, name: 'CRISP SNARE' },
+          { key: 4, name: 'OPEN HAT' }
+        ]
+      },
+      song2: {
+        title: 'RECORRIDO DE TECLAS: "CAFÉ DE MEDIANOCHE" (LO-FI CHILL)',
+        desc: 'Atmósfera relajada con acordes de Rhodes en [7], textura de vinilo en [5] y caja retardada.',
+        bpm: 78,
+        steps: [
+          [7, 5, 1], [], [], [],
+          [2],       [], [], [1],
+          [7],       [], [], [],
+          [2, 4],    [], [], []
+        ],
+        keyPath: [
+          { key: 7, name: 'RHODES CHOP' },
+          { key: 1, name: 'KICK 808' },
+          { key: 2, name: 'SNARE' },
+          { key: 1, name: 'KICK' },
+          { key: 7, name: 'RHODES CHOP' },
+          { key: 2, name: 'SNARE' },
+          { key: 4, name: 'OPEN HAT' },
+          { key: 5, name: 'VINYL CRACK' }
+        ]
+      },
+      song3: {
+        title: 'RECORRIDO DE TECLAS: "EL DRAGÓN DE OBSIDIANA" (DARK TRAP 808)',
+        desc: 'Sub-bajos demoledores en [6] y [1] con cajas rápidas en [2] y platillos dobles.',
+        bpm: 140,
+        steps: [
+          [6, 1, 3], [], [3], [],
+          [3],       [], [3], [],
+          [2, 3],    [], [3], [3],
+          [6, 8],    [], [3], []
+        ],
+        keyPath: [
+          { key: 6, name: 'LOW SUB 808' },
+          { key: 1, name: 'KICK' },
+          { key: 3, name: 'HI-HAT' },
+          { key: 2, name: 'CRISP SNARE' },
+          { key: 3, name: 'HI-HAT' },
+          { key: 6, name: 'LOW SUB 808' },
+          { key: 8, name: 'VOX STAB' },
+          { key: 2, name: 'CRISP SNARE' }
+        ]
+      },
+      song4: {
+        title: 'RECORRIDO DE TECLAS: "EL GRAN ARCANO" (MARCHA ÉPICA NÓRDICA)',
+        desc: 'El compás de marcha de Freja: Taiko en [1], Caja de guerra en [2], Acordes en [7] y Aliento en [8].',
+        bpm: 82,
+        steps: [
+          [1, 7], [], [], [],
+          [2],    [], [], [],
+          [1, 8], [], [], [],
+          [2, 7], [], [], []
+        ],
+        keyPath: [
+          { key: 1, name: 'TAIKO KICK' },
+          { key: 7, name: 'STRINGS / CHOP' },
+          { key: 2, name: 'WAR SNARE' },
+          { key: 1, name: 'TAIKO KICK' },
+          { key: 8, name: 'VOX BREATH' },
+          { key: 2, name: 'WAR SNARE' },
+          { key: 7, name: 'STRINGS' },
+          { key: 1, name: 'TAIKO KICK' }
+        ]
+      }
+    };
+
+    let currentSongKey = 'song1';
+    let isDemoRunning = false;
+    let demoStepIndex = 0;
+    let demoTimer = null;
+
+    let isPracticeActive = false;
+    let practicePathIndex = 0;
+    let practiceScoreVal = 0;
+    let practiceComboVal = 0;
+
+    // RENDER 16 LEDS BAR
+    const stepLedsBar = document.getElementById('stepLedsBar');
+    for (let i = 0; i < 16; i++) {
+      const led = document.createElement('div');
+      led.className = 'step-led';
+      led.id = `stepLed${i}`;
+      led.innerText = String(i + 1).padStart(2, '0');
+      stepLedsBar.appendChild(led);
+    }
+
+    // RENDER KEY PATH BADGES
+    function renderKeyPath() {
+      const song = lessonSongs[currentSongKey];
+      document.getElementById('lessonSongTitle').innerText = song.title;
+      document.getElementById('lessonSongDesc').innerText = song.desc;
+
+      const container = document.getElementById('keyPathContainer');
+      container.innerHTML = '';
+
+      song.keyPath.forEach((step, idx) => {
+        const badge = document.createElement('div');
+        badge.id = `keyStepBadge${idx}`;
+        badge.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-800 border border-slate-700 text-xs font-mono transition-all duration-200';
+        badge.innerHTML = `<span class="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px]">${step.key}</span>
+                           <span class="text-slate-300 text-[11px]">${step.name}</span>`;
+        container.appendChild(badge);
+
+        if (idx < song.keyPath.length - 1) {
+          const arrow = document.createElement('span');
+          arrow.className = 'text-slate-600 font-mono text-xs';
+          arrow.innerText = '➔';
+          container.appendChild(arrow);
+        }
+      });
+    }
+    renderKeyPath();
+
+    document.getElementById('lessonSongSelect').addEventListener('change', (e) => {
+      stopAutoDemo();
+      stopPracticeMode();
+      currentSongKey = e.target.value;
+      renderKeyPath();
+      updateBpm(lessonSongs[currentSongKey].bpm);
+    });
+
+    // AUTO DEMO CONTROLLER
+    const btnAutoDemo = document.getElementById('btnAutoDemo');
+    const demoIcon = document.getElementById('demoIcon');
+    const demoLabel = document.getElementById('demoLabel');
+
+    btnAutoDemo.addEventListener('click', () => {
+      if (!isDemoRunning) {
+        startAutoDemo();
+      } else {
+        stopAutoDemo();
+      }
+    });
+
+    function startAutoDemo() {
+      stopPracticeMode();
+      isDemoRunning = true;
+      demoIcon.innerText = '⏸️';
+      demoLabel.innerText = 'Pausar Recorrido';
+      btnAutoDemo.classList.add('bg-amber-400', 'text-black', 'shadow-[0_0_20px_#ffb703]');
+
+      const song = lessonSongs[currentSongKey];
+      const stepDuration = ((60 / song.bpm) / 4) * 1000;
+      demoStepIndex = 0;
+
+      demoTimer = setInterval(() => {
+        // Clear all step LEDs
+        for (let i = 0; i < 16; i++) {
+          const l = document.getElementById(`stepLed${i}`);
+          if (l) l.className = 'step-led';
+        }
+
+        const activeLed = document.getElementById(`stepLed${demoStepIndex}`);
+        if (activeLed) activeLed.className = 'step-led active-step';
+
+        // Play pads in this step
+        const stepHits = song.steps[demoStepIndex];
+        if (stepHits && stepHits.length > 0) {
+          stepHits.forEach(padNum => triggerPadVisual(padNum));
+        }
+
+        // Highlight matching key badge if exists
+        const pathIdx = demoStepIndex % song.keyPath.length;
+        document.querySelectorAll('[id^="keyStepBadge"]').forEach(b => {
+          b.classList.remove('bg-amber-500/30', 'border-amber-400', 'scale-105');
+        });
+        const activeBadge = document.getElementById(`keyStepBadge${pathIdx}`);
+        if (activeBadge) {
+          activeBadge.classList.add('bg-amber-500/30', 'border-amber-400', 'scale-105');
+        }
+
+        demoStepIndex = (demoStepIndex + 1) % 16;
+      }, stepDuration);
+    }
+
+    function stopAutoDemo() {
+      if (demoTimer) clearInterval(demoTimer);
+      isDemoRunning = false;
+      demoIcon.innerText = '▶️';
+      demoLabel.innerText = 'Ver Recorrido Automático';
+      btnAutoDemo.classList.remove('bg-amber-400', 'text-black', 'shadow-[0_0_20px_#ffb703]');
+      for (let i = 0; i < 16; i++) {
+        const l = document.getElementById(`stepLed${i}`);
+        if (l) l.className = 'step-led';
+      }
+      document.querySelectorAll('[id^="keyStepBadge"]').forEach(b => {
+        b.classList.remove('bg-amber-500/30', 'border-amber-400', 'scale-105');
+      });
+    }
+
+    // PRACTICE MODE CONTROLLER (RHYTHM GAME)
+    const btnPracticeMode = document.getElementById('btnPracticeMode');
+    const practiceIcon = document.getElementById('practiceIcon');
+    const practiceLabel = document.getElementById('practiceLabel');
+    const practiceStatusBox = document.getElementById('practiceStatusBox');
+    const practiceTargetText = document.getElementById('practiceTargetText');
+    const practiceFeedbackText = document.getElementById('practiceFeedbackText');
+    const practiceScore = document.getElementById('practiceScore');
+    const practiceStatusIcon = document.getElementById('practiceStatusIcon');
+
+    btnPracticeMode.addEventListener('click', () => {
+      if (!isPracticeActive) {
+        startPracticeMode();
+      } else {
+        stopPracticeMode();
+      }
+    });
+
+    function startPracticeMode() {
+      stopAutoDemo();
+      isPracticeActive = true;
+      practicePathIndex = 0;
+      practiceScoreVal = 0;
+      practiceComboVal = 0;
+      practiceIcon.innerText = '⏹️';
+      practiceLabel.innerText = 'Detener Práctica';
+      btnPracticeMode.classList.add('bg-cyan-400', 'text-black', 'shadow-[0_0_20px_#00f5d4]');
+      practiceStatusBox.classList.remove('hidden');
+      updatePracticeStep();
+    }
+
+    function stopPracticeMode() {
+      isPracticeActive = false;
+      practiceIcon.innerText = '🎮';
+      practiceLabel.innerText = 'Modo Práctica (Toca Tú)';
+      btnPracticeMode.classList.remove('bg-cyan-400', 'text-black', 'shadow-[0_0_20px_#00f5d4]');
+      practiceStatusBox.classList.add('hidden');
+      document.querySelectorAll('.mpc-pad').forEach(p => p.classList.remove('guide-pulse'));
+      document.querySelectorAll('[id^="keyStepBadge"]').forEach(b => {
+        b.classList.remove('bg-cyan-500/30', 'border-cyan-400', 'scale-105');
+      });
+    }
+
+    function updatePracticeStep() {
+      const song = lessonSongs[currentSongKey];
+      const target = song.keyPath[practicePathIndex];
+
+      // Highlight target pad
+      document.querySelectorAll('.mpc-pad').forEach(p => p.classList.remove('guide-pulse'));
+      const targetPad = document.getElementById(`pad${target.key}`);
+      if (targetPad) targetPad.classList.add('guide-pulse');
+
+      // Highlight key badge
+      document.querySelectorAll('[id^="keyStepBadge"]').forEach(b => {
+        b.classList.remove('bg-cyan-500/30', 'border-cyan-400', 'scale-105');
+      });
+      const badge = document.getElementById(`keyStepBadge${practicePathIndex}`);
+      if (badge) badge.classList.add('bg-cyan-500/30', 'border-cyan-400', 'scale-105');
+
+      practiceTargetText.innerText = `¡Paso ${practicePathIndex + 1}/${song.keyPath.length}! Presiona la tecla [${target.key}] (${target.name})`;
+      practiceFeedbackText.innerText = `Toca el pad pulsante o presiona el número ${target.key} en tu teclado.`;
+      practiceScore.innerText = `${practiceScoreVal} Pts (x${practiceComboVal})`;
+    }
+
+    function handleUserPadHit(padNum) {
+      triggerPadVisual(padNum);
+
+      if (isPracticeActive) {
+        const song = lessonSongs[currentSongKey];
+        const target = song.keyPath[practicePathIndex];
+
+        if (padNum === target.key) {
+          // Correct Hit!
+          practiceComboVal++;
+          practiceScoreVal += 100 * practiceComboVal;
+          practiceStatusIcon.innerText = '🔥';
+          practiceFeedbackText.innerText = `¡EXCELENTE! Golpe certero (+${100 * practiceComboVal} pts). Combo x${practiceComboVal}`;
+          practicePathIndex++;
+
+          if (practicePathIndex >= song.keyPath.length) {
+            practicePathIndex = 0; // Loop song pattern
+            practiceFeedbackText.innerText = `🎉 ¡COMPÁS COMPLETADO! Repitiendo el patrón para dominar la canción...`;
+          }
+          updatePracticeStep();
+        } else {
+          // Missed Hit!
+          practiceComboVal = 0;
+          practiceStatusIcon.innerText = '⚠️';
+          practiceFeedbackText.innerText = `Tocaste [${padNum}]. La tecla esperada era [${target.key}] (${target.name}). ¡Inténtalo de nuevo!`;
+          practiceScore.innerText = `${practiceScoreVal} Pts (x0)`;
+        }
+      }
+    }
 
     // ====================================================================
     // REALTIME OSCILLOSCOPE CANVAS & VU NEEDLE ANIMATION
@@ -1249,11 +1769,9 @@
       const h = oscCanvas.height;
       if (!w || !h) return;
 
-      // Dark background with slight trail
       oscCtx.fillStyle = 'rgba(3, 8, 6, 0.25)';
       oscCtx.fillRect(0, 0, w, h);
 
-      // Grid lines
       oscCtx.strokeStyle = 'rgba(0, 245, 212, 0.08)';
       oscCtx.lineWidth = 1;
       for (let x = 0; x < w; x += 30) {
@@ -1269,7 +1787,6 @@
         oscCtx.stroke();
       }
 
-      // Sine Waveform
       oscCtx.beginPath();
       oscCtx.lineWidth = 2.5;
       oscCtx.strokeStyle = '#00f5d4';
@@ -1288,10 +1805,9 @@
       oscCtx.stroke();
       oscCtx.shadowBlur = 0;
 
-      // Smooth VU Needle physics
       needleLVal += (targetNeedleVal - needleLVal) * 0.2;
       needleRVal += (targetNeedleVal * 0.95 - needleRVal) * 0.18;
-      targetNeedleVal += (-35 - targetNeedleVal) * 0.1; // decay back to zero
+      targetNeedleVal += (-35 - targetNeedleVal) * 0.1;
 
       document.getElementById('needleL').style.transform = `rotate(${needleLVal}deg)`;
       document.getElementById('needleR').style.transform = `rotate(${needleRVal}deg)`;
