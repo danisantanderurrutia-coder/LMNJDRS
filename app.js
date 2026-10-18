@@ -1741,8 +1741,6 @@ influencersData['minho-park'] = influencersData.minho;
 influencersData['damienvance'] = influencersData.damien;
 influencersData['damien-vance'] = influencersData.damien;
 influencersData['camilareyes'] = influencersData.camila;
-channelsData['the-orcaester'] = channelsData.orcaester;
-channelsData['the_orcaester'] = channelsData.orcaester;
 influencersData['camila-reyes'] = influencersData.camila;
 
 
@@ -1855,16 +1853,26 @@ const channelsData = {
   sofia: {
     id: "sofia",
     title: "1. Los viajes en el tiempo de Sofía",
-    subtitle: "Canal Infantil & Educativo de Historia",
-    category: "Infantil / Historia",
+    subtitle: "Aventuras Temporales, Dinosaurios & Valores Familiares",
+    category: "Infantil / Historia, Dinosaurios & Ciencia",
     icon: "fa-child-reaching",
     color: "var(--pink)",
     image: "yt_sofia_thumb.jpg",
-    concept: "Micro-aventuras animadas de 60 segundos donde Sofía viaja a épocas históricas clave (Egipto, Roma, el Renacimiento) dejando 1 enseñanza de valor por video.",
-    targetAge: "Niños de 6 a 12 años y familias educadoras.",
+    concept: "Micro-aventuras animadas de 60 segundos donde Sofía, una niña intrépida, viaja por el tiempo con su máquina temporal y su compañero Teko (un reptil carismático con Sentido Arcano). En cada salto viajan a épocas fascinantes —la era de los dinosaurios cretácicos, el antiguo Egipto, Roma o el Renacimiento— resolviendo un conflicto socioemocional en 60 segundos con empatía, trabajo en equipo y las rimas de su robot co-host.",
+    targetAge: "Niños de 4 a 12 años, familias educadoras y público infantil.",
     episodes: [
       {
-        title: "Episodio #1: ¿Cómo se construyeron las Pirámides de Guiza?",
+        title: "Episodio #1: Salto al Cretácico • El T-Rex que no sabía compartir",
+        duration: "1:00 min",
+        script: `[GANCHO / PORTAL]: "¡Sofía, algo está pasando en el Cretácico! ¡Salto en 3... 2... 1!"
+[PROBLEMA]: Sofía y su compañero Teko aterrizan en una selva jurásica. Rexy el pequeño T-Rex ha acaparado todas las frutas luminosas y ruge porque nadie quiere jugar con él.
+[ROBOT RAPEADOR]: "Si quieres amigos para jugar, ¡la fruta gigante hay que convidar! ¡Rrr-beat!"
+[SOLUCIÓN & MORALEJA]: Sofía le enseña a Rexy a tomar turnos y compartir. "Hoy aprendimos: Compartir no te quita lo que tienes, ¡te multiplica la diversión!"
+[PREGUNTA AL PÚBLICO]: "¿Y tú? ¿Compartes tus juguetes favoritos con tus amigos o hermanos?"`,
+        thumbnail: "Sofía con su brújula temporal junto a Teko y un tierno T-Rex verde en una selva prehistórica llena de helechos gigantes y un volcán sonriente al fondo."
+      },
+      {
+        title: "Episodio #2: ¿Cómo se construyeron las Pirámides de Guiza?",
         duration: "0:58 min",
         script: `[NARRADOR]: "¡Hola aventureros! Hoy Sofía viaja al año 2500 a.C. en el antiguo Egipto. ¿Sabías que los trabajadores no eran esclavos, sino artesanos respetados?"
 [VISUAL]: Sofía aterriza con su reloj del tiempo en el desierto animado.
@@ -1872,7 +1880,7 @@ const channelsData = {
         thumbnail: "Ilustración 3D colorida de Sofía con un sarcófago brillante y jeroglíficos animados."
       },
       {
-        title: "Episodio #2: El misterio de la primera imprenta de Gutenberg",
+        title: "Episodio #3: El misterio de la primera imprenta de Gutenberg",
         duration: "0:59 min",
         script: `[NARRADOR]: "Alemania, 1440. Antes de Gutenberg, ¡escribir un solo libro tardaba 1 año completo! Acompaña a Sofía a descubrir las letras de metal."`,
         thumbnail: "Sofía sosteniendo un libro dorado recién impreso en el taller de Maguncia."
@@ -1884,19 +1892,28 @@ const channelsData = {
   arcanotech: {
     id: "arcanotech",
     title: "2. Los Gemelos Arcanotech",
-    subtitle: "Sci-Fi, Solarpunk vs Cyberpunk",
-    category: "Futurismo & Divulgación Sci-Fi",
+    subtitle: "Dos Hermanos Magos: Solarpunk vs Cyberpunk",
+    category: "Futurismo, Ciencia & Fantasía",
     icon: "fa-atom",
     color: "var(--cyan)",
     image: "yt_arcanotech_thumb.jpg",
-    concept: "Debates narrativos entre dos hermanos gemelos virtuales: uno defiende la visión Solarpunk (armonía ecológica tecnológica) y la otra defiende la visión Cyberpunk (distopía neon e hiper-industrialización).",
-    targetAge: "Jóvenes y adultos de 16 a 40 años fascinados por la tecnología y la ciencia ficción.",
+    concept: "Dos hermanos magos viven en un bosque encantado con un dragón tierno y un espejo parlante. Un gemelo (Solarpunk, púrpura-azul) narra historias de ciencia y tecnologías posibles en armonía con la naturaleza; el otro gemelo (Cyberpunk, rojo oscuro-magenta) explora misterios profundos, conspiraciones espaciales y futuros distópicos, mientras el espejo mágico hace fact-checking in-world.",
+    targetAge: "Jóvenes y adultos de 14 a 40 años fascinados por la ciencia ficción, la tecnología, la magia y los debates conceptuales.",
     episodes: [
       {
-        title: "Episodio #10: Ciudades Flotantes: ¿Verde Utopía o Prisión de Neón?",
+        title: "Episodio #1: La Señal del Espacio • ¿Descubrimiento Real o Mentira Oculta?",
+        duration: "10:30 min",
+        script: `[MAGO SOLARPUNK (AZUL)]: "El telescopio James Webb captó una anomalía en K2-18b compatible con biofirmas de vida marina fotosintética. La física respalda este salto."
+[MAGO CYBERPUNK (ROJO)]: "¿O acaso están filtrando la información por cuotas para preparar el mercado de telecomunicaciones orbitales privadas?"
+[EL ESPEJO PARLANTE]: "¡Fact-check del Consejo del Bosque! Tres datos verificados por radioastrónomos y una teoría conspirativa desmentida."
+[DRAGÓN TIERNO]: *Estornuda chispas de colores cómicas sobre el pergamino del espejo.*`,
+        thumbnail: "Los dos hermanos magos con sus túnicas azul y magenta en el bosque encantado frente al espejo mágico con el pequeño dragón sobre el hombro."
+      },
+      {
+        title: "Episodio #2: Ciudades Flotantes: ¿Verde Utopía o Prisión de Neón?",
         duration: "12:40 min",
-        script: `[NEXUS]: "El futuro pertenece a las arcologías solares donde cada edificio genera su propia energía."
-[VEX]: "Iluso. El verdadero poder está en los servidores submarinos y los implantes neuronales nocturnos."`,
+        script: `[MAGO SOLARPUNK]: "El futuro pertenece a las arcologías solares donde cada edificio genera su propia energía y convive con la botánica."
+[MAGO CYBERPUNK]: "Iluso. El verdadero poder está en los servidores submarinos y los implantes neuronales nocturnos."`,
         thumbnail: "Pantalla dividida entre una ciudad verde llena de vegetación brillante y un rascacielos con lluvia de neón."
       }
     ],
@@ -1906,19 +1923,25 @@ const channelsData = {
   sagrados: {
     id: "sagrados",
     title: "3. Cuentos Sagrados (sin autor)",
-    subtitle: "Historia de las Religiones & Mitología",
-    category: "Historia & Filosofía",
+    subtitle: "Mitos Fundacionales, Tradiciones & Sabiduría Universal",
+    category: "Historia & Filosofía Perenne",
     icon: "fa-scroll",
     color: "var(--purple)",
     image: "yt_sagrados_thumb.jpg",
-    concept: "Relatos sobrios y de alta calidad estética sobre textos sagrados, mitos de creación e historias bíblicas, védicas y nórdicas contados con tono neutral y de profundo respeto cultural.",
-    targetAge: "Audiencia general interesada en historia antigua, teología y espiritualidad.",
+    concept: "Storytelling universal sobre textos sagrados, parábolas, mitos de creación y tradiciones espirituales del mundo (desde Mesopotamia y las escrituras bíblicas hasta leyendas védicas, budistas y sufíes) narradas con sobriedad, neutralidad y arte generativo estilo óleo al claroscuro.",
+    targetAge: "Audiencia transversal madura interesada en historia antigua, teología y espiritualidad.",
     episodes: [
       {
         title: "Episodio #4: El Poema de Gilgamesh y el Diluvio Universal",
         duration: "18:20 min",
         script: `[VOZ EN OFF]: "Miles de años antes del relato de Noé, en las tablillas de arcilla de Mesopotamia se escribió la búsqueda de la inmortalidad..."`,
         thumbnail: "Tablilla cuneiforme dorada iluminada por fuego divino con la epopeya grabado."
+      },
+      {
+        title: "Episodio #5: El Banquete del Sabio Sufí y la Trampa del Ego",
+        duration: "12:15 min",
+        script: `[VOZ EN OFF]: "En las calles de Bagdad del siglo IX, un maestro que vestía harapos entró al palacio de los mercaderes para demostrar qué alimentaba verdaderamente a las almas..."`,
+        thumbnail: "Palacio oriental al anochecer con faroles dorados y un anciano místico bajo un arco de mosaicos estrellados."
       }
     ],
     pipeline: "Investigación histórica comprobada -> Locución profunda e imponente -> Arte cinematográfico generativo estilo óleo -> Banda sonora orquestal.",
@@ -2015,6 +2038,9 @@ channelsData.lau_gamedev = channelsData.kira_gamedev;
 channelsData.mateo = channelsData.mateo_fintech;
 channelsData["infinite-archive"] = channelsData.arcano;
 channelsData.arcano = channelsData.arcano;
+channelsData['the-orcaester'] = channelsData.orcaester;
+channelsData['the_orcaester'] = channelsData.orcaester;
+channelsData.orcas = channelsData.orcaester;
 
 // --- 3. AUTHENTICATION & ACCESS CONTROL FOR INTERNAL TEAM PANEL ---
 let pendingTeamTab = 'members';
@@ -2141,6 +2167,7 @@ function updateWorldClocks() {
 function initRouter() {
   window.addEventListener('hashchange', handleRoute);
   window.addEventListener('load', handleRoute);
+  handleRoute();
   setInterval(updateWorldClocks, 1000);
   updateAuthUI();
 }
@@ -4966,6 +4993,66 @@ function renderYoutubeCatalogPage() {
 
   const channelsList = [
     {
+      id: 'orcaester',
+      title: 'The Orcaester • Orquesta Marina Infantil',
+      subtitle: 'Educación Musical & Consciencia Ecológica',
+      category: 'Infantil / Música & Ecología',
+      icon: 'fa-water',
+      color: '#06b6d4',
+      image: 'the_orcaester_thumb.jpg',
+      duration: '4:00 / Episodio',
+      desc: 'Orquesta sinfónica de animales marinos liderada por el Maestro Orcar. Enseña conceptos musicales a niños (tempo, dinámicas, familias de instrumentos) mientras promueve el cuidado de los océanos.',
+      monetization: 'YouTube Kids / Family ($3.5–$6 USD RPM) + Spotify Kids Clásica + Peluches & Merch Educativo'
+    },
+    {
+      id: 'sofia',
+      title: 'Los viajes en el tiempo de Sofía',
+      subtitle: 'Aventuras Temporales, Dinosaurios & Valores Familiares',
+      category: 'Infantil / Historia, Dinosaurios & Ciencia',
+      icon: 'fa-child-reaching',
+      color: 'var(--pink)',
+      image: 'yt_sofia_thumb.jpg',
+      duration: '1:00 / Short',
+      desc: 'Micro-aventuras animadas de 60 segundos por portales temporales (el Cretácico con dinosaurios junto a su compañero Teko, Egipto, Roma). Resolución de emociones con rimas del robot co-host.',
+      monetization: 'AdSense Kids ($3.5–$5 USD RPM) + Libros KDP en Amazon + Merchandising'
+    },
+    {
+      id: 'arcanotech',
+      title: 'Los Gemelos Arcanotech',
+      subtitle: 'Dos Hermanos Magos: Solarpunk vs Cyberpunk',
+      category: 'Futurismo, Ciencia & Fantasía',
+      icon: 'fa-atom',
+      color: 'var(--cyan)',
+      image: 'yt_arcanotech_thumb.jpg',
+      duration: '12:40 / Debate',
+      desc: 'Dos magos gemelos debaten en un bosque encantado junto a un dragón tierno y un espejo parlante: utopías solares ecológicas vs distopías cibernéticas nocturnas. Alta afinidad para comunidad dev.',
+      monetization: 'Patrocinios Tech/VPNs + AdSense Sci-Fi ($6–$9.5 USD RPM) + Afiliados Hardware'
+    },
+    {
+      id: 'sagrados',
+      title: 'Cuentos Sagrados (sin autor)',
+      subtitle: 'Mitos Fundacionales, Tradiciones & Sabiduría Universal',
+      category: 'Historia & Filosofía Perenne',
+      icon: 'fa-scroll',
+      color: 'var(--purple)',
+      image: 'yt_sagrados_thumb.jpg',
+      duration: '18:20 / Documental',
+      desc: 'Storytelling universal sobre textos sagrados y mitos de creación (Gilgamesh, parábolas bíblicas, sabiduría sufí y védica) narrados con respeto cultural y arte al óleo.',
+      monetization: 'Audiolibros Audible + AdSense Premium ($7–$12 USD RPM) + Licencias Educativas'
+    },
+    {
+      id: 'ranchera',
+      title: 'Maite & La Fiebre Ranchera',
+      subtitle: 'Cumbia Campesina & Videoclips 4K',
+      category: 'Música & Cono Sur',
+      icon: 'fa-music',
+      color: '#f59e0b',
+      image: 'yt_ranchera_thumb.jpg',
+      duration: '60:00 / Mix Festivo',
+      desc: 'Videoclips 4K generativos y mixes festivos de 1h para asados y fiestas populares en Chile y el Cono Sur con la voz de Maite Valenzuela.',
+      monetization: 'AdSense Sesiones Largas ($4.5–$7 USD RPM) + Spotify/Apple Music + Licores'
+    },
+    {
       id: 'mateo_fintech',
       title: 'Mateo Silva • Alpha Capital Insights',
       subtitle: 'FinTech, Modelos en Python & Real Estate Tech',
@@ -4988,66 +5075,6 @@ function renderYoutubeCatalogPage() {
       duration: '14:15 / DevLog',
       desc: 'Devlogs de programación en Godot/Unreal y ensayos sobre soberanía de código y privacidad digital presentados por Kira Vane.',
       monetization: 'Patrocinios SaaS Cloud + Wishlists Steam + AdSense Dev ($9–$15 USD RPM)'
-    },
-    {
-      id: 'ranchera',
-      title: 'Maite & La Fiebre Ranchera',
-      subtitle: 'Cumbia Campesina & Videoclips 4K',
-      category: 'Música & Cono Sur',
-      icon: 'fa-music',
-      color: '#f59e0b',
-      image: 'yt_ranchera_thumb.jpg',
-      duration: '60:00 / Mix Festivo',
-      desc: 'Videoclips 4K generativos y mixes festivos de 1h para asados y fiestas populares en Chile y el Cono Sur con la voz de Maite Valenzuela.',
-      monetization: 'AdSense Sesiones Largas ($4.5–$7 USD RPM) + Spotify/Apple Music + Licores'
-    },
-    {
-      id: 'arcanotech',
-      title: 'Los Gemelos Arcanotech',
-      subtitle: 'Solarpunk vs Cyberpunk',
-      category: 'Sci-Fi & Futurismo',
-      icon: 'fa-atom',
-      color: 'var(--cyan)',
-      image: 'yt_arcanotech_thumb.jpg',
-      duration: '12:40 / Debate',
-      desc: 'Debates narrativos entre dos magos gemelos: utopías solares ecológicas vs distopías cibernéticas nocturnas. Alta afinidad para comunidad dev.',
-      monetization: 'Patrocinios Tech/VPNs + AdSense Sci-Fi ($6–$9.5 USD RPM) + Afiliados Hardware'
-    },
-    {
-      id: 'sagrados',
-      title: 'Cuentos Sagrados (sin autor)',
-      subtitle: 'Historia de las Religiones & Mitología',
-      category: 'Historia & Filosofía',
-      icon: 'fa-scroll',
-      color: 'var(--purple)',
-      image: 'yt_sagrados_thumb.jpg',
-      duration: '18:20 / Documental',
-      desc: 'Relatos universales y mitos fundacionales narrados con sobriedad y arte generativo estilo óleo al claroscuro. Gran consumo en audiencias maduras.',
-      monetization: 'Audiolibros Audible + AdSense Premium ($7–$12 USD RPM) + Licencias Educativas'
-    },
-    {
-      id: 'orcaester',
-      title: 'The Orcaester • Orquesta Marina Infantil',
-      subtitle: 'Educación Musical & Consciencia Ecológica',
-      category: 'Infantil / Música & Ecología',
-      icon: 'fa-water',
-      color: '#06b6d4',
-      image: 'the_orcaester_thumb.jpg',
-      duration: '4:00 / Episodio',
-      desc: 'Orquesta sinfónica de animales marinos liderada por el Maestro Orcar. Enseña conceptos musicales a niños (tempo, dinámicas, familias de instrumentos) mientras promueve el cuidado de los océanos.',
-      monetization: 'YouTube Kids / Family ($3.5–$6 USD RPM) + Spotify Kids Clásica + Peluches & Merch Educativo'
-    },
-    {
-      id: 'sofia',
-      title: 'Los viajes en el tiempo de Sofía',
-      subtitle: 'Canal Infantil & Educativo de Historia',
-      category: 'Infantil / Historia',
-      icon: 'fa-child-reaching',
-      color: 'var(--pink)',
-      image: 'yt_sofia_thumb.jpg',
-      duration: '0:58 / Short',
-      desc: 'Micro-aventuras animadas de 60 segundos por portales temporales (Egipto, Roma, Renacimiento). Alta retención y valores familiares.',
-      monetization: 'AdSense Kids ($3.5–$5 USD RPM) + Libros KDP en Amazon + Merchandising'
     }
   ];
 
