@@ -2150,9 +2150,21 @@ function handleRoute() {
     renderCursosPage();
     showDynamicView();
   } else if (hash === '#comercial' || hash === '#clientes' || hash === '#pitch' || hash === '#showcase') {
+    showPublicView();
+    setTimeout(() => {
+      const el = document.getElementById('comercial');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
+  } else if (hash === '#musica' || hash === '#musica-comercial' || hash === '#soundforge') {
+    showPublicView();
+    setTimeout(() => {
+      const el = document.getElementById('musica');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
+  } else if (hash === '#comercial-full') {
     renderCommercialPage();
     showDynamicView();
-  } else if (hash === '#musica' || hash === '#musica-comercial' || hash === '#soundforge') {
+  } else if (hash === '#musica-full') {
     renderMusicaPage();
     showDynamicView();
   } else if (hash === '#logos' || hash === '#copys') {
@@ -8834,12 +8846,42 @@ function playMusicCommercialDemo(demoId, btn) {
 
   stopMusicCommercialDemo();
 
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) {
-      alert("Tu navegador no soporta Web Audio API. Por favor actualiza a un navegador moderno.");
+  // Caso especial: El Dragón Astral reproduce el master de audio real del pipeline de Freja
+  if (demoId === 'dragon') {
+    try {
+      const realAudio = new Audio('puerta_1_dragon_astral.m4a');
+      realAudio.volume = 0.85;
+      realAudio.play().then(() => {
+        activeCommercialAudio = {
+          id: 'dragon',
+          stop: () => {
+            try { realAudio.pause(); realAudio.currentTime = 0; } catch(e){}
+          }
+        };
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-stop"></i> Detener Pista';
+        const dot = document.getElementById('music-status-dot');
+        const text = document.getElementById('music-status-text');
+        if (dot) dot.style.background = '#fbbf24';
+        if (text) text.textContent = '🔊 Reproduciendo Master Oficial: «Puerta 1: El Despertar del Dragón Astral» (Freja Lindholm & Arcano)';
+        realAudio.onended = () => { stopMusicCommercialDemo(); };
+      }).catch(err => {
+        console.warn("Autoplay bloqueado o archivo inaccesible, usando sintetizador:", err);
+        fallbackSynthesizeDemo(demoId, btn);
+      });
+      return;
+    } catch(e) {
+      fallbackSynthesizeDemo(demoId, btn);
       return;
     }
+  }
+
+  fallbackSynthesizeDemo(demoId, btn);
+}
+
+function fallbackSynthesizeDemo(demoId, btn) {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
 
     const ctx = new AudioContext();
     const masterGain = ctx.createGain();
@@ -8850,11 +8892,9 @@ function playMusicCommercialDemo(demoId, btn) {
     let label = '';
 
     if (demoId === 'dragon') {
-      // D Dorian: D3, F3, A3, C4, E4
       chordFrequencies = [146.83, 174.61, 220.00, 261.63, 329.63];
       label = 'Reproduciendo: «El Dragón Astral» (Dark Fantasy • D Dorian)';
     } else if (demoId === 'cyber') {
-      // A Minor Synthwave: A2, C3, E3, G3, B3
       chordFrequencies = [110.00, 130.81, 164.81, 196.00, 246.94];
       label = 'Reproduciendo: «Neon Horizon 2088» (Cyberpunk Synthwave)';
     } else if (demoId === 'acoustic') {
@@ -9713,3 +9753,267 @@ function copiarPromptAdmin(targetId, btn) {
     }, 2000);
   });
 }
+
+// ============================================================================
+// FUNCIONES DE INTERACCIÓN LANDING: REPRODUCTOR FREJA & SECCIÓN COMERCIAL
+// ============================================================================
+
+// 1. Reproductor de Audio Real de Freja (Landing Showcase)
+let landingAudioInitialized = false;
+
+function initLandingAudioEvents() {
+  const audio = document.getElementById('landing-freja-audio');
+  if (!audio || landingAudioInitialized) return;
+  landingAudioInitialized = true;
+
+  audio.addEventListener('timeupdate', () => {
+    const curTime = audio.currentTime;
+    const durTime = audio.duration || 74.59;
+    const progressPercent = (curTime / durTime) * 100;
+
+    const bar = document.getElementById('landing-audio-progress-bar');
+    if (bar) bar.style.width = `${progressPercent}%`;
+
+    const curLabel = document.getElementById('landing-audio-cur');
+    if (curLabel) curLabel.textContent = formatAudioSeconds(curTime);
+
+    const durLabel = document.getElementById('landing-audio-dur');
+    if (durLabel && !isNaN(audio.duration)) durLabel.textContent = formatAudioSeconds(audio.duration);
+  });
+
+  audio.addEventListener('ended', () => {
+    const playIcon = document.getElementById('landing-play-icon');
+    const playText = document.getElementById('landing-play-text');
+    const waves = document.getElementById('landing-wave-container');
+    if (playIcon) playIcon.className = 'fa-solid fa-play';
+    if (playText) playText.textContent = 'Escuchar Canción Completa';
+    if (waves) waves.classList.remove('is-playing');
+  });
+}
+
+function formatAudioSeconds(sec) {
+  if (isNaN(sec)) return '00:00';
+  const mins = Math.floor(sec / 60);
+  const secs = Math.floor(sec % 60);
+  return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function toggleLandingFrejaAudio() {
+  const audio = document.getElementById('landing-freja-audio');
+  const playIcon = document.getElementById('landing-play-icon');
+  const playText = document.getElementById('landing-play-text');
+  const waves = document.getElementById('landing-wave-container');
+  if (!audio) return;
+
+  initLandingAudioEvents();
+  stopMusicCommercialDemo();
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      if (playIcon) playIcon.className = 'fa-solid fa-pause';
+      if (playText) playText.textContent = 'Pausar Canción';
+      if (waves) waves.classList.add('is-playing');
+    }).catch(err => {
+      console.error("Error al reproducir audio de Freja:", err);
+    });
+  } else {
+    audio.pause();
+    if (playIcon) playIcon.className = 'fa-solid fa-play';
+    if (playText) playText.textContent = 'Reanudar Canción';
+    if (waves) waves.classList.remove('is-playing');
+  }
+}
+
+function seekLandingAudio(e) {
+  const audio = document.getElementById('landing-freja-audio');
+  const wrap = document.getElementById('landing-audio-progress-wrap');
+  if (!audio || !wrap) return;
+
+  initLandingAudioEvents();
+  const rect = wrap.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const width = rect.width;
+  const dur = audio.duration || 74.59;
+  const newTime = (clickX / width) * dur;
+  audio.currentTime = newTime;
+}
+
+function toggleLandingAudioLoop() {
+  const audio = document.getElementById('landing-freja-audio');
+  const statusEl = document.getElementById('landing-loop-status');
+  if (!audio) return;
+  audio.loop = !audio.loop;
+  if (statusEl) statusEl.textContent = audio.loop ? 'ON' : 'OFF';
+}
+
+function playLandingDemoTrack(trackId) {
+  if (trackId === 'dragon') {
+    toggleLandingFrejaAudio();
+  } else {
+    const audio = document.getElementById('landing-freja-audio');
+    if (audio && !audio.paused) {
+      audio.pause();
+      const playIcon = document.getElementById('landing-play-icon');
+      const playText = document.getElementById('landing-play-text');
+      const waves = document.getElementById('landing-wave-container');
+      if (playIcon) playIcon.className = 'fa-solid fa-play';
+      if (playText) playText.textContent = 'Escuchar Canción Completa';
+      if (waves) waves.classList.remove('is-playing');
+    }
+    playMusicCommercialDemo(trackId, null);
+  }
+}
+
+// 2. Control de Pestañas Comerciales
+function switchComercialTab(tab) {
+  const btnServicios = document.getElementById('btn-com-servicios');
+  const btnSimulador = document.getElementById('btn-com-simulador');
+  const btnPitch = document.getElementById('btn-com-pitch');
+  const btnComparativa = document.getElementById('btn-com-comparativa');
+
+  const paneServicios = document.getElementById('com-pane-servicios');
+  const paneSimulador = document.getElementById('com-pane-simulador');
+  const panePitch = document.getElementById('com-pane-pitch');
+  const paneComparativa = document.getElementById('com-pane-comparativa');
+
+  [btnServicios, btnSimulador, btnPitch, btnComparativa].forEach(b => { if (b) b.classList.remove('active'); });
+  [paneServicios, paneSimulador, panePitch, paneComparativa].forEach(p => { if (p) p.classList.remove('active-pane'); });
+
+  if (tab === 'simulador') {
+    if (btnSimulador) btnSimulador.classList.add('active');
+    if (paneSimulador) paneSimulador.classList.add('active-pane');
+    updateLandingCampaignSim();
+  } else if (tab === 'pitch') {
+    if (btnPitch) btnPitch.classList.add('active');
+    if (panePitch) panePitch.classList.add('active-pane');
+  } else if (tab === 'comparativa') {
+    if (btnComparativa) btnComparativa.classList.add('active');
+    if (paneComparativa) paneComparativa.classList.add('active-pane');
+  } else {
+    if (btnServicios) btnServicios.classList.add('active');
+    if (paneServicios) paneServicios.classList.add('active-pane');
+  }
+}
+
+// 3. Carrusel del Pitch Deck Ejecutivo (10 Slides)
+let currentPitchSlide = 1;
+
+function goToPitchSlide(n) {
+  currentPitchSlide = n;
+  for (let i = 1; i <= 10; i++) {
+    const slide = document.getElementById(`pitch-slide-${i}`);
+    if (slide) slide.classList.toggle('active-slide', i === n);
+  }
+
+  const counter = document.getElementById('pitch-slide-counter');
+  if (counter) counter.textContent = `Slide ${n} / 10`;
+
+  const dots = document.querySelectorAll('.pitch-nav-dot');
+  dots.forEach((d, idx) => {
+    d.classList.toggle('active', idx + 1 === n);
+  });
+}
+
+function prevPitchSlide() {
+  let target = currentPitchSlide - 1;
+  if (target < 1) target = 10;
+  goToPitchSlide(target);
+}
+
+function nextPitchSlide() {
+  let target = currentPitchSlide + 1;
+  if (target > 10) target = 1;
+  goToPitchSlide(target);
+}
+
+// 4. Simulador de Campaña de la Landing
+function updateLandingCampaignSim() {
+  const reachEl = document.getElementById('land-sim-reach');
+  const creatorsEl = document.getElementById('land-sim-creators');
+  const formatEl = document.getElementById('land-sim-format');
+
+  const reachLabel = document.getElementById('land-sim-reach-label');
+  const creatorsLabel = document.getElementById('land-sim-creators-label');
+
+  const costEl = document.getElementById('land-sim-cost');
+  const tradEl = document.getElementById('land-sim-traditional');
+  const savingsEl = document.getElementById('land-sim-savings');
+  const cpmEl = document.getElementById('land-sim-cpm');
+  const engEl = document.getElementById('land-sim-engagement');
+
+  if (!reachEl || !creatorsEl) return;
+
+  const reach = parseInt(reachEl.value, 10);
+  const creators = parseInt(creatorsEl.value, 10);
+  const format = formatEl ? formatEl.value : 'reels';
+
+  if (reachLabel) reachLabel.textContent = `${reach.toLocaleString()} Views`;
+  if (creatorsLabel) creatorsLabel.textContent = `${creators} ${creators === 1 ? 'Influencer' : 'Influencers'}`;
+
+  let baseCpm = 2.80;
+  let tradCpm = 11.00;
+
+  if (format === 'ugc') {
+    baseCpm = 2.40;
+    tradCpm = 9.50;
+  } else if (format === 'omnichannel') {
+    baseCpm = 3.60;
+    tradCpm = 14.50;
+  }
+
+  const agencyCost = Math.round((reach / 1000) * baseCpm + (creators * 80));
+  const tradCost = Math.round((reach / 1000) * tradCpm + (creators * 450));
+  const savingsPercent = Math.round(((tradCost - agencyCost) / tradCost) * 100);
+
+  const estimatedCpm = ((agencyCost / reach) * 1000).toFixed(2);
+  const engRate = (8.5 + (creators * 0.6) - (reach / 1000000) * 1.5).toFixed(1);
+
+  if (costEl) costEl.textContent = `$${agencyCost.toLocaleString()} USD`;
+  if (tradEl) tradEl.textContent = `$${tradCost.toLocaleString()} USD`;
+  if (savingsEl) savingsEl.textContent = `-${savingsPercent}%`;
+  if (cpmEl) cpmEl.textContent = `$${estimatedCpm} USD`;
+  if (engEl) engEl.textContent = `${engRate}% (Alto)`;
+}
+
+function applyLandingSimToQuote() {
+  const serviceSel = document.getElementById('land-b2b-service');
+  const msgEl = document.getElementById('land-b2b-message');
+  const reachEl = document.getElementById('land-sim-reach');
+  const creatorsEl = document.getElementById('land-sim-creators');
+  const costEl = document.getElementById('land-sim-cost');
+
+  if (serviceSel) serviceSel.value = 'Influencer Marketing con Rostros IA';
+  if (msgEl && reachEl && creatorsEl && costEl) {
+    msgEl.value = `Cotización desde Simulador: Campaña de ${reachEl.value} visualizaciones con ${creatorsEl.value} influencers IA. Presupuesto estimado: ${costEl.textContent}. Por favor contactar para detalles de contratación.`;
+  }
+
+  const formSection = document.getElementById('land-b2b-name');
+  if (formSection) {
+    formSection.scrollIntoView({ behavior: 'smooth' });
+    formSection.focus();
+  }
+}
+
+function prefillLandingB2B(serviceName) {
+  const serviceSel = document.getElementById('land-b2b-service');
+  const formInput = document.getElementById('land-b2b-name');
+  if (serviceSel) {
+    serviceSel.value = serviceName;
+  }
+  if (formInput) {
+    formInput.scrollIntoView({ behavior: 'smooth' });
+    formInput.focus();
+  }
+}
+
+function handleLandingB2BSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('land-b2b-name')?.value || '';
+  const company = document.getElementById('land-b2b-company')?.value || '';
+  const email = document.getElementById('land-b2b-email')?.value || '';
+  const service = document.getElementById('land-b2b-service')?.value || '';
+
+  alert(`¡Gracias, ${name}! Hemos recibido la solicitud para ${company} (${service}). Un director de cuentas de Manejadores te contactará a ${email} en menos de 24 horas.`);
+  e.target.reset();
+}
+

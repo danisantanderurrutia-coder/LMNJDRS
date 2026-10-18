@@ -1,7 +1,6 @@
 .DS_Store
 *.log
 *.wav
-*.mp3
-*.m4a
 *.aiff
 caldero_freja/
+!puerta_1_dragon_astral.m4a
