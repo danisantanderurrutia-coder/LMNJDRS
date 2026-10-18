@@ -45,7 +45,7 @@
       <ul class="nav-links" id="public-nav-links">
         <li><a href="#roster">Influencers</a></li>
         <li><a href="#youtube">Youtube</a></li>
-        <li><a href="caldero_freja/" target="_blank" style="color: #fbbf24; font-weight: 600;"><i class="fa-solid fa-compact-disc" style="color: #00f5d4; margin-right: 4px;"></i> SoundForge Studio</a></li>
+        <!-- Caldero moved to internal Admin Panel as requested -->
         <li><a href="#cursos">Cursos</a></li>
         <li><a href="#seguridad">Seguridad Digital</a></li>
         <li><a href="#empresas">Empresas</a></li>
@@ -68,6 +68,173 @@
   <!-- Dynamic Router Container for Dedicated Subpages -->
   <main id="view-dynamic" class="mode-view">
     <!-- Rendered dynamically by app.js router -->
+  
+    <!-- PÁGINA 7: CALDERO DE PROMPTS DE FREJA (MOTOR ALQUÍMICO DE PRODUCCIÓN) -->
+    <div id="team-pane-caldero" class="team-pane">
+      <section class="section" style="padding-top: 1rem;">
+        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <span class="section-subtitle" style="color: #ff70a6;"><i class="fa-solid fa-wand-magic-sparkles"></i> Motor Interno de Producción Sonora & Lore</span>
+              <h2 class="section-title">El Caldero de Freja • Generador de Prompts Alquímicos</h2>
+              <p class="section-desc" style="max-width: 850px; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                Herramienta interna adaptada para el equipo de producción de <strong>El Gran Arcano</strong> y <strong>Los Manejadores</strong>. 
+                Genera prompts calibrados para Suno v3.5/v4, Udio AI, MusicGen y Midjourney combinando escalas modulares, cánticos sacros y directivas de producción.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+              <select id="adminCalderoPresetSelect" onchange="applyAdminCalderoPreset(this.value)" class="form-input" style="background: rgba(18, 22, 36, 0.9); border-color: rgba(255, 42, 133, 0.5); color: #ff70a6; font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1rem;">
+                <option value="">📜 Cargar Preset de Capítulo...</option>
+                <option value="dragon">Puerta I: El Dragón Astral (Danse Macabre • 74 BPM)</option>
+                <option value="biblioteca">Puerta II: La Biblioteca en Llamas (Mozart • 68 BPM)</option>
+                <option value="portal">Puerta III: El Sigilo Prohibido (Stravinsky • 110 BPM)</option>
+                <option value="astrologo">Puerta IV: La Torre del Astrólogo (Satie • 62 BPM)</option>
+                <option value="valquiria">Puerta V: Lamento de la Valquiria (Wagner • 78 BPM)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Interactivo de Generación de Prompts (5 Pasos Alquímicos) -->
+        <div style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(255, 42, 133, 0.3); border-radius: var(--radius-lg); padding: 2rem; backdrop-filter: blur(16px); margin-bottom: 2rem;">
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+            
+            <!-- Parámetros 1: Armonía & Tempo -->
+            <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+              <h4 style="color: #ff70a6; font-size: 0.9rem; font-family: var(--font-heading); margin-bottom: 0.75rem;">
+                <i class="fa-solid fa-music"></i> 1. Armonía & Tempo
+              </h4>
+              <div style="margin-bottom: 0.75rem;">
+                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Modo Armónico / Escala:</label>
+                <select id="adminCalderoModo" onchange="generarPromptsAdminCaldero()" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
+                  <option value="D Dorian (Místico y Noble)">D Dorian (Místico y Noble)</option>
+                  <option value="A Aeolian (Melancolía y Lamento)">A Aeolian (Melancolía y Lamento)</option>
+                  <option value="E Phrygian (Tensión de Batalla y Hechizo)">E Phrygian (Tensión y Batalla)</option>
+                  <option value="C Harmonic Minor (Gótico Dramático)">C Harmonic Minor (Gótico Dramático)</option>
+                  <option value="F Lydian (Luz Astral y Épica Cósmica)">F Lydian (Luz Astral)</option>
+                </select>
+              </div>
+              <div style="margin-bottom: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">
+                  <span>Tempo Sugerido:</span>
+                  <span id="adminCalderoBpmVal" style="color: #00f5d4; font-family: monospace; font-weight: 700;">74 BPM</span>
+                </div>
+                <input type="range" id="adminCalderoBpm" min="55" max="135" value="74" oninput="document.getElementById('adminCalderoBpmVal').innerText = this.value + ' BPM'; generarPromptsAdminCaldero();" style="width: 100%; accent-color: #ff2a85;">
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Inspiración Clásica / Híbrida:</label>
+                <input type="text" id="adminCalderoClasica" oninput="generarPromptsAdminCaldero()" value="Danse Macabre (Camille Saint-Saëns) + Chillwave Dark Synth Arps" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
+              </div>
+            </div>
+
+            <!-- Parámetros 2: Lore, Fusión & Voces -->
+            <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+              <h4 style="color: #00f5d4; font-size: 0.9rem; font-family: var(--font-heading); margin-bottom: 0.75rem;">
+                <i class="fa-solid fa-sliders"></i> 2. Fusión Sonora & Configuración Vocal
+              </h4>
+              <div style="margin-bottom: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">
+                  <span>Fader de Fusión:</span>
+                  <span id="adminCalderoFusionVal" style="color: #c77dff; font-family: monospace; font-weight: 700;">50% Híbrido Dark Fantasy</span>
+                </div>
+                <input type="range" id="adminCalderoFusion" min="0" max="100" value="50" oninput="updateAdminFusionLabel(this.value); generarPromptsAdminCaldero();" style="width: 100%; accent-color: #00f5d4;">
+              </div>
+              <div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+                <label style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="adminCalderoChkInstr" onchange="generarPromptsAdminCaldero()">
+                  <span>Instrumental Puro (Sin Voces)</span>
+                </label>
+                <label style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="adminCalderoChkLirico" checked onchange="generarPromptsAdminCaldero()">
+                  <span>Voz Lírica de Freja + Coro Sacro</span>
+                </label>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Espacio Acústico (Reverberación):</label>
+                <input type="text" id="adminCalderoEspacio" oninput="generarPromptsAdminCaldero()" value="Cripta inundada de piedra húmeda con reverberación de 7 segundos" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
+              </div>
+            </div>
+
+            <!-- Parámetros 3: Alquimia Lírica & Cánticos -->
+            <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <h4 style="color: #c77dff; font-size: 0.9rem; font-family: var(--font-heading); margin: 0;">
+                  <i class="fa-solid fa-scroll"></i> 3. Cántico en Latín / Nórdico
+                </h4>
+                <button onclick="generarLetraSacraAdminCaldero()" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.5rem; color: #ff70a6; border-color: rgba(255,42,133,0.4);">
+                  🎲 Aleatorio
+                </button>
+              </div>
+              <textarea id="adminCalderoFrases" rows="4" oninput="generarPromptsAdminCaldero()" class="form-input" style="font-size: 0.78rem; font-family: monospace; background: #0c0f1d; color: #00f5d4; resize: vertical;">«Per tenebras astra peto,
+Cinis manet in secreto.
+Oculis clausis deum video,
+Sanguine portas aperio.»
+(A través de las tinieblas busco las estrellas, la ceniza permanece en secreto. Con ojos cerrados contemplo al dios, con sangre abro las puertas.)</textarea>
+              <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Drop Místico (El Quiebre):</label>
+                <input type="text" id="adminCalderoQuiebre" oninput="generarPromptsAdminCaldero()" value="Corte súbito de toda la orquesta hacia un silencio absoluto con eco de campana disonante" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CAJAS DE SALIDA DE PROMPTS LISTAS PARA COPIAR -->
+          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="margin: 0; font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">
+                <i class="fa-solid fa-bolt" style="color: #ffb703;"></i> Prompts Listos para Producción (1 Clic)
+              </h4>
+              <span style="font-size: 0.75rem; font-family: monospace; color: var(--text-dim);">
+                Motor calibrado con Suno v3.5/v4, Udio, MusicGen y Midjourney v6
+              </span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+              
+              <!-- SUNO STYLE -->
+              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(255, 42, 133, 0.4); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.8rem; font-weight: 700; color: #ff70a6; font-family: monospace;">SUNO v3.5/v4 • STYLE PROMPT</span>
+                  <button onclick="copiarPromptAdmin('adminPromptSunoStyle', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
+                </div>
+                <textarea id="adminPromptSunoStyle" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #ff9ebb; resize: none;"></textarea>
+              </div>
+
+              <!-- SUNO LYRICS / STRUCTURE -->
+              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(157, 78, 221, 0.4); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.8rem; font-weight: 700; color: #c77dff; font-family: monospace;">SUNO v3.5/v4 • LYRICS & STRUCTURE</span>
+                  <button onclick="copiarPromptAdmin('adminPromptSunoLyrics', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
+                </div>
+                <textarea id="adminPromptSunoLyrics" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #e9d5ff; resize: none;"></textarea>
+              </div>
+
+              <!-- UDIO AI -->
+              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(0, 245, 212, 0.4); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.8rem; font-weight: 700; color: #00f5d4; font-family: monospace;">UDIO AI • TAGS PROMPT</span>
+                  <button onclick="copiarPromptAdmin('adminPromptUdio', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
+                </div>
+                <textarea id="adminPromptUdio" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #a7f3d0; resize: none;"></textarea>
+              </div>
+
+              <!-- MIDJOURNEY / FLUX -->
+              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(255, 183, 3, 0.4); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.8rem; font-weight: 700; color: #ffb703; font-family: monospace;">MIDJOURNEY v6 / FLUX • ARTE CINEMÁTICO</span>
+                  <button onclick="copiarPromptAdmin('adminPromptMj', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
+                </div>
+                <textarea id="adminPromptMj" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #fde68a; resize: none;"></textarea>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
   </main>
 
     <!-- =================================================================== -->
@@ -682,6 +849,9 @@
       </button>
       <button id="btn-team-tab-youtube-studio" class="team-tab-btn" onclick="switchTeamTab('youtube-studio')">
         <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> 6. YouTube Studio & El Gran Arcano
+      </button>
+      <button id="btn-team-tab-caldero" class="team-tab-btn" onclick="switchTeamTab('caldero')">
+        <i class="fa-solid fa-wand-magic-sparkles" style="color: #ff70a6;"></i> 7. Caldero de Prompts (Freja)
       </button>
     </div>
 

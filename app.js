@@ -1089,6 +1089,17 @@ const influencersData = {
       pitch: 1.02,
       lang: "es-ES"
     },
+    featuredTrack: {
+      title: "Puerta I: Invocación del Dragón Astral (Versión 1.0)",
+      tome: "Tomo I: El Observatorio Celestial",
+      bpm: 74,
+      scale: "D Dorian • 432Hz",
+      duration: "1:14",
+      audioUrl: "caldero_freja/puerta_1_dragon_astral_v1.m4a",
+      wavUrl: "caldero_freja/puerta_1_dragon_astral_v1.wav",
+      calderoUrl: "caldero_freja/",
+      description: "Master baseline oficial generado en El Caldero de Freja: chelos acústicos modelados, pads analógicos a 432Hz, coro en latín y drop súbito al silencio."
+    },
     roi: {
       defaultFollowers: 120000,
       defaultConversion: 3.8,
@@ -2227,6 +2238,7 @@ function switchTeamTab(tab) {
   const btnMembers = document.getElementById('btn-team-tab-members');
   const btnInfluencerOps = document.getElementById('btn-team-tab-influencer-ops');
   const btnYoutubeStudio = document.getElementById('btn-team-tab-youtube-studio');
+  const btnCaldero = document.getElementById('btn-team-tab-caldero');
 
   const paneGantt = document.getElementById('team-pane-gantt');
   const panePipeline = document.getElementById('team-pane-pipeline');
@@ -2234,9 +2246,10 @@ function switchTeamTab(tab) {
   const paneMembers = document.getElementById('team-pane-members');
   const paneInfluencerOps = document.getElementById('team-pane-influencer-ops');
   const paneYoutubeStudio = document.getElementById('team-pane-youtube-studio');
+  const paneCaldero = document.getElementById('team-pane-caldero');
 
-  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio].forEach(b => { if (b) b.classList.remove('active'); });
-  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio].forEach(p => { if (p) p.classList.remove('active-pane'); });
+  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnCaldero].forEach(b => { if (b) b.classList.remove('active'); });
+  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneCaldero].forEach(p => { if (p) p.classList.remove('active-pane'); });
 
   if (tab === 'gantt') {
     if (btnGantt) btnGantt.classList.add('active');
@@ -3353,6 +3366,39 @@ function renderInfluencerPublicProduct(id) {
             </div>
           ` : ''}
 
+          
+          <!-- Pista Musical Oficial (El Caldero de Freja) -->
+          ${data.featuredTrack ? `
+            <div class="product-voice-card" style="margin-top: 0.85rem; border-color: rgba(255, 42, 133, 0.4); background: linear-gradient(135deg, rgba(255,42,133,0.08) 0%, rgba(157,78,221,0.08) 100%); padding: 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+              <div class="voice-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+                <div class="voice-title" style="font-size: 0.85rem; font-weight: 700; color: #ff70a6; display: flex; align-items: center; gap: 0.4rem;">
+                  <i class="fa-solid fa-compact-disc" style="color: #00f5d4;"></i>
+                  <span>${data.featuredTrack.title}</span>
+                </div>
+                <span class="voice-badge" style="font-size: 0.68rem; padding: 0.2rem 0.5rem; background: rgba(0,245,212,0.15); color: #00f5d4; border: 1px solid rgba(0,245,212,0.3); border-radius: 9999px; font-family: monospace;">${data.featuredTrack.scale}</span>
+              </div>
+              
+              <div style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.6rem; line-height: 1.4;">
+                ${data.featuredTrack.description}
+              </div>
+
+              <!-- Reproductor Nativo de Audio -->
+              <audio controls preload="none" style="width: 100%; height: 34px; border-radius: 8px; margin-bottom: 0.5rem;">
+                <source src="${data.featuredTrack.audioUrl}" type="audio/mp4">
+                <source src="${data.featuredTrack.wavUrl}" type="audio/wav">
+              </audio>
+
+              <div style="display: flex; gap: 0.5rem; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+                <a href="${data.featuredTrack.calderoUrl}" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem; color: #ff70a6; border-color: rgba(255,42,133,0.5); text-decoration: none;">
+                  <i class="fa-solid fa-wand-magic-sparkles" style="color: #00f5d4; margin-right: 4px;"></i> Abrir en El Caldero
+                </a>
+                <a href="${data.featuredTrack.wavUrl}" download class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem; color: #00f5d4; border-color: rgba(0,245,212,0.4); text-decoration: none;">
+                  <i class="fa-solid fa-download" style="margin-right: 4px;"></i> Master WAV (v1.0)
+                </a>
+              </div>
+            </div>
+          ` : ''}
+
           <!-- Consistency Lookbook Gallery -->
           ${data.gallery && data.gallery.length > 0 ? `
             <div class="product-lookbook-section">
@@ -3855,6 +3901,39 @@ function renderInfluencerCockpit(id) {
             <div class="voice-transcript" style="font-size: 0.78rem; max-height: 65px; overflow-y: auto; line-height: 1.35; padding: 0.5rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-sm);">
               <i class="fa-solid fa-quote-left" style="color: var(--purple); margin-right: 0.35rem;"></i>
               ${data.voice.transcript}
+            </div>
+          </div>
+        ` : ''}
+
+        
+        <!-- Pista Musical Oficial (El Caldero de Freja) -->
+        ${data.featuredTrack ? `
+          <div class="cockpit-voice-box" style="margin-top: 0.75rem; border-color: rgba(255, 42, 133, 0.4); background: linear-gradient(135deg, rgba(255,42,133,0.08) 0%, rgba(157,78,221,0.08) 100%);">
+            <div class="voice-header" style="margin-bottom: 0.45rem;">
+              <div class="voice-title" style="font-size: 0.82rem; color: #ff70a6;">
+                <i class="fa-solid fa-compact-disc" style="color: #00f5d4;"></i>
+                <span>${data.featuredTrack.title}</span>
+              </div>
+              <span class="voice-badge" style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(0,245,212,0.15); color: #00f5d4; border-color: rgba(0,245,212,0.3);">${data.featuredTrack.scale}</span>
+            </div>
+            
+            <div style="font-size: 0.76rem; color: var(--text-dim); margin-bottom: 0.5rem; line-height: 1.35;">
+              ${data.featuredTrack.description}
+            </div>
+
+            <!-- Reproductor Nativo de Audio -->
+            <audio controls preload="none" style="width: 100%; height: 32px; border-radius: 8px; margin-bottom: 0.4rem;">
+              <source src="${data.featuredTrack.audioUrl}" type="audio/mp4">
+              <source src="${data.featuredTrack.wavUrl}" type="audio/wav">
+            </audio>
+
+            <div style="display: flex; gap: 0.4rem; align-items: center; justify-content: space-between; margin-top: 0.3rem;">
+              <a href="${data.featuredTrack.calderoUrl}" target="_blank" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.3rem 0.6rem; color: #ff70a6; border-color: rgba(255,42,133,0.5);">
+                <i class="fa-solid fa-wand-magic-sparkles" style="color: #00f5d4; margin-right: 4px;"></i> Abrir en El Caldero
+              </a>
+              <a href="${data.featuredTrack.wavUrl}" download class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.3rem 0.6rem; color: #00f5d4; border-color: rgba(0,245,212,0.4);">
+                <i class="fa-solid fa-download"></i> Master WAV (v1)
+              </a>
             </div>
           </div>
         ` : ''}
@@ -8075,5 +8154,186 @@ function copyPilotKlingPrompts(influencerId) {
   const prompts = data.pilotScript.scenes.map(s => `// ESCENA ${s.num} (${s.time}):\n${s.klingPrompt}`).join('\n\n');
   navigator.clipboard.writeText(prompts).then(() => {
     alert('🎬 Prompts de Kling 3.0 copiados al portapapeles.');
+  });
+}
+
+
+// ====================================================================
+// EL CALDERO DE FREJA • MOTOR INTERNO DE PROMPTS (PANEL DE ADMINISTRADOR)
+// ====================================================================
+const adminCalderoPresets = {
+  dragon: {
+    modo: "D Dorian (Místico y Noble)",
+    bpm: 74,
+    clasica: "Danse Macabre (Camille Saint-Saëns) + Chillwave Dark Synth Arps",
+    fusion: 50,
+    espacio: "Cripta inundada de piedra húmeda con reverberación de 7 segundos",
+    quiebre: "Corte súbito de toda la orquesta hacia un silencio absoluto con eco de campana disonante",
+    frases: "«Per tenebras astra peto,\nCinis manet in secreto.\nOculis clausis deum video,\nSanguine portas aperio.»\n(A través de las tinieblas busco las estrellas, la ceniza permanece en secreto. Con ojos cerrados contemplo al dios, con sangre abro las puertas.)",
+    bestiario: "Cuervo albino de tres ojos, raíces de tejo carbonizado",
+    clima: "Nevada glacial cayendo sobre piedra volcánica aún incandescente",
+    material: "Hierro frío de campana gótica, astillas de obsidiana y cera ardiente"
+  },
+  biblioteca: {
+    modo: "A Aeolian (Melancolía y Lamento)",
+    bpm: 68,
+    clasica: "Lacrimosa del Réquiem de Mozart + Lofi Chillwave Tape Warmth",
+    fusion: 40,
+    espacio: "Gran biblioteca abovedada con techos de 20 metros colapsando en eco",
+    quiebre: "Un suspiro de soprano solitario tras el estruendo de un pilar de piedra cayendo",
+    frases: "«Ignis vorat veritatem, nox accipit animam»\n(El fuego devora la verdad, la noche acoge el alma)",
+    bestiario: "Polillas de obsidiana, hojas de belladona marchita",
+    clima: "Ventisca polar silenciosa con copos negros de hollín",
+    material: "Pergamino reseco crujiendo al fuego, cuero curtido y brasa violeta"
+  },
+  portal: {
+    modo: "E Phrygian (Tensión de Batalla y Hechizo)",
+    bpm: 110,
+    clasica: "La Consagración de la Primavera (Stravinsky) + Tambores Chamánicos & Modular Synth",
+    fusion: 65,
+    espacio: "Páramo abierto sin límites bajo un cielo combado con eco disperso",
+    quiebre: "Aceleración rítmica insana interrumpida por un acorde modal suspendido en el vacío",
+    frases: "«Porta patet, sed pretium sanguis est»\n(El umbral se abre, mas el precio es sangre)",
+    bestiario: "Lobo de escarcha con cuernos de ciervo, liquen carmesí",
+    clima: "Tormenta de viento electromagnético con relámpagos sin trueno",
+    material: "Roca basáltica agrietada, mercurio líquido y cuerdas tensadas al límite"
+  },
+  astrologo: {
+    modo: "D Dorian (Místico y Noble)",
+    bpm: 62,
+    clasica: "Gymnopédie No. 1 (Erik Satie) en Re menor + Ambient Drone Cósmico",
+    fusion: 75,
+    espacio: "Cámara circular en la cúspide de una torre de piedra con eco íntimo",
+    quiebre: "Una sola nota de campana de cristal que vibra hasta extinguirse en susurro",
+    frases: "«Nox longa, stellae mutae, solus in turre»\n(Larga es la noche, mudas las estrellas, solo en la torre)",
+    bestiario: "Lechuza de nieve ciega, musgo pálido sobre piedra",
+    clima: "Niebla densa e inmóvil que congela las ventanas de la torre a medianoche",
+    material: "Lente de telescopio empañada, latón envejecido y madera de roble centenario"
+  },
+  valquiria: {
+    modo: "C Harmonic Minor (Gótico Dramático)",
+    bpm: 78,
+    clasica: "Cabalgata de las Valquirias (Wagner) desconstruida en Neoclásico Sombrío",
+    fusion: 30,
+    espacio: "Fiordo escarpado con reverberación natural rebotando en acantilados",
+    quiebre: "Vocalise solista de Freja subiendo a registro sobreagudo sin ningún acompañamiento",
+    frases: "«Valkyrja bíðr í skugga,\nSól tér sortna yfir foldu.»\n(La valquiria aguarda en la sombra, el sol se oscurece sobre la tierra.)",
+    bestiario: "Águila gigante de escarcha, túmulo funerario de piedra negra",
+    clima: "Viento aullante cortando la niebla en la cima de un glaciar",
+    material: "Acero templado en nieve, runas grabadas en hueso de ballena"
+  }
+};
+
+function updateAdminFusionLabel(val) {
+  val = parseInt(val);
+  const el = document.getElementById('adminCalderoFusionVal');
+  if (!el) return;
+  if (val < 35) el.innerText = `${val}% Gótico Sinfónico Puro`;
+  else if (val <= 65) el.innerText = `${val}% Híbrido Dark Fantasy & Modular`;
+  else el.innerText = `${val}% Chillwave Noir Synth Ambient`;
+}
+
+function applyAdminCalderoPreset(key) {
+  if (!adminCalderoPresets[key]) return;
+  const p = adminCalderoPresets[key];
+  if (document.getElementById('adminCalderoModo')) document.getElementById('adminCalderoModo').value = p.modo;
+  if (document.getElementById('adminCalderoBpm')) {
+    document.getElementById('adminCalderoBpm').value = p.bpm;
+    document.getElementById('adminCalderoBpmVal').innerText = `${p.bpm} BPM`;
+  }
+  if (document.getElementById('adminCalderoClasica')) document.getElementById('adminCalderoClasica').value = p.clasica;
+  if (document.getElementById('adminCalderoFusion')) {
+    document.getElementById('adminCalderoFusion').value = p.fusion;
+    updateAdminFusionLabel(p.fusion);
+  }
+  if (document.getElementById('adminCalderoEspacio')) document.getElementById('adminCalderoEspacio').value = p.espacio;
+  if (document.getElementById('adminCalderoQuiebre')) document.getElementById('adminCalderoQuiebre').value = p.quiebre;
+  if (document.getElementById('adminCalderoFrases')) document.getElementById('adminCalderoFrases').value = p.frases;
+
+  generarPromptsAdminCaldero();
+}
+
+function generarLetraSacraAdminCaldero() {
+  const canticos = [
+    "«Per tenebras astra peto,\nCinis manet in secreto.\nOculis clausis deum video,\nSanguine portas aperio.»\n(A través de las tinieblas busco las estrellas, la ceniza permanece en secreto. Con ojos cerrados contemplo al dios, con sangre abro las puertas.)",
+    "«Silentium magnum in turre vetusta,\nTempus fugit sicut flumen in umbra.\nAudi vocem antiquorum,\nRegnum cadit sub sideribus.»\n(Gran silencio en la torre antigua, el tiempo huye cual río en la sombra. Escucha la voz de los antiguos, el reino cae bajo las estrellas.)",
+    "«Valkyrja bíðr í skugga,\nSól tér sortna yfir foldu.\nEldur brennr, hjarta kólnar,\nMinning deyr í þögn.»\n(La valquiria aguarda en la sombra, el sol se oscurece sobre la tierra. El fuego arde, el corazón se enfría, la memoria muere en silencio.)",
+    "«Porta patet, sed pretium sanguis est,\nIgnis vorat veritatem, nox accipit animam.»\n(El umbral se abre, mas el precio es sangre. El fuego devora la verdad, la noche acoge el alma.)"
+  ];
+  const pick = canticos[Math.floor(Math.random() * canticos.length)];
+  const txt = document.getElementById('adminCalderoFrases');
+  if (txt) {
+    txt.value = pick;
+    generarPromptsAdminCaldero();
+  }
+}
+
+function generarPromptsAdminCaldero() {
+  const modo = document.getElementById('adminCalderoModo') ? document.getElementById('adminCalderoModo').value : 'D Dorian';
+  const bpm = document.getElementById('adminCalderoBpm') ? document.getElementById('adminCalderoBpm').value : 74;
+  const clasica = document.getElementById('adminCalderoClasica') ? document.getElementById('adminCalderoClasica').value : 'Danse Macabre';
+  const fusionVal = document.getElementById('adminCalderoFusion') ? parseInt(document.getElementById('adminCalderoFusion').value) : 50;
+  const espacio = document.getElementById('adminCalderoEspacio') ? document.getElementById('adminCalderoEspacio').value : 'Cripta de piedra con 7s reverb';
+  const quiebre = document.getElementById('adminCalderoQuiebre') ? document.getElementById('adminCalderoQuiebre').value : 'Corte súbito a silencio con campana disonante';
+  const frases = document.getElementById('adminCalderoFrases') ? document.getElementById('adminCalderoFrases').value : 'Per tenebras astra peto';
+  const isInstrumental = document.getElementById('adminCalderoChkInstr') ? document.getElementById('adminCalderoChkInstr').checked : false;
+  const isLirico = document.getElementById('adminCalderoChkLirico') ? document.getElementById('adminCalderoChkLirico').checked : true;
+
+  let fusionDesc = "";
+  if (fusionVal < 35) fusionDesc = "pure acoustic gothic orchestration, visceral cello bowing, sacred choir";
+  else if (fusionVal <= 65) fusionDesc = "dark fantasy hybrid, raw cellos layered with warm analog synth pads and modular sub-bass";
+  else fusionDesc = "chillwave noir ambient, lush retro analog synthesizers, tape wow-and-flutter, slow deep sub-bass";
+
+  let vocalStyle = isInstrumental ? "Instrumental only, no vocals, pure ambient score" : (isLirico ? "Ethereal dramatic soprano vocalise by Freja Lindholm, ancient choir chants in Latin, Nordic sacred resonance" : "Sparse whispered murmurs");
+
+  // 1. Suno Style
+  const sunoStyle = `Dark fantasy epic gothic orchestration, ${fusionDesc}, inspired by ${clasica}, ${bpm} BPM, harmonic mode ${modo}, raw acoustic textures (iron gothic bell, obsidian shards), cavernous hall reverb (${espacio}), ${vocalStyle}, solemn sorrowful arcane atmosphere.`;
+  const sunoStyleEl = document.getElementById('adminPromptSunoStyle');
+  if (sunoStyleEl) sunoStyleEl.value = sunoStyle;
+
+  // 2. Suno Lyrics & Structure
+  const firstLine = frases.split('\n')[0].replace(/[«»]/g, '');
+  let lyricsStructure = "";
+  if (isInstrumental) {
+    lyricsStructure = `[Instrumental Opening: ${bpm} BPM, ambient drone and room decay of ${espacio}]\n[Solo Rustic Cello - Slow ${modo} motif inspired by ${clasica}]\n[Extended Ambient Drift: 2 minutes of sparse tape pads and ticking astrolabe]\n[Ritual Break: ${quiebre}]\n[Climax: Massive hybrid swell and sub-bass return]\n[End]`;
+  } else {
+    lyricsStructure = `[Intro: Atmospheric drone, cold wind, room sound of ${espacio}]\n[Verse 1 - Freja Soprano Solo: Gentle and wounded in ${modo}]\n${firstLine}\n\n[Pre-Chorus - Sacred Monks Choir swell]\nSilentium magnum in turre vetusta,\nTempus fugit sicut flumen in umbra...\n\n[Ritual Break: ${quiebre}]\n\n[Chorus: Full Gothic Choir and Valkyrie High Notes]\n«${firstLine}»\n(Invocación de los sellos astrales)\n\n[Outro: Whispered prayer fading into blizzard]\n[End]`;
+  }
+  const sunoLyricsEl = document.getElementById('adminPromptSunoLyrics');
+  if (sunoLyricsEl) sunoLyricsEl.value = lyricsStructure;
+
+  // 3. Udio Tags
+  const udioPrompt = [
+    "dark fantasy neoclassical",
+    fusionDesc,
+    `inspired by ${clasica}`,
+    `${bpm} bpm`,
+    modo,
+    isInstrumental ? "instrumental" : "nordic soprano, latin choir",
+    "dramatic slow tempo",
+    "heavy room impulse response",
+    `space: ${espacio}`,
+    "organic cello friction, gothic solemnity, cinematic"
+  ].join(", ");
+  const udioEl = document.getElementById('adminPromptUdio');
+  if (udioEl) udioEl.value = udioPrompt;
+
+  // 4. Midjourney Prompt
+  const mjPrompt = `Cinematic dark fantasy photography, medium wide shot of music producer Freja Lindholm with platinum blonde braided hair and velvet corset standing in an ancient gothic observatory, glowing runic sigils hovering, ethereal moonlight, 8k resolution, octane render, mood inspired by ${clasica} --ar 16:9 --style raw`;
+  const mjEl = document.getElementById('adminPromptMj');
+  if (mjEl) mjEl.value = mjPrompt;
+}
+
+function copiarPromptAdmin(targetId, btn) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  navigator.clipboard.writeText(target.value).then(() => {
+    const original = btn.innerText;
+    btn.innerText = '✅ Copiado';
+    btn.style.color = '#00f5d4';
+    setTimeout(() => {
+      btn.innerText = original;
+      btn.style.color = '';
+    }, 2000);
   });
 }
