@@ -5635,7 +5635,7 @@ Todas las piezas musicales y cinemáticas visuales de The Infinite Archive son g
 
 🔗 CONEXIÓN CON LA BÓVEDA DEL GRAN ARCANO:
 • Plataforma Web Interactiva: https://infinitearchive.vault
-• Repositorio GitHub: https://github.com/danisantanderurrutia-coder/INCEL
+• Repositorio GitHub: https://github.com/danisantanderurrutia-coder/LMNJDRS
 • Grimorio & Comunidad: https://discord.gg/infinite-archive
 
 #TheInfiniteArchive #ElvenMusic #FantasyStudy #DeepCalm #AmbientMusic #StudyWithMe
@@ -6234,7 +6234,7 @@ Todas las piezas musicales y cinemáticas visuales de The Infinite Archive son g
 
 🔗 CONEXIÓN CON LA BÓVEDA DEL GRAN ARCANO:
 • Plataforma Web Interactiva: https://infinitearchive.vault
-• Repositorio GitHub: https://github.com/danisantanderurrutia-coder/INCEL
+• Repositorio GitHub: https://github.com/danisantanderurrutia-coder/LMNJDRS
 • Grimorio & Comunidad: https://discord.gg/infinite-archive
 
 #TheInfiniteArchive #ElvenMusic #FantasyStudy #DeepCalm #AmbientMusic #StudyWithMe

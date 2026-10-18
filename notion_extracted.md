@@ -1,4 +1,4 @@
-# Los Manejadores (AKA Proyecto INCEL)
+# Los Manejadores
 
 
 ## *“Conectamos talentos con el mundo”*
