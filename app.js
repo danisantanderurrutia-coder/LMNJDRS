@@ -2149,24 +2149,21 @@ function handleRoute() {
   } else if (hash === '#cursos' || hash === '#formacion' || hash === '#talleres') {
     renderCursosPage();
     showDynamicView();
-  } else if (hash === '#comercial' || hash === '#clientes' || hash === '#pitch' || hash === '#showcase') {
+  } else if (hash === '#comercial' || hash === '#clientes' || hash === '#pitch' || hash === '#showcase' || hash === '#comercial-full') {
     showPublicView();
-    setTimeout(() => {
-      const el = document.getElementById('comercial');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 80);
-  } else if (hash === '#musica' || hash === '#musica-comercial' || hash === '#soundforge') {
-    showPublicView();
-    setTimeout(() => {
-      const el = document.getElementById('musica');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 80);
-  } else if (hash === '#comercial-full') {
-    renderCommercialPage();
-    showDynamicView();
-  } else if (hash === '#musica-full') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (hash === '#musica' || hash === '#musica-comercial' || hash === '#soundforge' || hash === '#musica-full') {
     renderMusicaPage();
     showDynamicView();
+  } else if (hash.startsWith('#music-')) {
+    if (!document.getElementById('music-demos')) {
+      renderMusicaPage();
+    }
+    showDynamicView();
+    setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
   } else if (hash === '#logos' || hash === '#copys') {
     if (isTeamAuthenticated()) {
       showTeamView('copys');
