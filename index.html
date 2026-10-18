@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Los Manejadores (Proyecto INCEL) — Agencia de Comunicación Digital e Influencers IA</title>
+  <title>Manejadores — Agencia de Comunicación Digital e Influencers IA</title>
   <meta name="description" content="Conectamos talentos con el mundo. Agencia líder en Influencers IA, Canales de YouTube Educativos y Asesorías Comunicacionales.">
   
   <!-- Google Fonts -->
@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" href="favicon.png?v=4">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261011_freja_fix_v6">
+  <link rel="stylesheet" href="styles.css?v=20261018_manejadores_v1">
 </head>
 <body>
 
@@ -44,16 +44,16 @@
     <div class="nav-controls">
       <ul class="nav-links" id="public-nav-links">
         <li><a href="#roster">Influencers</a></li>
+        <li><a href="#comercial" style="color: var(--cyan); font-weight: 600;"><i class="fa-solid fa-briefcase" style="margin-right: 4px;"></i> Versión Comercial</a></li>
         <li><a href="#youtube">Youtube</a></li>
-        <!-- Caldero moved to internal Admin Panel as requested -->
         <li><a href="#cursos">Cursos</a></li>
         <li><a href="#seguridad">Seguridad Digital</a></li>
         <li><a href="#empresas">Empresas</a></li>
       </ul>
 
       <div class="nav-actions-group">
-        <a href="#clientes" class="nav-pitch-btn" title="Ver Pitch Comercial & Clientes">
-          <i class="fa-solid fa-briefcase"></i> Clientes
+        <a href="#comercial" class="nav-pitch-btn" title="Ver Versión Comercial & Demo para Clientes">
+          <i class="fa-solid fa-briefcase"></i> Clientes B2B
         </a>
         <button class="btn-dossier-pdf" onclick="window.print()" title="Imprimir o Exportar PDF">
           <i class="fa-solid fa-file-pdf"></i> PDF
@@ -68,173 +68,6 @@
   <!-- Dynamic Router Container for Dedicated Subpages -->
   <main id="view-dynamic" class="mode-view">
     <!-- Rendered dynamically by app.js router -->
-  
-    <!-- PÁGINA 7: CALDERO DE PROMPTS DE FREJA (MOTOR ALQUÍMICO DE PRODUCCIÓN) -->
-    <div id="team-pane-caldero" class="team-pane">
-      <section class="section" style="padding-top: 1rem;">
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
-            <div>
-              <span class="section-subtitle" style="color: #ff70a6;"><i class="fa-solid fa-wand-magic-sparkles"></i> Motor Interno de Producción Sonora & Lore</span>
-              <h2 class="section-title">El Caldero de Freja • Generador de Prompts Alquímicos</h2>
-              <p class="section-desc" style="max-width: 850px; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
-                Herramienta interna adaptada para el equipo de producción de <strong>El Gran Arcano</strong> y <strong>Los Manejadores</strong>. 
-                Genera prompts calibrados para Suno v3.5/v4, Udio AI, MusicGen y Midjourney combinando escalas modulares, cánticos sacros y directivas de producción.
-              </p>
-            </div>
-            <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-              <select id="adminCalderoPresetSelect" onchange="applyAdminCalderoPreset(this.value)" class="form-input" style="background: rgba(18, 22, 36, 0.9); border-color: rgba(255, 42, 133, 0.5); color: #ff70a6; font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1rem;">
-                <option value="">📜 Cargar Preset de Capítulo...</option>
-                <option value="dragon">Puerta I: El Dragón Astral (Danse Macabre • 74 BPM)</option>
-                <option value="biblioteca">Puerta II: La Biblioteca en Llamas (Mozart • 68 BPM)</option>
-                <option value="portal">Puerta III: El Sigilo Prohibido (Stravinsky • 110 BPM)</option>
-                <option value="astrologo">Puerta IV: La Torre del Astrólogo (Satie • 62 BPM)</option>
-                <option value="valquiria">Puerta V: Lamento de la Valquiria (Wagner • 78 BPM)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel Interactivo de Generación de Prompts (5 Pasos Alquímicos) -->
-        <div style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(255, 42, 133, 0.3); border-radius: var(--radius-lg); padding: 2rem; backdrop-filter: blur(16px); margin-bottom: 2rem;">
-          
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
-            
-            <!-- Parámetros 1: Armonía & Tempo -->
-            <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-              <h4 style="color: #ff70a6; font-size: 0.9rem; font-family: var(--font-heading); margin-bottom: 0.75rem;">
-                <i class="fa-solid fa-music"></i> 1. Armonía & Tempo
-              </h4>
-              <div style="margin-bottom: 0.75rem;">
-                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Modo Armónico / Escala:</label>
-                <select id="adminCalderoModo" onchange="generarPromptsAdminCaldero()" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
-                  <option value="D Dorian (Místico y Noble)">D Dorian (Místico y Noble)</option>
-                  <option value="A Aeolian (Melancolía y Lamento)">A Aeolian (Melancolía y Lamento)</option>
-                  <option value="E Phrygian (Tensión de Batalla y Hechizo)">E Phrygian (Tensión y Batalla)</option>
-                  <option value="C Harmonic Minor (Gótico Dramático)">C Harmonic Minor (Gótico Dramático)</option>
-                  <option value="F Lydian (Luz Astral y Épica Cósmica)">F Lydian (Luz Astral)</option>
-                </select>
-              </div>
-              <div style="margin-bottom: 0.75rem;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">
-                  <span>Tempo Sugerido:</span>
-                  <span id="adminCalderoBpmVal" style="color: #00f5d4; font-family: monospace; font-weight: 700;">74 BPM</span>
-                </div>
-                <input type="range" id="adminCalderoBpm" min="55" max="135" value="74" oninput="document.getElementById('adminCalderoBpmVal').innerText = this.value + ' BPM'; generarPromptsAdminCaldero();" style="width: 100%; accent-color: #ff2a85;">
-              </div>
-              <div>
-                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Inspiración Clásica / Híbrida:</label>
-                <input type="text" id="adminCalderoClasica" oninput="generarPromptsAdminCaldero()" value="Danse Macabre (Camille Saint-Saëns) + Chillwave Dark Synth Arps" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
-              </div>
-            </div>
-
-            <!-- Parámetros 2: Lore, Fusión & Voces -->
-            <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-              <h4 style="color: #00f5d4; font-size: 0.9rem; font-family: var(--font-heading); margin-bottom: 0.75rem;">
-                <i class="fa-solid fa-sliders"></i> 2. Fusión Sonora & Configuración Vocal
-              </h4>
-              <div style="margin-bottom: 0.75rem;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">
-                  <span>Fader de Fusión:</span>
-                  <span id="adminCalderoFusionVal" style="color: #c77dff; font-family: monospace; font-weight: 700;">50% Híbrido Dark Fantasy</span>
-                </div>
-                <input type="range" id="adminCalderoFusion" min="0" max="100" value="50" oninput="updateAdminFusionLabel(this.value); generarPromptsAdminCaldero();" style="width: 100%; accent-color: #00f5d4;">
-              </div>
-              <div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
-                <label style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
-                  <input type="checkbox" id="adminCalderoChkInstr" onchange="generarPromptsAdminCaldero()">
-                  <span>Instrumental Puro (Sin Voces)</span>
-                </label>
-                <label style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
-                  <input type="checkbox" id="adminCalderoChkLirico" checked onchange="generarPromptsAdminCaldero()">
-                  <span>Voz Lírica de Freja + Coro Sacro</span>
-                </label>
-              </div>
-              <div>
-                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Espacio Acústico (Reverberación):</label>
-                <input type="text" id="adminCalderoEspacio" oninput="generarPromptsAdminCaldero()" value="Cripta inundada de piedra húmeda con reverberación de 7 segundos" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
-              </div>
-            </div>
-
-            <!-- Parámetros 3: Alquimia Lírica & Cánticos -->
-            <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-                <h4 style="color: #c77dff; font-size: 0.9rem; font-family: var(--font-heading); margin: 0;">
-                  <i class="fa-solid fa-scroll"></i> 3. Cántico en Latín / Nórdico
-                </h4>
-                <button onclick="generarLetraSacraAdminCaldero()" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.5rem; color: #ff70a6; border-color: rgba(255,42,133,0.4);">
-                  🎲 Aleatorio
-                </button>
-              </div>
-              <textarea id="adminCalderoFrases" rows="4" oninput="generarPromptsAdminCaldero()" class="form-input" style="font-size: 0.78rem; font-family: monospace; background: #0c0f1d; color: #00f5d4; resize: vertical;">«Per tenebras astra peto,
-Cinis manet in secreto.
-Oculis clausis deum video,
-Sanguine portas aperio.»
-(A través de las tinieblas busco las estrellas, la ceniza permanece en secreto. Con ojos cerrados contemplo al dios, con sangre abro las puertas.)</textarea>
-              <div style="margin-top: 0.5rem;">
-                <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Drop Místico (El Quiebre):</label>
-                <input type="text" id="adminCalderoQuiebre" oninput="generarPromptsAdminCaldero()" value="Corte súbito de toda la orquesta hacia un silencio absoluto con eco de campana disonante" class="form-input" style="font-size: 0.8rem; background: #0c0f1d;">
-              </div>
-            </div>
-
-          </div>
-
-          <!-- CAJAS DE SALIDA DE PROMPTS LISTAS PARA COPIAR -->
-          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-              <h4 style="margin: 0; font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">
-                <i class="fa-solid fa-bolt" style="color: #ffb703;"></i> Prompts Listos para Producción (1 Clic)
-              </h4>
-              <span style="font-size: 0.75rem; font-family: monospace; color: var(--text-dim);">
-                Motor calibrado con Suno v3.5/v4, Udio, MusicGen y Midjourney v6
-              </span>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
-              
-              <!-- SUNO STYLE -->
-              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(255, 42, 133, 0.4); border-radius: var(--radius-md); padding: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span style="font-size: 0.8rem; font-weight: 700; color: #ff70a6; font-family: monospace;">SUNO v3.5/v4 • STYLE PROMPT</span>
-                  <button onclick="copiarPromptAdmin('adminPromptSunoStyle', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
-                </div>
-                <textarea id="adminPromptSunoStyle" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #ff9ebb; resize: none;"></textarea>
-              </div>
-
-              <!-- SUNO LYRICS / STRUCTURE -->
-              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(157, 78, 221, 0.4); border-radius: var(--radius-md); padding: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span style="font-size: 0.8rem; font-weight: 700; color: #c77dff; font-family: monospace;">SUNO v3.5/v4 • LYRICS & STRUCTURE</span>
-                  <button onclick="copiarPromptAdmin('adminPromptSunoLyrics', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
-                </div>
-                <textarea id="adminPromptSunoLyrics" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #e9d5ff; resize: none;"></textarea>
-              </div>
-
-              <!-- UDIO AI -->
-              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(0, 245, 212, 0.4); border-radius: var(--radius-md); padding: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span style="font-size: 0.8rem; font-weight: 700; color: #00f5d4; font-family: monospace;">UDIO AI • TAGS PROMPT</span>
-                  <button onclick="copiarPromptAdmin('adminPromptUdio', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
-                </div>
-                <textarea id="adminPromptUdio" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #a7f3d0; resize: none;"></textarea>
-              </div>
-
-              <!-- MIDJOURNEY / FLUX -->
-              <div style="background: rgba(10, 12, 22, 0.95); border: 1px solid rgba(255, 183, 3, 0.4); border-radius: var(--radius-md); padding: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span style="font-size: 0.8rem; font-weight: 700; color: #ffb703; font-family: monospace;">MIDJOURNEY v6 / FLUX • ARTE CINEMÁTICO</span>
-                  <button onclick="copiarPromptAdmin('adminPromptMj', this)" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; color: #00f5d4;">Copiar</button>
-                </div>
-                <textarea id="adminPromptMj" rows="4" readonly class="form-input" style="font-size: 0.76rem; font-family: monospace; background: #060810; color: #fde68a; resize: none;"></textarea>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </section>
-    </div>
-
   </main>
 
     <!-- =================================================================== -->
@@ -267,11 +100,11 @@ Sanguine portas aperio.»
           <a href="#roster" class="btn btn-primary">
             <i class="fa-solid fa-gem"></i> Influencers IA
           </a>
+          <a href="#comercial" class="btn btn-secondary" style="border-color: rgba(6, 182, 212, 0.6); color: #67e8f9; background: rgba(6, 182, 212, 0.1);">
+            <i class="fa-solid fa-briefcase" style="color: var(--cyan);"></i> Versión Comercial (Clientes)
+          </a>
           <a href="#youtube" class="btn btn-secondary" style="border-color: rgba(168, 85, 247, 0.5); color: #d8b4fe;">
             <i class="fa-brands fa-youtube" style="color: #c084fc;"></i> YouTube & Arcano
-          </a>
-          <a href="caldero_freja/" target="_blank" class="btn btn-secondary" style="border-color: rgba(255, 183, 3, 0.6); color: #fbbf24; background: rgba(255, 183, 3, 0.08);">
-            <i class="fa-solid fa-compact-disc" style="color: #00f5d4;"></i> SoundForge Studio
           </a>
           <a href="#empresas" class="btn btn-secondary" style="border-color: rgba(6, 182, 212, 0.5); color: #67e8f9;">
             <i class="fa-solid fa-building" style="color: var(--cyan);"></i> Soluciones Empresas
@@ -281,9 +114,6 @@ Sanguine portas aperio.»
           </a>
           <a href="#cursos" class="btn btn-secondary" style="border-color: rgba(245, 158, 11, 0.5); color: #fde68a;">
             <i class="fa-solid fa-graduation-cap" style="color: #fbbf24;"></i> Cursos IA
-          </a>
-          <a href="#clientes" class="btn btn-secondary" style="border-color: rgba(16, 185, 129, 0.5); color: #6ee7b7;">
-            <i class="fa-solid fa-briefcase" style="color: #34d399;"></i> Clientes & Pitch
           </a>
         </div>
       </div>
@@ -623,19 +453,19 @@ Sanguine portas aperio.»
       </div>
     </section>
 
-    <!-- LANDING SHOWCASE 5: CLIENTES & PITCH COMERCIAL -->
+    <!-- LANDING SHOWCASE 5: VERSIÓN COMERCIAL PARA CLIENTES -->
     <section class="section" style="padding-top: 2rem; padding-bottom: 3rem;">
-      <div class="glass-card" style="padding: 2.5rem; text-align: center; border-color: rgba(139, 92, 246, 0.4); background: radial-gradient(circle at center, rgba(139, 92, 246, 0.12) 0%, rgba(10, 12, 22, 0.98) 100%); border-radius: var(--radius-lg);">
-        <span class="section-subtitle" style="color: var(--purple);"><i class="fa-solid fa-briefcase"></i> Alianzas & Portafolio Comercial</span>
+      <div class="glass-card" style="padding: 2.5rem; text-align: center; border-color: rgba(6, 182, 212, 0.4); background: radial-gradient(circle at center, rgba(6, 182, 212, 0.12) 0%, rgba(10, 12, 22, 0.98) 100%); border-radius: var(--radius-lg);">
+        <span class="section-subtitle" style="color: var(--cyan);"><i class="fa-solid fa-briefcase"></i> Versión Comercial para Clientes & Marcas</span>
         <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #fff; margin: 0.5rem 0 1rem 0;">
-          ¿Listo para Colaborar con Los Manejadores?
+          ¿Listo para Impulsar tu Marca con Manejadores?
         </h2>
         <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 680px; margin: 0 auto 1.75rem auto; line-height: 1.7;">
-          Explora nuestro pitch de inversión, portafolio de clientes y casos de uso comerciales. Estructuramos campañas de patrocinio, coproducción de canales y modelos virtuales a medida.
+          Accede a nuestra <strong>Versión Comercial</strong>: prueba el simulador interactivo de campañas en tiempo real, explora el catálogo de embajadores virtuales y cotiza el retorno de inversión para tu empresa.
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="#clientes" class="btn btn-primary" style="font-size: 1rem; padding: 0.8rem 1.8rem;">
-            <i class="fa-solid fa-handshake"></i> Ver Dossier de Clientes & Pitch
+          <a href="#comercial" class="btn btn-primary" style="font-size: 1rem; padding: 0.8rem 1.8rem; background: var(--primary-gradient); border: none;">
+            <i class="fa-solid fa-rocket"></i> Abrir Versión Comercial (Clientes)
           </a>
           <button class="btn btn-secondary" onclick="window.print()" style="font-size: 1rem; padding: 0.8rem 1.5rem;">
             <i class="fa-solid fa-file-pdf"></i> Descargar Dossier PDF
@@ -850,8 +680,8 @@ Sanguine portas aperio.»
       <button id="btn-team-tab-youtube-studio" class="team-tab-btn" onclick="switchTeamTab('youtube-studio')">
         <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> 6. YouTube Studio & El Gran Arcano
       </button>
-      <button id="btn-team-tab-caldero" class="team-tab-btn" onclick="switchTeamTab('caldero')">
-        <i class="fa-solid fa-wand-magic-sparkles" style="color: #ff70a6;"></i> 7. Caldero de Prompts (Freja)
+      <button id="btn-team-tab-manual" class="team-tab-btn" onclick="switchTeamTab('manual')">
+        <i class="fa-solid fa-book-open" style="color: var(--cyan);"></i> 7. Cómo Ocupar Esta Herramienta (Manual de Uso)
       </button>
     </div>
 
@@ -969,7 +799,7 @@ Sanguine portas aperio.»
             <a href="https://notion.so/" target="_blank" class="workspace-link-item">
               <i class="fa-solid fa-book-bookmark" style="color: #fff;"></i>
               <div>
-                <strong>Notion Central INCEL</strong>
+                <strong>Notion Central Manejadores</strong>
                 <span>Base de conocimientos, prompts y actas de reuniones</span>
               </div>
             </a>
@@ -1702,6 +1532,244 @@ Agenda consulta gratuita hoy."</div>
       </section>
     </div>
 
+    <!-- PÁGINA 7: MANUAL DE OPERACIONES Y GUÍA DE USO DE MANEJADORES -->
+    <div id="team-pane-manual" class="team-pane">
+      <section class="section" style="padding-top: 1rem;">
+        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <span class="section-subtitle" style="color: var(--cyan);"><i class="fa-solid fa-book-open"></i> Manual del Administrador • Guía Maestra de Operaciones</span>
+              <h2 class="section-title">Cómo Ocupar la Plataforma Manejadores</h2>
+              <p class="section-description" style="max-width: 900px; margin: 0.5rem 0 0 0;">
+                Documentación ejecutiva e interactiva para el equipo fundador (Alemania, Canadá y Chile). 
+                Aprende el flujo de trabajo diario: gestión de influencers, generación masiva de contenido, operación de canales de YouTube, atención de clientes comerciales y custodia de seguridad digital.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+              <a href="#comercial" class="btn btn-primary" style="font-size: 0.82rem; background: var(--primary-gradient); border: none;">
+                <i class="fa-solid fa-briefcase"></i> Ver Versión Comercial (Clientes)
+              </a>
+              <button onclick="window.print()" class="btn btn-secondary" style="font-size: 0.82rem;">
+                <i class="fa-solid fa-file-pdf"></i> Imprimir Guía en PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Filtros / Navegación Rápida por Módulos -->
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; background: rgba(18, 22, 36, 0.7); padding: 0.8rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <button class="archive-filter-btn active" onclick="filtrarManualAdmin('todos', this)"><i class="fa-solid fa-layer-group"></i> Toda la Guía</button>
+          <button class="archive-filter-btn" onclick="filtrarManualAdmin('influencers', this)"><i class="fa-solid fa-gem"></i> 1. Gestión de Influencers</button>
+          <button class="archive-filter-btn" onclick="filtrarManualAdmin('pipeline', this)"><i class="fa-solid fa-diagram-project"></i> 2. Producción Diaria</button>
+          <button class="archive-filter-btn" onclick="filtrarManualAdmin('ventas', this)"><i class="fa-solid fa-handshake"></i> 3. Cierre y Venta a Clientes</button>
+          <button class="archive-filter-btn" onclick="filtrarManualAdmin('youtube', this)"><i class="fa-brands fa-youtube"></i> 4. Operación YouTube</button>
+          <button class="archive-filter-btn" onclick="filtrarManualAdmin('seguridad', this)"><i class="fa-solid fa-shield-halved"></i> 5. Seguridad Digital</button>
+          <button class="archive-filter-btn" onclick="filtrarManualAdmin('rutina', this)"><i class="fa-solid fa-clock"></i> 6. Checklist Diario (20m)</button>
+        </div>
+
+        <!-- CONTENIDO ESTRUCTURADO EN 6 BLOQUES MODULARES -->
+        <div class="manual-modules-grid" style="display: flex; flex-direction: column; gap: 2rem;">
+
+          <!-- MÓDULO 1: GESTIÓN DE INFLUENCERS Y FICHAS DE PRODUCTO -->
+          <div class="manual-card-block" data-module="influencers" style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: var(--radius-lg); padding: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(139, 92, 246, 0.2); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-solid fa-gem"></i>
+              </div>
+              <div>
+                <h3 style="color: #fff; font-size: 1.35rem; font-family: var(--font-heading); margin: 0;">Módulo 1: Cómo Operar y Mantener el Roster de Influencers</h3>
+                <span style="font-size: 0.8rem; color: var(--purple); font-weight: 600;">Consistencia facial, calibración de voz y cockpits operativos</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1.25rem;">
+              <div style="background: rgba(0,0,0,0.35); padding: 1.2rem; border-radius: var(--radius-md); border-left: 3px solid var(--purple);">
+                <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-fingerprint" style="color: var(--cyan); margin-right: 0.35rem;"></i> Consistencia Facial 4K</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                  Cada influencer cuenta con una <strong>semilla maestra (Seed)</strong> y un LoRA específico en Flux.1 o Midjourney. 
+                  En la pestaña 5 <em>Operaciones de Influencers</em> y en la ficha de cada modelo encontrarás su prompt base exacto, lente focal sugerido (85mm f/1.4) y modificadores de textura de piel real.
+                </p>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.35); padding: 1.2rem; border-radius: var(--radius-md); border-left: 3px solid var(--cyan);">
+                <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-microphone-lines" style="color: var(--cyan); margin-right: 0.35rem;"></i> Calibración Vocal en ElevenLabs</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                  Para mantener la voz idéntica en cada reel o locución, ajusta: <strong>Stability al 65%</strong>, <strong>Clarity al 80%</strong> y Style Exaggeration al 15%. 
+                  Los ID de voz para Elena, Laura, Julia, Mateo y los demás están registrados en las fichas internas de cada personaje.
+                </p>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.35); padding: 1.2rem; border-radius: var(--radius-md); border-left: 3px solid var(--pink);">
+                <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-sliders" style="color: var(--pink); margin-right: 0.35rem;"></i> Cockpits Individuales</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                  Haz clic en cualquier influencer en el Roster para abrir su <strong>Cockpit Operativo</strong>. 
+                  Allí puedes editar su biografía, links a redes, planes de monetización VIP (Fanvue/Patreon) y exportar el paquete de prensa con 1 clic.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MÓDULO 2: PIPELINE DE PRODUCCIÓN DIARIA -->
+          <div class="manual-card-block" data-module="pipeline" style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: var(--radius-lg); padding: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(6, 182, 212, 0.2); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-solid fa-diagram-project"></i>
+              </div>
+              <div>
+                <h3 style="color: #fff; font-size: 1.35rem; font-family: var(--font-heading); margin: 0;">Módulo 2: Flujo de Producción Diaria (Pipeline de 7 Pasos)</h3>
+                <span style="font-size: 0.8rem; color: var(--cyan); font-weight: 600;">Desde la idea viral hasta la publicación automatizada</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem;">
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="color: var(--cyan); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem;">Paso 1 • Selección de Guion</div>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Abre la pestaña 4 <em>Hub de Copys</em> y elige un script prefabricado según el objetivo del día (Engagement, Venta o Suscripción).</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="color: var(--cyan); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem;">Paso 2 • Locución de Audio</div>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Copia el texto en ElevenLabs con la voz del avatar asignado. Descarga el archivo de audio (.mp3 o .wav en 48kHz).</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="color: var(--cyan); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem;">Paso 3 • Generación de Imagen / Video</div>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Genera el plano con Flux o anima el rostro en HeyGen/Kling con sincronización labial exacta con el audio.</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="color: var(--cyan); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem;">Paso 4 • Subtítulos y Publicación</div>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Aplica subtítulos dinámicos en CapCut con palabras clave resaltadas en amarillo y programa en Metricool o Buffer.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MÓDULO 3: CIERRE COMERCIAL Y ATENCIÓN A CLIENTES -->
+          <div class="manual-card-block" data-module="ventas" style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-lg); padding: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-solid fa-handshake"></i>
+              </div>
+              <div>
+                <h3 style="color: #fff; font-size: 1.35rem; font-family: var(--font-heading); margin: 0;">Módulo 3: Cómo Atender a Clientes y Cerrar Contratos B2B</h3>
+                <span style="font-size: 0.8rem; color: var(--green); font-weight: 600;">Uso de la Versión Comercial, Simulador de ROI y Argumentario de Ventas</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
+              <div style="background: rgba(0,0,0,0.35); padding: 1.2rem; border-radius: var(--radius-md);">
+                <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-desktop" style="color: var(--green); margin-right: 0.35rem;"></i> Demostración en Vivo (#comercial)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                  Durante una videollamada con un cliente potencial o marca, comparte la pantalla en la <strong>Versión Comercial</strong>. 
+                  Muestra el catálogo interactivo de embajadores, reproduce ejemplos de contenido y utiliza el <strong>Simulador de Campaña</strong> para calcular su ahorro inmediato frente a agencias tradicionales.
+                </p>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.35); padding: 1.2rem; border-radius: var(--radius-md);">
+                <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-bullseye" style="color: var(--green); margin-right: 0.35rem;"></i> Las 3 Respuestas Clave a Objeciones</h4>
+                <ul style="font-size: 0.82rem; color: var(--text-muted); padding-left: 1rem; line-height: 1.6;">
+                  <li><strong>«¿Se nota que es IA?»:</strong> Demuestra nuestros renders 4K con poros y microexpresiones que superan el uncanny valley.</li>
+                  <li><strong>«¿Qué pasa si cambian de opinión?»:</strong> Cero riesgo de cancelación, agendas o huelgas. Disponibilidad 24/7.</li>
+                  <li><strong>«¿Cuánto demora empezar?»:</strong> Entregamos la primera prueba de concepto de 3 videos en menos de 48 horas.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- MÓDULO 4: YOUTUBE STUDIO & CONTENIDO DE AUTORIDAD -->
+          <div class="manual-card-block" data-module="youtube" style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg); padding: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(239, 68, 68, 0.2); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+              <div>
+                <h3 style="color: #fff; font-size: 1.35rem; font-family: var(--font-heading); margin: 0;">Módulo 4: Operación de Canales de YouTube & Studio</h3>
+                <span style="font-size: 0.8rem; color: #ef4444; font-weight: 600;">Metadatos SEO, generación de miniaturas y subida sistemática</span>
+              </div>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+              En la pestaña 6 <strong>YouTube Studio</strong> puedes cambiar entre canales con un clic (The Infinite Archive / El Gran Arcano, Mateo Silva FinTech, Kira DevLogs, Fiebre Ranchera, etc.).
+              Cada canal incluye el paquete preparado con <strong>Título SEO de alto CTR</strong>, descripción con marcas de tiempo, etiquetas optimizadas y el prompt exacto para la miniatura en Midjourney v6.
+            </p>
+            <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md); font-size: 0.82rem; color: var(--text-dim); display: flex; gap: 0.5rem; align-items: center;">
+              <i class="fa-solid fa-circle-info" style="color: var(--cyan);"></i>
+              <span><strong>Nota de Producción Sonora:</strong> La suite de producción musical independiente (SoundForge Studio) se encuentra separada en la carpeta externa <code>/Documents/Produccion_Musical/</code> para evitar saturar el repositorio web.</span>
+            </div>
+          </div>
+
+          <!-- MÓDULO 5: SEGURIDAD DIGITAL Y CUSTODIA DE ACTIVOS -->
+          <div class="manual-card-block" data-module="seguridad" style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-lg); padding: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(59, 130, 246, 0.2); color: #60a5fa; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div>
+                <h3 style="color: #fff; font-size: 1.35rem; font-family: var(--font-heading); margin: 0;">Módulo 5: Protocolo de Seguridad Digital & Custodia</h3>
+                <span style="font-size: 0.8rem; color: #60a5fa; font-weight: 600;">Reglas estrictas para los tres socios administradores</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <strong style="color: #60a5fa; font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">1. Gestor de Contraseñas Único</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Nunca enviar contraseñas o API keys por WhatsApp o chat no cifrado. Usar la bóveda compartida de Bitwarden con llaves maestras.</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <strong style="color: #60a5fa; font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">2. 2FA Obligatorio en Todas las Cuentas</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Activar autenticación de dos factores en Instagram, TikTok, YouTube, ElevenLabs y Stripe mediante aplicación autenticadora (Aegis / 1Password) o YubiKey.</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-md);">
+                <strong style="color: #60a5fa; font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">3. Respaldo Semanal Desconectado</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Realizar copias de seguridad semanales de los LoRAs maestros, semillas y bases de datos a discos cifrados externos (Cold Storage).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MÓDULO 6: CHECKLIST DIARIO (RUTINA DE 20 MINUTOS) -->
+          <div class="manual-card-block" data-module="rutina" style="background: rgba(15, 18, 30, 0.85); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-lg); padding: 2rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.2); color: #fbbf24; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <h3 style="color: #fff; font-size: 1.35rem; font-family: var(--font-heading); margin: 0;">Módulo 6: Checklist Diario del Administrador (Rutina de 20 Minutos)</h3>
+                  <span style="font-size: 0.8rem; color: #fbbf24; font-weight: 600;">Tareas críticas recomendadas de lunes a viernes</span>
+                </div>
+              </div>
+              <span id="manual-checklist-status" style="font-size: 0.85rem; color: var(--cyan); font-weight: 600;">0 de 5 tareas completadas hoy</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+              <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" onchange="actualizarChecklistManual()" class="manual-chk" style="width: 18px; height: 18px; accent-color: var(--cyan);">
+                <span style="font-size: 0.88rem; color: #fff;"><strong>09:00 AM • Revisión de Leads y Mensajes Entrantes:</strong> Comprobar bandeja de solicitudes comerciales, Fanvue VIP y DMs de marcas.</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" onchange="actualizarChecklistManual()" class="manual-chk" style="width: 18px; height: 18px; accent-color: var(--cyan);">
+                <span style="font-size: 0.88rem; color: #fff;"><strong>11:30 AM • Programación del Contenido Diario:</strong> Verificar que los 3 reels/shorts programados en Metricool tengan los subtítulos correctos.</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" onchange="actualizarChecklistManual()" class="manual-chk" style="width: 18px; height: 18px; accent-color: var(--cyan);">
+                <span style="font-size: 0.88rem; color: #fff;"><strong>14:00 PM • Sincronización Transatlántica:</strong> Revisar horas de coincidencia activa entre Alemania (Daniel), Canadá (Pancho) y Chile (Wladimir) en los relojes de cabecera.</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" onchange="actualizarChecklistManual()" class="manual-chk" style="width: 18px; height: 18px; accent-color: var(--cyan);">
+                <span style="font-size: 0.88rem; color: #fff;"><strong>16:30 PM • Monitoreo de YouTube Analytics & CTR:</strong> Comprobar el rendimiento de miniaturas en El Gran Arcano y canales fintech.</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" onchange="actualizarChecklistManual()" class="manual-chk" style="width: 18px; height: 18px; accent-color: var(--cyan);">
+                <span style="font-size: 0.88rem; color: #fff;"><strong>18:00 PM • Actualización del Roadmap (Carta Gantt):</strong> Marcar los hitos completados de la semana en la pestaña 2 del panel.</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <!-- Modal para Perfil de Influencers -->
@@ -1835,11 +1903,11 @@ Agenda consulta gratuita hoy."</div>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>© 2026 Los Manejadores (Proyecto INCEL). Todos los derechos reservados.</p>
-    <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-dim);">Desarrollado para la gestión estratégica entre Alemania y Canadá.</p>
+    <p>© 2026 Manejadores. Todos los derechos reservados.</p>
+    <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-dim);">Desarrollado para la gestión estratégica internacional entre Alemania, Canadá y Chile.</p>
   </footer>
 
   <!-- App JS JavaScript -->
-  <script src="app.js?v=20261011_freja_fix_v6"></script>
+  <script src="app.js?v=20261018_manejadores_v1"></script>
 </body>
 </html>

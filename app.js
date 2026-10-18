@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LOS MANEJADORES (PROYECTO INCEL) - INTERACTIVE APPLICATION LOGIC & SPA ROUTER
+   MANEJADORES - INTERACTIVE APPLICATION LOGIC & SPA ROUTER
    Features: SPA Routing (#influencer/*, #channel/*, #asesorias, #logos, #gantt),
    Dedicated Subpage Renderers, Interactive Logo Showcase, Advisory Booking,
    Interactive Gantt Chart & Copy Hub.
@@ -1095,10 +1095,7 @@ const influencersData = {
       bpm: 74,
       scale: "D Dorian • 432Hz",
       duration: "1:14",
-      audioUrl: "caldero_freja/puerta_1_dragon_astral_v1.m4a",
-      wavUrl: "caldero_freja/puerta_1_dragon_astral_v1.wav",
-      calderoUrl: "caldero_freja/",
-      description: "Master baseline oficial generado en El Caldero de Freja: chelos acústicos modelados, pads analógicos a 432Hz, coro en latín y drop súbito al silencio."
+      description: "Master baseline oficial: chelos acústicos modelados, pads analógicos a 432Hz, coro en latín y drop súbito al silencio. Gestionado en la suite externa de Producción Musical."
     },
     roi: {
       defaultFollowers: 120000,
@@ -2152,8 +2149,8 @@ function handleRoute() {
   } else if (hash === '#cursos' || hash === '#formacion' || hash === '#talleres') {
     renderCursosPage();
     showDynamicView();
-  } else if (hash === '#clientes' || hash === '#pitch') {
-    renderClientsPage();
+  } else if (hash === '#comercial' || hash === '#clientes' || hash === '#pitch' || hash === '#showcase') {
+    renderCommercialPage();
     showDynamicView();
   } else if (hash === '#logos' || hash === '#copys') {
     if (isTeamAuthenticated()) {
@@ -2181,6 +2178,13 @@ function handleRoute() {
       showTeamView('members');
     } else {
       openAuthModal('members');
+      showPublicView();
+    }
+  } else if (hash === '#manual' || hash === '#guia' || hash === '#como-usar' || hash === '#instrucciones') {
+    if (isTeamAuthenticated()) {
+      showTeamView('manual');
+    } else {
+      openAuthModal('manual');
       showPublicView();
     }
   } else if (hash === '#influencer-ops' || hash === '#operaciones') {
@@ -2238,7 +2242,7 @@ function switchTeamTab(tab) {
   const btnMembers = document.getElementById('btn-team-tab-members');
   const btnInfluencerOps = document.getElementById('btn-team-tab-influencer-ops');
   const btnYoutubeStudio = document.getElementById('btn-team-tab-youtube-studio');
-  const btnCaldero = document.getElementById('btn-team-tab-caldero');
+  const btnManual = document.getElementById('btn-team-tab-manual');
 
   const paneGantt = document.getElementById('team-pane-gantt');
   const panePipeline = document.getElementById('team-pane-pipeline');
@@ -2246,10 +2250,10 @@ function switchTeamTab(tab) {
   const paneMembers = document.getElementById('team-pane-members');
   const paneInfluencerOps = document.getElementById('team-pane-influencer-ops');
   const paneYoutubeStudio = document.getElementById('team-pane-youtube-studio');
-  const paneCaldero = document.getElementById('team-pane-caldero');
+  const paneManual = document.getElementById('team-pane-manual');
 
-  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnCaldero].forEach(b => { if (b) b.classList.remove('active'); });
-  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneCaldero].forEach(p => { if (p) p.classList.remove('active-pane'); });
+  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnManual].forEach(b => { if (b) b.classList.remove('active'); });
+  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneManual].forEach(p => { if (p) p.classList.remove('active-pane'); });
 
   if (tab === 'gantt') {
     if (btnGantt) btnGantt.classList.add('active');
@@ -2273,6 +2277,10 @@ function switchTeamTab(tab) {
     if (paneYoutubeStudio) paneYoutubeStudio.classList.add('active-pane');
     if (window.location.hash !== '#team-youtube') window.location.hash = '#team-youtube';
     renderAdminYoutubeStudio(window.pendingAdminChannel || 'arcano');
+  } else if (tab === 'manual') {
+    if (btnManual) btnManual.classList.add('active');
+    if (paneManual) paneManual.classList.add('active-pane');
+    if (window.location.hash !== '#manual') window.location.hash = '#manual';
   } else {
     // Default tab: 'members' (Posición 1: Equipo Fundador & Roles)
     if (btnMembers) btnMembers.classList.add('active');
@@ -3388,13 +3396,8 @@ function renderInfluencerPublicProduct(id) {
                 <source src="${data.featuredTrack.wavUrl}" type="audio/wav">
               </audio>
 
-              <div style="display: flex; gap: 0.5rem; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-                <a href="${data.featuredTrack.calderoUrl}" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem; color: #ff70a6; border-color: rgba(255,42,133,0.5); text-decoration: none;">
-                  <i class="fa-solid fa-wand-magic-sparkles" style="color: #00f5d4; margin-right: 4px;"></i> Abrir en El Caldero
-                </a>
-                <a href="${data.featuredTrack.wavUrl}" download class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem; color: #00f5d4; border-color: rgba(0,245,212,0.4); text-decoration: none;">
-                  <i class="fa-solid fa-download" style="margin-right: 4px;"></i> Master WAV (v1.0)
-                </a>
+              <div style="display: flex; gap: 0.5rem; align-items: center; justify-content: flex-end; flex-wrap: wrap;">
+                <span style="font-size: 0.72rem; color: var(--text-dim);"><i class="fa-solid fa-compact-disc"></i> Producción en Suite Externa (/Documents/Produccion_Musical/)</span>
               </div>
             </div>
           ` : ''}
@@ -3927,13 +3930,8 @@ function renderInfluencerCockpit(id) {
               <source src="${data.featuredTrack.wavUrl}" type="audio/wav">
             </audio>
 
-            <div style="display: flex; gap: 0.4rem; align-items: center; justify-content: space-between; margin-top: 0.3rem;">
-              <a href="${data.featuredTrack.calderoUrl}" target="_blank" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.3rem 0.6rem; color: #ff70a6; border-color: rgba(255,42,133,0.5);">
-                <i class="fa-solid fa-wand-magic-sparkles" style="color: #00f5d4; margin-right: 4px;"></i> Abrir en El Caldero
-              </a>
-              <a href="${data.featuredTrack.wavUrl}" download class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.3rem 0.6rem; color: #00f5d4; border-color: rgba(0,245,212,0.4);">
-                <i class="fa-solid fa-download"></i> Master WAV (v1)
-              </a>
+            <div style="display: flex; gap: 0.4rem; align-items: center; justify-content: flex-end; margin-top: 0.3rem;">
+              <span style="font-size: 0.72rem; color: var(--text-dim);"><i class="fa-solid fa-compact-disc"></i> Producción en Suite Externa (/Documents/Produccion_Musical/)</span>
             </div>
           </div>
         ` : ''}
@@ -7362,9 +7360,9 @@ function handleCourseEnrollment(courseTitle, price) {
 }
 
 // ============================================================================
-// RENDER: CLIENTES & PITCH DECK PAGE
+// RENDER: VERSIÓN COMERCIAL & DEMOSTRACIÓN DE PRODUCTO PARA CLIENTES
 // ============================================================================
-function renderClientsPage() {
+function renderCommercialPage() {
   const container = document.getElementById('view-dynamic');
   if (!container) return;
 
@@ -7373,161 +7371,628 @@ function renderClientsPage() {
       <div class="breadcrumbs">
         <a href="#home">Inicio</a>
         <span class="separator"><i class="fa-solid fa-chevron-right"></i></span>
-        <span class="current">Clientes & Inversionistas (Pitch Deck)</span>
+        <span class="current">Versión Comercial • Demostración de Producto para Clientes & Marcas</span>
       </div>
       <a href="#home" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver a Inicio</a>
     </div>
 
-    <!-- Header Section -->
-    <div class="section-header" style="text-align: center; max-width: 850px; margin: 0 auto 3rem auto;">
-      <span class="section-subtitle" style="color: var(--purple);"><i class="fa-solid fa-chart-pie"></i> PRESENTACIÓN EJECUTIVA</span>
-      <h1 class="section-title" style="font-size: 2.75rem; margin-top: 0.5rem;">Pitch Deck para Clientes & Inversionistas</h1>
-      <p class="section-description" style="margin-top: 0.75rem; line-height: 1.7;">
-        Síntesis estratégica de 10 diapositivas para presentación ante marcas globales, socios comerciales y fondos de capital de riesgo.
+    <!-- Hero Comercial -->
+    <div class="section-header" style="text-align: center; max-width: 900px; margin: 0 auto 3rem auto;">
+      <span class="section-subtitle" style="color: var(--cyan);"><i class="fa-solid fa-briefcase"></i> SHOWCASE COMERCIAL • MANEJADORES B2B</span>
+      <h1 class="section-title" style="font-size: 2.8rem; margin-top: 0.5rem;">
+        Talento Virtual & Fábrica de Contenido para tu Marca
+      </h1>
+      <p class="section-description" style="margin-top: 0.85rem; line-height: 1.7; font-size: 1.05rem;">
+        Desarrollamos influencers virtuales con consistencia fotográfica 4K, producción automatizada de video corto para TikTok/Reels y canales de YouTube llave en mano. 
+        <strong>Hasta un 80% menos costes</strong> que el talento humano tradicional, disponibilidad 24/7 y primera entrega en 48 horas.
       </p>
-      <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-        <button class="btn btn-secondary btn-sm" onclick="window.print()" title="Generar PDF de las diapositivas">
-          <i class="fa-solid fa-file-pdf"></i> Descargar Pitch Deck (PDF)
-        </button>
-        <a href="#client-contact" class="btn btn-primary btn-sm">
-          <i class="fa-solid fa-envelope"></i> Contactar al Equipo Fundador
+      
+      <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+        <a href="#commercial-simulator" class="btn btn-primary" style="background: var(--primary-gradient); border: none;">
+          <i class="fa-solid fa-calculator"></i> Probar Simulador de Campaña & ROI
         </a>
+        <a href="#commercial-roster" class="btn btn-secondary">
+          <i class="fa-solid fa-users"></i> Catálogo de Talentos Listos
+        </a>
+        <a href="#commercial-plans" class="btn btn-secondary">
+          <i class="fa-solid fa-tags"></i> Planes y Precios
+        </a>
+        <button class="btn btn-secondary" onclick="toggleCommercialDeck()">
+          <i class="fa-solid fa-file-powerpoint"></i> Pitch Deck (10 Diapositivas)
+        </button>
       </div>
     </div>
 
-    <!-- Pitch Deck Slider Container -->
-    <div class="pitch-container" style="margin-bottom: 4rem;">
-      <!-- Slide 1 -->
-      <div class="pitch-slide active-slide" data-slide="1">
-        <span class="slide-num">DIAPOSITIVA 1 DE 10 • PORTADA</span>
-        <h3 class="slide-title">Los Manejadores — Creative AI Studio</h3>
-        <p class="slide-text">Conectamos talentos digitales con el mundo mediante IA generativa, narrativa de alto enganche y monetización estructurada.</p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--cyan);"><i class="fa-solid fa-earth-americas"></i> Operaciones Estratégicas: Alemania (CET), Canadá (EST) y Chile (CLT)</div>
+    <!-- BLOQUE 1: LAS 4 SOLUCIONES COMERCIALES CLAVE -->
+    <section class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-subtitle" style="color: var(--purple);"><i class="fa-solid fa-layer-group"></i> Portafolio de Productos</span>
+        <h2 class="section-title" style="font-size: 2rem;">¿Qué Puede Hacer Manejadores por tu Empresa?</h2>
       </div>
 
-      <!-- Slide 2 -->
-      <div class="pitch-slide" data-slide="2">
-        <span class="slide-num">DIAPOSITIVA 2 DE 10 • EL PROBLEMA</span>
-        <h3 class="slide-title">El Cuello de Botella de los Creadores & Agencias</h3>
-        <p class="slide-text">El 95% de los creadores y marcas sufren saturación operativa: costos de producción prohibitivos ($3,000+/mes por video tradicional), inconsistencia visual, cancelaciones de rodaje y agotamiento de agenda.</p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
-          <em>TAM global de la economía de creadores excede $250B con 70% de ineficiencia en producción artesanal de contenido.</em>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Solución 1 -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(6, 182, 212, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(6, 182, 212, 0.15); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-user-astronaut"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Embajador Virtual Exclusivo</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Diseñamos la cara visible, tono de voz y vestuario corporativo con tu logo. Un activo digital perpetuo de tu marca sin riesgo de huelgas ni cancelaciones.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Consistencia facial absoluta en cualquier pose</li>
+              <li>Voz clonada en español, inglés o multilingüe</li>
+              <li>Cesión total de derechos de propiedad intelectual</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Embajador Virtual Exclusivo')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: var(--cyan); border-color: rgba(6, 182, 212, 0.4);">
+            Solicitar Embajador Propio
+          </button>
         </div>
-      </div>
 
-      <!-- Slide 3 -->
-      <div class="pitch-slide" data-slide="3">
-        <span class="slide-num">DIAPOSITIVA 3 DE 10 • LA SOLUCIÓN</span>
-        <h3 class="slide-title">Influencia Virtual Asistida por IA & Consistencia 4K</h3>
-        <p class="slide-text">Creamos avatares hiperrealistas con consistencia facial absoluta y canales automatizados a 1/10 del costo tradicional y con una velocidad de iteración 10 veces mayor.</p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--green);">
-          <i class="fa-solid fa-circle-check"></i> Producción 24/7 sin dependencia física de agenda ni fatiga de rodaje.
+        <!-- Solución 2 -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(139, 92, 246, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(139, 92, 246, 0.15); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-video"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Fábrica de Reels & TikTok UGC</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Packs mensuales de 15 a 50 videos verticales con ganchos de alta retención. Promociona tus productos o servicios con estilo orgánico y testimonios creíbles.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Guiones probados para comercio y apps</li>
+              <li>Subtítulos animados automáticos de alto impacto</li>
+              <li>Entrega mensual continua sin retrasos de rodaje</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Pack Reels y TikTok UGC')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: var(--purple); border-color: rgba(139, 92, 246, 0.4);">
+            Contratar Pack de Contenido
+          </button>
         </div>
-      </div>
 
-      <!-- Slide 4 -->
-      <div class="pitch-slide" data-slide="4">
-        <span class="slide-num">DIAPOSITIVA 4 DE 10 • MODELO DE NEGOCIO</span>
-        <h3 class="slide-title">Múltiples Embudos de Monetización Integrados</h3>
-        <p class="slide-text">
-          1. Suscripciones VIP recurrentes (Fanvue / OnlyFans: $12–$25 USD/mes).<br>
-          2. YouTube Automatizado (AdSense de alto RPM + Patrocinios integrados).<br>
-          3. E-Commerce Directo (Shopify, Gumroad, Cosmética limpia, Suplementación, E-books).<br>
-          4. Soluciones B2B & Embajadores Virtuales para Empresas ($2,500 a $15,000 USD).
-        </p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
-          <em>LTV estimado de suscriptor VIP: $185 USD. Costo de Adquisición (CAC): $18 USD. Margen neto consolidado superior al 65%.</em>
+        <!-- Solución 3 -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(239, 68, 68, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(239, 68, 68, 0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Canal de YouTube Llave en Mano</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Desarrollamos y gestionamos un canal educativo o de nicho para tu industria. Construye autoridad en Google, genera leads B2B y monetiza vía AdSense.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Investigación de palabras clave con alto RPM</li>
+              <li>Guiones persuasivos con IA y locución natural</li>
+              <li>Miniaturas 4K optimizadas para un CTR superior al 8%</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Canal YouTube Corporativo')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">
+            Lanzar Canal de YouTube
+          </button>
         </div>
-      </div>
 
-      <!-- Slide 5 -->
-      <div class="pitch-slide" data-slide="5">
-        <span class="slide-num">DIAPOSITIVA 5 DE 10 • PRUEBA SOCIAL & PORTAFOLIO</span>
-        <h3 class="slide-title">Roster de Talentos Validados</h3>
-        <p class="slide-text">Julia Schmidt (K-Beauty & Cosmética), Laura Taeda (Fitness & Nutrición), Mateo Silva (Fintech & Inversiones), Elena Daddario (Mindfulness & Libros), Maite Valenzuela (Música Urbana) y Kira Voss (Desarrollo & Venta de Videojuegos Indie).</p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--pink);">
-          <i class="fa-solid fa-chart-line"></i> Retención mensual superior al 70% con interacción automatizada y funnels de conversión directa.
+        <!-- Solución 4 -->
+        <div class="glass-card" style="padding: 1.75rem; border-color: rgba(16, 185, 129, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-comments-dollar"></i>
+            </div>
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Reactivación & Automatización</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Automatizamos el seguimiento de clientes por WhatsApp y respondemos el 100% de reseñas en Google Maps con SEO local para atraer clientes de tu zona en 48h.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Reactivación de bases de datos inactivas sin pauta</li>
+              <li>Respuestas con IA a Google Reviews en 60 segundos</li>
+              <li>Embudos de calificación de prospectos directos</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Automatización WhatsApp y Maps')" class="btn btn-secondary btn-sm" style="margin-top: 1.25rem; width: 100%; justify-content: center; color: var(--green); border-color: rgba(16, 185, 129, 0.4);">
+            Activar Funnel de Ventas
+          </button>
         </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: CATÁLOGO DE TALENTOS DISPONIBLES PARA PATROCINIO -->
+    <section id="commercial-roster" class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-subtitle" style="color: var(--pink);"><i class="fa-solid fa-star"></i> Catálogo Activo</span>
+        <h2 class="section-title" style="font-size: 2rem;">Modelos Virtuales Listos para Campañas Inmediatas</h2>
+        <p class="section-description">Selecciona el perfil ideal para la audiencia de tu marca y solicita una demostración personalizada.</p>
       </div>
 
-      <!-- Slide 6 -->
-      <div class="pitch-slide" data-slide="6">
-        <span class="slide-num">DIAPOSITIVA 6 DE 10 • ARQUITECTURA TÉCNICA</span>
-        <h3 class="slide-title">Pipeline Tecnológico Propietario de 8 Pasos</h3>
-        <p class="slide-text">Desde la arquitectura de prompts con Gemini (formato ROLOCODEPRE), consistencia LoRA con Flux 2 y Motion Control en Kling 3.0, hasta orquestación autónoma con Antigravity agy CLI.</p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--cyan);">
-          <i class="fa-solid fa-microchip"></i> Stack modular capaz de generar hasta 500 piezas audiovisuales al día.
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.25rem;">
+        
+        <!-- Laura Taeda -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(16, 185, 129, 0.4); display: flex; gap: 1rem; align-items: center;">
+          <img src="laura_avatar.jpg" alt="Laura Taeda" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green);">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h4 style="color: #fff; font-size: 1rem; margin: 0;">Laura Taeda</h4>
+              <span style="font-size: 0.7rem; color: var(--green); background: rgba(16, 185, 129, 0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">5.8% Eng.</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--cyan); display: block;">Fitness & Nutrición Basada en Ciencia</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">Ideal para suplementos, ropa deportiva, apps de bienestar y snacks saludables.</p>
+            <button onclick="selectModelForQuote('Laura Taeda')" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: var(--green);">
+              Cotizar con Laura
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Slide 7 -->
-      <div class="pitch-slide" data-slide="7">
-        <span class="slide-num">DIAPOSITIVA 7 DE 10 • SEGURIDAD & COMPLIANCE</span>
-        <h3 class="slide-title">Seguridad, KYC y Marco Legal Transfronterizo</h3>
-        <p class="slide-text">Verificación KYC rigurosa para modelos y plataformas, protección de propiedad intelectual, pasarelas de cobro seguras (Wise Business / Stripe) y estricto cumplimiento normativo GDPR (UE) y PIPEDA (Canadá).</p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
-          <em>Blindaje de secretos industriales, contratos de confidencialidad y control absoluto de los activos generativos.</em>
+        <!-- Julia Schmidt -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(236, 72, 153, 0.4); display: flex; gap: 1rem; align-items: center;">
+          <img src="julia_avatar.jpg" alt="Julia Schmidt" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--pink);">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h4 style="color: #fff; font-size: 1rem; margin: 0;">Julia Schmidt</h4>
+              <span style="font-size: 0.7rem; color: var(--pink); background: rgba(236, 72, 153, 0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">6.1% Eng.</span>
+            </div>
+            <span style="font-size: 0.75rem; color: #ff70a6; display: block;">Dermocosmética & Clean Beauty</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">Perfecta para marcas de cosmética, clínicas estéticas, skincare y belleza limpia.</p>
+            <button onclick="selectModelForQuote('Julia Schmidt')" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: var(--pink);">
+              Cotizar con Julia
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Slide 8 -->
-      <div class="pitch-slide" data-slide="8">
-        <span class="slide-num">DIAPOSITIVA 8 DE 10 • PLAN FINANCIERO</span>
-        <h3 class="slide-title">Metas Financieras & Expansión Trimestral</h3>
-        <p class="slide-text">
-          • Fase 1: 5 influencers activos en producción y primeros 500 suscriptores pagos.<br>
-          • Fase 2: Expansión de tiendas e-commerce asociadas y 4 contratos B2B con empresas.<br>
-          • Proyección Mes 6: $35,000 USD/mes con margen de contribución superior al 65%.
-        </p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
-          <em>Inversión en cómputo GPU y APIs estimada en $450 USD/mes por avatar activo.</em>
+        <!-- Mateo Silva -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(6, 182, 212, 0.4); display: flex; gap: 1rem; align-items: center;">
+          <img src="mateo_avatar.jpg" alt="Mateo Silva" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--cyan);">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h4 style="color: #fff; font-size: 1rem; margin: 0;">Mateo Silva</h4>
+              <span style="font-size: 0.7rem; color: var(--cyan); background: rgba(6, 182, 212, 0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">7.2% Eng. (Top RPM)</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--cyan); display: block;">Fintech, Inversiones & SaaS</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">Ideal para plataformas de trading, bancos digitales, apps de ahorro y fondos B2B.</p>
+            <button onclick="selectModelForQuote('Mateo Silva')" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: var(--cyan);">
+              Cotizar con Mateo
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Slide 9 -->
-      <div class="pitch-slide" data-slide="9">
-        <span class="slide-num">DIAPOSITIVA 9 DE 10 • EQUIPO FUNDADOR</span>
-        <h3 class="slide-title">Sinergia Fundadora Multidisciplinaria</h3>
-        <p class="slide-text">
-          <strong>Daniel Santander (Alemania):</strong> Dirección de Arquitectura IA, LoRAs y Automatización con agy CLI.<br>
-          <strong>Pancho Ipinza (Canadá):</strong> Dirección Creativa, Storytelling, Relaciones Públicas y Captación B2B.<br>
-          <strong>Wladimir Gutierrez (Chile):</strong> Media Operations, Motion AI y Escalamiento de Contenido Audiovisual.
-        </p>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
-          <em>Red transnacional de especialistas en edición audiovisual, copywriters y asesores jurídicos internacionales.</em>
+        <!-- Elena Daddario -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(96, 165, 250, 0.4); display: flex; gap: 1rem; align-items: center;">
+          <img src="elena_avatar.png" alt="Elena Daddario" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #60a5fa;">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h4 style="color: #fff; font-size: 1rem; margin: 0;">Elena Daddario</h4>
+              <span style="font-size: 0.7rem; color: #60a5fa; background: rgba(96, 165, 250, 0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">6.4% Eng.</span>
+            </div>
+            <span style="font-size: 0.75rem; color: #93c5fd; display: block;">Mindfulness & Psicología Consciente</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">Alineada con editoriales, apps de meditación, infusiones, té y moda sostenible.</p>
+            <button onclick="selectModelForQuote('Elena Daddario')" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: #60a5fa;">
+              Cotizar con Elena
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Slide 10 -->
-      <div class="pitch-slide" data-slide="10">
-        <span class="slide-num">DIAPOSITIVA 10 DE 10 • CALL TO ACTION</span>
-        <h3 class="slide-title">Siguiente Paso: Construyamos Juntos</h3>
-        <p class="slide-text">Únete como inversor estratégico, contrata una campaña de patrocinio con nuestros influencers o desarrolla el avatar virtual propio de tu marca.</p>
-        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="#client-contact" class="btn btn-primary btn-sm"><i class="fa-solid fa-handshake"></i> Iniciar Conversación Comercial</a>
-          <a href="#empresas" class="btn btn-secondary btn-sm"><i class="fa-solid fa-building-gear"></i> Ver Soluciones B2B</a>
+        <!-- Camila Reyes -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(239, 68, 68, 0.4); display: flex; gap: 1rem; align-items: center;">
+          <img src="camila_avatar.jpg" alt="Camila Reyes" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #ef4444;">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h4 style="color: #fff; font-size: 1rem; margin: 0;">Camila Reyes</h4>
+              <span style="font-size: 0.7rem; color: #f87171; background: rgba(239, 68, 68, 0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">5.5% Eng.</span>
+            </div>
+            <span style="font-size: 0.75rem; color: #f87171; display: block;">Moda Latina & Entretenimiento Viral</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">Alta conversión para tiendas e-commerce, ropa femenina y contenido viral de TikTok.</p>
+            <button onclick="selectModelForQuote('Camila Reyes')" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: #f87171;">
+              Cotizar con Camila
+            </button>
+          </div>
         </div>
+
+        <!-- Alejandra Prototipo B2B -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(245, 158, 11, 0.4); display: flex; gap: 1rem; align-items: center;">
+          <img src="alejandra_avatar.jpg" alt="Alejandra B2B" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #f59e0b;">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h4 style="color: #fff; font-size: 1rem; margin: 0;">Alejandra (B2B Custom)</h4>
+              <span style="font-size: 0.7rem; color: #fbbf24; background: rgba(245, 158, 11, 0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">100% Adaptable</span>
+            </div>
+            <span style="font-size: 0.75rem; color: #fde68a; display: block;">Embajadora Virtual Corporativa</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">Prototipo diseñado para ser customizado con el rostro, uniforme y branding de tu empresa.</p>
+            <button onclick="selectModelForQuote('Alejandra (B2B Custom)')" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.6rem; color: #fbbf24;">
+              Cotizar Modelo B2B
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 3: SIMULADOR INTERACTIVO DE CAMPAÑA & CALCULADORA DE ROI -->
+    <section id="commercial-simulator" class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="glass-card" style="padding: 2.5rem; border-color: rgba(6, 182, 212, 0.5); background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.12) 0%, rgba(15, 18, 30, 0.98) 100%); border-radius: var(--radius-lg);">
+        
+        <div style="text-align: center; max-width: 750px; margin: 0 auto 2rem auto;">
+          <span class="section-subtitle" style="color: var(--cyan);"><i class="fa-solid fa-calculator"></i> Cotizador en Tiempo Real</span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: #fff; margin: 0.5rem 0;">
+            Simulador de Campaña & Retorno de Inversión (ROI)
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Ajusta los parámetros de tu empresa y calcula al instante el ahorro económico, volumen de publicaciones y alcance proyectado.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center;">
+          
+          <!-- Controles del Simulador -->
+          <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+            
+            <div style="margin-bottom: 1.25rem;">
+              <label style="font-size: 0.85rem; color: #fff; font-weight: 600; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-building" style="color: var(--cyan); margin-right: 0.35rem;"></i> Industria de tu Empresa:
+              </label>
+              <select id="sim-industry" onchange="updateCommercialSimulator()" class="form-input" style="background: #0d111e; color: #fff; font-size: 0.88rem;">
+                <option value="ecommerce">E-Commerce & Retail de Consumo</option>
+                <option value="belleza">Belleza, Estética & Skincare</option>
+                <option value="fitness">Fitness, Salud & Suplementación</option>
+                <option value="fintech">FinTech, Software SaaS & B2B</option>
+                <option value="gastronomia">Gastronomía, Hotelería & Locales</option>
+                <option value="educacion">Cursos, Infoproductos & Educación</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #fff; font-weight: 600; margin-bottom: 0.4rem;">
+                <span><i class="fa-solid fa-film" style="color: var(--purple); margin-right: 0.35rem;"></i> Volumen Mensual de Videos:</span>
+                <span id="sim-volume-label" style="color: var(--cyan); font-family: monospace;">25 Videos / Mes</span>
+              </div>
+              <input type="range" id="sim-volume" min="10" max="60" step="5" value="25" oninput="updateCommercialSimulator()" style="width: 100%; accent-color: var(--cyan);">
+              <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim); margin-top: 0.2rem;">
+                <span>10 (Piloto)</span>
+                <span>25 (Escala)</span>
+                <span>60 (Dominancia)</span>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label style="font-size: 0.85rem; color: #fff; font-weight: 600; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-calendar" style="color: var(--pink); margin-right: 0.35rem;"></i> Duración del Compromiso:
+              </label>
+              <select id="sim-duration" onchange="updateCommercialSimulator()" class="form-input" style="background: #0d111e; color: #fff; font-size: 0.88rem;">
+                <option value="1">1 Mes (Prueba de Concepto Inicial)</option>
+                <option value="3" selected>3 Meses (Campaña de Crecimiento - 15% Descuento)</option>
+                <option value="6">6 Meses (Posicionamiento Total - 25% Descuento)</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size: 0.85rem; color: #fff; font-weight: 600; display: block; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-user-tag" style="color: #fbbf24; margin-right: 0.35rem;"></i> Formato de Talento:
+              </label>
+              <select id="sim-talent-type" onchange="updateCommercialSimulator()" class="form-input" style="background: #0d111e; color: #fff; font-size: 0.88rem;">
+                <option value="roster">Influencer de Catálogo (Laura, Julia, Mateo, etc.)</option>
+                <option value="custom">Embajador Virtual 100% Exclusivo para mi Marca</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Resultados del Simulador -->
+          <div style="background: rgba(18, 22, 36, 0.9); padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid rgba(6, 182, 212, 0.4);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">
+              Proyección Financiera & Ahorro Estimado
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Inversión en Manejadores:</span>
+                <span id="sim-manejadores-cost" style="font-size: 1.6rem; font-weight: 800; color: var(--cyan); font-family: monospace;">$1,150 USD</span>
+                <span style="font-size: 0.7rem; color: var(--text-dim); display: block;">Todo incluido / sin imprevistos</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Costo Agencia Tradicional:</span>
+                <span id="sim-traditional-cost" style="font-size: 1.6rem; font-weight: 800; color: #f87171; font-family: monospace; text-decoration: line-through;">$4,800 USD</span>
+                <span style="font-size: 0.7rem; color: #f87171; display: block;">Rodaje, actores y agencias</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.9rem; border-radius: 8px; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="font-size: 0.8rem; color: var(--green); font-weight: 700; display: block;">Ahorro Neto Directo:</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Dinero ahorrado en tu presupuesto de marketing</span>
+              </div>
+              <span id="sim-savings-percent" style="font-size: 1.5rem; font-weight: 900; color: var(--green); font-family: monospace;">-76%</span>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-glass); padding-top: 1rem; margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.35rem;">
+                <span style="color: var(--text-muted);">Alcance Orgánico Proyectado:</span>
+                <strong id="sim-reach-label" style="color: #fff;">250k - 600k Reproducciones</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.35rem;">
+                <span style="color: var(--text-muted);">Tiempo de Primera Entrega:</span>
+                <strong style="color: var(--cyan);">Menos de 48 horas</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+                <span style="color: var(--text-muted);">Derechos Comerciales:</span>
+                <strong style="color: var(--green);">100% Libres de regalías</strong>
+              </div>
+            </div>
+
+            <button onclick="applySimulationToQuote()" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.85rem; background: var(--primary-gradient); border: none;">
+              <i class="fa-solid fa-paper-plane"></i> Solicitar Propuesta con Esta Configuración
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 4: TABLA COMPARATIVA DIRECTA -->
+    <section class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-subtitle" style="color: var(--cyan);"><i class="fa-solid fa-scale-balanced"></i> Análisis Comparativo</span>
+        <h2 class="section-title" style="font-size: 2rem;">Manejadores vs. Agencias Tradicionales</h2>
       </div>
 
-      <!-- Controls -->
-      <div class="pitch-controls">
-        <button class="btn btn-secondary" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
-        <div class="pitch-dots" id="pitch-dots"></div>
-        <button class="btn btn-primary" onclick="nextSlide()">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; background: rgba(18, 22, 36, 0.7); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); font-size: 0.88rem;">
+          <thead>
+            <tr style="background: rgba(0,0,0,0.5); text-align: left;">
+              <th style="padding: 1rem 1.25rem; color: var(--text-muted);">Criterio Comercial</th>
+              <th style="padding: 1rem 1.25rem; color: #f87171;"><i class="fa-solid fa-xmark"></i> Agencia Tradicional con Actores</th>
+              <th style="padding: 1rem 1.25rem; color: var(--cyan); background: rgba(6, 182, 212, 0.08);"><i class="fa-solid fa-check"></i> Manejadores Virtual Studio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: #fff;">Tiempo de Lanzamiento</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">3 a 6 semanas (castings, pruebas, rodajes)</td>
+              <td style="padding: 1rem 1.25rem; color: #fff; background: rgba(6, 182, 212, 0.04);"><strong>48 Horas</strong> (prototipo listo de inmediato)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: #fff;">Costes por Pieza de Video</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">$250 a $600 USD por reel producido</td>
+              <td style="padding: 1rem 1.25rem; color: #fff; background: rgba(6, 182, 212, 0.04);"><strong>$25 a $55 USD</strong> (reducción del 80%)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: #fff;">Disponibilidad & Agenda</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Limitada a horarios de estudio y agenda de actores</td>
+              <td style="padding: 1rem 1.25rem; color: #fff; background: rgba(6, 182, 212, 0.04);"><strong>24/7/365</strong> sin fatiga ni indisponibilidad</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: #fff;">Riesgo de Reputación</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Alto (escándalos personales, opiniones públicas)</td>
+              <td style="padding: 1rem 1.25rem; color: #fff; background: rgba(6, 182, 212, 0.04);"><strong>0% de riesgo</strong> (100% controlado por guion)</td>
+            </tr>
+            <tr>
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: #fff;">Propiedad de la Imagen</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Licencia temporal con cobros anuales recurrentes</td>
+              <td style="padding: 1rem 1.25rem; color: #fff; background: rgba(6, 182, 212, 0.04);"><strong>IP Propietaria</strong> cedida a la marca en planes B2B</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BLOQUE 5: PLANES COMERCIALES TRANSPARENTES -->
+    <section id="commercial-plans" class="section" style="padding-top: 0; margin-bottom: 3.5rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-subtitle" style="color: var(--purple);"><i class="fa-solid fa-tags"></i> Opciones de Contratación</span>
+        <h2 class="section-title" style="font-size: 2rem;">Planes de Producción B2B</h2>
+        <p class="section-description">Sin contratos de permanencia forzosa. Escala según los resultados de tu marca.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Plan Starter -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Prueba de Concepto</span>
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.25rem 0 0.5rem 0;">Starter Piloto 48h</h3>
+            <div style="font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 1rem; font-family: monospace;">
+              $450 <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">USD (Pago único)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Ideal para validar el engagement de un influencer virtual con tu producto antes de escalar la pauta.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; line-height: 1.8;">
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> 3 Videos verticales 9:16 de alta conversión</li>
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> 1 Influencer de catálogo a elección</li>
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> Guion aprobado + locución en ElevenLabs</li>
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> Entrega completa en menos de 48 horas</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Plan Starter Piloto ($450 USD)')" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
+            Contratar Piloto 48h
+          </button>
+        </div>
+
+        <!-- Plan Pro Scale (Destacado) -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(6, 182, 212, 0.6); background: radial-gradient(circle at top, rgba(6, 182, 212, 0.15) 0%, rgba(18, 22, 36, 0.95) 100%); display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+          <div style="position: absolute; top: -12px; right: 20px; background: var(--primary-gradient); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 20px; text-transform: uppercase;">
+            Más Elegido por Empresas
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; color: var(--cyan); font-weight: 700; text-transform: uppercase;">Crecimiento Continuo</span>
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.25rem 0 0.5rem 0;">Pro Scale Mensual</h3>
+            <div style="font-size: 2rem; font-weight: 900; color: var(--cyan); margin-bottom: 1rem; font-family: monospace;">
+              $1,250 <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">USD / mes</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Fábrica de contenido constante para dominar TikTok e Instagram Reels con publicación periódica.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-muted); padding-left: 1rem; line-height: 1.8;">
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> <strong>25 Videos mensuales</strong> listos para pauta</li>
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> Hasta 2 Influencers activos en paralelo</li>
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> Subtítulos dinámicos y ganchos A/B testing</li>
+              <li><i class="fa-solid fa-check" style="color: var(--cyan); margin-right: 0.35rem;"></i> Sesión mensual de optimización estratégica</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Plan Pro Scale ($1,250 USD/mes)')" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; justify-content: center; background: var(--primary-gradient); border: none;">
+            Comenzar Plan Scale
+          </button>
+        </div>
+
+        <!-- Plan Enterprise -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(139, 92, 246, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-size: 0.75rem; color: var(--purple); font-weight: 700; text-transform: uppercase;">Marca Exclusiva</span>
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.25rem 0 0.5rem 0;">Enterprise Avatar Propio</h3>
+            <div style="font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 1rem; font-family: monospace;">
+              $3,500 <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">USD</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Creación y cesión de un avatar virtual 100% exclusivo para tu empresa con soporte dedicado.
+            </p>
+            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 1rem; line-height: 1.8;">
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> <strong>Diseño de rostro y personalidad exclusiva</strong></li>
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> Cesión notarial total de Propiedad Intelectual</li>
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> 40 Videos de contenido base de lanzamiento</li>
+              <li><i class="fa-solid fa-check" style="color: var(--purple); margin-right: 0.35rem;"></i> Canal privado de Slack/Telegram con dirección</li>
+            </ul>
+          </div>
+          <button onclick="prefillCommercialInquiry('Plan Enterprise Avatar Propio ($3,500 USD)')" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%; justify-content: center;">
+            Solicitar Plan Enterprise
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 6: PITCH DECK DE 10 DIAPOSITIVAS (COLLAPSIBLE / MODAL) -->
+    <div id="commercial-pitch-deck-container" style="display: none; margin-bottom: 4rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 1.5rem;">
+        <span class="section-subtitle" style="color: var(--purple);"><i class="fa-solid fa-chart-pie"></i> SÍNTESIS ESTRATÉGICA</span>
+        <h2 class="section-title" style="font-size: 2rem;">Pitch Deck Ejecutivo (10 Diapositivas)</h2>
+      </div>
+
+      <!-- Pitch Deck Slider Container -->
+      <div class="pitch-container">
+        <!-- Slide 1 -->
+        <div class="pitch-slide active-slide" data-slide="1">
+          <span class="slide-num">DIAPOSITIVA 1 DE 10 • PORTADA</span>
+          <h3 class="slide-title">Manejadores — Creative AI Studio</h3>
+          <p class="slide-text">Conectamos talentos digitales con el mundo mediante IA generativa, narrativa de alto enganche y monetización estructurada.</p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--cyan);"><i class="fa-solid fa-earth-americas"></i> Operaciones Estratégicas: Alemania (CET), Canadá (EST) y Chile (CLT)</div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="pitch-slide" data-slide="2">
+          <span class="slide-num">DIAPOSITIVA 2 DE 10 • EL PROBLEMA</span>
+          <h3 class="slide-title">El Cuello de Botella de los Creadores & Agencias</h3>
+          <p class="slide-text">El 95% de los creadores y marcas sufren saturación operativa: costos de producción prohibitivos ($3,000+/mes por video tradicional), inconsistencia visual, cancelaciones de rodaje y agotamiento de agenda.</p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
+            <em>TAM global de la economía de creadores excede $250B con 70% de ineficiencia en producción artesanal de contenido.</em>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="pitch-slide" data-slide="3">
+          <span class="slide-num">DIAPOSITIVA 3 DE 10 • LA SOLUCIÓN</span>
+          <h3 class="slide-title">Influencia Virtual Asistida por IA & Consistencia 4K</h3>
+          <p class="slide-text">Creamos avatares hiperrealistas con consistencia facial absoluta y canales automatizados a 1/10 del costo tradicional y con una velocidad de iteración 10 veces mayor.</p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--green);">
+            <i class="fa-solid fa-circle-check"></i> Producción 24/7 sin dependencia física de agenda ni fatiga de rodaje.
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="pitch-slide" data-slide="4">
+          <span class="slide-num">DIAPOSITIVA 4 DE 10 • MODELO DE NEGOCIO</span>
+          <h3 class="slide-title">Múltiples Embudos de Monetización Integrados</h3>
+          <p class="slide-text">
+            1. Suscripciones VIP recurrentes (Fanvue / OnlyFans: $12–$25 USD/mes).<br>
+            2. YouTube Automatizado (AdSense de alto RPM + Patrocinios integrados).<br>
+            3. E-Commerce Directo (Shopify, Gumroad, Cosmética limpia, Suplementación, E-books).<br>
+            4. Soluciones B2B & Embajadores Virtuales para Empresas ($2,500 a $15,000 USD).
+          </p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim);">
+            <em>Margen neto consolidado de agencia superior al 65%.</em>
+          </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="pitch-slide" data-slide="5">
+          <span class="slide-num">DIAPOSITIVA 5 DE 10 • PRUEBA SOCIAL & PORTAFOLIO</span>
+          <h3 class="slide-title">Roster de Talentos Validados</h3>
+          <p class="slide-text">Julia Schmidt (Clean Beauty), Laura Taeda (Fitness & Nutrición), Mateo Silva (Fintech & Inversiones), Elena Daddario (Mindfulness), Camila Reyes (Moda Viral) y Damien Vance (Dark Romance).</p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--pink);">
+            <i class="fa-solid fa-chart-line"></i> Retención mensual superior al 70% con interacción automatizada.
+          </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="pitch-slide" data-slide="6">
+          <span class="slide-num">DIAPOSITIVA 6 DE 10 • ARQUITECTURA TÉCNICA</span>
+          <h3 class="slide-title">Pipeline Tecnológico Propietario de 7 Pasos</h3>
+          <p class="slide-text">Desde la arquitectura de prompts con Gemini, consistencia LoRA con Flux y Motion Control en HeyGen/Kling, hasta orquestación autónoma de flujos.</p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--cyan);">
+            <i class="fa-solid fa-microchip"></i> Capacidad de generar hasta 500 piezas audiovisuales al mes por cluster.
+          </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="pitch-slide" data-slide="7">
+          <span class="slide-num">DIAPOSITIVA 7 DE 10 • SEGURIDAD & COMPLIANCE</span>
+          <h3 class="slide-title">Seguridad, KYC y Marco Legal Transfronterizo</h3>
+          <p class="slide-text">Verificación KYC rigurosa, protección de propiedad intelectual, pasarelas seguras (Wise Business / Stripe) y cumplimiento normativo GDPR (UE) y PIPEDA (Canadá).</p>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="pitch-slide" data-slide="8">
+          <span class="slide-num">DIAPOSITIVA 8 DE 10 • PLAN FINANCIERO</span>
+          <h3 class="slide-title">Metas Financieras & Expansión Trimestral</h3>
+          <p class="slide-text">
+            • Fase 1: 5 influencers activos en producción y primeros 500 suscriptores pagos.<br>
+            • Fase 2: Expansión de tiendas e-commerce asociadas y 4 contratos B2B con empresas.<br>
+            • Proyección Mes 6: $35,000 USD/mes con margen de contribución superior al 65%.
+          </p>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="pitch-slide" data-slide="9">
+          <span class="slide-num">DIAPOSITIVA 9 DE 10 • EQUIPO FUNDADOR</span>
+          <h3 class="slide-title">Sinergia Fundadora Multidisciplinaria</h3>
+          <p class="slide-text">
+            <strong>Daniel Santander (Alemania):</strong> Dirección de Arquitectura IA, LoRAs y Automatización.<br>
+            <strong>Pancho Ipinza (Canadá):</strong> Dirección Creativa, Storytelling y Alianzas B2B.<br>
+            <strong>Wladimir Gutierrez (Chile):</strong> Media Operations, Motion AI y Video Generativo.
+          </p>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="pitch-slide" data-slide="10">
+          <span class="slide-num">DIAPOSITIVA 10 DE 10 • CALL TO ACTION</span>
+          <h3 class="slide-title">Siguiente Paso: Construyamos Juntos</h3>
+          <p class="slide-text">Únete como inversor estratégico, contrata una campaña de patrocinio con nuestros influencers o desarrolla el avatar virtual propio de tu marca.</p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="#client-contact" class="btn btn-primary btn-sm"><i class="fa-solid fa-handshake"></i> Iniciar Conversación Comercial</a>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="pitch-controls">
+          <button class="btn btn-secondary" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+          <div class="pitch-dots" id="pitch-dots"></div>
+          <button class="btn btn-primary" onclick="nextSlide()">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
       </div>
     </div>
 
-    <!-- SECTION: CONTACTO TRANSNACIONAL & ALIANZAS COMERCIALES -->
-    <div class="clients-contact-section" id="client-contact">
+    <!-- BLOQUE 7: OFICINAS Y FORMULARIO DE CONTACTO COMERCIAL DIRECTO -->
+    <div class="clients-contact-section" id="client-contact" style="margin-top: 3rem;">
       <div style="text-align: center; max-width: 750px; margin: 0 auto 2.5rem auto;">
-        <span class="detail-badge" style="background: rgba(139, 92, 246, 0.15); color: var(--purple); border-color: rgba(139, 92, 246, 0.3); font-size: 0.75rem;">
+        <span class="detail-badge" style="background: rgba(6, 182, 212, 0.15); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); font-size: 0.75rem;">
           <i class="fa-solid fa-earth-americas"></i> COBERTURA TRANSNACIONAL
         </span>
         <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: #fff; margin: 0.6rem 0 0.4rem 0;">
-          Alianzas Comerciales & Inversión
+          Solicita una Propuesta Comercial para tu Marca
         </h2>
         <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-          Coordinamos proyectos internacionales con marcas, agencias y fondos desde nuestros tres husos horarios en Europa y las Américas.
+          Coordinamos proyectos internacionales con empresas desde nuestros tres husos horarios en Europa y las Américas. 
+          Te responderemos en menos de 24 horas con una propuesta personalizada.
         </p>
       </div>
 
@@ -7537,7 +8002,7 @@ function renderClientsPage() {
           <div style="font-size: 2.5rem; line-height: 1;">🇩🇪</div>
           <div>
             <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.2rem;">Alemania (Berlín)</h4>
-            <div style="font-size: 0.8rem; color: var(--cyan); margin-bottom: 0.35rem;"><i class="fa-regular fa-clock"></i> CET (UTC+1 / UTC+2)</div>
+            <div style="font-size: 0.8rem; color: var(--cyan); margin-bottom: 0.35rem;"><i class="fa-regular fa-clock"></i> CET (UTC+1)</div>
             <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Hub de Arquitectura de IA, LoRAs, Seguridad RGPD e Infraestructura de Servidores.</p>
           </div>
         </div>
@@ -7562,12 +8027,12 @@ function renderClientsPage() {
       </div>
 
       <!-- Direct Contact & Inquiry Form -->
-      <div class="glass-card" style="margin-top: 2rem; padding: 2.25rem;">
+      <div class="glass-card" style="margin-top: 2rem; padding: 2.25rem; border-color: rgba(6, 182, 212, 0.4);">
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fa-solid fa-paper-plane" style="color: var(--cyan);"></i> Envía tu Propuesta de Colaboración o Inversión
+          <i class="fa-solid fa-paper-plane" style="color: var(--cyan);"></i> Envía tu Solicitud Comercial Directa
         </h3>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem;">
-          Responderemos en menos de 24 horas con la información ejecutiva correspondiente.
+          Recibe en menos de 24 horas tu presupuesto formal o agenda una videollamada de demostración en vivo.
         </p>
 
         <form onsubmit="handleClientsContactSubmit(event)">
@@ -7577,36 +8042,37 @@ function renderClientsPage() {
               <input type="text" id="client-name" placeholder="Tu nombre" required>
             </div>
             <div class="b2b-form-group">
-              <label>Empresa, Fondo o Agencia *</label>
-              <input type="text" id="client-company" placeholder="Nombre de tu organización" required>
+              <label>Empresa o Marca *</label>
+              <input type="text" id="client-company" placeholder="Nombre de tu negocio o agencia" required>
             </div>
             <div class="b2b-form-group">
               <label>Correo Electrónico *</label>
-              <input type="email" id="client-email" placeholder="correo@organizacion.com" required>
+              <input type="email" id="client-email" placeholder="correo@empresa.com" required>
             </div>
             <div class="b2b-form-group">
-              <label>Tipo de Interés / Alianza *</label>
+              <label>Plan o Servicio de Interés *</label>
               <select id="client-type" required>
-                <option value="Campaña con Influencer IA">Campaña de Patrocinio con Influencer del Catálogo</option>
-                <option value="Creación de Embajador Virtual">Creación de Embajador Virtual Exclusivo para Marca</option>
-                <option value="Inversión / Equity">Inversión de Capital / Equity en el Estudio</option>
-                <option value="Soluciones B2B Procesos">Soluciones B2B & Consultoría de Procesos con IA</option>
-                <option value="Prensa / Difusión">Contacto de Prensa / Medios</option>
+                <option value="Starter Piloto 48h ($450 USD)">Starter Piloto 48h ($450 USD)</option>
+                <option value="Pro Scale Mensual ($1,250 USD/mes)" selected>Pro Scale Mensual ($1,250 USD/mes)</option>
+                <option value="Enterprise Avatar Propio ($3,500 USD)">Enterprise Avatar Propio ($3,500 USD)</option>
+                <option value="Campaña con Influencer Específico">Campaña con Influencer del Catálogo</option>
+                <option value="Canal YouTube Corporativo">Canal YouTube Corporativo Llave en Mano</option>
+                <option value="Inversión / Equity">Inversión de Capital / Alianza de Inversión</option>
               </select>
             </div>
           </div>
 
           <div class="b2b-form-group" style="margin-top: 1.25rem;">
-            <label>Mensaje o Descripción de la Oportunidad *</label>
-            <textarea id="client-message" rows="3" placeholder="Cuéntanos brevemente sobre tu proyecto o interés de inversión..." required></textarea>
+            <label>Mensaje o Detalle del Proyecto *</label>
+            <textarea id="client-message" rows="3" placeholder="Cuéntanos brevemente sobre tu producto, objetivos o dudas..." required></textarea>
           </div>
 
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem;">
-            <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.8rem;">
-              <i class="fa-solid fa-paper-plane"></i> Enviar Mensaje a Dirección Ejecutiva
+            <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.8rem; background: var(--primary-gradient); border: none;">
+              <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud a Dirección Comercial
             </button>
             <div style="font-size: 0.82rem; color: var(--text-muted);">
-              <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> Trato confidencial y seguro
+              <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> Trato confidencial y propuesta en menos de 24 horas
             </div>
           </div>
         </form>
@@ -7614,11 +8080,156 @@ function renderClientsPage() {
     </div>
   `;
 
-  // Initialize Pitch Deck Slider after insertion into DOM
+  // Initialize Pitch Deck Slider and Simulator
   setTimeout(() => {
     initPitchDeck();
     showSlide(1);
-  }, 30);
+    updateCommercialSimulator();
+  }, 40);
+}
+
+// Retrocompatibilidad para enlaces previos
+function renderClientsPage() {
+  renderCommercialPage();
+}
+
+function toggleCommercialDeck() {
+  const deck = document.getElementById('commercial-pitch-deck-container');
+  if (!deck) return;
+  if (deck.style.display === 'none' || !deck.style.display) {
+    deck.style.display = 'block';
+    deck.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    deck.style.display = 'none';
+  }
+}
+
+function selectModelForQuote(modelName) {
+  const typeSelect = document.getElementById('client-type');
+  const msgArea = document.getElementById('client-message');
+  const contactSec = document.getElementById('client-contact');
+
+  if (typeSelect) typeSelect.value = 'Campaña con Influencer Específico';
+  if (msgArea) msgArea.value = `Hola, estamos interesados en realizar una campaña comercial con ${modelName}. Deseamos cotizar opciones para nuestro producto.`;
+  if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+}
+
+function prefillCommercialInquiry(planOrService) {
+  const typeSelect = document.getElementById('client-type');
+  const msgArea = document.getElementById('client-message');
+  const contactSec = document.getElementById('client-contact');
+
+  if (typeSelect) {
+    let matched = false;
+    for (let opt of typeSelect.options) {
+      if (opt.value.toLowerCase().includes(planOrService.toLowerCase())) {
+        typeSelect.value = opt.value;
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) typeSelect.value = planOrService;
+  }
+
+  if (msgArea) msgArea.value = `Hola equipo de Manejadores, nos gustaría recibir información detallada y cotización para: ${planOrService}.`;
+  if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+}
+
+function updateCommercialSimulator() {
+  const volEl = document.getElementById('sim-volume');
+  const durEl = document.getElementById('sim-duration');
+  const talentEl = document.getElementById('sim-talent-type');
+  const volLabel = document.getElementById('sim-volume-label');
+  const manejadoresCostEl = document.getElementById('sim-manejadores-cost');
+  const traditionalCostEl = document.getElementById('sim-traditional-cost');
+  const savingsPercentEl = document.getElementById('sim-savings-percent');
+  const reachLabelEl = document.getElementById('sim-reach-label');
+
+  if (!volEl) return;
+
+  const volume = parseInt(volEl.value, 10);
+  const durationMonths = parseInt(durEl ? durEl.value : 1, 10);
+  const isCustom = talentEl && talentEl.value === 'custom';
+
+  if (volLabel) volLabel.textContent = `${volume} Videos / Mes`;
+
+  // Costo base por video en Manejadores: ~$45 USD
+  let baseUnitCost = 45;
+  if (volume >= 40) baseUnitCost = 35;
+  else if (volume >= 25) baseUnitCost = 40;
+
+  let monthlyCost = volume * baseUnitCost;
+  if (isCustom) monthlyCost += 600; // Recargo de custodia de avatar exclusivo
+
+  // Descuentos por duración
+  let discount = 0;
+  if (durationMonths === 3) discount = 0.15;
+  else if (durationMonths === 6) discount = 0.25;
+
+  const finalMonthlyCost = Math.round(monthlyCost * (1 - discount));
+  
+  // Costo tradicional promedio: $190 USD por video con actores, cámaras, edición y agencia
+  const traditionalMonthlyCost = Math.round(volume * 190 + (isCustom ? 2500 : 800));
+
+  const savingsPct = Math.round(((traditionalMonthlyCost - finalMonthlyCost) / traditionalMonthlyCost) * 100);
+
+  if (manejadoresCostEl) manejadoresCostEl.textContent = `$${finalMonthlyCost.toLocaleString()} USD`;
+  if (traditionalCostEl) traditionalCostEl.textContent = `$${traditionalMonthlyCost.toLocaleString()} USD`;
+  if (savingsPercentEl) savingsPercentEl.textContent = `-${savingsPct}%`;
+
+  const minReach = (volume * 12).toLocaleString();
+  const maxReach = (volume * 35).toLocaleString();
+  if (reachLabelEl) reachLabelEl.textContent = `${minReach}k - ${maxReach}k Visualizaciones`;
+}
+
+function applySimulationToQuote() {
+  const volEl = document.getElementById('sim-volume');
+  const indEl = document.getElementById('sim-industry');
+  const talentEl = document.getElementById('sim-talent-type');
+  const costEl = document.getElementById('sim-manejadores-cost');
+  const msgArea = document.getElementById('client-message');
+  const contactSec = document.getElementById('client-contact');
+
+  const vol = volEl ? volEl.value : 25;
+  const ind = indEl ? indEl.options[indEl.selectedIndex].text : 'General';
+  const talent = talentEl && talentEl.value === 'custom' ? 'Embajador Virtual Exclusivo' : 'Influencer de Catálogo';
+  const cost = costEl ? costEl.textContent : '';
+
+  if (msgArea) {
+    msgArea.value = `Hola equipo de Manejadores,\nHe configurado en el simulador una campaña para la industria «${ind}» con ${vol} videos/mes en formato «${talent}» (${cost}).\nPor favor contáctenme para coordinar la primera prueba piloto.`;
+  }
+  if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+}
+
+// HELPERS PARA EL MANUAL DEL ADMINISTRADOR EN PANEL INTERNO
+function filtrarManualAdmin(categoria, btn) {
+  const allBtns = btn && btn.parentElement ? btn.parentElement.querySelectorAll('.archive-filter-btn') : [];
+  allBtns.forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const blocks = document.querySelectorAll('.manual-card-block');
+  blocks.forEach(block => {
+    if (categoria === 'todos' || block.getAttribute('data-module') === categoria) {
+      block.style.display = 'block';
+    } else {
+      block.style.display = 'none';
+    }
+  });
+}
+
+function actualizarChecklistManual() {
+  const checkboxes = document.querySelectorAll('.manual-chk');
+  const checked = document.querySelectorAll('.manual-chk:checked').length;
+  const statusEl = document.getElementById('manual-checklist-status');
+  if (statusEl) {
+    if (checked === checkboxes.length) {
+      statusEl.style.color = '#10b981';
+      statusEl.textContent = `🎉 ¡Todas las ${checked} tareas completadas hoy!`;
+    } else {
+      statusEl.style.color = 'var(--cyan)';
+      statusEl.textContent = `${checked} de ${checkboxes.length} tareas completadas hoy`;
+    }
+  }
 }
 
 function handleClientsContactSubmit(e) {
@@ -7787,7 +8398,7 @@ function resetGanttData() {
 
 function exportGanttJSON() {
   const exportPayload = {
-    project: "Los Manejadores (Proyecto INCEL)",
+    project: "Manejadores",
     dossierVersion: "2026.1",
     exportedAt: new Date().toISOString(),
     completedCount: ganttTasks.filter(t => t.completed).length,
