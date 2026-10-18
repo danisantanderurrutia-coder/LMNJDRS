@@ -1,6 +1,7 @@
 #!/bin/bash
 # Launcher script for Manejadores Localhost
-PROJECT_DIR="/Users/danielsantander/Documents/INCEL"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+PROJECT_DIR="$SCRIPT_DIR"
 SUPPORT_DIR="/Users/danielsantander/Library/Application Support/INCEL"
 PLIST_PATH="$HOME/Library/LaunchAgents/com.losmanejadores.incel.server.plist"
 PORT=8080
