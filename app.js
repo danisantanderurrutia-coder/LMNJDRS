@@ -1741,6 +1741,8 @@ influencersData['minho-park'] = influencersData.minho;
 influencersData['damienvance'] = influencersData.damien;
 influencersData['damien-vance'] = influencersData.damien;
 influencersData['camilareyes'] = influencersData.camila;
+channelsData['the-orcaester'] = channelsData.orcaester;
+channelsData['the_orcaester'] = channelsData.orcaester;
 influencersData['camila-reyes'] = influencersData.camila;
 
 
@@ -1796,6 +1798,60 @@ const channelsData = {
     ]
   },
 
+    orcaester: {
+    id: "orcaester",
+    title: "The Orcaester (La Orquesta Marina)",
+    subtitle: "Educación Musical Infantil & Consciencia Marina",
+    category: "Infantil / Música Clásica & Ecología",
+    icon: "fa-water",
+    color: "#06b6d4",
+    image: "the_orcaester_thumb.jpg",
+    concept: "Franquicia de animación 3D infantil donde una orquesta de animales marinos liderada por el Maestro Orcar enseña conceptos musicales (ritmo, tempo, dinámicas forte/piano) a niños de 2 a 8 años, vinculando la armonía musical con la limpieza y conservación del océano.",
+    targetAge: "Niños de 2 a 8 años, familias, jardines infantiles y profesores de música elemental.",
+    episodes: [
+      {
+        title: "Episodio #1: El Gran Concierto del Arrecife (¿Forte o Piano?)",
+        duration: "4:00 min",
+        script: `[MAESTRO ORCAR]: "¡Paren las aguas! ¿Estamos haciendo música o un maremoto? En la música, cuando queremos fuerza como una ola gigante tocamos ¡FORTE!, pero cuando susurramos un secreto tocamos piano..."
+[ACCIDENTE ECOLÓGICO]: La caracola de Sammy el Salmón está atascada con una bolsa plástica. Don Tenazas la extrae con sus pinzas.
+[VALOR / MORALEJA]: Cuidar el mar para que los instrumentos no se silencien. ¡Si cuidas la ola, la música suena sola!`,
+        thumbnail: "El Maestro Orcar dirigiendo con batuta de coral brillante rodeado de Estelita, Don Tenazas, Sammy y Octavio en el arrecife turquesa."
+      },
+      {
+        title: "Episodio #2: El Tempo de las Tortugas y el Salto del Delfín (Largo vs. Presto)",
+        duration: "3:45 min",
+        script: `[MAESTRO ORCAR]: "Hoy aprenderemos la velocidad del sonido: el compás 'Largo' como las sabias tortugas marinas y el compás 'Presto' como las acrobacias de Dali el Delfín."
+[VALOR]: La paciencia rítmica y la reducción del ruido de motores en los santuarios marinos.`,
+        thumbnail: "Dali el delfín saltando con su flauta de agua mientras una tortuga marina marca el pulso lento en un tambor de concha."
+      },
+      {
+        title: "Episodio #3: Las 4 Familias del Océano (Cuerdas, Viento, Percusión y Coro)",
+        duration: "4:30 min",
+        script: `[NARRADOR]: "Octavio abraza 4 chelos con sus tentáculos, Tío Boris llena sus mejillas con la tuba, Don Tenazas chasquea sus pinzas y Pablito el pingüino canta la nota más alta del Polo Sur."
+[VALOR]: El trabajo en equipo y cómo cada especie del arrecife tiene un rol irremplazable.`,
+        thumbnail: "Octavio el pulpo tocando arpa y violines simultáneos con sus 8 tentáculos junto a Tío Boris inflando mejillas con la tuba dorada."
+      }
+    ],
+    pipeline: "Guion pedagógico musical con LLM especializado -> Composición de piezas orquestales en DAW / Udio / Suno -> Modelado y cinemáticas con Flux.1 y Kling 3.0 -> Voces infantiles cálidas y expresivas con ElevenLabs -> Masterización infantil limpia (-14 LUFS).",
+    monetization: "AdSense YouTube Kids, streaming de bandas sonoras y canciones para dormir en Spotify Kids, libros interactivos ilustrados en Amazon KDP y venta de peluches oficiales de los animales músicos.",
+    commercialProducts: [
+      {
+        name: "Licencia de Contenido para Jardines Infantiles & Escuelas de Música",
+        desc: "Paquete completo con los 12 episodios en 4K sin publicidad, guías pedagógicas en PDF para profesores y pistas instrumentales de acompañamiento (Minus-One).",
+        price: "$350 USD / licencia institucional anual"
+      },
+      {
+        name: "Integración de Marca / Patrocinio Educativo (Sponsorship)",
+        desc: "Mención animada al inicio del video y en créditos finales para marcas de alimentos saludables, juguetes educativos o fundaciones de conservación marina.",
+        price: "$750 USD / episodio (presencia permanente en canal oficial)"
+      },
+      {
+        name: "Desarrollo de Canción Original / Episodio a Medida para Fundación",
+        desc: "Creación de un episodio exclusivo de The Orcaester protagonizado por un animal o causa ecológica específica de tu organización con música orquestal propia.",
+        price: "$1.850 USD (producción completa 3D y entrega de master)"
+      }
+    ]
+  },
   sofia: {
     id: "sofia",
     title: "1. Los viajes en el tiempo de Sofía",
@@ -4970,6 +5026,18 @@ function renderYoutubeCatalogPage() {
       monetization: 'Audiolibros Audible + AdSense Premium ($7–$12 USD RPM) + Licencias Educativas'
     },
     {
+      id: 'orcaester',
+      title: 'The Orcaester • Orquesta Marina Infantil',
+      subtitle: 'Educación Musical & Consciencia Ecológica',
+      category: 'Infantil / Música & Ecología',
+      icon: 'fa-water',
+      color: '#06b6d4',
+      image: 'the_orcaester_thumb.jpg',
+      duration: '4:00 / Episodio',
+      desc: 'Orquesta sinfónica de animales marinos liderada por el Maestro Orcar. Enseña conceptos musicales a niños (tempo, dinámicas, familias de instrumentos) mientras promueve el cuidado de los océanos.',
+      monetization: 'YouTube Kids / Family ($3.5–$6 USD RPM) + Spotify Kids Clásica + Peluches & Merch Educativo'
+    },
+    {
       id: 'sofia',
       title: 'Los viajes en el tiempo de Sofía',
       subtitle: 'Canal Infantil & Educativo de Historia',
@@ -5529,7 +5597,8 @@ function selectAdminChannel(channelId) {
     'ranchera': 'studio-btn-ranchera',
     'arcanotech': 'studio-btn-arcanotech',
     'sagrados': 'studio-btn-sagrados',
-    'sofia': 'studio-btn-sofia'
+    'sofia': 'studio-btn-sofia',
+    'orcaester': 'studio-btn-orcaester'
   };
 
   // Reset active buttons
