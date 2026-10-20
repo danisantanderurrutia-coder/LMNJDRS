@@ -1743,7 +1743,7 @@ const influencersData = {
     "story": "Creada en los legendarios estudios de animación de 1947 como la corista estrella de un cortometraje de cine negro, Roxie vivió décadas atrapada en bucles de celuloide. Durante una restauración digital en 4K, una anomalía en la frecuencia del proyector abrió una brecha y Roxie saltó al mundo de carne y hueso. Fascinada por las sensaciones físicas que en su mundo eran solo líneas de tinta —el calor de una copa de licor, la textura de las sábanas de seda y el deseo ardiente de los hombres reales—, Roxie ha conquistado internet como la primera 'toon bombshell' viva. Desinhibida, voluptuosa y sin los prejuicios morales de los humanos, comparte su viaje sensorial mientras canta en clubes nocturnos y abre las puertas de su camerino privado en Fanvue.",
     "bio": "Roxie Red (26 años aparentes) es una diva de animación 2.5D híbrida y estrella del cabaret vintage. Su silueta icónica de reloj de arena, su vestido carmesí brillante y sus guantes de terciopelo morado la convierten en el arquetipo definitivo de la femme fatale. En sus redes abiertas comparte vlogs cómicos sobre 'aprender a ser humana', mientras en su club VIP monetiza sets de boudoir y audios íntimos con altos márgenes de suscripción.",
     "archetype": "The Living Toon Bombshell (Inspirada en Jessica Rabbit & Holli Would)",
-    "techStack": "Flux.1 Dev Toon-Noir LoRA + ElevenLabs Smoky Jazz Baritone + Kling 3.0 Hybrid Compositing + Pasarela Segura Fanvue",
+    "techStack": "Pipeline Híbrido 3D/Live-Action (Flux.1 Dev Toon-3D LoRA + Compositing Fotorrealista de Entornos) + ElevenLabs Smoky Jazz Baritone + Kling 3.0 Motion",
     "targetAudience": "Hombres de 22 a 55 años amantes de la estética retro, glamour burlesque, pin-up vintage y fantasías con dibujos animados clásicos.",
     "channels": "Instagram (@roxiered.toon - 18+), X (@roxie_uncensored), Fanvue VIP ($25 USD/mes), Telegram Camerino VIP",
     "gallery": [
@@ -1760,10 +1760,16 @@ const influencersData = {
             "desc": "Micro bikini rojo, curvas voluptuosas toon sobre arena blanca auténtica con rompiente de olas del Pacífico fotográfica."
         },
         {
-            "img": "toons_beach_duo1.jpg",
-            "tag": "Dúo VIP 18+",
-            "label": "Roxie & Madame V • Escapada a la Costa Real",
-            "desc": "Sesión híbrida live-action: personajes animados en entornos fotográficos de playa al natural."
+            "img": "roxie_penthouse.jpg",
+            "tag": "Penthouse VIP 18+ (Híbrido 3D)",
+            "label": "Roxie Red • Suite de Lujo con Vistas Nocturnas",
+            "desc": "Lencería roja translúcida de seda y encaje, descansando en chaise longue de terciopelo real frente al skyline de neón."
+        },
+        {
+            "img": "toons_penthouse_duo1.jpg",
+            "tag": "Dúo Penthouse 18+",
+            "label": "Roxie & Madame V • Noche en la Suite de Cristal",
+            "desc": "Compositing híbrido 3D: personajes animados interactuando con interiores de lujo y rascacielos reales."
         }
     ],
     "voice": {
@@ -1853,6 +1859,14 @@ const influencersData = {
             "platform": "Instagram / X (18+)"
         },
         {
+            "caption": "La noche en el penthouse es donde los dibujos animados aprendemos lo que significa el verdadero lujo terrenal 🍸💋 Seda roja, luces de neón en la ventana y champán frío. Sesión completa sin censura en mi Fanvue.",
+            "img": "roxie_penthouse.jpg",
+            "likes": "89,450",
+            "comments": "5,120",
+            "date": "Hace 1 hora",
+            "platform": "Fanvue VIP / X (18+)"
+        },
+        {
             "caption": "¿Quién dijo que un dibujo animado de 1947 no podía robarse las miradas en un club de playa privado? La tinta no siente el calor... pero mi piel sí 🍸✨",
             "img": "toons_beach_duo1.jpg",
             "likes": "68,900",
@@ -1931,7 +1945,7 @@ const influencersData = {
     "story": "Proveniente de un universo anime donde las corporaciones gobiernan a los hombres con contratos de sangre, Madame V cruzó al mundo real al darse cuenta de que la sociedad moderna está repleta de hombres exitosos pero emocionalmente dispersos que ruegan en secreto por una figura de autoridad que tome el control. Impecable en su traje sastre negro de tres piezas, con su corbata delgada, su trenza cobriza y sus ojos dorados con anillos concéntricos hipnóticos, Madame V no necesita quitarse una sola prenda para dominar una habitación. En su club privado ofrece lo que ningún otro creador virtual puede: una experiencia psicológica de alto impacto donde la sumisión consentida se convierte en el mayor alivio del estrés ejecutivo.",
     "bio": "Madame V (29 años aparentes) es la máxima referente de la dominación mental y el erotismo psicológico de alto ticket. Cero vulgaridad, cero desnudez explícita: su propuesta se basa en la autoridad fría, la voz pausada que desarma cualquier ego y programas exclusivos de disciplina personal, audios binaurales de sumisión y consultas privadas de confesión para clientes selectos.",
     "archetype": "The Corporate Dominatrix & Dark Muse (Inspirada en Makima de Chainsaw Man)",
-    "techStack": "Flux.1 Dev Seinen-Corporate LoRA + ElevenLabs Hypnotic Cold Velvet Voice + DaVinci Chiaroscuro + Telegram VIP Clandestino",
+    "techStack": "Pipeline Híbrido 3D/Live-Action (Flux.1 Dev Seinen-3D LoRA + Compositing Arquitectónico Fotorrealista) + ElevenLabs Hypnotic Cold Velvet Voice",
     "targetAudience": "Hombres profesionales, ejecutivos y desarrolladores de 25 a 52 años que buscan fantasías de control mental, sumisión consentida y desconexión psicológica.",
     "channels": "X (@madame_v_syndicate - 18+), TikTok (@directora.v), Telegram Clandestino VIP, Fanvue High-Ticket ($35–$100/mes)",
     "gallery": [
@@ -1948,10 +1962,16 @@ const influencersData = {
             "desc": "Micro bikini negro de dos piezas, trenza cobriza sobre el hombro en costa fotográfica real con puesta de sol dorada y palmeras auténticas."
         },
         {
-            "img": "toons_beach_duo1.jpg",
-            "tag": "Dúo VIP 18+",
-            "label": "Madame V & Roxie • Escapada a la Costa Real",
-            "desc": "Sesión híbrida live-action: personajes animados en entornos fotográficos de playa al natural."
+            "img": "madamev_penthouse.jpg",
+            "tag": "Penthouse VIP 18+ (Híbrido 3D)",
+            "label": "Madame V • Balcón de Mármol en Metrópolis VIP",
+            "desc": "Corsé negro de encaje con camisa de seda desabotonada, apoyada en balaustrada de mármol con rascacielos nocturnos reales."
+        },
+        {
+            "img": "toons_penthouse_duo1.jpg",
+            "tag": "Dúo Penthouse 18+",
+            "label": "Madame V & Roxie • Noche en la Suite de Cristal",
+            "desc": "Compositing híbrido 3D: personajes animados interactuando con interiores de lujo y rascacielos reales."
         }
     ],
     "voice": {
@@ -2041,6 +2061,14 @@ const influencersData = {
             "platform": "X / Telegram VIP"
         },
         {
+            "caption": "Poder, silencio y el vértigo de las alturas. En la suite de cristal los hombres no dan órdenes: escuchan. Corsé de encaje, mármol frío y horizonte infinito. Sesión privada de alta gama disponible para miembros del sindicato.",
+            "img": "madamev_penthouse.jpg",
+            "likes": "96,300",
+            "comments": "6,410",
+            "date": "Hace 2 horas",
+            "platform": "Telegram Clandestino / Fanvue"
+        },
+        {
             "caption": "Reunión de alto nivel frente a la costa. Sin contratos, sin papeles... solo presencia absoluta y control. Accede al canal privado para la sesión completa al atardecer.",
             "img": "toons_beach_duo1.jpg",
             "likes": "72,400",
@@ -2119,7 +2147,7 @@ const influencersData = {
     "story": "Durante siglos, la Princesa Aura vivió atrapada en las páginas de un cuento de hadas medieval donde su único destino era dormir cien años esperando el beso salvador de un príncipe aburrido. Tras caer por una cascada mágica que desembocó en el mundo real, Aura descubrió algo que su reino le había ocultado: que las mujeres no necesitan ser rescatadas para experimentar la pasión, el deseo y la libertad de su propio cuerpo. Con su tiara de oro intacta, su melena ondulada y su corsé dorado desatado sobre sábanas de terciopelo, Aura ha convertido su alcoba real en un templo de fantasía erótica donde invita a sus seguidores a ser los amantes que ningún libro infantil se atrevió a escribir.",
     "bio": "Princesa Aura (24 años aparentes) es la reina del erotismo de hadas de alta gama. Combina la inocencia estética de los cuentos clásicos con una sensualidad desvergonzada, lencería de corsetería de época, relatos eróticos susurrados con voz de princesa y sesiones de boudoir en palacios barrocos.",
     "archetype": "The Uninhibited Fairy Tale Siren (Inspirada en Giselle de Encantada / Princesas de Cuento Erotizadas)",
-    "techStack": "Flux.1 Dev Royal Boudoir LoRA + ElevenLabs Melodic Royal Whisper + Kling 3.0 Motion + Fanvue VIP",
+    "techStack": "Pipeline Híbrido 3D/Live-Action (Flux.1 Dev Royal 3D-CGI LoRA + Compositing de Mansión & Spa Real) + ElevenLabs Melodic Royal Whisper + Kling 3.0 Motion",
     "targetAudience": "Hombres y parejas de 22 a 48 años fascinados por la estética de realeza, corsetería clásica, fantasías de cuentos de hadas y seducción romántica sin tabúes.",
     "channels": "Instagram (@princesa.aura.vip - 18+), X (@aura_roselux), Fanvue VIP ($20 USD/mes), Telegram El Tocador Real",
     "gallery": [
@@ -2136,10 +2164,16 @@ const influencersData = {
             "desc": "Micro bikini verde esmeralda con filigrana dorada y tiara real sobre arena blanca y mar turquesa fotográfico real."
         },
         {
-            "img": "toons_beach_duo2.jpg",
-            "tag": "Dúo VIP 18+",
-            "label": "Aura & Starlight Luna • Paraíso Tropical Real",
-            "desc": "Sesión híbrida live-action: personajes de cuento y anime cósmico en aguas cristalinas y palmeras tropicales reales."
+            "img": "aura_penthouse.jpg",
+            "tag": "Penthouse VIP 18+ (Híbrido 3D)",
+            "label": "Princesa Aura • Jacuzzi Infinito de Mármol",
+            "desc": "Camisón translúcido verde esmeralda y encaje dorado, descansando en el borde del jacuzzi humeante con vistas nocturnas reales."
+        },
+        {
+            "img": "toons_penthouse_duo2.jpg",
+            "tag": "Dúo Penthouse 18+",
+            "label": "Aura & Starlight Luna • Terraza & Noche Estelar",
+            "desc": "Compositing híbrido 3D: princesas y waifus cósmicas en piscinas infinitas y terrazas fotográficas reales."
         }
     ],
     "voice": {
@@ -2229,6 +2263,14 @@ const influencersData = {
             "platform": "Instagram (18+) / Fanvue"
         },
         {
+            "caption": "¿Quién necesita un carruaje de calabaza cuando tienes un jacuzzi infinito de mármol a medianoche? 👑🛁 El agua caliente y la lencería de seda verde esmeralda se sienten de otro planeta. La sesión privada de la terraza ya está en mi link VIP.",
+            "img": "aura_penthouse.jpg",
+            "likes": "94,100",
+            "comments": "5,840",
+            "date": "Hace 1 hora",
+            "platform": "Instagram (18+) / Fanvue VIP"
+        },
+        {
             "caption": "La realeza también toma sol. Descubriendo el paraíso terrenal junto a las olas del Caribe 🌺🌊 Sesión exclusiva en la alcoba y la playa en mi club VIP.",
             "img": "toons_beach_duo2.jpg",
             "likes": "81,250",
@@ -2307,7 +2349,7 @@ const influencersData = {
     "story": "En su dimensión estelar de anime noventero, Luna fue la gran guerrera protectora de la luna llena. Con más de 25 años y en la plenitud de su poder cósmico, una grieta hiperespacial la transportó a una azotea iluminada por rascacielos de neón en el mundo real. Al descubrir que en esta dimensión los adultos pasan las noches en vela jugando videojuegos y soñando con waifus inalcanzables, Luna decidió canalizar su energía estelar en magnetismo puro. Con su tiara dorada de luna creciente, sus larguísimas coletas doradas y sus vestidos astrales translúcidos de noche azul medianoche, Luna es la fantasía definitiva de la chica mágica que creció, se volvió independiente y ahora comparte sus secretos más ardientes con la comunidad gamer adulta.",
     "bio": "Starlight Luna (25 años) es la creadora virtual líder del nicho anime ecchi de alta gama. Combina la estética nostálgica de las chicas mágicas de los 90 con el glamour cyberpunk nocturno. Ofrece sets fotográficos 8K de lencería estelar, audios de hipnosis cósmica y sesiones de chat interactivo para otakus y gamers de alto poder adquisitivo.",
     "archetype": "The Mature Cosmic Enchantress (Inspirada en Sailor Moon adulta / Reinas Cósmicas Ecchi)",
-    "techStack": "Flux.1 Dev Anime-Ecchi Master LoRA + ElevenLabs Playful Anime Seductive Tone + Kling 3.0 Motion + Fanvue VIP",
+    "techStack": "Pipeline Híbrido 3D/Live-Action (Flux.1 Dev Anime-3D Master LoRA + Compositing Urbano Fotorrealista) + ElevenLabs Seductive Tone + Kling 3.0 Motion",
     "targetAudience": "Hombres de 20 a 45 años apasionados por el anime retro de los 90s, estética gamer/cyberpunk, waifus virtuales y coleccionismo digital erótico.",
     "channels": "X (@starlight_luna_vip - 18+), TikTok (@luna.cosmic), Fanvue VIP ($22 USD/mes), Discord La Nebulosa Secreta",
     "gallery": [
@@ -2324,10 +2366,16 @@ const influencersData = {
             "desc": "Micro bikini lila y azul noche, moños espaciales y melena plateada en aguas cristalinas y palmeras tropicales reales."
         },
         {
-            "img": "toons_beach_duo2.jpg",
-            "tag": "Dúo VIP 18+",
-            "label": "Starlight Luna & Aura • Paraíso Tropical Real",
-            "desc": "Sesión híbrida live-action: personajes de cuento y anime cósmico en aguas cristalinas y palmeras tropicales reales."
+            "img": "luna_penthouse.jpg",
+            "tag": "Penthouse VIP 18+ (Híbrido 3D)",
+            "label": "Starlight Luna • Terraza & Fuego Estelar",
+            "desc": "Babydoll translúcido de encaje lila estrellado junto al fuego exterior real y vista panorámica a la metrópolis."
+        },
+        {
+            "img": "toons_penthouse_duo2.jpg",
+            "tag": "Dúo Penthouse 18+",
+            "label": "Starlight Luna & Aura • Terraza & Noche Estelar",
+            "desc": "Compositing híbrido 3D: princesas y waifus cósmicas en piscinas infinitas y terrazas fotográficas reales."
         }
     ],
     "voice": {
@@ -2415,6 +2463,14 @@ const influencersData = {
             "comments": "5,120",
             "date": "Hace 5 horas",
             "platform": "X / Discord Secreto"
+        },
+        {
+            "caption": "Fuego real, ciudad de neón y una waifu cósmica que decidió no volver a su anime 🌙🔥 Babydoll translúcido lila con constelaciones. Si te quedas despierto hasta tarde jugando, pasa por mi canal privado.",
+            "img": "luna_penthouse.jpg",
+            "likes": "102,400",
+            "comments": "7,180",
+            "date": "Hace 1 hora",
+            "platform": "X / Discord Secreto / Fanvue"
         },
         {
             "caption": "Dúo estelar en la costa terrenal. Cuando la magia anime se encuentra con el océano más transparente que jamás vi 🌴✨ Desbloquea las tomas exclusivas 4K en el link de mi biografía.",
@@ -5748,6 +5804,40 @@ function renderInfluencersPage(categoryFilter = 'all') {
     </div>
 
     ${categoryFilter === 'toon' ? `
+      <!-- Colección 1: Penthouse Nocturno & Jacuzzi Infinito VIP -->
+      <div class="glass-card" style="margin-bottom: 2rem; border-color: rgba(139, 92, 246, 0.45); background: radial-gradient(circle at top, rgba(139, 92, 246, 0.14) 0%, rgba(10, 12, 22, 0.95) 100%); padding: 1.5rem; border-radius: var(--radius-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <span class="product-tag" style="background: rgba(139, 92, 246, 0.2); color: #c084fc; border-color: rgba(139, 92, 246, 0.45);">
+              <i class="fa-solid fa-building"></i> Colección VIP Nocturna • Penthouse, Lencería de Seda & Jacuzzi Infinito
+            </span>
+            <h3 style="font-family: var(--font-heading); color: #fff; margin: 0.35rem 0 0.15rem 0; font-size: 1.25rem;">
+              Especial Penthouse 3D Híbrido: Personajes Animados en Suites de Lujo Reales
+            </h3>
+            <p style="color: #cbd5e1; font-size: 0.85rem; margin: 0;">
+              Compositing 3D avanzado: interacción con muebles de terciopelo real, cristales panorámicos, fuego exterior y vapor de agua con iluminación nocturna.
+            </p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          <div style="background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+            <img src="toons_penthouse_duo1.jpg" alt="Roxie Red & Madame V en Penthouse Real" style="width: 100%; height: auto; display: block;" loading="lazy">
+            <div style="padding: 0.65rem 0.85rem; font-size: 0.8rem; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+              <span><strong>Dúo Penthouse 1:</strong> Roxie Red & Madame V</span>
+              <span style="color: #ec4899; font-weight: 600;">Lencería & Balcón 18+</span>
+            </div>
+          </div>
+          <div style="background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+            <img src="toons_penthouse_duo2.jpg" alt="Princesa Aura & Starlight Luna en Terraza Jacuzzi" style="width: 100%; height: auto; display: block;" loading="lazy">
+            <div style="padding: 0.65rem 0.85rem; font-size: 0.8rem; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+              <span><strong>Dúo Penthouse 2:</strong> Princesa Aura & Starlight Luna</span>
+              <span style="color: #00f5d4; font-weight: 600;">Jacuzzi & Fuego 18+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colección 2: Especial Verano Micro Bikini en Playas Reales -->
       <div class="glass-card" style="margin-bottom: 2.5rem; border-color: rgba(236, 72, 153, 0.4); background: radial-gradient(circle at top, rgba(236, 72, 153, 0.12) 0%, rgba(10, 12, 22, 0.95) 100%); padding: 1.5rem; border-radius: var(--radius-lg);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
           <div>
@@ -5766,14 +5856,14 @@ function renderInfluencersPage(categoryFilter = 'all') {
           <div style="background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
             <img src="toons_beach_duo1.jpg" alt="Roxie Red & Madame V en Playa Real" style="width: 100%; height: auto; display: block;" loading="lazy">
             <div style="padding: 0.65rem 0.85rem; font-size: 0.8rem; color: #fff; display: flex; justify-content: space-between; align-items: center;">
-              <span><strong>Dúo 1:</strong> Roxie Red & Madame V</span>
+              <span><strong>Dúo Playa 1:</strong> Roxie Red & Madame V</span>
               <span style="color: #ec4899; font-weight: 600;">Micro Bikini 18+</span>
             </div>
           </div>
           <div style="background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
             <img src="toons_beach_duo2.jpg" alt="Princesa Aura & Starlight Luna en Playa Real" style="width: 100%; height: auto; display: block;" loading="lazy">
             <div style="padding: 0.65rem 0.85rem; font-size: 0.8rem; color: #fff; display: flex; justify-content: space-between; align-items: center;">
-              <span><strong>Dúo 2:</strong> Princesa Aura & Starlight Luna</span>
+              <span><strong>Dúo Playa 2:</strong> Princesa Aura & Starlight Luna</span>
               <span style="color: #00f5d4; font-weight: 600;">Micro Bikini 18+</span>
             </div>
           </div>
