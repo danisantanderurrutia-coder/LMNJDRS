@@ -1752,6 +1752,12 @@ const influencersData = {
             "tag": "Master 4K",
             "label": "Roxie Red • Noche en el Club Eclipse",
             "desc": "Vestido de lentejuelas escarlata, guantes púrpuras de ópera y micrófono vintage bajo focos de teatro."
+        },
+        {
+            "img": "roxie_beach.jpg",
+            "tag": "Edición Verano 18+",
+            "label": "Roxie Red • Sol & Bikini en Club de Playa",
+            "desc": "Bikini rojo halterneck, silueta voluptuosa toon en reposera junto al mar turquesa con cóctel tropical."
         }
     ],
     "voice": {
@@ -1910,6 +1916,12 @@ const influencersData = {
             "tag": "Master 4K",
             "label": "Madame V • Despacho en Rascacielos",
             "desc": "Traje sastre negro a medida, camisa blanca abotonada, corbata y mirada hipnótica con rascacielos nocturnos de fondo."
+        },
+        {
+            "img": "madamev_beach.jpg",
+            "tag": "Edición Verano 18+",
+            "label": "Madame V • Atardecer en la Orilla Privada",
+            "desc": "Bikini minimalista negro de dos piezas, trenza cobriza sobre el hombro y mirada penetrante dorada a la hora dorada."
         }
     ],
     "voice": {
@@ -2068,6 +2080,12 @@ const influencersData = {
             "tag": "Master 4K",
             "label": "Princesa Aura • En la Alcoba Real",
             "desc": "Corsé dorado de gala, hombros al descubierto con velos lavanda y tiara de oro bajo la luz de las velas."
+        },
+        {
+            "img": "aura_beach.jpg",
+            "tag": "Edición Verano 18+",
+            "label": "Princesa Aura • Sirena Real en Arena Blanca",
+            "desc": "Bikini verde esmeralda con filigrana dorada, tiara real y ondas rubias en resort tropical paradisíaco."
         }
     ],
     "voice": {
@@ -2226,6 +2244,12 @@ const influencersData = {
             "tag": "Master 4K",
             "label": "Starlight Luna • Azotea de Neón Cósmica",
             "desc": "Vestido de noche azul medianoche translúcido con constelaciones doradas, tiara lunar y horizonte cyberpunk."
+        },
+        {
+            "img": "luna_beach.jpg",
+            "tag": "Edición Verano 18+",
+            "label": "Starlight Luna • Magia Estelar Bajo las Palmeras",
+            "desc": "Bikini estelar lila y azul noche con detalles cósmicos, moños espaciales y cóctel veraniego frente a la bahía."
         }
     ],
     "voice": {
