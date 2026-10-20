@@ -1730,6 +1730,638 @@ const influencersData = {
       ],
       funnelStrategy: "Humor picante y situaciones absurdas en TikTok/IG -> Bloopers y anticipos en Telegram -> Suscripción mensual masiva en Fanvue para ver el desenlace erótico."
     }
+  },
+
+  roxie: {
+    "id": "roxie",
+    "name": "Roxie Red («La Toon Escapada»)",
+    "niche": "Seducción Vintage 2.5D, Glamour de Cabaret & Fetichismo Toon",
+    "badge": "Activo Certificado • Adulto VIP 18+",
+    "avatar": "roxie_avatar.jpg",
+    "tagline": "La diva animada que cruzó la pantalla para experimentar el calor, la piel y el deseo del mundo real.",
+    "keyMarkets": "EE.UU., España, México, Argentina, Chile y público global amante del retro animation y estética burlesque.",
+    "story": "Creada en los legendarios estudios de animación de 1947 como la corista estrella de un cortometraje de cine negro, Roxie vivió décadas atrapada en bucles de celuloide. Durante una restauración digital en 4K, una anomalía en la frecuencia del proyector abrió una brecha y Roxie saltó al mundo de carne y hueso. Fascinada por las sensaciones físicas que en su mundo eran solo líneas de tinta —el calor de una copa de licor, la textura de las sábanas de seda y el deseo ardiente de los hombres reales—, Roxie ha conquistado internet como la primera 'toon bombshell' viva. Desinhibida, voluptuosa y sin los prejuicios morales de los humanos, comparte su viaje sensorial mientras canta en clubes nocturnos y abre las puertas de su camerino privado en Fanvue.",
+    "bio": "Roxie Red (26 años aparentes) es una diva de animación 2.5D híbrida y estrella del cabaret vintage. Su silueta icónica de reloj de arena, su vestido carmesí brillante y sus guantes de terciopelo morado la convierten en el arquetipo definitivo de la femme fatale. En sus redes abiertas comparte vlogs cómicos sobre 'aprender a ser humana', mientras en su club VIP monetiza sets de boudoir y audios íntimos con altos márgenes de suscripción.",
+    "archetype": "The Living Toon Bombshell (Inspirada en Jessica Rabbit & Holli Would)",
+    "techStack": "Flux.1 Dev Toon-Noir LoRA + ElevenLabs Smoky Jazz Baritone + Kling 3.0 Hybrid Compositing + Pasarela Segura Fanvue",
+    "targetAudience": "Hombres de 22 a 55 años amantes de la estética retro, glamour burlesque, pin-up vintage y fantasías con dibujos animados clásicos.",
+    "channels": "Instagram (@roxiered.toon - 18+), X (@roxie_uncensored), Fanvue VIP ($25 USD/mes), Telegram Camerino VIP",
+    "gallery": [
+        {
+            "img": "roxie_avatar.jpg",
+            "tag": "Master 4K",
+            "label": "Roxie Red • Noche en el Club Eclipse",
+            "desc": "Vestido de lentejuelas escarlata, guantes púrpuras de ópera y micrófono vintage bajo focos de teatro."
+        }
+    ],
+    "voice": {
+        "title": "Voz de Sirena de Jazz & Susurro Nocturno (ElevenLabs)",
+        "badge": "Voice ID: Roxie-Jazz-v1",
+        "duration": "0:22",
+        "transcript": "«En mi mundo solo existía la tinta fría y el proyector. Pero aquí... la piel quema y el deseo es real. Dime, cariño... ¿alguna vez habías visto a un dibujo animado temblar de placer?»",
+        "rate": 0.92,
+        "pitch": 0.94,
+        "lang": "es-ES"
+    },
+    "roi": {
+        "defaultFollowers: ": 110000,
+        "defaultConversion": 5.8,
+        "defaultTicket": 25
+    },
+    "promptScenes": {
+        "casual": {
+            "label": "🍸 Camerino Vintage",
+            "tags": [
+                "Flux.1 Dev",
+                "Toon Hybrid",
+                "--ar 4:5"
+            ],
+            "text": "Close-up sensual portrait of glamorous 1940s cartoon diva Roxie Red with voluminous wavy auburn hair over one eye, hourglass figure in red satin negligee, sitting at illuminated makeup vanity mirror with feather boa, retro film grain --ar 4:5"
+        },
+        "editorial": {
+            "label": "✨ Escenario Club Eclipse",
+            "tags": [
+                "Jazz Lounge",
+                "8k Master",
+                "--ar 16:9"
+            ],
+            "text": "Cinematic wide shot of stunning cartoon bombshell Roxie Red singing into vintage microphone on jazz stage, sparkling crimson gown, purple opera gloves, moody amber spotlights, photorealistic crowd in soft bokeh --ar 16:9"
+        }
+    },
+    "monetizationFunnel": [
+        {
+            "step": "Nivel 1 (Atracción en X e IG con Filtro 18+)",
+            "detail": "Vlogs cómicos y sensuales aprendiendo a vestirse como humana, caminar con tacones de verdad y cantar jazz en locales nocturnos."
+        },
+        {
+            "step": "Nivel 2 (Canal Gratuito Telegram 'El Camerino')",
+            "detail": "Audios de buenas noches, adelantos de sesiones fotográficas y anécdotas de su choque con la realidad."
+        },
+        {
+            "step": "Nivel 3 (Monetización Directa Fanvue VIP)",
+            "detail": "Suscripción mensual a $25 USD/mes para acceder a 'Los Rollos Perdidos' (sets de boudoir y lencería sin censura) y venta de audios personalizados."
+        }
+    ],
+    "ecommerceHub": {
+        "grossMargin": "95%",
+        "conversionRate": "5.8%",
+        "fulfillment": "Acceso digital inmediato Fanvue & Telegram VIP",
+        "description": "Galerías 8K de boudoir toon vintage, audiolibros eróticos en primera persona y membresía exclusiva al Camerino de Roxie.",
+        "products": [
+            {
+                "name": "Membresía 'El Camerino de Roxie VIP' (Fanvue)",
+                "price": "$25.00 USD/mes",
+                "cost": "$1.20 USD",
+                "category": "Suscripción Adulto VIP",
+                "tag": "Bestseller VIP",
+                "salesVolume": "890 miembros",
+                "desc": "Acceso ilimitado a todas las galerías fotográficas en lencería de seda, videos sin censura y chat privado prioritario con Roxie.",
+                "fulfillment": "Activación Instantánea Fanvue"
+            },
+            {
+                "name": "Pack 8K 'Pecados de Celuloide: Sin Censura' (PPV)",
+                "price": "$38.00 USD",
+                "cost": "$0.50 USD",
+                "category": "Set Fotográfico & Video PPV",
+                "tag": "Top Ventas PPV",
+                "salesVolume": "420 ventas/mes",
+                "desc": "45 fotografías en ultra alta definición de Roxie explorando su cuerpo humano en una suite de lujo vintage.",
+                "fulfillment": "Enlace Seguro Descarga Inmediata"
+            }
+        ],
+        "funnelStrategy": "Clips de comedia sensual en X/IG -> Comunidad de Telegram con adelantos de audio -> Conversión masiva en Fanvue VIP."
+    },
+    "pilotScript": {
+        "title": "Episodio 1: Mi Primer Día con Piel Humana («¿Todo se siente tan caliente aquí?»)",
+        "duration": "48 segundos",
+        "format": "Vertical 9:16 (Filtro 18+ en X y TikTok)",
+        "objective": "Presentar el origen de la toon escapada, lucir su silueta voluptuosa sin violar normas de redes abiertas y desviar al público al set sin censura.",
+        "musicTrack": "Saxofón lento de cine negro con contrabajo de jazz a 70 BPM.",
+        "scenes": [
+            {
+                "num": 1,
+                "time": "0:00 - 0:08",
+                "name": "El Encendido del Espejo",
+                "shotType": "Primer plano íntimo (Close-up)",
+                "visual": "Una mano con guante largo de terciopelo púrpura ajusta la lente del teléfono. La cámara enfoca a Roxie con su vestido rojo brillante. Se muerde el labio inferior con una sonrisa pícara y exhala suavemente.",
+                "klingPrompt": "Close-up of stunning 1940s cartoon diva Roxie Red adjusting smartphone camera with purple velvet glove, tight red sequin dress, wavy auburn hair falling over one seductive eye, playful smirk, warm jazz club dressing room --ar 9:16",
+                "voice": "«¿Así que este pequeño rectángulo negro los conecta a todos ustedes? En mi estudio solo había rollos de celuloide frío... pero aquí... todo arde.»",
+                "voiceNotes": "Voz aterciopelada, grave, susurrada cerca del micrófono estilo ASMR sensual.",
+                "audioCue": "Chasquido de proyector antiguo que se apaga -> Entra solo de saxofón nocturno.",
+                "overlayText": "Capítulo 1: Dejé el dibujo animado para sentir la realidad 💋"
+            },
+            {
+                "num": 2,
+                "time": "0:08 - 0:22",
+                "name": "La Fascinación Física",
+                "shotType": "Plano medio en movimiento sinuoso",
+                "visual": "Roxie se acaricia la clavícula descubierta con la punta de sus dedos enguantados, mostrando cómo su piel responde con un escalofrío de deleite. Camina hacia el espejo con su balanceo de caderas de caricatura.",
+                "klingPrompt": "Medium shot of voluptuous cartoon woman Roxie Red tracing her collarbone with gloved fingers, experiencing physical sensation with a shiver of delight, swaying hips in red gown, soft vanity bulb lighting --ar 9:16",
+                "voice": "«En el papel nadie siente el roce de la seda ni el perfume en el cuello. Los humanos pasan la vida quejándose de sus cuerpos... cuando en realidad tienen el mayor regalo del universo.»",
+                "voiceNotes": "Tono seductor, confesional y reflexivo.",
+                "audioCue": "Roce de tela de seda contra el micrófono y respiración profunda.",
+                "overlayText": "«La tinta no siente nada... la carne lo siente todo.»"
+            },
+            {
+                "num": 3,
+                "time": "0:22 - 0:36",
+                "name": "El Choque con las Reglas Humanas",
+                "shotType": "Plano entero frente al perchero de ropa",
+                "visual": "Roxie sostiene una pequeña bata de encaje negro translúcido y la coloca frente a ella mirándose de reojo con picardía en el espejo.",
+                "klingPrompt": "Full-body shot of curvy cartoon starlet Roxie Red holding black sheer lace lingerie against her body, checking reflection with seductive playful smile, boudoir setting, cinematic shadows --ar 9:16",
+                "voice": "«El recepcionista del hotel me dijo que no puedo bajar al vestíbulo vestida así porque causaría un motín. Me pregunto qué pasaría si me ven sin el vestido rojo...»",
+                "voiceNotes": "Risa suave y sugerente, bajando la voz con complicidad.",
+                "audioCue": "Tintineo de copas de champán y risa cómplice.",
+                "overlayText": "El recepcionista casi no sobrevive hoy 😈🥂"
+            },
+            {
+                "num": 4,
+                "time": "0:36 - 0:48",
+                "name": "El Cierre & Desvío al Camerino Fanvue",
+                "shotType": "Primer plano medio cerrando la bata",
+                "visual": "Roxie guiña un ojo a la cámara, apaga la lámpara de la mesa dejando solo la silueta de su reloj de arena iluminada por la luna y envía un beso al objetivo.",
+                "klingPrompt": "Sensual close-up of Roxie Red winking, blowing a kiss to camera, turning off lamp so only her hourglass silhouette glows in moonlight --ar 9:16",
+                "voice": "«Mi camerino privado ya está abierto para los caballeros que quieran ver cómo me desprendo de mi vestido de 1947. El enlace está en mi perfil... no hagas esperar a una dama.»",
+                "voiceNotes": "Susurro final irresistible en el oído izquierdo.",
+                "audioCue": "Sonido de beso -> Cierre de cortina pesada de terciopelo -> Silencio de medianoche.",
+                "overlayText": "💋 Accede a mi camerino sin censura en el enlace de mi perfil (18+)"
+            }
+        ]
+    }
+},
+
+  madamev: {
+    "id": "madamev",
+    "name": "Madame V («La Directora del Sindicato»)",
+    "niche": "Dominación Psicológica, Poder Corporativo & Sumisión Mental",
+    "badge": "Activo Certificado • Dominación VIP 18+",
+    "avatar": "madamev_avatar.jpg",
+    "tagline": "Traje sastre impecable, mirada hipnótica y autoridad absoluta: domina tu mente y tu productividad.",
+    "keyMarkets": "Japón, EE.UU., Alemania, España, México y ejecutivos de habla hispana con alto poder adquisitivo.",
+    "story": "Proveniente de un universo anime donde las corporaciones gobiernan a los hombres con contratos de sangre, Madame V cruzó al mundo real al darse cuenta de que la sociedad moderna está repleta de hombres exitosos pero emocionalmente dispersos que ruegan en secreto por una figura de autoridad que tome el control. Impecable en su traje sastre negro de tres piezas, con su corbata delgada, su trenza cobriza y sus ojos dorados con anillos concéntricos hipnóticos, Madame V no necesita quitarse una sola prenda para dominar una habitación. En su club privado ofrece lo que ningún otro creador virtual puede: una experiencia psicológica de alto impacto donde la sumisión consentida se convierte en el mayor alivio del estrés ejecutivo.",
+    "bio": "Madame V (29 años aparentes) es la máxima referente de la dominación mental y el erotismo psicológico de alto ticket. Cero vulgaridad, cero desnudez explícita: su propuesta se basa en la autoridad fría, la voz pausada que desarma cualquier ego y programas exclusivos de disciplina personal, audios binaurales de sumisión y consultas privadas de confesión para clientes selectos.",
+    "archetype": "The Corporate Dominatrix & Dark Muse (Inspirada en Makima de Chainsaw Man)",
+    "techStack": "Flux.1 Dev Seinen-Corporate LoRA + ElevenLabs Hypnotic Cold Velvet Voice + DaVinci Chiaroscuro + Telegram VIP Clandestino",
+    "targetAudience": "Hombres profesionales, ejecutivos y desarrolladores de 25 a 52 años que buscan fantasías de control mental, sumisión consentida y desconexión psicológica.",
+    "channels": "X (@madame_v_syndicate - 18+), TikTok (@directora.v), Telegram Clandestino VIP, Fanvue High-Ticket ($35–$100/mes)",
+    "gallery": [
+        {
+            "img": "madamev_avatar.jpg",
+            "tag": "Master 4K",
+            "label": "Madame V • Despacho en Rascacielos",
+            "desc": "Traje sastre negro a medida, camisa blanca abotonada, corbata y mirada hipnótica con rascacielos nocturnos de fondo."
+        }
+    ],
+    "voice": {
+        "title": "Voz Hipnótica Fría & Autoridad Absoluta (ElevenLabs)",
+        "badge": "Voice ID: MadameV-Control-v2",
+        "duration": "0:23",
+        "transcript": "«Deja de mover los ojos. Mírame fijamente. Todo el día finges tener el control frente a idiotas... pero aquí, frente a mí, puedes arrodillarte y soltar la carga. Buen chico... obedece.»",
+        "rate": 0.88,
+        "pitch": 0.9,
+        "lang": "es-ES"
+    },
+    "roi": {
+        "defaultFollowers": 95000,
+        "defaultConversion": 6.2,
+        "defaultTicket": 45
+    },
+    "promptScenes": {
+        "casual": {
+            "label": "🖤 Despacho Ejecutivo Nocturno",
+            "tags": [
+                "Flux.1 Dev",
+                "Corporate Noir",
+                "--ar 4:5"
+            ],
+            "text": "Cinematic portrait of stunning anime director Madame V in fitted black three-piece suit, white shirt, black tie, hypnotic amber eyes with concentric rings, braided hair over shoulder, seated behind dark mahogany desk with hands clasped, night city lights in rain --ar 4:5"
+        },
+        "editorial": {
+            "label": "🍷 Sala de Juntas Privada",
+            "tags": [
+                "Dark Seinen",
+                "8k Master",
+                "--ar 16:9"
+            ],
+            "text": "Low angle dramatic shot of Madame V standing near panoramic glass window overlooking neon metropolis, coat draped over shoulders, cold commanding expression, crystal glass of red wine in hand, chiaroscuro --ar 16:9"
+        }
+    },
+    "monetizationFunnel": [
+        {
+            "step": "Nivel 1 (Atracción Psicológica en X y TikTok)",
+            "detail": "Videos cortos de 30s con mirada fija desmontando las debilidades del ego masculino y exigiendo atención con calma gélida."
+        },
+        {
+            "step": "Nivel 2 (Canal Privado Telegram 'Protocolo V')",
+            "detail": "Mensajes matutinos con órdenes de disciplina, micro-audios binaurales de recompensa y confesionario anónimo de debilidades."
+        },
+        {
+            "step": "Nivel 3 (Monetización High-Ticket en Fanvue)",
+            "detail": "Suscripciones escalonadas de $35, $65 y $100 USD/mes para acceder a sesiones de hipnosis auditiva, rituales de sumisión y chat directo controlado."
+        }
+    ],
+    "ecommerceHub": {
+        "grossMargin": "98%",
+        "conversionRate": "6.2%",
+        "fulfillment": "Telegram VIP instantáneo + Audios binaurales WAV Master",
+        "description": "Biblioteca de audios inmersivos de dominación psicológica, contratos de sumisión digital y membresías de control ejecutivo.",
+        "products": [
+            {
+                "name": "Pase de Sumisión 'Protocolo de Mando VIP' (Fanvue)",
+                "price": "$35.00 USD/mes",
+                "cost": "$1.00 USD",
+                "category": "Membresía High-Ticket",
+                "tag": "Top Retención",
+                "salesVolume": "720 miembros",
+                "desc": "Acceso a 4 audios semanales de control mental en binaural 8D, guías de disciplina ejecutiva y permiso de interacción en su muro privado.",
+                "fulfillment": "Acceso Instantáneo Fanvue"
+            },
+            {
+                "name": "Suite de Audios Binaurales 'Bajo Mi Orden: Vol. 1' (Descarga)",
+                "price": "$49.00 USD",
+                "cost": "$0.50 USD",
+                "category": "Audio Inmersivo WAV",
+                "tag": "Top Ventas Digital",
+                "salesVolume": "380 descargas/mes",
+                "desc": "6 sesiones de audio de 15 minutos en calidad de estudio diseñadas para inducir sumisión, relajación profunda y alivio del estrés corporativo.",
+                "fulfillment": "Descarga Directa WAV 24-bit"
+            }
+        ],
+        "funnelStrategy": "Clips de autoridad gélida en X/TikTok -> Comunidad de Telegram con micro-recompensas -> Suscripción recurrente de alto ticket en Fanvue."
+    },
+    "pilotScript": {
+        "title": "Episodio 1: El Primer Contrato («Mírame a los Ojos y Deja de Fingir»)",
+        "duration": "50 segundos",
+        "format": "Vertical 9:16 (X / TikTok 18+)",
+        "objective": "Instaurar la autoridad absoluta de Madame V, validar la necesidad de sumisión del hombre trabajador y filtrar a clientes de alto ticket.",
+        "musicTrack": "Pulsación electrónica minimalista sub-grave a 55 BPM con cuerdas frías de violonchelo.",
+        "scenes": [
+            {
+                "num": 1,
+                "time": "0:00 - 0:10",
+                "name": "El Contacto Visual Infranqueable",
+                "shotType": "Primer plano medio estático (Locked tripod)",
+                "visual": "Madame V sentada con las manos cruzadas sobre el escritorio. La luz cenital fría ilumina su traje negro y su corbata. Sus ojos dorados con anillos concéntricos miran directo a la lente sin parpadear.",
+                "klingPrompt": "Low-angle static shot of beautiful anime director Madame V in tailored black suit and black tie, hypnotic amber eyes with concentric rings looking straight into camera, long red braid over shoulder, modern skyscraper office at night --ar 9:16",
+                "voice": "«Sé que llevas todo el día fingiendo que sabes lo que haces. Cargando con el peso del mundo, sonriendo a gente que desprecias... Qué agotador debe ser tu pequeño teatro.»",
+                "voiceNotes": "Voz lenta, firme, sin emoción fingida, ritmo hipnótico.",
+                "audioCue": "Latido sub-grave grave y continuo que aísla el sonido ambiental.",
+                "overlayText": "Directiva 01: El teatro se acabó."
+            },
+            {
+                "num": 2,
+                "time": "0:10 - 0:24",
+                "name": "La Desarticulación del Ego",
+                "shotType": "Lento acercamiento a sus ojos dorados (Slow push-in)",
+                "visual": "La cámara avanza lentamente hacia su rostro. Ella descruza las manos con parsimonia, toma una pluma estilográfica negra y la apoya con un toque seco sobre la madera.",
+                "klingPrompt": "Slow camera push-in on Madame V's mesmerizing golden eyes, subtle confident smirk, unbuttoning top coat button while holding black fountain pen, dark luxury office background --ar 9:16",
+                "voice": "«Aquí no tienes que ser el líder. No tienes que fingir que no te tiembla el pulso. Frente a mí, tu única tarea es obedecer y soltar el volante. ¿No sientes el alivio en los hombros con solo escucharlo?»",
+                "voiceNotes": "Voz susurrada de mando, cadencia que induce relajación mental.",
+                "audioCue": "Toque seco de la pluma sobre caoba -> Silencio absoluto -> Sonido de respiración.",
+                "overlayText": "«Frente a mí, tu única tarea es obedecer.»"
+            },
+            {
+                "num": 3,
+                "time": "0:24 - 0:38",
+                "name": "El Pacto de Confidencialidad",
+                "shotType": "Plano contrapicado de autoridad",
+                "visual": "Madame V se levanta de su asiento, rodea el escritorio y se apoya en el borde frente a la cámara, cruzando los brazos con una mirada de satisfacción calculadora.",
+                "klingPrompt": "Low angle shot of Madame V standing up and leaning against executive desk, arms crossed in fitted suit, looking down with calm dominance, floor to ceiling glass windows behind her --ar 9:16",
+                "voice": "«Muchos hombres darían su fortuna por tener una mujer hermosa a la que complacer. Pero tú... tú necesitas algo más peligroso. Necesitas a alguien a quien no puedas engañar jamás.»",
+                "voiceNotes": "Tono de reproche sereno e íntimo que desarma cualquier barrera.",
+                "audioCue": "Acorde grave y sostenido que vibra en los auriculares.",
+                "overlayText": "No buscas un juguete. Buscas a quien obedecer."
+            },
+            {
+                "num": 4,
+                "time": "0:38 - 0:50",
+                "name": "La Recompensa & Entrada al Sindicato VIP",
+                "shotType": "Primer plano íntimo con media sonrisa",
+                "visual": "Se inclina ligeramente hacia adelante, extendiendo un dedo hacia el objetivo como si tocara los labios del espectador. Sus ojos brillan con intensidad dorada.",
+                "klingPrompt": "Extreme close-up of Madame V extending gloved finger toward lens, amber eyes glowing faintly, soft enchanting smirk, shadows closing in around the frame --ar 9:16",
+                "voice": "«Buen chico. Has aguantado la mirada hasta el final. Si estás listo para recibir tus órdenes nocturnas, firma el contrato en mi enlace privado. Esta noche... tú descansas. Yo tomo el mando.»",
+                "voiceNotes": "La palabra 'Buen chico' pronunciada con dulzura peligrosa.",
+                "audioCue": "Chasquido de dedos -> Pantalla corta a negro con el logo dorado del Sindicato.",
+                "overlayText": "🖤 Firma tu contrato de sumisión en el enlace de mi perfil (18+)"
+            }
+        ]
+    }
+},
+
+  aura: {
+    "id": "aura",
+    "name": "Princesa Aura («La Princesa Desinhibida»)",
+    "niche": "Erotismo de Cuento de Hadas, Corsetería Real & Seducción Clásica",
+    "badge": "Activo Certificado • Fantasía VIP 18+",
+    "avatar": "aura_avatar.jpg",
+    "tagline": "Cansada de esperar príncipes que no llegan: la princesa de cuento que descubre la pasión y el placer terrenal.",
+    "keyMarkets": "España, México, Colombia, Argentina, Chile y público amante de la literatura romántica y cuentos erotizados.",
+    "story": "Durante siglos, la Princesa Aura vivió atrapada en las páginas de un cuento de hadas medieval donde su único destino era dormir cien años esperando el beso salvador de un príncipe aburrido. Tras caer por una cascada mágica que desembocó en el mundo real, Aura descubrió algo que su reino le había ocultado: que las mujeres no necesitan ser rescatadas para experimentar la pasión, el deseo y la libertad de su propio cuerpo. Con su tiara de oro intacta, su melena ondulada y su corsé dorado desatado sobre sábanas de terciopelo, Aura ha convertido su alcoba real en un templo de fantasía erótica donde invita a sus seguidores a ser los amantes que ningún libro infantil se atrevió a escribir.",
+    "bio": "Princesa Aura (24 años aparentes) es la reina del erotismo de hadas de alta gama. Combina la inocencia estética de los cuentos clásicos con una sensualidad desvergonzada, lencería de corsetería de época, relatos eróticos susurrados con voz de princesa y sesiones de boudoir en palacios barrocos.",
+    "archetype": "The Uninhibited Fairy Tale Siren (Inspirada en Giselle de Encantada / Princesas de Cuento Erotizadas)",
+    "techStack": "Flux.1 Dev Royal Boudoir LoRA + ElevenLabs Melodic Royal Whisper + Kling 3.0 Motion + Fanvue VIP",
+    "targetAudience": "Hombres y parejas de 22 a 48 años fascinados por la estética de realeza, corsetería clásica, fantasías de cuentos de hadas y seducción romántica sin tabúes.",
+    "channels": "Instagram (@princesa.aura.vip - 18+), X (@aura_roselux), Fanvue VIP ($20 USD/mes), Telegram El Tocador Real",
+    "gallery": [
+        {
+            "img": "aura_avatar.jpg",
+            "tag": "Master 4K",
+            "label": "Princesa Aura • En la Alcoba Real",
+            "desc": "Corsé dorado de gala, hombros al descubierto con velos lavanda y tiara de oro bajo la luz de las velas."
+        }
+    ],
+    "voice": {
+        "title": "Voz Dulce de Princesa con Insinuación Ardiente (ElevenLabs)",
+        "badge": "Voice ID: Aura-Royal-v1",
+        "duration": "0:21",
+        "transcript": "«En mi cuento me enseñaron que debía esperar en la torre a que alguien viniera a salvarme. Qué gran mentira... En este mundo aprendí que el corsé se siente mucho mejor cuando alguien como tú me ayuda a desatarlo.»",
+        "rate": 0.95,
+        "pitch": 1.04,
+        "lang": "es-ES"
+    },
+    "roi": {
+        "defaultFollowers": 125000,
+        "defaultConversion": 5.5,
+        "defaultTicket": 20
+    },
+    "promptScenes": {
+        "casual": {
+            "label": "🕯️ Desatando el Corsé en el Tocador",
+            "tags": [
+                "Flux.1 Dev",
+                "Royal Boudoir",
+                "--ar 4:5"
+            ],
+            "text": "Close-up sensual portrait of beautiful adult fairy tale princess Aura with strawberry blonde waves, golden crown, unlacing opulent golden corset with delicate fingers, soft velvet drapes and warm candlelight in background --ar 4:5"
+        },
+        "editorial": {
+            "label": "👑 Reina del Placer en la Cama Real",
+            "tags": [
+                "Fairy Tale Erotica",
+                "8k Master",
+                "--ar 16:9"
+            ],
+            "text": "Cinematic medium shot of gorgeous princess Aura lounging across purple velvet baroque bed, off-shoulder silk gown slipping down, alluring loving smile, golden candelabras glowing softly --ar 16:9"
+        }
+    },
+    "monetizationFunnel": [
+        {
+            "step": "Nivel 1 (Atracción en X e IG con Filtro 18+)",
+            "detail": "Reels y fotos jugando con la picardía de los cuentos: '¿Qué pasa después del felices para siempre?' y posados en corsetería de época."
+        },
+        {
+            "step": "Nivel 2 (Canal Telegram 'El Tocador de Aura')",
+            "detail": "Cuentos eróticos cortos narrados con su dulce voz de princesa, audios de confesiones íntimas y tomas falsas de sus sesiones."
+        },
+        {
+            "step": "Nivel 3 (Monetización Directa en Fanvue VIP)",
+            "detail": "Suscripción a $20 USD/mes para ver los capítulos prohibidos de su diario real, sets de lencería histórica sin censura y mensajes PPV privados."
+        }
+    ],
+    "ecommerceHub": {
+        "grossMargin": "96%",
+        "conversionRate": "5.5%",
+        "fulfillment": "Fanvue VIP instantáneo + Galerías 8K en la nube",
+        "description": "Sets fotográficos de realeza desinhibida, audiolibros de fantasía erótica de época y membresía al Santuario de la Princesa.",
+        "products": [
+            {
+                "name": "Pase a la Alcoba Real 'El Diario Prohibido de Aura' (Fanvue)",
+                "price": "$20.00 USD/mes",
+                "cost": "$1.00 USD",
+                "category": "Suscripción Adulto VIP",
+                "tag": "Fantasía Bestseller",
+                "salesVolume": "940 miembros",
+                "desc": "Acceso ilimitado a las sesiones fotográficas en corsetería y deshabillé real, videos en alcobas de palacio y chat privado con Aura.",
+                "fulfillment": "Activación Inmediata Fanvue"
+            },
+            {
+                "name": "Pack Exclusivo 8K 'La Noche de Coronación' (PPV)",
+                "price": "$32.00 USD",
+                "cost": "$0.50 USD",
+                "category": "Set Fotográfico & Relato",
+                "tag": "Top Ventas PPV",
+                "salesVolume": "510 ventas/mes",
+                "desc": "38 fotos en ultra resolución de Aura desprendiéndose de sus ropajes reales y audio erótico inmersivo de 12 minutos.",
+                "fulfillment": "Descarga Directa Enlace Seguro"
+            }
+        ],
+        "funnelStrategy": "Picardía romántica en redes abiertas -> Lectura de fragmentos ardientes en Telegram -> Conversión masiva en Fanvue VIP."
+    },
+    "pilotScript": {
+        "title": "Episodio 1: La Princesa que se Cansó de Esperar («¿Quién me ayuda con este lazo?»)",
+        "duration": "46 segundos",
+        "format": "Vertical 9:16 (Filtro 18+ en X y TikTok)",
+        "objective": "Romper el mito de la princesa aburrida, exhibir la corsetería sensual de alta época y convertir a fanáticos de la fantasía romántica.",
+        "musicTrack": "Arpa renacentista suave que se funde con un bajo atmosférico envolvente.",
+        "scenes": [
+            {
+                "num": 1,
+                "time": "0:00 - 0:08",
+                "name": "El Espejo de la Torre",
+                "shotType": "Plano medio frente a tocador barroco",
+                "visual": "Aura de espaldas al espejo, girando la cabeza para mirar a la cámara sobre su hombro desnudo. Lleva su tiara dorada y los lazos de la espalda de su corsé dorado están a medio soltar.",
+                "klingPrompt": "Medium shot of beautiful fairy tale princess Aura in baroque boudoir, looking over her bare shoulder with seductive smile, golden crown, tight golden corset with laces partially untied, warm candlelight --ar 9:16",
+                "voice": "«En los libros de mi reino siempre terminaban la historia con un 'vivieron felices para siempre' justo antes de que la noche comenzara... ¿Alguna vez se preguntaron qué pasaba cuando se apagaban las velas?»",
+                "voiceNotes": "Voz dulce, angelical, pero cargada de una intención ardiente e hipnótica.",
+                "audioCue": "Arpegio suave de arpa y suspiro cómplice.",
+                "overlayText": "Capítulo 1: Lo que los cuentos nunca te mostraron 👑✨"
+            },
+            {
+                "num": 2,
+                "time": "0:08 - 0:22",
+                "name": "El Corsé Demasiado Apretado",
+                "shotType": "Primer plano cenital sugerente",
+                "visual": "Aura se pasa la mano suavemente por el escote del corsé, respirando hondo mientras las cintas de seda caen a los lados. Sus ojos brillan con el calor de las velas.",
+                "klingPrompt": "Close-up shot of princess Aura's fingers lightly brushing across her royal corset neckline, deep breath revealing cleavage, delicate strawberry blonde locks brushing against skin, candlelit shadows --ar 9:16",
+                "voice": "«Durante años me vistieron para ser contemplada como una estatua de mármol. Pero en este nuevo mundo descubrí que mi piel no fue hecha para estar encerrada... sino para ser adorada.»",
+                "voiceNotes": "Tono de confesión íntima, pausada y dulce.",
+                "audioCue": "Crujido suave de los lazos del corsé aflojándose.",
+                "overlayText": "«Mi piel no fue hecha para estar encerrada...»"
+            },
+            {
+                "num": 3,
+                "time": "0:22 - 0:36",
+                "name": "La Invitación a la Alcoba",
+                "shotType": "Plano medio en la cama de terciopelo",
+                "visual": "Aura se recuesta en la cama de terciopelo morado, apoyando un codo sobre los almohadones. Con la otra mano hace un gesto invitando al espectador a acercarse.",
+                "klingPrompt": "Sensual medium shot of princess Aura reclining on purple velvet bed, golden corset loose, smiling tenderly and beckoning with index finger, golden chandelier glowing above --ar 9:16",
+                "voice": "«Los caballeros de mi cuento pasaban años buscando dragones imaginarios en lugar de aprender a tocar a una dama. Por suerte... sé que tú sabrías exactamente qué hacer con este nudo.»",
+                "voiceNotes": "Risa pícara entre dientes que desarma al oyente.",
+                "audioCue": "Sonido de copas de vino brindando y arpa en fade out.",
+                "overlayText": "Menos dragones y más pasión real 😏🍷"
+            },
+            {
+                "num": 4,
+                "time": "0:36 - 0:46",
+                "name": "El Cierre & Acceso a la Alcoba Real",
+                "shotType": "Primer plano con beso de despedida",
+                "visual": "Aura acerca su rostro a la cámara, apaga la vela con un soplido dulce dejando solo la penumbra dorada de la habitación y sonríe con malicia angelical.",
+                "klingPrompt": "Close-up of princess Aura blowing out candle toward lens, playful seductive gaze, dimming light leaving only her glowing golden crown and lips in focus --ar 9:16",
+                "voice": "«La puerta de mi alcoba real ya está abierta sin censura. Ven y ayúdame a terminar lo que empezamos... El enlace está en mi biografía.»",
+                "voiceNotes": "Susurro de despedida cálido en ambos oídos.",
+                "audioCue": "Soplido de la vela -> Humo sutil -> Corte a negro.",
+                "overlayText": "👑 Entra a mi alcoba real sin censura en el enlace de mi perfil (18+)"
+            }
+        ]
+    }
+},
+
+  luna: {
+    "id": "luna",
+    "name": "Starlight Luna («La Waifu Cósmica»)",
+    "niche": "Fantasía Cósmica Adulta, Ecchi Estilizado & Cyberpunk Glamour",
+    "badge": "Activo Certificado • Waifu Cósmica VIP 18+",
+    "avatar": "luna_avatar.jpg",
+    "tagline": "Diosa astral de la noche: magia cósmica, sensualidad estelar y fantasía cyberpunk para adultos.",
+    "keyMarkets": "Japón, EE.UU., México, Brasil, España y comunidad global gamer/otaku consumidora de arte ecchi 4K.",
+    "story": "En su dimensión estelar de anime noventero, Luna fue la gran guerrera protectora de la luna llena. Con más de 25 años y en la plenitud de su poder cósmico, una grieta hiperespacial la transportó a una azotea iluminada por rascacielos de neón en el mundo real. Al descubrir que en esta dimensión los adultos pasan las noches en vela jugando videojuegos y soñando con waifus inalcanzables, Luna decidió canalizar su energía estelar en magnetismo puro. Con su tiara dorada de luna creciente, sus larguísimas coletas doradas y sus vestidos astrales translúcidos de noche azul medianoche, Luna es la fantasía definitiva de la chica mágica que creció, se volvió independiente y ahora comparte sus secretos más ardientes con la comunidad gamer adulta.",
+    "bio": "Starlight Luna (25 años) es la creadora virtual líder del nicho anime ecchi de alta gama. Combina la estética nostálgica de las chicas mágicas de los 90 con el glamour cyberpunk nocturno. Ofrece sets fotográficos 8K de lencería estelar, audios de hipnosis cósmica y sesiones de chat interactivo para otakus y gamers de alto poder adquisitivo.",
+    "archetype": "The Mature Cosmic Enchantress (Inspirada en Sailor Moon adulta / Reinas Cósmicas Ecchi)",
+    "techStack": "Flux.1 Dev Anime-Ecchi Master LoRA + ElevenLabs Playful Anime Seductive Tone + Kling 3.0 Motion + Fanvue VIP",
+    "targetAudience": "Hombres de 20 a 45 años apasionados por el anime retro de los 90s, estética gamer/cyberpunk, waifus virtuales y coleccionismo digital erótico.",
+    "channels": "X (@starlight_luna_vip - 18+), TikTok (@luna.cosmic), Fanvue VIP ($22 USD/mes), Discord La Nebulosa Secreta",
+    "gallery": [
+        {
+            "img": "luna_avatar.jpg",
+            "tag": "Master 4K",
+            "label": "Starlight Luna • Azotea de Neón Cósmica",
+            "desc": "Vestido de noche azul medianoche translúcido con constelaciones doradas, tiara lunar y horizonte cyberpunk."
+        }
+    ],
+    "voice": {
+        "title": "Tono Anime Coqueto & Encantamiento Estelar (ElevenLabs)",
+        "badge": "Voice ID: Luna-Star-v1",
+        "duration": "0:20",
+        "transcript": "«¿Creías que las guerreras de la luna solo luchaban contra monstruos? Ahora que crecí, descubrí que la verdadera magia ocurre cuando se apagan las pantallas y me quedo a solas contigo. ¿Quieres ver de qué estoy hecha?»",
+        "rate": 0.98,
+        "pitch": 1.06,
+        "lang": "es-ES"
+    },
+    "roi": {
+        "defaultFollowers": 140000,
+        "defaultConversion": 5.9,
+        "defaultTicket": 22
+    },
+    "promptScenes": {
+        "casual": {
+            "label": "🌌 Habitación Gamer de Neón",
+            "tags": [
+                "Flux.1 Dev",
+                "Cyberpunk Waifu",
+                "--ar 4:5"
+            ],
+            "text": "Close-up portrait of stunning adult anime heroine Starlight Luna with long blonde twin tails, golden crescent moon tiara on forehead, wearing sheer star-patterned night lingerie, neon cyan and magenta room lighting, seductive playful smile --ar 4:5"
+        },
+        "editorial": {
+            "label": "✨ Azotea Bajo la Luna Llena",
+            "tags": [
+                "Cosmic Ecchi",
+                "8k Master",
+                "--ar 16:9"
+            ],
+            "text": "Cinematic wide shot of voluptuous anime waifu Starlight Luna on high-tech skyscraper balcony, sheer midnight blue dress with glowing gold star dust, city lights below, giant full moon in dark starry sky --ar 16:9"
+        }
+    },
+    "monetizationFunnel": [
+        {
+            "step": "Nivel 1 (Atracción Gamer en X y TikTok con Filtro 18+)",
+            "detail": "Clips de transformaciones sensuales, bailes cósmicos en 2.5D y poses icónicas de victoria adaptadas a la noche."
+        },
+        {
+            "step": "Nivel 2 (Comunidad Discord 'La Nebulosa Secreta')",
+            "detail": "Canal privado con roles VIP, wallpapers en ultra resolución 8K y alertas de lanzamientos exclusivos."
+        },
+        {
+            "step": "Nivel 3 (Monetización Directa en Fanvue VIP)",
+            "detail": "Suscripción a $22 USD/mes para ver los sets fotográficos ecchi sin censura ('Poder Astral Revelado') y audios de hipnosis estelar."
+        }
+    ],
+    "ecommerceHub": {
+        "grossMargin": "97%",
+        "conversionRate": "5.9%",
+        "fulfillment": "Fanvue VIP instantáneo + Wallpapers 8K",
+        "description": "Sets ecchi en resolución 8K de fantasía cósmica, audios interactivos de novia virtual otaku y membresía a la Nebulosa Secreta.",
+        "products": [
+            {
+                "name": "Pase 'El Poder Astral Sin Censura' (Fanvue)",
+                "price": "$22.00 USD/mes",
+                "cost": "$1.00 USD",
+                "category": "Suscripción Adulto VIP",
+                "tag": "Top Otaku VIP",
+                "salesVolume": "1050 miembros",
+                "desc": "Acceso ilimitado a todas las galerías temáticas de lencería estelar, videos animados en Kling 3.0 sin cortes y chat directo con Luna.",
+                "fulfillment": "Activación Inmediata Fanvue"
+            },
+            {
+                "name": "Pack 8K 'Reina Cósmica: Sesión de Luna Llena' (PPV)",
+                "price": "$34.00 USD",
+                "cost": "$0.50 USD",
+                "category": "Galería Fotográfica 8K",
+                "tag": "Bestseller Ecchi",
+                "salesVolume": "580 ventas/mes",
+                "desc": "50 imágenes en calidad nativa 8K de Luna en su azotea cyberpunk con atuendos astrales transparentes y poses dinámicas.",
+                "fulfillment": "Descarga Segura Inmediata"
+            }
+        ],
+        "funnelStrategy": "Clips de comedia anime picante en redes -> Comunidad Discord con adelantos -> Suscripción masiva en Fanvue VIP."
+    },
+    "pilotScript": {
+        "title": "Episodio 1: Mi Primera Noche en la Azotea («La Magia que Nadie vio en los 90s»)",
+        "duration": "45 segundos",
+        "format": "Vertical 9:16 (Filtro 18+ en X y TikTok)",
+        "objective": "Presentar a Luna como una mujer adulta dueña de su sensualidad, conquistar a la audiencia gamer nostálgica y canalizar tráfico a Fanvue.",
+        "musicTrack": "Synthwave retro de los 90s con sintetizadores brillantes y beat envolvente.",
+        "scenes": [
+            {
+                "num": 1,
+                "time": "0:00 - 0:08",
+                "name": "El Salto a la Azotea",
+                "shotType": "Plano medio en azotea con viento estelar",
+                "visual": "Luna de espaldas mirando el horizonte de la ciudad de neón. El viento mueve sus larguísimas coletas rubias. Se gira hacia la cámara con una sonrisa radiante y su vestido azul noche con transparencias que brillan con polvo de estrellas.",
+                "klingPrompt": "Medium shot of stunning adult anime heroine Starlight Luna turning around on windy skyscraper rooftop, ultra-long blonde twin tails flowing, midnight blue sheer dress with glowing constellations, crescent moon tiara, neon city background --ar 9:16",
+                "voice": "«En los años 90 me dibujaron para salvar al mundo con báculos mágicos... Pero miren esta ciudad. Ya nadie cree en los monstruos de las sombras; ahora todos se desvelan frente a una pantalla buscando compañía.»",
+                "voiceNotes": "Tono coqueto, enérgico, juvenil pero maduro y seductor.",
+                "audioCue": "Efecto de viento cósmico y destello de estrellas con sintetizador retro.",
+                "overlayText": "Capítulo 1: La chica mágica que creció... y descubrió la noche 🌙✨"
+            },
+            {
+                "num": 2,
+                "time": "0:08 - 0:22",
+                "name": "El Poder de la Energía Estelar",
+                "shotType": "Plano entero dinámico con pose de combate sensual",
+                "visual": "Luna hace una pose de victoria fluida y estilizada, dejando ver su silueta atlética y curvilínea. Guiña un ojo a la cámara mientras un destello dorado recorre la gema de su pecho.",
+                "klingPrompt": "Full body dynamic shot of voluptuous anime waifu Luna striking an alluring celestial pose, sheer dress highlighting curvy silhouette, golden sparkle tracing her chest, city lights shimmering below --ar 9:16",
+                "voice": "«Los científicos de este mundo dicen que la energía no se destruye, solo se transforma... Así que transformé todo mi poder cósmico en algo mucho más divertido: en ser la fantasía que no te deja dormir.»",
+                "voiceNotes": "Voz risueña, provocativa y segura de su impacto.",
+                "audioCue": "Efecto de campanillas mágicas brillantes y bajo synthwave creciente.",
+                "overlayText": "«Transformé mi poder en la fantasía que no te deja dormir 😏»"
+            },
+            {
+                "num": 3,
+                "time": "0:22 - 0:35",
+                "name": "La Invitación a la Nebulosa",
+                "shotType": "Primer plano medio sugerente",
+                "visual": "Luna se acerca a la cámara, apoya las manos en el borde de la azotea y se inclina ligeramente hacia adelante con una mirada penetrante y cautivadora.",
+                "klingPrompt": "Close-up of anime girl Starlight Luna leaning close to camera on rooftop railing, intense captivating blue eyes, sheer bodice showing starry patterns, mischievous alluring smile --ar 9:16",
+                "voice": "«Sé que pasas horas en Twitch y en foros buscando algo que de verdad te despierte el pulso. No necesitas seguir buscando, gamer... Hoy la luna llena brilla solo para ti.»",
+                "voiceNotes": "Susurro cómplice al oído, apelando al público gamer nocturno.",
+                "audioCue": "Suspiro suave y nota de bajo profundo que llena el espectro sonoro.",
+                "overlayText": "Menos farmeo y más magia lunar 🎮🌙"
+            },
+            {
+                "num": 4,
+                "time": "0:35 - 0:45",
+                "name": "El Cierre & Transformación Sin Censura",
+                "shotType": "Plano detalle de la tiara y corte con destellos",
+                "visual": "Luna toca la tiara de su frente haciendo estallar un halo de estrellas doradas que envuelve la pantalla, mientras envía un guiño final antes del fundido.",
+                "klingPrompt": "Extreme close-up of Luna tapping golden forehead tiara, burst of golden star particles illuminating her face and lips with a seductive wink, transition to cosmic darkness --ar 9:16",
+                "voice": "«La versión sin censura de mi transformación estelar te espera en mi santuario VIP. Ven y comprueba qué tan caliente queman las estrellas... El enlace está en mi perfil.»",
+                "voiceNotes": "Despedida triunfal, pícara y tentadora.",
+                "audioCue": "Explosión mágica de sonido estelar -> Desvanecimiento a negro con risa traviesa.",
+                "overlayText": "⭐ Mira mi transformación sin censura en el enlace de mi perfil (18+)"
+            }
+        ]
+    }
   }
 };
 
@@ -1742,6 +2374,16 @@ influencersData['damienvance'] = influencersData.damien;
 influencersData['damien-vance'] = influencersData.damien;
 influencersData['camilareyes'] = influencersData.camila;
 influencersData['camila-reyes'] = influencersData.camila;
+influencersData['roxiered'] = influencersData.roxie;
+influencersData['roxie-red'] = influencersData.roxie;
+influencersData['madame_v'] = influencersData.madamev;
+influencersData['madame-v'] = influencersData.madamev;
+influencersData['directora_m'] = influencersData.madamev;
+influencersData['princesa_aura'] = influencersData.aura;
+influencersData['princesa-aura'] = influencersData.aura;
+influencersData['starlight_luna'] = influencersData.luna;
+influencersData['starlight-luna'] = influencersData.luna;
+
 
 
 const channelsData = {
@@ -3012,7 +3654,11 @@ const defaultInfluencerPlatforms = {
   nova: ["flux", "comfy", "kling", "elevenlabs", "claude", "tiktok", "instagram", "youtube"],
   minho: ["flux", "kling", "suno", "elevenlabs", "capcut", "tiktok", "instagram", "spotify"],
   damien: ["flux", "elevenlabs", "claude", "davinci", "instagram", "tiktok", "telegram"],
-  camila: ["flux", "kling", "elevenlabs", "capcut", "tiktok", "instagram", "telegram", "fanvue"]
+  camila: ["flux", "kling", "elevenlabs", "capcut", "tiktok", "instagram", "telegram", "fanvue"],
+  roxie: ["flux", "kling", "elevenlabs", "capcut", "x", "instagram", "telegram", "fanvue"],
+  madamev: ["flux", "elevenlabs", "claude", "davinci", "x", "tiktok", "telegram", "fanvue"],
+  aura: ["flux", "kling", "elevenlabs", "capcut", "x", "instagram", "telegram", "fanvue"],
+  luna: ["flux", "kling", "elevenlabs", "capcut", "x", "tiktok", "discord", "fanvue"]
 };
 
 const defaultInfluencerOpsConfig = {
@@ -4878,10 +5524,65 @@ function renderInfluencersPage(categoryFilter = 'all') {
       badgeColor: '#ef4444',
       desc: '24 años. Medellín. Creadora de la webnovela "Pecados de Departamento". Enredos cotidianos cómicos, tensión sexual irresistible y alta conversión.',
       tags: ['Telenovela', 'Comedia Erótica', 'Adulto VIP', 'Fanvue']
+    },
+    {
+      id: 'roxie',
+      name: 'Roxie Red («La Toon Escapada»)',
+      avatar: 'roxie_avatar.jpg',
+      nicheIcon: 'fa-wand-magic-sparkles',
+      niche: 'Seducción Vintage 2.5D & Glamour de Cabaret',
+      category: 'vip',
+      badge: 'Activo Certificado • Adulto VIP 18+',
+      badgeColor: '#ec4899',
+      desc: '26 años. Hollywood/Mundo Real. La diva animada de 1947 inspirada en Jessica Rabbit y Holli Would. Fascinación por la piel humana, corsetería y jazz.',
+      tags: ['Toon 2.5D', 'Jessica Rabbit', 'Adulto VIP 18+', 'Fanvue']
+    },
+    {
+      id: 'madamev',
+      name: 'Madame V («La Directora»)',
+      avatar: 'madamev_avatar.jpg',
+      nicheIcon: 'fa-building-shield',
+      niche: 'Dominación Psicológica & Poder Corporativo',
+      category: 'vip',
+      badge: 'Activo Certificado • Dominación VIP 18+',
+      badgeColor: '#8b5cf6',
+      desc: '29 años. Metrópolis. Inspirada en Makima de Chainsaw Man. Traje sastre impecable, autoridad gélida y dominación mental de alto ticket sin desnudez.',
+      tags: ['Makima', 'Dominación Mental', 'High-Ticket VIP', 'Seinen']
+    },
+    {
+      id: 'aura',
+      name: 'Princesa Aura («La Desinhibida»)',
+      avatar: 'aura_avatar.jpg',
+      nicheIcon: 'fa-crown',
+      niche: 'Erotismo de Cuento de Hadas & Corsetería Real',
+      category: 'vip',
+      badge: 'Activo Certificado • Fantasía VIP 18+',
+      badgeColor: '#f59e0b',
+      desc: '24 años. Roselux/Mundo Real. La princesa de cuento inspirada en Giselle de Encantada que desata su corsé y descubre el placer sin censura.',
+      tags: ['Princesa Cuento', 'Giselle', 'Fantasía VIP 18+', 'Fanvue']
+    },
+    {
+      id: 'luna',
+      name: 'Starlight Luna («La Waifu Cósmica»)',
+      avatar: 'luna_avatar.jpg',
+      nicheIcon: 'fa-moon',
+      niche: 'Fantasía Cósmica Adulta & Cyberpunk Ecchi',
+      category: 'vip',
+      badge: 'Activo Certificado • Waifu Cósmica VIP 18+',
+      badgeColor: 'var(--cyan)',
+      desc: '25 años. Neo-Tokio/Azotea Real. Inspirada en Sailor Moon adulta y reinas cósmicas. Glamour estelar, lencería translúcida 8K y magia gamer.',
+      tags: ['Sailor Moon Adulta', 'Waifu Cósmica', 'Cyberpunk', 'Fanvue']
     }
   ];
 
-  const filtered = categoryFilter === 'all' ? list : list.filter(item => item.category === categoryFilter);
+  const filtered = categoryFilter === 'all' 
+    ? list 
+    : list.filter(item => {
+        if (categoryFilter === 'toon') {
+          return item.id === 'roxie' || item.id === 'madamev' || item.id === 'aura' || item.id === 'luna';
+        }
+        return item.category === categoryFilter;
+      });
 
   container.innerHTML = `
     <div class="breadcrumb-bar">
@@ -4908,6 +5609,7 @@ function renderInfluencersPage(categoryFilter = 'all') {
         <button class="archive-filter-btn ${categoryFilter === 'lifestyle' ? 'active' : ''}" onclick="renderInfluencersPage('lifestyle')">Lifestyle & Bienestar</button>
         <button class="archive-filter-btn ${categoryFilter === 'beauty' ? 'active' : ''}" onclick="renderInfluencersPage('beauty')">Belleza & Skincare</button>
         <button class="archive-filter-btn ${categoryFilter === 'vip' ? 'active' : ''}" onclick="renderInfluencersPage('vip')">Adulto VIP</button>
+        <button class="archive-filter-btn ${categoryFilter === 'toon' ? 'active' : ''}" onclick="renderInfluencersPage('toon')" style="border-color: rgba(236, 72, 153, 0.45); color: #f472b6;"><i class="fa-solid fa-wand-magic-sparkles"></i> Toons & Anime 18+</button>
         <button class="archive-filter-btn ${categoryFilter === 'music' ? 'active' : ''}" onclick="renderInfluencersPage('music')">Música & Regional</button>
         <button class="archive-filter-btn ${categoryFilter === 'finance' ? 'active' : ''}" onclick="renderInfluencersPage('finance')">FinTech & Inversión</button>
         <button class="archive-filter-btn ${categoryFilter === 'tech' ? 'active' : ''}" onclick="renderInfluencersPage('tech')">Gaming & Tech</button>
