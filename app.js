@@ -1755,9 +1755,15 @@ const influencersData = {
         },
         {
             "img": "roxie_beach.jpg",
-            "tag": "Edición Verano 18+",
-            "label": "Roxie Red • Sol & Bikini en Club de Playa",
-            "desc": "Bikini rojo halterneck, silueta voluptuosa toon en reposera junto al mar turquesa con cóctel tropical."
+            "tag": "Edición Verano 18+ (Fondo Real)",
+            "label": "Roxie Red • Micro Bikini en Playa Real",
+            "desc": "Micro bikini rojo, curvas voluptuosas toon sobre arena blanca auténtica con rompiente de olas del Pacífico fotográfica."
+        },
+        {
+            "img": "toons_beach_duo1.jpg",
+            "tag": "Dúo VIP 18+",
+            "label": "Roxie & Madame V • Escapada a la Costa Real",
+            "desc": "Sesión híbrida live-action: personajes animados en entornos fotográficos de playa al natural."
         }
     ],
     "voice": {
@@ -1770,7 +1776,7 @@ const influencersData = {
         "lang": "es-ES"
     },
     "roi": {
-        "defaultFollowers: ": 110000,
+        "defaultFollowers": 110000,
         "defaultConversion": 5.8,
         "defaultTicket": 25
     },
@@ -1837,6 +1843,24 @@ const influencersData = {
         ],
         "funnelStrategy": "Clips de comedia sensual en X/IG -> Comunidad de Telegram con adelantos de audio -> Conversión masiva en Fanvue VIP."
     },
+    "posts": [
+        {
+            "caption": "Dicen que los humanos vienen a la playa a 'desconectar'. Yo vine a sentir la arena caliente bajo los pies y el viento del Pacífico en la piel. Mi primer bikini en el mundo real... ¿aprueban el rojo? 💋🌊 Set completo y sin censura en mi link VIP.",
+            "img": "roxie_beach.jpg",
+            "likes": "45,210",
+            "comments": "2,340",
+            "date": "Hace 4 horas",
+            "platform": "Instagram / X (18+)"
+        },
+        {
+            "caption": "¿Quién dijo que un dibujo animado de 1947 no podía robarse las miradas en un club de playa privado? La tinta no siente el calor... pero mi piel sí 🍸✨",
+            "img": "toons_beach_duo1.jpg",
+            "likes": "68,900",
+            "comments": "3,890",
+            "date": "Ayer",
+            "platform": "X Uncensored"
+        }
+    ],
     "pilotScript": {
         "title": "Episodio 1: Mi Primer Día con Piel Humana («¿Todo se siente tan caliente aquí?»)",
         "duration": "48 segundos",
@@ -1919,9 +1943,15 @@ const influencersData = {
         },
         {
             "img": "madamev_beach.jpg",
-            "tag": "Edición Verano 18+",
-            "label": "Madame V • Atardecer en la Orilla Privada",
-            "desc": "Bikini minimalista negro de dos piezas, trenza cobriza sobre el hombro y mirada penetrante dorada a la hora dorada."
+            "tag": "Edición Verano 18+ (Fondo Real)",
+            "label": "Madame V • Micro Bikini en Costa Real al Atardecer",
+            "desc": "Micro bikini negro de dos piezas, trenza cobriza sobre el hombro en costa fotográfica real con puesta de sol dorada y palmeras auténticas."
+        },
+        {
+            "img": "toons_beach_duo1.jpg",
+            "tag": "Dúo VIP 18+",
+            "label": "Madame V & Roxie • Escapada a la Costa Real",
+            "desc": "Sesión híbrida live-action: personajes animados en entornos fotográficos de playa al natural."
         }
     ],
     "voice": {
@@ -2001,6 +2031,24 @@ const influencersData = {
         ],
         "funnelStrategy": "Clips de autoridad gélida en X/TikTok -> Comunidad de Telegram con micro-recompensas -> Suscripción recurrente de alto ticket en Fanvue."
     },
+    "posts": [
+        {
+            "caption": "Incluso la Directora necesita evaluar nuevos horizontes. La disciplina no descansa al atardecer, pero el agua salada tiene una forma curiosa de disolver el estrés corporativo. Mantén la mirada arriba. 🖤🌅 Sesión de playa sin censura en mi canal privado.",
+            "img": "madamev_beach.jpg",
+            "likes": "54,120",
+            "comments": "1,980",
+            "date": "Hace 6 horas",
+            "platform": "X / Telegram VIP"
+        },
+        {
+            "caption": "Reunión de alto nivel frente a la costa. Sin contratos, sin papeles... solo presencia absoluta y control. Accede al canal privado para la sesión completa al atardecer.",
+            "img": "toons_beach_duo1.jpg",
+            "likes": "72,400",
+            "comments": "4,120",
+            "date": "Hace 2 días",
+            "platform": "Fanvue High-Ticket"
+        }
+    ],
     "pilotScript": {
         "title": "Episodio 1: El Primer Contrato («Mírame a los Ojos y Deja de Fingir»)",
         "duration": "50 segundos",
@@ -2083,9 +2131,15 @@ const influencersData = {
         },
         {
             "img": "aura_beach.jpg",
-            "tag": "Edición Verano 18+",
-            "label": "Princesa Aura • Sirena Real en Arena Blanca",
-            "desc": "Bikini verde esmeralda con filigrana dorada, tiara real y ondas rubias en resort tropical paradisíaco."
+            "tag": "Edición Verano 18+ (Fondo Real)",
+            "label": "Princesa Aura • Micro Bikini en Costa Real",
+            "desc": "Micro bikini verde esmeralda con filigrana dorada y tiara real sobre arena blanca y mar turquesa fotográfico real."
+        },
+        {
+            "img": "toons_beach_duo2.jpg",
+            "tag": "Dúo VIP 18+",
+            "label": "Aura & Starlight Luna • Paraíso Tropical Real",
+            "desc": "Sesión híbrida live-action: personajes de cuento y anime cósmico en aguas cristalinas y palmeras tropicales reales."
         }
     ],
     "voice": {
@@ -2165,6 +2219,24 @@ const influencersData = {
         ],
         "funnelStrategy": "Picardía romántica en redes abiertas -> Lectura de fragmentos ardientes en Telegram -> Conversión masiva en Fanvue VIP."
     },
+    "posts": [
+        {
+            "caption": "En los cuentos nos dibujaban en castillos con diez capas de enaguas pesadas. Qué alivio haber escapado a un mundo donde las olas son reales, el agua es turquesa y el bikini es minúsculo 👑✨ ¿Me ayudas a ponerme bronceador? Set completo en mi Fanvue VIP.",
+            "img": "aura_beach.jpg",
+            "likes": "62,800",
+            "comments": "3,410",
+            "date": "Hace 3 horas",
+            "platform": "Instagram (18+) / Fanvue"
+        },
+        {
+            "caption": "La realeza también toma sol. Descubriendo el paraíso terrenal junto a las olas del Caribe 🌺🌊 Sesión exclusiva en la alcoba y la playa en mi club VIP.",
+            "img": "toons_beach_duo2.jpg",
+            "likes": "81,250",
+            "comments": "4,790",
+            "date": "Ayer",
+            "platform": "Fanvue VIP"
+        }
+    ],
     "pilotScript": {
         "title": "Episodio 1: La Princesa que se Cansó de Esperar («¿Quién me ayuda con este lazo?»)",
         "duration": "46 segundos",
@@ -2247,9 +2319,15 @@ const influencersData = {
         },
         {
             "img": "luna_beach.jpg",
-            "tag": "Edición Verano 18+",
-            "label": "Starlight Luna • Magia Estelar Bajo las Palmeras",
-            "desc": "Bikini estelar lila y azul noche con detalles cósmicos, moños espaciales y cóctel veraniego frente a la bahía."
+            "tag": "Edición Verano 18+ (Fondo Real)",
+            "label": "Starlight Luna • Micro Bikini Cósmico en la Costa Real",
+            "desc": "Micro bikini lila y azul noche, moños espaciales y melena plateada en aguas cristalinas y palmeras tropicales reales."
+        },
+        {
+            "img": "toons_beach_duo2.jpg",
+            "tag": "Dúo VIP 18+",
+            "label": "Starlight Luna & Aura • Paraíso Tropical Real",
+            "desc": "Sesión híbrida live-action: personajes de cuento y anime cósmico en aguas cristalinas y palmeras tropicales reales."
         }
     ],
     "voice": {
@@ -2329,6 +2407,24 @@ const influencersData = {
         ],
         "funnelStrategy": "Clips de comedia anime picante en redes -> Comunidad Discord con adelantos -> Suscripción masiva en Fanvue VIP."
     },
+    "posts": [
+        {
+            "caption": "¿Pelear por el cosmos bajo la luna? Mejor un descanso en el mundo terrenal con bikini estelar y palmeras tropicales de verdad 🌙💜 La gravedad humana y el agua de mar se sienten increíbles. ¡Set completo en mi Fanvue!",
+            "img": "luna_beach.jpg",
+            "likes": "74,300",
+            "comments": "5,120",
+            "date": "Hace 5 horas",
+            "platform": "X / Discord Secreto"
+        },
+        {
+            "caption": "Dúo estelar en la costa terrenal. Cuando la magia anime se encuentra con el océano más transparente que jamás vi 🌴✨ Desbloquea las tomas exclusivas 4K en el link de mi biografía.",
+            "img": "toons_beach_duo2.jpg",
+            "likes": "93,500",
+            "comments": "6,340",
+            "date": "Ayer",
+            "platform": "Fanvue VIP"
+        }
+    ],
     "pilotScript": {
         "title": "Episodio 1: Mi Primera Noche en la Azotea («La Magia que Nadie vio en los 90s»)",
         "duration": "45 segundos",
@@ -4309,6 +4405,11 @@ function renderInfluencerPublicProduct(id) {
                   </div>
                 </div>
                 <div class="social-caption">${post.caption}</div>
+                ${post.img ? `
+                  <div style="margin: 0.85rem 0; border-radius: 8px; overflow: hidden; background: #000; text-align: center;">
+                    <img src="${post.img}" alt="Publicación" style="width: 100%; max-height: 480px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">
+                  </div>
+                ` : ''}
                 <div class="social-stats">
                   <span><i class="fa-regular fa-heart" style="color: var(--pink);"></i> ${post.likes} Me gusta</span>
                   <span><i class="fa-regular fa-comment" style="color: var(--cyan);"></i> ${post.comments} Comentarios</span>
@@ -4748,11 +4849,11 @@ function renderInfluencerCockpit(id) {
       <main class="cockpit-main-stage">
         <div class="cockpit-tab-bar">
           <button id="tab-btn-platforms" class="tab-btn cockpit-tab-btn active" onclick="switchTab(this, 'tab-platforms')">
+            <i class="fa-solid fa-layer-group"></i> Plataformas & SOP
+          </button>
           <button id="tab-btn-pilot" class="tab-btn cockpit-tab-btn" onclick="switchTab(this, 'tab-pilot')" style="position: relative;">
             <i class="fa-solid fa-clapperboard" style="color: #ec4899; margin-right: 0.35rem;"></i> Guión Piloto 🎬
             <span style="background: #ec4899; color: #fff; font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.4rem; border-radius: 999px; margin-left: 0.35rem;">NUEVO</span>
-          </button>
-            <i class="fa-solid fa-layer-group"></i> Plataformas & SOP
           </button>
           <button id="tab-btn-ecommerce" class="tab-btn cockpit-tab-btn" onclick="switchTab(this, 'tab-ecommerce')">
             <i class="fa-solid fa-cart-shopping"></i> E-Commerce & Catálogo
@@ -4888,7 +4989,7 @@ function renderInfluencerCockpit(id) {
         <!-- Tab 1: Posts Mockup (Non-active by default in cockpit) -->
         <div id="tab-posts" class="tab-pane">
         <h3 style="font-family: var(--font-heading); margin-bottom: 1.5rem; font-size: 1.4rem;">Muestra de Contenido en Redes Sociales</h3>
-        ${data.posts.map(post => `
+        ${(data.posts && data.posts.length > 0) ? data.posts.map(post => `
           <div class="social-mockup-card">
             <div class="social-header">
               <img src="${data.avatar}" alt="${data.name}" class="social-avatar">
@@ -4898,13 +4999,18 @@ function renderInfluencerCockpit(id) {
               </div>
             </div>
             <div class="social-caption">${post.caption}</div>
+            ${post.img ? `
+              <div style="margin: 0.85rem 0; border-radius: 8px; overflow: hidden; background: #000; text-align: center;">
+                <img src="${post.img}" alt="Publicación" style="width: 100%; max-height: 480px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px;">
+              </div>
+            ` : ''}
             <div class="social-stats">
               <span><i class="fa-regular fa-heart" style="color: var(--pink);"></i> ${post.likes} Me gusta</span>
               <span><i class="fa-regular fa-comment" style="color: var(--cyan);"></i> ${post.comments} Comentarios</span>
               <span><i class="fa-regular fa-clock"></i> ${post.date}</span>
             </div>
           </div>
-        `).join('')}
+        `).join('') : '<p style="color: var(--text-muted);">Sin publicaciones de muestra registradas.</p>'}
       </div>
 
       <!-- Tab 2: Funnel & Interactive ROI Calculator -->
@@ -5640,6 +5746,40 @@ function renderInfluencersPage(categoryFilter = 'all') {
         <button class="archive-filter-btn ${categoryFilter === 'b2b' ? 'active' : ''}" onclick="renderInfluencersPage('b2b')">Marcas B2B</button>
       </div>
     </div>
+
+    ${categoryFilter === 'toon' ? `
+      <div class="glass-card" style="margin-bottom: 2.5rem; border-color: rgba(236, 72, 153, 0.4); background: radial-gradient(circle at top, rgba(236, 72, 153, 0.12) 0%, rgba(10, 12, 22, 0.95) 100%); padding: 1.5rem; border-radius: var(--radius-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <span class="product-tag" style="background: rgba(236, 72, 153, 0.15); color: #ec4899; border-color: rgba(236, 72, 153, 0.4);">
+              <i class="fa-solid fa-umbrella-beach"></i> Especial Verano 18+ • Compositing Híbrido en Playas Reales
+            </span>
+            <h3 style="font-family: var(--font-heading); color: #fff; margin: 0.35rem 0 0.15rem 0; font-size: 1.25rem;">
+              Sesión de Micro Bikini: Personajes Animados en Playas Fotográficas Auténticas
+            </h3>
+            <p style="color: #cbd5e1; font-size: 0.85rem; margin: 0;">
+              Tecnología de integración 2.5D sobre entornos fotográficos reales: fidelidad facial absoluta a su lore en trajes de baño de alto impacto.
+            </p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          <div style="background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+            <img src="toons_beach_duo1.jpg" alt="Roxie Red & Madame V en Playa Real" style="width: 100%; height: auto; display: block;" loading="lazy">
+            <div style="padding: 0.65rem 0.85rem; font-size: 0.8rem; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+              <span><strong>Dúo 1:</strong> Roxie Red & Madame V</span>
+              <span style="color: #ec4899; font-weight: 600;">Micro Bikini 18+</span>
+            </div>
+          </div>
+          <div style="background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+            <img src="toons_beach_duo2.jpg" alt="Princesa Aura & Starlight Luna en Playa Real" style="width: 100%; height: auto; display: block;" loading="lazy">
+            <div style="padding: 0.65rem 0.85rem; font-size: 0.8rem; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+              <span><strong>Dúo 2:</strong> Princesa Aura & Starlight Luna</span>
+              <span style="color: #00f5d4; font-weight: 600;">Micro Bikini 18+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ` : ''}
 
     <div class="roster-grid">
       ${filtered.map(item => `
