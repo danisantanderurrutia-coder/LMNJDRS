@@ -3025,6 +3025,10 @@ function handleRoute() {
     const channelId = hash.replace('#channel/', '');
     renderChannelPage(channelId);
     showDynamicView();
+  } else if (hash === '#micro-cinema' || hash === '#cinema' || hash === '#microcinema' || hash.startsWith('#micro-cinema/')) {
+    const rawParam = hash.startsWith('#micro-cinema/') ? hash.replace('#micro-cinema/', '') : '';
+    renderMicroCinemaPage(rawParam);
+    showDynamicView();
   } else if (hash === '#roster' || hash === '#influencers') {
     renderInfluencersPage();
     showDynamicView();
@@ -11093,3 +11097,532 @@ function handleLandingB2BSubmit(e) {
   e.target.reset();
 }
 
+
+
+// ==========================================================================
+// 8. MICRO-CINEMA & FICCIÓN VERTICAL (SERIES NATIVAS 9:16)
+// ==========================================================================
+
+const microCinemaData = {
+  kassandra: {
+    id: 'kassandra',
+    title: 'Kassandra & El Clan Colmillo',
+    name: 'Kassandra Valmont',
+    archetype: 'La Diva de Lujo & Negociadora Implacable',
+    category: 'fantasy',
+    isAdult: true,
+    rating: '+18 Adult Fiction',
+    ratingColor: '#ec4899',
+    ratingBg: 'rgba(236, 72, 153, 0.15)',
+    ratingBorder: 'rgba(236, 72, 153, 0.4)',
+    ratingNotice: '🔞 Contenido Adulto: Sátira irreverente, humor picante y choque cultural salvaje.',
+    world: 'Campamento de Guerra Orco / Territorios Bárbaros',
+    companion: "Gorg'zul el Devastador (Troll de 2.8m con garrote de guerra)",
+    image: 'cinema_diva_troll.jpg',
+    banner: 'microcinema_fantasy_banner.jpg',
+    synopsis: 'Kassandra, alta ejecutiva de moda acostumbrada a humillar a directivos en salas de juntas, cae por un portal a un campamento orco en plena guerra tribal. Descalza pero con un bikini de esmeralda y oro, se niega a ensuciarse y empieza a dar órdenes al clan como si fueran sus becarios. Gorg\'zul, el señor de la guerra, queda desconcertado por su autoridad y la nombra líder estratégica.',
+    hook: '"Día 4 con los orcos. Me retaron a duelo a muerte. Les dije que sus tótems combinaban fatal con sus taparrabos y ahora soy su consultora de imagen. Gorg\'zul es mi nuevo chófer personal."',
+    scriptScene: [
+      { step: '00-03s (Hook)', desc: 'Kassandra se retoca el labial mirando a cámara. De fondo, dos orcos gigantes pelean con hachas hasta que ella chasquea los dedos y se detienen avergonzados.' },
+      { step: '03-25s (Nudo)', desc: 'Explica a cámara el estado de las negociaciones de paz con la tribu vecina usando un mapa de guerra como si fuera una presentación de PowerPoint.' },
+      { step: '25-45s (Clímax cómico)', desc: 'Gorg\'zul intenta ofrecerle un cuenco con ojos de jabalí asado. Ella lo rechaza con asco: "Si no es orgánico y sin gluten, no lo toco, cariño".' },
+      { step: '45-60s (Call to Action)', desc: 'Pide a los seguidores en comentarios que voten qué castigo darle al chamán que quemó su toalla de seda.' }
+    ],
+    productionTech: 'Midjourney v6 + Kling 1.5 + ElevenLabs (Voz de Diva Sarcástica)',
+    targetRPM: '$7.5–$12 USD RPM (TikTok Series & Fanvue Premium)'
+  },
+  vespera: {
+    id: 'vespera',
+    title: 'Vespera: El Santuario Rúnico',
+    name: 'Vespera Nightshade',
+    archetype: 'La Dama Oscura & Arqueóloga Arcana',
+    category: 'fantasy',
+    isAdult: true,
+    rating: '+18 Adult Fiction',
+    ratingColor: '#ec4899',
+    ratingBg: 'rgba(236, 72, 153, 0.15)',
+    ratingBorder: 'rgba(236, 72, 153, 0.4)',
+    ratingNotice: '🔞 Contenido Adulto: Fantasía oscura pulp, sensualidad gótica y peligro depredador.',
+    world: 'El Valle de los Primigenios (Templos ciclópeos y selva jurásica con runas)',
+    companion: 'Rexis el Guardián Sagrado (T-Rex ancestral con marcas rúnicas)',
+    image: 'cinema_goth_dino.jpg',
+    banner: 'microcinema_fantasy_banner.jpg',
+    synopsis: 'Vespera es una buscadora de reliquias arcanas vestida en cuero negro y runas que descubre el secreto de una civilización milenaria extinta: los dinosaurios no eran monstruos ciegos, sino los guardianes sagrados de templos piramidales. Con carisma dominante y sangre fría, establece un lazo casi simbiótico con un T-Rex de 12 metros que la protege.',
+    hook: '"En mi ciudad todos los hombres con los que salí resultaron ser unos cobardes. Conocí a Rexis: mide 12 metros, no habla de sus ex y acaba de devorar a los saqueadores del templo. Chicas, los dinosaurios entienden mejor la lealtad."',
+    scriptScene: [
+      { step: '00-04s (Hook)', desc: 'Plano cerrado de Vespera con sonrisa seductora mientras acaricia la piel escamada de la mandíbula de Rexis, que emite un ronroneo que hace temblar la pantalla.' },
+      { step: '04-30s (Nudo)', desc: 'Muestra los jeroglíficos rúnicos de un altar perdido y explica el ritual para despertar a los demás guardianes carnívoros del valle.' },
+      { step: '30-50s (Acción)', desc: 'Un grupo de mercenarios intenta entrar al templo; Rexis ruge tras ella y Vespera ni siquiera parpadea mientras toma un sorbo de vino.' },
+      { step: '50-60s (Comunidad)', desc: '"Comenten abajo qué runa desciframos mañana: ¿la del aliento de azufre o la del pacto de sangre?"' }
+    ],
+    productionTech: 'Flux Dev LoRA + Runway Gen-3 Alpha + Foley Acústico Jurásico Masterizado',
+    targetRPM: '$8–$14 USD RPM (TikTok Dark Romance & YouTube Shorts)'
+  },
+  sylvia: {
+    id: 'sylvia',
+    title: 'Sylvia: La Reina del Enjambre',
+    name: 'Sylvia Kerr',
+    archetype: 'Emperatriz Biomecánica & Consciencia Colmena',
+    category: 'scifi',
+    isAdult: true,
+    rating: '+18 Adult Fiction',
+    ratingColor: '#ec4899',
+    ratingBg: 'rgba(236, 72, 153, 0.15)',
+    ratingBorder: 'rgba(236, 72, 153, 0.4)',
+    ratingNotice: '🔞 Contenido Adulto: Horror cósmico, violencia visceral alienígena y bio-sensualidad.',
+    world: 'Sector Némesis / Planeta Nido Xenomorfo',
+    companion: 'El Enjambre Quimérico (Bestias zerg colosales con cuchillas de quitina)',
+    image: 'cinema_swarm_queen.jpg',
+    banner: 'microcinema_scifi_banner.jpg',
+    synopsis: 'Ex-piloto humana asimilada por una supermente alienígena biológica. En lugar de perder su humanidad, Sylvia tomó el control de la colmena. Con alas de cuchilla óseas y un exoesqueleto de quitina púrpura bioluminiscente, lidera miles de millones de parásitos carnívoros como si fueran su corte real.',
+    hook: '"Mi ex decía que era demasiado controladora con la relación. Bueno, ahora controlo cuatro mil millones de bestias carnívoras con un chasquido mental. Y ninguna de ellas me deja en visto."',
+    scriptScene: [
+      { step: '00-03s (Hook)', desc: 'Ojos violetas brillando en la oscuridad. Sylvia extiende sus alas de cuchillas y la cámara revela un ejército de bestias arrodilladas en el suelo alienígena.' },
+      { step: '03-25s (Nudo)', desc: 'Monólogo sobre la superioridad de la biomasa frente a las corporaciones humanas que intentan colonizar su planeta.' },
+      { step: '25-45s (Tensión)', desc: 'Una bestia alienígena gigante acerca sus fauces con saliva ácida; Sylvia le acaricia la cabeza con ternura gélida.' },
+      { step: '45-60s (Hook final)', desc: '"Una fragata humana acaba de entrar en órbita. ¿Los devoramos de inmediato o jugamos con ellos primero? Ustedes deciden en los comentarios."' }
+    ],
+    productionTech: 'Unreal Engine 5 + Nano Banana Pro + ElevenLabs Voz Psiónica con Reverb',
+    targetRPM: '$10–$16 USD RPM (Comunidad Sci-Fi Hardcore & Patreon VIP)'
+  },
+  anya: {
+    id: 'anya',
+    title: 'Anya Vance: Redline Mech',
+    name: 'Anya Vance',
+    archetype: 'Piloto Mecha de Élite & As de Combate',
+    category: 'scifi',
+    isAdult: false,
+    rating: 'PG-13 Acción & Sci-Fi',
+    ratingColor: '#06b6d4',
+    ratingBg: 'rgba(6, 182, 212, 0.15)',
+    ratingBorder: 'rgba(6, 182, 212, 0.4)',
+    ratingNotice: '⚔️ Clasificación PG-13: Aventura y acción épica apta para marcas y público general.',
+    world: 'Hangar Industrial Militar Neo-Tokyo / Sector 07',
+    companion: 'Titan-09 "Ares" (Mecha de combate de 40 metros con reactor nuclear)',
+    image: 'cinema_mecha_pilot.jpg',
+    banner: 'microcinema_scifi_banner.jpg',
+    synopsis: 'Anya es la única piloto viva capaz de soportar la tasa de sincronización neuronal del 98% con el Titan-09. Con su cabello pelirrojo fuego y bikini táctico de piloto en fibra de carbono, desprecia los protocolos de los generales y defiende la última ciudad costera de invasiones kaiju submarinas.',
+    hook: '"Me dijeron que este mecha tiene un 80% de probabilidad de sobrecalentamiento. Por suerte a mí siempre me ha gustado el calor. Conectando interfaz neuronal en 3, 2, 1..."',
+    scriptScene: [
+      { step: '00-04s (Hook)', desc: 'Alarma de emergencia roja. Anya ajusta sus guantes de piloto mientras el reactor nuclear del mecha gigante ruge expulsando vapor a presión a sus espaldas.' },
+      { step: '04-28s (Briefing)', desc: 'Explica los puntos débiles de la bestia colosal detectada en el sonar mientras los técnicos del hangar corren a toda prisa.' },
+      { step: '28-50s (Despegue)', desc: 'Anya sube al elevador de la cabina, se coloca el visor holográfico y la mano metálica del mecha se activa con luces de neón.' },
+      { step: '50-60s (Cierre épico)', desc: '"Objetivo fijado. Denle like para activar los cañones de plasma en el próximo asalto."' }
+    ],
+    productionTech: 'Blender Hard-Surface 3D + Flux Dev + Kling 1.5 + SFX Mecha de Cine',
+    targetRPM: '$5–$9 USD RPM (Patrocinios Tech, Gaming & YouTube AdSense)'
+  },
+  meilin: {
+    id: 'meilin',
+    title: 'Mei Lin: Dunas del Borde Exterior',
+    name: 'Mei Lin',
+    archetype: 'Cazadora Espacial & Mercenaria Solitaria',
+    category: 'scifi',
+    isAdult: false,
+    rating: 'PG-13 Aventura Espacial',
+    ratingColor: '#06b6d4',
+    ratingBg: 'rgba(6, 182, 212, 0.15)',
+    ratingBorder: 'rgba(6, 182, 212, 0.4)',
+    ratingNotice: '⚔️ Clasificación PG-13: Space Western, supervivencia y cacería de monstruos estelares.',
+    world: 'Planeta Desierto Carmesí (Dos lunas púrpuras y pecios de cruceros espaciales)',
+    companion: 'Leviatán de Dunas & Acorazado Estelar Caído "Vanguardia"',
+    image: 'cinema_space_hunter.jpg',
+    banner: 'microcinema_scifi_banner.jpg',
+    synopsis: 'Mei Lin opera en el sector más peligroso del Borde Exterior. Armada con un rifle de plasma y vestida en bikini táctico de cuero del desierto, rastrea recompensas millonarias y criaturas titánicas que devoran naves interestelares entre tormentas de arena ionizada.',
+    hook: '"La Alianza puso cien mil créditos por mi cabeza. Lástima que contrataron cazarrecompensas que no saben navegar una tormenta de arena. Hoy cenamos filete de bestia estelar."',
+    scriptScene: [
+      { step: '00-03s (Hook)', desc: 'Viento caliente agitando su coleta alta. Mei Lin mira por la mira telescópica de su rifle mientras una duna entera se eleva revelando el lomo acorazado de un monstruo.' },
+      { step: '03-30s (Supervivencia)', desc: 'Muestra los restos oxidados del crucero estelar caído que usa como fortaleza y cómo filtra agua en el desierto.' },
+      { step: '30-48s (Disparo de plasma)', desc: 'Disparo de energía certero que ilumina las dos lunas púrpuras en el cielo nocturno.' },
+      { step: '48-60s (Gancho)', desc: '"El gremio de contrabandistas quiere negociar. ¿Acepto su cargamento de antimateria o los dejo en el desierto? Dejen su voto."' }
+    ],
+    productionTech: 'Midjourney Photoreal + LivePortrait + Efectos de Partículas de Arena 4K',
+    targetRPM: '$6–$11 USD RPM (Gaming Sponsors, Creadores Sci-Fi & Merchandising)'
+  },
+  valeria: {
+    id: 'valeria',
+    title: 'Valeria: La Furia del Coliseo',
+    name: 'Valeria Ironclast',
+    archetype: 'Campeona Gladiadora & Atleta Implacable',
+    category: 'fantasy',
+    isAdult: false,
+    rating: 'PG-13 Acción Épica',
+    ratingColor: '#06b6d4',
+    ratingBg: 'rgba(6, 182, 212, 0.15)',
+    ratingBorder: 'rgba(6, 182, 212, 0.4)',
+    ratingNotice: '⚔️ Clasificación PG-13: Épica de arena, comedia de gimnasio y combates físicos heroicos.',
+    world: 'El Gran Coliseo Subterráneo de los Monstruos',
+    companion: 'Asterion el Minotauro (Campeón caído que ahora es su sparring)',
+    image: 'cinema_amazon_colosseum.jpg',
+    banner: 'microcinema_fantasy_banner.jpg',
+    synopsis: 'Entrenadora de crossfit y atleta de combate que fue transportada al coliseo más brutal del inframundo. Creyeron que sería presa fácil para las bestias, pero Valeria convirtió la arena en su gimnasio personal, derribando minotauros y ganándose la adoración del público.',
+    hook: '"Mi entrenador me dijo que necesitaba variar mi rutina de peso muerto. Llevo 3 asaltos contra un tipo mitad toro con problemas de ira. Si no me traen un batido frío, le rompo el otro cuerno."',
+    scriptScene: [
+      { step: '00-04s (Hook)', desc: 'Valeria se sacude el polvo de la arena con una sonrisa triunfal mientras un minotauro gigante de 300 kilos cae noqueado detrás de ella.' },
+      { step: '04-26s (Rutina de combate)', desc: 'Explica a cámara la técnica de palanca que usó para neutralizar la embestida del monstruo cornudo.' },
+      { step: '26-45s (La multitud ruge)', desc: 'Los monstruos del público la vitorean mientras el emperador del coliseo no sabe qué hacer.' },
+      { step: '45-60s (Desafío)', desc: '"Mañana abren la fosa de las quimeras. Comenten si quieren que pelee con lanza o a mano limpia."' }
+    ],
+    productionTech: 'Unreal Engine 5 Colosseum + Flux Realism + Coreografías Mocap',
+    targetRPM: '$5–$8.5 USD RPM (Marcas Fitness, Suplementos & Audiencias Deportivas)'
+  }
+};
+
+let currentMicroCinemaFilter = 'all';
+
+function renderMicroCinemaPage(filterParam) {
+  const container = document.getElementById('view-dynamic');
+  if (!container) return;
+
+  if (filterParam && ['adult', 'pg13', 'fantasy', 'scifi', 'all'].includes(filterParam)) {
+    currentMicroCinemaFilter = filterParam;
+  }
+
+  const heroinesList = Object.values(microCinemaData);
+
+  const filtered = heroinesList.filter(item => {
+    if (currentMicroCinemaFilter === 'adult') return item.isAdult;
+    if (currentMicroCinemaFilter === 'pg13') return !item.isAdult;
+    if (currentMicroCinemaFilter === 'fantasy') return item.category === 'fantasy';
+    if (currentMicroCinemaFilter === 'scifi') return item.category === 'scifi';
+    return true;
+  });
+
+  const adultCount = heroinesList.filter(h => h.isAdult).length;
+  const pg13Count = heroinesList.filter(h => !h.isAdult).length;
+
+  container.innerHTML = `
+    <div style="max-width: 1300px; margin: 0 auto; padding: 2rem 1rem 5rem;">
+      
+      <!-- Back Navigation -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+        <a href="#home" onclick="navigateRoute('#home')" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+          <i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i> Volver a la Agencia
+        </a>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: #f472b6; background: rgba(236, 72, 153, 0.15); padding: 0.3rem 0.75rem; border-radius: 20px; border: 1px solid rgba(236, 72, 153, 0.4);">
+            <i class="fa-solid fa-clapperboard" style="margin-right: 4px;"></i> DIVISIÓN MICRO-CINEMA
+          </span>
+          <span style="font-size: 0.75rem; font-weight: 700; color: #67e8f9; background: rgba(6, 182, 212, 0.15); padding: 0.3rem 0.75rem; border-radius: 20px; border: 1px solid rgba(6, 182, 212, 0.4);">
+            FORMATO VERTICAL 9:16
+          </span>
+        </div>
+      </div>
+
+      <!-- Hero Header -->
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="section-subtitle" style="color: #f472b6; letter-spacing: 2px;">
+          <i class="fa-solid fa-film"></i> PRODUCCIÓN AUDIOVISUAL & SERIES NATIVAS PARA REDES
+        </span>
+        <h1 style="font-family: var(--font-heading); font-size: 2.6rem; color: #fff; margin: 0.5rem 0 1rem; line-height: 1.2;">
+          Micro-Cinema: <span class="gradient-text">Sagas del Multiverso</span>
+        </h1>
+        <p style="max-width: 820px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
+          Historias cinematográficas de ficción pura diseñadas para dominar el algoritmo de TikTok, Reels y Shorts. Fotorrealismo AAA, choque de realidades y cero dilemas de engaño: cine directo al feed con retención récord.
+        </p>
+      </div>
+
+      <!-- Disclaimer de Clasificación de Audiencias -->
+      <div class="glass-card" style="padding: 1.25rem 1.75rem; margin-bottom: 2.5rem; border-color: rgba(236, 72, 153, 0.4); background: radial-gradient(circle at top left, rgba(236, 72, 153, 0.12) 0%, rgba(10, 12, 22, 0.95) 100%); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 1.25rem;">
+          <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(236, 72, 153, 0.2); color: #ec4899; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 0.25rem;">
+              Aviso de Segmentación de Audiencias (Dual Pipeline)
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              Esta división cuenta con <strong>3 producciones con narrativa para adultos (+18)</strong> (sátira irreverente, peligro depredador y comedia picante) y <strong>3 producciones de Aventura & Sci-Fi Épica (PG-13)</strong> aptas para patrocinadores comerciales y público masivo.
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: #ec4899; background: rgba(236, 72, 153, 0.15); padding: 0.35rem 0.75rem; border-radius: 6px; border: 1px solid rgba(236, 72, 153, 0.4);">
+            🔞 3 Series +18
+          </span>
+          <span style="font-size: 0.75rem; font-weight: 700; color: #06b6d4; background: rgba(6, 182, 212, 0.15); padding: 0.35rem 0.75rem; border-radius: 6px; border: 1px solid rgba(6, 182, 212, 0.4);">
+            ⚔️ 3 Series PG-13
+          </span>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem;">
+        <button onclick="filterMicroCinema('all')" class="btn ${currentMicroCinemaFilter === 'all' ? 'btn-primary' : 'btn-secondary'}" style="font-size: 0.85rem; padding: 0.55rem 1.1rem;">
+          <i class="fa-solid fa-border-all"></i> Todos los Universos (6)
+        </button>
+        <button onclick="filterMicroCinema('adult')" class="btn ${currentMicroCinemaFilter === 'adult' ? 'btn-primary' : 'btn-secondary'}" style="font-size: 0.85rem; padding: 0.55rem 1.1rem; border-color: rgba(236, 72, 153, 0.5); color: ${currentMicroCinemaFilter === 'adult' ? '#fff' : '#f472b6'};">
+          <i class="fa-solid fa-fire"></i> Clasificación +18 Adultos (${adultCount})
+        </button>
+        <button onclick="filterMicroCinema('pg13')" class="btn ${currentMicroCinemaFilter === 'pg13' ? 'btn-primary' : 'btn-secondary'}" style="font-size: 0.85rem; padding: 0.55rem 1.1rem; border-color: rgba(6, 182, 212, 0.5); color: ${currentMicroCinemaFilter === 'pg13' ? '#fff' : '#67e8f9'};">
+          <i class="fa-solid fa-shield-heart"></i> PG-13 Aventura & Sci-Fi (${pg13Count})
+        </button>
+        <button onclick="filterMicroCinema('fantasy')" class="btn ${currentMicroCinemaFilter === 'fantasy' ? 'btn-primary' : 'btn-secondary'}" style="font-size: 0.85rem; padding: 0.55rem 1.1rem;">
+          <i class="fa-solid fa-dragon"></i> Trilogía Fantasía
+        </button>
+        <button onclick="filterMicroCinema('scifi')" class="btn ${currentMicroCinemaFilter === 'scifi' ? 'btn-primary' : 'btn-secondary'}" style="font-size: 0.85rem; padding: 0.55rem 1.1rem;">
+          <i class="fa-solid fa-rocket"></i> Trilogía Sci-Fi
+        </button>
+      </div>
+
+      <!-- Dual Showcase Panorámico -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 3.5rem;">
+        
+        <!-- Banner Fantasía -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(139, 92, 246, 0.35); overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #c084fc;">
+              <i class="fa-solid fa-hat-wizard"></i> TRILOGÍA FANTASÍA SALVAJE
+            </span>
+            <span style="font-size: 0.72rem; color: var(--text-dim);">Póster Tríptico Oficial</span>
+          </div>
+          <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.75rem;">
+            <img src="microcinema_fantasy_banner.jpg" alt="Trilogía Fantasía Micro-Cinema" style="width: 100%; height: auto; display: block;" />
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">
+            Kassandra (Trolls) • Vespera (Dinos & Runas) • Valeria (Coliseo)
+          </div>
+        </div>
+
+        <!-- Banner Sci-Fi -->
+        <div class="glass-card" style="padding: 1.25rem; border-color: rgba(6, 182, 212, 0.35); overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #67e8f9;">
+              <i class="fa-solid fa-satellite"></i> TRILOGÍA SCI-FI & MECHAS
+            </span>
+            <span style="font-size: 0.72rem; color: var(--text-dim);">Póster Tríptico Oficial</span>
+          </div>
+          <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.75rem;">
+            <img src="microcinema_scifi_banner.jpg" alt="Trilogía Sci-Fi Micro-Cinema" style="width: 100%; height: auto; display: block;" />
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">
+            Sylvia (Enjambre) • Anya (Mecha 40m) • Mei Lin (Dunas Rojas)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Grid de las 6 Protagonistas -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.75rem; margin-bottom: 3.5rem;">
+        ${filtered.map(h => `
+          <div class="glass-card" style="display: flex; flex-direction: column; overflow: hidden; border-color: ${h.isAdult ? 'rgba(236, 72, 153, 0.35)' : 'rgba(6, 182, 212, 0.35)'}; transition: transform 0.3s ease, border-color 0.3s ease;">
+            
+            <!-- Poster Image Vertical -->
+            <div style="position: relative; width: 100%; height: 380px; overflow: hidden; background: #000;">
+              <img src="${h.image}" alt="${h.title}" style="width: 100%; height: 100%; object-fit: cover; object-position: top center;" />
+              <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 12, 20, 0.95) 0%, rgba(10, 12, 20, 0.2) 60%, transparent 100%);"></div>
+              
+              <!-- Badges Superiores -->
+              <div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.72rem; font-weight: 800; color: ${h.ratingColor}; background: ${h.ratingBg}; padding: 0.25rem 0.65rem; border-radius: 20px; border: 1px solid ${h.ratingBorder}; backdrop-filter: blur(8px);">
+                  ${h.rating}
+                </span>
+                <span style="font-size: 0.7rem; font-weight: 700; color: #fff; background: rgba(0,0,0,0.6); padding: 0.25rem 0.55rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-mobile-screen" style="margin-right: 4px;"></i> 9:16
+                </span>
+              </div>
+
+              <!-- Info Inferior sobre la imagen -->
+              <div style="position: absolute; bottom: 12px; left: 16px; right: 16px;">
+                <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: ${h.isAdult ? '#f472b6' : '#67e8f9'}; font-weight: 700; margin-bottom: 2px;">
+                  ${h.archetype}
+                </div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; line-height: 1.2;">
+                  ${h.title}
+                </h3>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+              
+              <div>
+                <!-- Entorno & Compañero -->
+                <div style="margin-bottom: 0.85rem; font-size: 0.82rem;">
+                  <div style="color: #cbd5e1; margin-bottom: 4px;">
+                    <i class="fa-solid fa-earth-americas" style="color: var(--cyan); width: 18px;"></i> <strong>Mundo:</strong> ${h.world}
+                  </div>
+                  <div style="color: #cbd5e1;">
+                    <i class="fa-solid fa-paw" style="color: ${h.isAdult ? '#ec4899' : '#fbbf24'}; width: 18px;"></i> <strong>Aliado/Criatura:</strong> ${h.companion}
+                  </div>
+                </div>
+
+                <!-- Hook Preview -->
+                <div style="background: rgba(255, 255, 255, 0.03); border-left: 3px solid ${h.ratingColor}; padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 0.82rem; color: #e2e8f0; font-style: italic;">
+                  ${h.hook}
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <button onclick="openMicroCinemaModal('${h.id}')" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.65rem; background: ${h.isAdult ? 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)' : 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)'};">
+                <i class="fa-solid fa-clapperboard"></i> Ver Ficha &amp; Storyboard <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+              </button>
+
+            </div>
+
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Framework de Negocio para Clientes e Inversionistas -->
+      <div class="glass-card" style="padding: 2.25rem; border-color: rgba(139, 92, 246, 0.4); background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.12) 0%, rgba(10, 12, 22, 0.95) 100%);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <span class="section-subtitle" style="color: #c084fc;">VENTAJAS DEL MODELO NARRATIVO</span>
+            <h2 style="font-family: var(--font-heading); font-size: 1.8rem; color: #fff;">¿Por qué Micro-Cinema y no Influencers Falsos?</h2>
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 0.35rem 0.8rem; border-radius: 20px; border: 1px solid rgba(16, 185, 129, 0.4);">
+            85%+ RETENCIÓN AUDIENCIA
+          </span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+          <div style="background: rgba(255,255,255,0.03); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="color: #ec4899; font-size: 1.2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-bullhorn"></i></div>
+            <div style="font-weight: 700; color: #fff; margin-bottom: 0.3rem;">Transparencia Radical</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+              La audiencia sabe que es una serie de ficción cinematográfica. No hay fatiga del engaño ni decepción por perfiles falsos de Instagram.
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="color: #06b6d4; font-size: 1.2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-layer-group"></i></div>
+            <div style="font-weight: 700; color: #fff; margin-bottom: 0.3rem;">Doble Pipeline Comercial</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+              Las 3 series +18 monetizan con suscripciones VIP, Fanvue y Creator Rewards; las 3 series PG-13 son 100% patrocinables por marcas de gaming, tech y bebidas.
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="color: #fbbf24; font-size: 1.2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-arrows-spin"></i></div>
+            <div style="font-weight: 700; color: #fff; margin-bottom: 0.3rem;">Interactividad con Comentarios</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+              Cada episodio termina con un dilema abierto. La decisión más votada en comentarios se convierte en el guion del siguiente episodio renderizado.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Dinámico de Personaje -->
+    <div id="microcinema-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); overflow-y: auto; padding: 2rem 1rem;" onclick="if(event.target===this) closeMicroCinemaModal()">
+      <div id="microcinema-modal-content" class="glass-card" style="max-width: 900px; margin: 0 auto; border-color: rgba(236, 72, 153, 0.4); padding: 2rem; position: relative;">
+        <!-- Rendered via openMicroCinemaModal -->
+      </div>
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function filterMicroCinema(filterType) {
+  currentMicroCinemaFilter = filterType;
+  renderMicroCinemaPage(filterType);
+}
+
+function openMicroCinemaModal(heroineId) {
+  const h = microCinemaData[heroineId];
+  if (!h) return;
+
+  const backdrop = document.getElementById('microcinema-modal-backdrop');
+  const modalContent = document.getElementById('microcinema-modal-content');
+  if (!backdrop || !modalContent) return;
+
+  modalContent.innerHTML = `
+    <!-- Close Button -->
+    <button onclick="closeMicroCinemaModal()" style="position: absolute; top: 18px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+      
+      <!-- Poster Col -->
+      <div style="flex: 1 1 300px; max-width: 340px;">
+        <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+          <img src="${h.image}" alt="${h.title}" style="width: 100%; height: auto; display: block;" />
+        </div>
+        <div style="margin-top: 1rem; text-align: center;">
+          <span style="font-size: 0.8rem; font-weight: 800; color: ${h.ratingColor}; background: ${h.ratingBg}; padding: 0.4rem 0.9rem; border-radius: 20px; border: 1px solid ${h.ratingBorder}; display: inline-block;">
+            ${h.rating}
+          </span>
+          <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
+            ${h.ratingNotice}
+          </p>
+        </div>
+      </div>
+
+      <!-- Dossier Info Col -->
+      <div style="flex: 1 1 400px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2px; color: ${h.isAdult ? '#f472b6' : '#67e8f9'}; font-weight: 700;">
+            ${h.archetype}
+          </span>
+          <h2 style="font-family: var(--font-heading); font-size: 2rem; color: #fff; margin: 0.2rem 0 0.75rem;">
+            ${h.title}
+          </h2>
+
+          <p style="color: #e2e8f0; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            ${h.synopsis}
+          </p>
+
+          <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #fbbf24; margin-bottom: 0.3rem;">
+              <i class="fa-solid fa-quote-left"></i> Hook de Entrada (Primeros 3 Segundos):
+            </div>
+            <div style="font-size: 0.88rem; color: #fff; font-style: italic;">
+              ${h.hook}
+            </div>
+          </div>
+
+          <!-- Escaleta del Episodio Piloto -->
+          <div style="margin-bottom: 1.25rem;">
+            <h4 style="font-size: 0.9rem; color: #fff; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1px;">
+              <i class="fa-solid fa-list-check" style="color: var(--cyan); margin-right: 6px;"></i> Escaleta del Piloto (60 seg):
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              ${h.scriptScene.map(s => `
+                <div style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 0.45rem 0.75rem; border-radius: 6px; border-left: 2px solid ${h.ratingColor};">
+                  <strong style="color: ${h.ratingColor};">${s.step}:</strong> <span style="color: var(--text-muted);">${s.desc}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Pipeline & Monetización -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.78rem;">
+            <div style="background: rgba(255,255,255,0.02); padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="color: var(--text-dim); font-size: 0.72rem;">STACK TECNOLÓGICO:</div>
+              <div style="color: #cbd5e1; font-weight: 600;">${h.productionTech}</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+              <div style="color: var(--text-dim); font-size: 0.72rem;">RPM / MONETIZACIÓN:</div>
+              <div style="color: #10b981; font-weight: 600;">${h.targetRPM}</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button onclick="navigator.clipboard.writeText('${h.hook.replace(/'/g, "\\'")}'); alert('¡Hook copiado al portapapeles!');" class="btn btn-secondary" style="flex: 1; font-size: 0.85rem; justify-content: center;">
+            <i class="fa-solid fa-copy"></i> Copiar Hook de Guion
+          </button>
+          <button onclick="closeMicroCinemaModal()" class="btn btn-primary" style="flex: 1; font-size: 0.85rem; justify-content: center;">
+            <i class="fa-solid fa-check"></i> Entendido
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  backdrop.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMicroCinemaModal() {
+  const backdrop = document.getElementById('microcinema-modal-backdrop');
+  if (backdrop) backdrop.style.display = 'none';
+  document.body.style.overflow = '';
+}

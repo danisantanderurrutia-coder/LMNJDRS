@@ -45,6 +45,7 @@
       <ul class="nav-links" id="public-nav-links">
         <li><a href="#home" onclick="navigateRoute('#home')">Inicio</a></li>
         <li><a href="#roster" onclick="navigateRoute('#roster')">Influencers</a></li>
+        <li><a href="#micro-cinema" onclick="navigateRoute('#micro-cinema')" style="color: #f472b6; font-weight: 600;"><i class="fa-solid fa-clapperboard" style="color: #ec4899; margin-right: 4px;"></i> Micro-Cinema</a></li>
         <li><a href="#musica" onclick="navigateRoute('#musica')" style="color: #fbbf24; font-weight: 600;"><i class="fa-solid fa-compact-disc" style="color: #00f5d4; margin-right: 4px;"></i> Música</a></li>
         <li><a href="#youtube" onclick="navigateRoute('#youtube')">YouTube</a></li>
         <li><a href="#empresas" onclick="navigateRoute('#empresas')">Empresas</a></li>
@@ -96,6 +97,9 @@
         <div class="hero-actions" style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;">
           <a href="#roster" onclick="navigateRoute('#roster')" class="btn btn-primary">
             <i class="fa-solid fa-gem"></i> Influencers IA
+          </a>
+          <a href="#micro-cinema" onclick="navigateRoute('#micro-cinema')" class="btn btn-secondary" style="border-color: rgba(236, 72, 153, 0.6); color: #f472b6; background: rgba(236, 72, 153, 0.12);">
+            <i class="fa-solid fa-clapperboard" style="color: #ec4899;"></i> Micro-Cinema (Series)
           </a>
           <a href="#youtube" onclick="navigateRoute('#youtube')" class="btn btn-secondary" style="border-color: rgba(168, 85, 247, 0.5); color: #d8b4fe;">
             <i class="fa-brands fa-youtube" style="color: #c084fc;"></i> YouTube & Arcano
@@ -154,11 +158,11 @@
       </div>
     </section>
 
-    <!-- 3. Los 4 Pilares de la Agencia (Core Verticals Gateway) -->
+    <!-- 3. Los 5 Pilares de la Agencia (Core Verticals Gateway) -->
     <section class="section" style="padding-top: 1.5rem; padding-bottom: 2.5rem;">
       <div class="section-header" style="margin-bottom: 2.5rem;">
         <span class="section-subtitle"><i class="fa-solid fa-cubes"></i> Ecosistema Comercial</span>
-        <h2 class="section-title">Nuestras 4 Divisiones de Producción</h2>
+        <h2 class="section-title">Nuestras 5 Divisiones de Producción</h2>
         <p class="section-description">
           Explora los departamentos especializados de Los Manejadores. Cada división opera con pipelines automatizados y estándares de calidad para la industria del entretenimiento y marcas globales.
         </p>
@@ -275,6 +279,34 @@
           </div>
           <a href="#empresas" onclick="navigateRoute('#empresas')" class="btn btn-secondary" style="justify-content: center; width: 100%; border-color: rgba(6, 182, 212, 0.5); color: #67e8f9;">
             <i class="fa-solid fa-building"></i> Ver Soluciones B2B <i class="fa-solid fa-arrow-right" style="margin-left: 0.4rem;"></i>
+          </a>
+        </div>
+
+        <!-- División 5: Micro-Cinema & Ficción Vertical -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(244, 114, 182, 0.45); display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.15) 0%, rgba(10, 12, 22, 0.95) 100%);">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(236, 72, 153, 0.2); color: #f472b6; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-solid fa-clapperboard"></i>
+              </div>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #f472b6; background: rgba(236, 72, 153, 0.15); padding: 0.25rem 0.6rem; border-radius: 20px; border: 1px solid rgba(236, 72, 153, 0.4);">
+                6 SAGAS • ADULTOS &amp; SCI-FI
+              </span>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin-bottom: 0.65rem;">
+              Micro-Cinema &amp; Ficción Vertical
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              Series narrativas en formato vertical (9:16) para TikTok, Reels y Shorts con CGI fotorrealista. 3 universos para adultos (+18) y 3 de aventura y sci-fi épica (PG-13). Ficción sin engaños y máxima retención.
+            </p>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+              <span style="font-size: 0.72rem; color: #f472b6; background: rgba(236,72,153,0.12); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(236,72,153,0.3);">3 Adultos (+18)</span>
+              <span style="font-size: 0.72rem; color: #67e8f9; background: rgba(6,182,212,0.12); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3);">3 PG-13 Épicas</span>
+              <span style="font-size: 0.72rem; color: #cbd5e1; background: rgba(255,255,255,0.06); padding: 0.2rem 0.5rem; border-radius: 4px;">Vertical Cinema 9:16</span>
+            </div>
+          </div>
+          <a href="#micro-cinema" onclick="navigateRoute('#micro-cinema')" class="btn btn-primary" style="justify-content: center; width: 100%; background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);">
+            <i class="fa-solid fa-clapperboard"></i> Explorar Micro-Cinema <i class="fa-solid fa-arrow-right" style="margin-left: 0.4rem;"></i>
           </a>
         </div>
 
