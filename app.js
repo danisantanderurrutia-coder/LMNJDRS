@@ -987,8 +987,59 @@ const influencersData = {
         label: "🖤 Dominatrix Elegante Studio",
         tags: ["Studio Master", "High-End Fetish", "--ar 16:9"],
         text: "Cinematic moody studio portrait of Alina Van Dijk wearing sleek black leather corset and tailored choker, intense commanding yet warm gaze, chiaroscuro lighting, deep shadows, 85mm f/1.4 lens, 8k photographic master --ar 16:9"
+      },
+      accessories: {
+        label: "💎 Bodegón B-Roll (Zero-Face)",
+        tags: ["Flux.1 Dev", "Still Life", "Higgsfield I2V", "--ar 16:9"],
+        text: "Cinematic close-up still life of a handcrafted sleek black leather choker with warm brass ring resting on dark silk sheets beside an open vintage sexology notebook and a steaming espresso cup, moody warm candlelight, deep shadows, 85mm macro lens, 8k photographic master, no humans --ar 16:9"
       }
     },
+    accessories: [
+      {
+        id: "cuero",
+        category: "Cuero & Fetish Elegante",
+        icon: "fa-solid fa-mask",
+        badge: "0% Deformación Facial",
+        name: "Gargantilla y Antifaz de Cuero Negro",
+        concept: "Textura táctil de cuero satinado, herrajes dorados y antifaz de terciopelo sobre sábanas de satén negro. Ideal para crear anticipación y misterio sensorial.",
+        promptImg: "Cinematic macro shot of a handcrafted sleek black leather choker with polished gold brass ring and soft black velvet blindfold resting on wrinkled dark silk bedsheets, warm flickering candle light, chiaroscuro shadows, 85mm macro lens, 8k photographic master, no people --ar 16:9",
+        promptMotion: "Subtle flickering candle flame reflections on polished leather surface, delicate micro-vibration of light in dim room, slow atmospheric macro pan --motion 2",
+        usage: "Insertar entre miradas de Alina como plano de transición para sugerir fetiche sin mostrar desnudez ni arriesgar censura."
+      },
+      {
+        id: "cafe",
+        category: "Café & Intimidad Matutina",
+        icon: "fa-solid fa-mug-hot",
+        badge: "Animación de Vapor 1 Toma",
+        name: "Espresso Doble & Notas de Sexología en Tulum",
+        concept: "La mañana reflexiva de Alina en la selva o Barcelona. Transmite cotidianidad, calidez y estilo de vida sofisticado sin consumir créditos de labios.",
+        promptImg: "Top-down aesthetic flatlay of a dark ceramic cup of black espresso with thick crema on a weathered teakwood balcony table, an open leatherbound diary with handwritten notes in Spanish about desire and consent, tortoiseshell reading glasses, soft tropical morning sunbeams filtering through palm leaves --ar 16:9",
+        promptMotion: "Gentle wisps of white steam rising slowly from the hot espresso cup, dappled jungle sunlight gently shifting on the wooden surface, cinematic slow motion --motion 2",
+        usage: "Plano de inicio o cierre para reels reflexivos y audios de buenos días en Telegram VIP."
+      },
+      {
+        id: "libros",
+        category: "Libros & Intelecto Clínico",
+        icon: "fa-solid fa-book-open",
+        badge: "Autoridad & Mente",
+        name: "Biblioteca Privada & Manuales de Psicoanálisis",
+        concept: "Consolida a Alina como sexóloga clínica y mentora intelectual. Libros de Bataille, Foucault y psicología erótica con copa de licor ámbar.",
+        promptImg: "Moody cinematic still life of vintage hardcover books on psychoanalysis and clinical sexology stacked on a dark mahogany study desk, an amber whiskey tumbler catching warm desk lamp reflections, heavy shadows, leather armchair in background, 50mm f/1.4 lens, dark academia atmosphere --ar 16:9",
+        promptMotion: "Slow rack focus from the vintage book spines to the amber liquid reflections in the crystal glass, subtle dust particles floating in the warm lamp beam --motion 2",
+        usage: "Fondo visual para fragmentos de podcast o reflexiones sobre psicología del control y dinámicas de poder."
+      },
+      {
+        id: "juguetes",
+        category: "Juguetes & Erotismo Sensorial",
+        icon: "fa-solid fa-feather",
+        badge: "Atmósfera Sensorial 4K",
+        name: "Cuerdas Shibari de Seda & Aceites Botánicos",
+        concept: "Elementos de estimulación táctil: cuerdas suaves de seda lila y obsidiana, plumas y frasco cuentagotas de cristal ámbar para masajes.",
+        promptImg: "Sensory macro photograph of coiled soft lilac and black silk shibari ropes resting on neutral linen cloth next to an amber glass dropper bottle of essential massage oil and a soft feather, warm spa backlighting, shallow depth of field, elegant and luxurious adult styling --ar 16:9",
+        promptMotion: "Extremely slow cinematic dolly across the braided silky texture of the rope, soft light glinting across the glass dropper bottle --motion 2",
+        usage: "Acompañamiento visual perfecto para audios binaurales 3D de relajación y obediencia sensorial."
+      }
+    ],
     monetizationFunnel: [
       { step: "Nivel 1 (Atracción SFW en X e Instagram)", detail: "Reflexiones sobre fetiches sin culpa, consentimiento, fotos de estilo bikini/boudoir sugerente y micro-clips de voz relajante." },
       { step: "Nivel 2 (Canal Telegram Gratuito)", detail: "Micro-audios binaurales de muestra, encuestas sobre fantasías y anticipos de sesiones temáticas." },
@@ -3045,6 +3096,13 @@ function handleRoute() {
       openAuthModal('youtube-studio');
       showPublicView();
     }
+  } else if (hash === '#team-microcinema' || hash === '#microcinema-ops') {
+    if (isTeamAuthenticated()) {
+      showTeamView('microcinema-ops');
+    } else {
+      openAuthModal('microcinema-ops');
+      showPublicView();
+    }
   } else if (hash === '#asesorias') {
     renderAdvisoriesPage();
     showDynamicView();
@@ -3169,6 +3227,7 @@ function switchTeamTab(tab) {
   const btnInfluencerOps = document.getElementById('btn-team-tab-influencer-ops');
   const btnYoutubeStudio = document.getElementById('btn-team-tab-youtube-studio');
   const btnManual = document.getElementById('btn-team-tab-manual');
+  const btnMicroCinemaOps = document.getElementById('btn-team-tab-microcinema-ops');
 
   const paneGantt = document.getElementById('team-pane-gantt');
   const panePipeline = document.getElementById('team-pane-pipeline');
@@ -3177,9 +3236,10 @@ function switchTeamTab(tab) {
   const paneInfluencerOps = document.getElementById('team-pane-influencer-ops');
   const paneYoutubeStudio = document.getElementById('team-pane-youtube-studio');
   const paneManual = document.getElementById('team-pane-manual');
+  const paneMicroCinemaOps = document.getElementById('team-pane-microcinema-ops');
 
-  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnManual].forEach(b => { if (b) b.classList.remove('active'); });
-  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneManual].forEach(p => { if (p) p.classList.remove('active-pane'); });
+  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnManual, btnMicroCinemaOps].forEach(b => { if (b) b.classList.remove('active'); });
+  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneManual, paneMicroCinemaOps].forEach(p => { if (p) p.classList.remove('active-pane'); });
 
   if (tab === 'gantt') {
     if (btnGantt) btnGantt.classList.add('active');
@@ -3207,6 +3267,11 @@ function switchTeamTab(tab) {
     if (btnManual) btnManual.classList.add('active');
     if (paneManual) paneManual.classList.add('active-pane');
     if (window.location.hash !== '#manual') window.location.hash = '#manual';
+  } else if (tab === 'microcinema-ops' || tab === 'microcinema') {
+    if (btnMicroCinemaOps) btnMicroCinemaOps.classList.add('active');
+    if (paneMicroCinemaOps) paneMicroCinemaOps.classList.add('active-pane');
+    if (window.location.hash !== '#team-microcinema') window.location.hash = '#team-microcinema';
+    renderTeamMicroCinemaMatrix();
   } else {
     // Default tab: 'members' (Posición 1: Equipo Fundador & Roles)
     if (btnMembers) btnMembers.classList.add('active');
@@ -3230,7 +3295,11 @@ function renderInfluencerOpsMatrix() {
     { id: 'alejandra', name: 'Alejandra (Prototipo B2B)', handler: 'Comercial B2B (Pancho / Daniel)', niche: 'Embajadora Virtual • Disponible para Negocios', status: 'En Adopción B2B', ticket: 'Licencia B2B' },
     { id: 'alina', name: 'Alina Van Dijk', handler: 'Equipo (Submarca Adulto VIP)', niche: 'Dominatrix Consciente & Erotismo Terapéutico', status: 'Listo • Live (Adulto VIP)', ticket: '$25 USD/m (VIP)' },
     { id: 'freja', name: 'Freja Lindholm', handler: 'Equipo (Producción Musical / Arcano)', niche: 'Música Lírica, Gaming & El Gran Arcano', status: 'Listo • Live (Música)', ticket: '$29 USD/álbum' },
-    { id: 'nova', name: 'Nova (Unidad NV-01)', handler: 'Equipo (Robótica & Tech Urbana)', niche: 'Androide Autónoma & Real-World Robotics', status: 'Listo • Live (Tech)', ticket: '$35 USD/m (Patrocinios)' }
+    { id: 'nova', name: 'Nova (Unidad NV-01)', handler: 'Equipo (Robótica & Tech Urbana)', niche: 'Androide Autónoma & Real-World Robotics', status: 'Listo • Live (Tech)', ticket: '$35 USD/m (Patrocinios)' },
+    { id: 'roxie', name: 'Roxie Red («La Toon»)', handler: 'Submarca Adulto VIP (Pipeline 3D Híbrido)', niche: 'Seducción Vintage 2.5D & Glamour Burlesque', status: 'Listo • Live (Adulto VIP)', ticket: '$25 USD/m (VIP)' },
+    { id: 'madamev', name: 'Madame V («La Directora»)', handler: 'Submarca Adulto VIP (Pipeline Seinen 3D)', niche: 'Dominación Psicológica & Alto Ticket', status: 'Listo • Live (Dominación VIP)', ticket: '$45 USD/m (VIP)' },
+    { id: 'aura', name: 'Princesa Aura («La Sirena»)', handler: 'Submarca Adulto VIP (Pipeline Royal 3D)', niche: 'Erotismo de Cuento de Hadas & Corsetería', status: 'Listo • Live (Fantasía VIP)', ticket: '$20 USD/m (VIP)' },
+    { id: 'luna', name: 'Starlight Luna («La Waifu»)', handler: 'Submarca Adulto VIP (Pipeline Anime 3D)', niche: 'Waifu Cósmica 90s & Cyberpunk Ecchi', status: 'Listo • Live (Waifu VIP)', ticket: '$22 USD/m (VIP)' }
   ];
 
   let rows = characters.map(c => {
@@ -3284,9 +3353,9 @@ function renderInfluencerOpsMatrix() {
         </td>
         <td>
           <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
-            <a href="#influencer-cockpit/${c.id}" class="btn btn-primary btn-sm" style="font-size: 0.72rem; padding: 0.28rem 0.5rem;" title="Abrir Cockpit Operativo Privado (Prompts, SOP y Briefing)">
+            <button onclick="openAdminInlineCockpit('${c.id}')" class="btn btn-primary btn-sm" style="font-size: 0.72rem; padding: 0.28rem 0.5rem;" title="Inspeccionar Cockpit Operativo aquí en el panel">
               <i class="fa-solid fa-sliders"></i> Cockpit
-            </a>
+            </button>
             <a href="#influencer/${c.id}" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.28rem 0.5rem; border-color: rgba(6, 182, 212, 0.4); color: var(--cyan); background: rgba(6, 182, 212, 0.08);" title="Ver Ficha Comercial de Producto Pública">
               <i class="fa-solid fa-eye"></i> Ficha Pública
             </a>
@@ -3912,7 +3981,7 @@ const defaultInfluencerOpsConfig = {
     scheduler: "Metricool + Telegram Scheduled",
     responsible: "Equipo (Submarca Adulto VIP)",
     status: "Listo • Live (Adulto VIP)",
-    sop: "1. Generación de retratos sensuales y boudoir en Flux.1 Dev con LoRA Alina Van Dijk.\n2. Scripting de reflexiones sex-positive y dominación psicológica en Claude 3.5 Sonnet.\n3. Grabación de audios binaurales susurrados íntimos en ElevenLabs.\n4. Publicación de contenido SFW en Twitter/X e Instagram con enlace a Telegram VIP.\n5. Conversión a Fanvue para membresía mensual y mensajes PPV personalizados."
+    sop: "1. Generación de retratos sensuales y boudoir en Flux.1 Dev con LoRA Alina Van Dijk.\n2. Generación de B-Roll de 'Accesorios' (cuero, café, libros, juguetes) para intercalar en el montaje con 0 créditos de rostro.\n3. Scripting de reflexiones sex-positive y dominación psicológica en Claude 3.5 Sonnet.\n4. Grabación de audios binaurales susurrados íntimos en ElevenLabs (Voice ID: Alina-Hypno-v1).\n5. Animación de micro-movimientos en Higgsfield (I2V) y montaje 1:2 (1 plano de rostro + 2 de accesorios).\n6. Publicación SFW en Twitter/X e Instagram con enlace a Telegram VIP y Fanvue ($25/m)."
   },
   freja: {
     handle: "@freja.valkyrie",
@@ -4450,6 +4519,34 @@ function renderInfluencerPublicProduct(id) {
             </div>
           </div>
 
+          ${data.accessories ? `
+            <!-- Universo de Accesorios & Bodegones Sensoriales -->
+            <div class="product-lore-card" style="border-color: rgba(245, 158, 11, 0.35); background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.6) 100%); margin-bottom: 2rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.85rem;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                  <i class="fa-solid fa-gem" style="color: #f59e0b;"></i> Atrezzo Sensorial & Universo de Accesorios
+                </h3>
+                <span style="font-size: 0.72rem; font-weight: 800; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.2rem 0.6rem; border-radius: 999px;">
+                  B-ROLL ZERO-FACE
+                </span>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 1rem;">
+                Objetos de mundo, fetiches y bodegones fotográficos que construyen la atmósfera íntima de ${data.name} sin necesidad de exponer su rostro, multiplicando el metraje con cero riesgo de deformación facial:
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
+                ${data.accessories.map(acc => `
+                  <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); padding: 0.75rem 0.85rem; border-radius: 6px;">
+                    <div style="display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.25rem;">
+                      <i class="${acc.icon}" style="color: #f59e0b; font-size: 0.85rem;"></i>
+                      <strong style="color: #fff; font-size: 0.85rem;">${acc.name}</strong>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.35;">${acc.concept}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
           <!-- Social Media Content Mockup -->
           <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem;">
             <i class="fa-solid fa-hashtag" style="color: var(--pink);"></i> Muestra de Contenido & Engagement
@@ -4508,62 +4605,6 @@ function renderInfluencerPublicProduct(id) {
               <p class="service-item-desc">Derechos de explotación exclusivos para tu sector o territorio, o adquisición del activo con entrega de LoRAs y prompts.</p>
             </div>
           </div>
-
-          <!-- Pilot Episode Showcase: Guión del Video Piloto Oficial -->
-          ${data.pilotScript ? `
-            <div class="glass-card" style="margin-top: 2rem; border-color: rgba(236, 72, 153, 0.45); background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.12) 0%, rgba(10, 12, 22, 0.95) 100%); padding: 1.75rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
-                <div>
-                  <span class="product-tag" style="background: rgba(236, 72, 153, 0.15); color: #ec4899; border-color: rgba(236, 72, 153, 0.4);">
-                    <i class="fa-solid fa-clapperboard"></i> Pre-Producción Oficial • Video Piloto / Primer Episodio
-                  </span>
-                  <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin: 0.35rem 0;">
-                    ${data.pilotScript.title}
-                  </h3>
-                  <div style="font-size: 0.85rem; color: #cbd5e1; max-width: 650px;">
-                    ${data.pilotScript.objective}
-                  </div>
-                </div>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                  <button class="btn btn-primary btn-sm" onclick="copyFullPilotScript('${data.id}')" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
-                    <i class="fa-solid fa-copy"></i> Copiar Guión Completo
-                  </button>
-                  <button class="btn btn-secondary btn-sm" onclick="copyPilotKlingPrompts('${data.id}')">
-                    <i class="fa-solid fa-video"></i> Copiar Prompts Kling 3.0
-                  </button>
-                </div>
-              </div>
-
-              <!-- Metadata Pills -->
-              <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; font-size: 0.82rem; padding: 0.75rem 1rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
-                <div><strong style="color: var(--cyan);"><i class="fa-solid fa-clock"></i> Duración:</strong> ${data.pilotScript.duration}</div>
-                <div><strong style="color: #ec4899;"><i class="fa-solid fa-mobile-screen"></i> Formato:</strong> ${data.pilotScript.format}</div>
-                <div><strong style="color: #f59e0b;"><i class="fa-solid fa-music"></i> Audio Track:</strong> ${data.pilotScript.musicTrack}</div>
-              </div>
-
-              <!-- Scenes Grid -->
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                ${data.pilotScript.scenes.map(s => `
-                  <div style="background: rgba(18, 20, 36, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 1.15rem; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <span style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; font-weight: 800; font-size: 0.72rem; padding: 0.2rem 0.5rem; border-radius: 4px;">ESCENA ${s.num}</span>
-                        <span style="color: var(--cyan); font-family: monospace; font-size: 0.78rem;"><i class="fa-regular fa-clock"></i> ${s.time}</span>
-                      </div>
-                      <h4 style="color: #fff; font-size: 0.92rem; margin-bottom: 0.4rem;">${s.name}</h4>
-                      <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; margin-bottom: 0.6rem;">${s.visual}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-glass); padding-top: 0.6rem; margin-top: 0.4rem;">
-                      <div style="color: #ec4899; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.2rem;"><i class="fa-solid fa-microphone-lines"></i> Locución:</div>
-                      <div style="color: #f1f5f9; font-size: 0.78rem; font-style: italic; line-height: 1.35; margin-bottom: 0.4rem;">${s.voice}</div>
-                      <div style="color: var(--cyan); font-size: 0.72rem;"><strong>Texto:</strong> «${s.overlayText}»</div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          ` : ''}
 
           <!-- E-Commerce Showcase: Productos y Estrategias de Venta Directa -->
           ${data.ecommerce ? `
@@ -4921,6 +4962,12 @@ function renderInfluencerCockpit(id) {
           <button id="tab-btn-tech" class="tab-btn cockpit-tab-btn" onclick="switchTab(this, 'tab-technical')">
             <i class="fa-solid fa-code"></i> Prompts por Escena
           </button>
+          ${data.accessories ? `
+            <button id="tab-btn-accessories" class="tab-btn cockpit-tab-btn" onclick="switchTab(this, 'tab-accessories')" style="position: relative;">
+              <i class="fa-solid fa-gem" style="color: #f59e0b; margin-right: 0.35rem;"></i> Accesorios B-Roll (0 Créditos Cara)
+              <span style="background: linear-gradient(135deg, #f59e0b, #ec4899); color: #000; font-size: 0.62rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 999px; margin-left: 0.35rem;">ZERO-FACE</span>
+            </button>
+          ` : ''}
           <button id="tab-btn-calib" class="tab-btn cockpit-tab-btn" onclick="switchTab(this, 'tab-calibration')">
             <i class="fa-solid fa-clipboard-question"></i> Briefing & Preguntas (0/6)
           </button>
@@ -5371,6 +5418,104 @@ function renderInfluencerCockpit(id) {
           `}
         </div>
       </div>
+
+      <!-- Tab Especial: Accesorios & Bodegones B-Roll (Zero-Face) -->
+      ${data.accessories ? `
+      <div id="tab-accessories" class="tab-pane">
+        <div class="glass-card" style="padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(245, 158, 11, 0.35); background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08) 0%, rgba(10, 12, 22, 0.95) 100%);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+            <div>
+              <span style="display: inline-block; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #f59e0b; font-size: 0.72rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 6px; text-transform: uppercase; margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-gem"></i> Metodología Zero-Face • Ahorro Radical de Créditos
+              </span>
+              <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-heading);">
+                Accesorios & Bodegones Sensoriales de ${data.name}
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 780px; margin: 0; line-height: 1.55;">
+                Genera planos de inserción (B-Roll) de alta fidelidad estética (cuero, café, libros, juguetes) sin gastar créditos en el rostro de Alina. 
+                Los bodegones estáticos y micro-movimientos de vapor/luz en Higgsfield tienen <strong>100% de tasa de éxito a la primera toma</strong>, eliminando por completo los descartes por deformación facial.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+              <span class="platform-pill highlight" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; font-weight: 700; font-size: 0.82rem; padding: 0.4rem 0.85rem;">
+                <i class="fa-solid fa-shield-halved"></i> 0% Deformación Facial
+              </span>
+              <span class="platform-pill" style="background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #f59e0b; font-weight: 700; font-size: 0.82rem; padding: 0.4rem 0.85rem;">
+                <i class="fa-solid fa-calculator"></i> 4x Multiplicador de Metraje
+              </span>
+            </div>
+          </div>
+
+          <!-- Formula Box -->
+          <div style="background: rgba(0,0,0,0.45); border: 1px dashed rgba(245, 158, 11, 0.45); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <div style="font-size: 1.75rem; color: #f59e0b;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div style="flex: 1; font-size: 0.88rem; color: #cbd5e1; line-height: 1.55;">
+              <strong style="color: #fff;">Fórmula de Montaje Cinematográfico LMNJDRS:</strong>
+              1 toma de rostro de Alina (5s) + 2 tomas de Accesorios (10s) + Audio binaural en ElevenLabs = <strong>1 Reel / TikTok de 15 segundos</strong> de altísima retención y estética de lujo por sólo ~25 créditos de Higgsfield, en vez de arriesgar 80+ créditos en repetir planos faciales.
+            </div>
+          </div>
+
+          <!-- Grid of Accessories -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem;">
+            ${data.accessories.map(acc => `
+              <div class="glass-card" style="padding: 1.25rem; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.6rem;">
+                    <div>
+                      <span style="font-size: 0.7rem; font-weight: 800; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <i class="${acc.icon || 'fa-solid fa-gem'}"></i> ${acc.category}
+                      </span>
+                      <h4 style="color: #fff; font-size: 1.05rem; margin-top: 0.2rem; font-family: var(--font-heading);">${acc.name}</h4>
+                    </div>
+                    <span style="font-size: 0.68rem; font-weight: 700; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.2rem 0.5rem; border-radius: 4px; white-space: nowrap;">
+                      ${acc.badge}
+                    </span>
+                  </div>
+
+                  <p style="font-size: 0.82rem; color: #94a3b8; line-height: 1.45; margin-bottom: 0.85rem;">
+                    ${acc.concept}
+                  </p>
+
+                  <!-- Image Prompt -->
+                  <div style="margin-bottom: 0.85rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                      <span style="font-size: 0.72rem; font-weight: 700; color: var(--cyan); text-transform: uppercase;">
+                        <i class="fa-solid fa-image"></i> Prompt Imagen Base (Flux.1 / Midjourney)
+                      </span>
+                      <button class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;" onclick="navigator.clipboard.writeText('${acc.promptImg.replace(/'/g, "\\'")}'); alert('¡Prompt de imagen copiado!');">
+                        <i class="fa-solid fa-copy"></i> Copiar
+                      </button>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.5); padding: 0.6rem; border-radius: 6px; font-family: monospace; font-size: 0.74rem; color: #cbd5e1; line-height: 1.4; border: 1px solid rgba(255,255,255,0.05); word-break: break-all;">
+                      ${acc.promptImg}
+                    </div>
+                  </div>
+
+                  <!-- Motion Prompt Higgsfield -->
+                  <div style="margin-bottom: 0.85rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                      <span style="font-size: 0.72rem; font-weight: 700; color: #ec4899; text-transform: uppercase;">
+                        <i class="fa-solid fa-video"></i> Motion Prompt (Higgsfield I2V / Kling)
+                      </span>
+                      <button class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;" onclick="navigator.clipboard.writeText('${acc.promptMotion.replace(/'/g, "\\'")}'); alert('¡Prompt de movimiento copiado!');">
+                        <i class="fa-solid fa-copy"></i> Copiar
+                      </button>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.5); padding: 0.6rem; border-radius: 6px; font-family: monospace; font-size: 0.74rem; color: #f472b6; line-height: 1.4; border: 1px solid rgba(236,72,153,0.15); word-break: break-all;">
+                      ${acc.promptMotion}
+                    </div>
+                  </div>
+                </div>
+
+                <div style="font-size: 0.76rem; color: #94a3b8; background: rgba(255,255,255,0.03); padding: 0.5rem 0.75rem; border-radius: 6px; border-left: 2px solid #f59e0b; margin-top: 0.5rem;">
+                  <strong style="color: #cbd5e1;"><i class="fa-solid fa-lightbulb" style="color: #f59e0b;"></i> Aplicación en montaje:</strong> ${acc.usage}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      ` : ''}
 
       <!-- Tab 5: Gestión de Contenidos & Plataformas (Active by default in cockpit) -->
       <div id="tab-platforms" class="tab-pane active">
@@ -11626,3 +11771,363 @@ function closeMicroCinemaModal() {
   if (backdrop) backdrop.style.display = 'none';
   document.body.style.overflow = '';
 }
+
+// ==========================================================================
+// UNIFIED ADMIN DASHBOARD: INLINE COCKPIT DRAWER & MICROCINEMA MATRIX
+// ==========================================================================
+
+function openAdminInlineCockpit(influencerId) {
+  const cleanId = (influencerId || '').toLowerCase().trim();
+  const data = influencersData[cleanId];
+  if (!data) return;
+
+  const drawer = document.getElementById('admin-inline-cockpit-drawer');
+  const body = document.getElementById('admin-inline-cockpit-body');
+  const title = document.getElementById('admin-inline-cockpit-title');
+  const extLink = document.getElementById('admin-inline-cockpit-ext-link');
+
+  if (!drawer || !body) return;
+
+  if (title) title.innerHTML = `<i class="fa-solid fa-sliders" style="color: var(--pink); margin-right: 8px;"></i> Cockpit: ${data.name} <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: normal;">(${data.niche})</span>`;
+  if (extLink) extLink.href = `#influencer-cockpit/${cleanId}`;
+
+  const roi = data.roi || { defaultFollowers: 50000, defaultConversion: 1.5, defaultTicket: 14 };
+  const opsConfig = typeof getInfluencerOpsConfig === 'function' ? getInfluencerOpsConfig(cleanId) : { status: 'Activo / Producción Live', sop: '' };
+
+  body.innerHTML = `
+    <!-- Production Cockpit Inline Layout -->
+    <div class="cockpit-container" style="margin-top: 1rem;">
+      <!-- Left Rail: Identity, Specs, Voice & LoRA Consistency -->
+      <aside class="cockpit-sidebar">
+        <div class="cockpit-profile-card">
+          <div class="cockpit-profile-header">
+            <img src="${data.avatar}" alt="${data.name}" class="cockpit-avatar">
+            <div class="cockpit-name-group">
+              <span class="detail-badge" style="font-size: 0.68rem; padding: 0.2rem 0.5rem; display: inline-block; margin-bottom: 0.35rem;">${data.badge}</span>
+              <h2 class="cockpit-name" style="font-size: 1.25rem;">${data.name}</h2>
+              <div class="cockpit-niche"><i class="fa-solid fa-tag"></i> ${data.niche}</div>
+            </div>
+          </div>
+          
+          <p class="cockpit-bio" style="font-size: 0.82rem;">${data.bio}</p>
+
+          <div class="cockpit-spec-list">
+            <div class="cockpit-spec-item">
+              <div class="cockpit-spec-label"><i class="fa-solid fa-masks-theater"></i> Arquetipo</div>
+              <div class="cockpit-spec-value">${data.archetype}</div>
+            </div>
+            <div class="cockpit-spec-item">
+              <div class="cockpit-spec-label"><i class="fa-solid fa-microchip"></i> Stack IA</div>
+              <div class="cockpit-spec-value">${data.techStack}</div>
+            </div>
+            <div class="cockpit-spec-item">
+              <div class="cockpit-spec-label"><i class="fa-solid fa-share-nodes"></i> Canales</div>
+              <div class="cockpit-spec-value">${data.channels}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LoRA Master Facial Consistency Gallery -->
+        ${data.gallery && data.gallery.length > 0 ? `
+          <div class="cockpit-lora-strip" style="margin-top: 1rem;">
+            <div class="cockpit-lora-header">
+              <span class="cockpit-lora-title"><i class="fa-solid fa-id-card-clip" style="color: var(--purple);"></i> Consistencia LoRA</span>
+              <span class="cockpit-lora-tag">4K Master</span>
+            </div>
+            <div class="cockpit-lora-grid">
+              ${data.gallery.map(g => `
+                <img src="${g.img}" alt="${g.label}" title="${g.label} - ${g.tag}" class="cockpit-lora-thumb" loading="lazy">
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </aside>
+
+      <!-- Right Main Stage: Immediate Production Tabs & Workspaces -->
+      <main class="cockpit-main-stage">
+        <div class="cockpit-tab-bar" style="margin-bottom: 1.25rem;">
+          <button id="inline-tab-btn-platforms" class="tab-btn cockpit-tab-btn active" onclick="switchInlineTab(this, 'inline-tab-platforms')">
+            <i class="fa-solid fa-layer-group"></i> Plataformas & SOP
+          </button>
+          <button id="inline-tab-btn-pilot" class="tab-btn cockpit-tab-btn" onclick="switchInlineTab(this, 'inline-tab-pilot')">
+            <i class="fa-solid fa-clapperboard" style="color: #ec4899; margin-right: 0.35rem;"></i> Guión Piloto
+          </button>
+          <button id="inline-tab-btn-tech" class="tab-btn cockpit-tab-btn" onclick="switchInlineTab(this, 'inline-tab-technical')">
+            <i class="fa-solid fa-code"></i> Prompts por Escena
+          </button>
+          ${data.accessories ? `
+            <button id="inline-tab-btn-accessories" class="tab-btn cockpit-tab-btn" onclick="switchInlineTab(this, 'inline-tab-accessories')">
+              <i class="fa-solid fa-gem" style="color: #f59e0b; margin-right: 0.35rem;"></i> Accesorios B-Roll
+            </button>
+          ` : ''}
+          <button id="inline-tab-btn-calib" class="tab-btn cockpit-tab-btn" onclick="switchInlineTab(this, 'inline-tab-calibration')">
+            <i class="fa-solid fa-clipboard-question"></i> Briefing & Calibración
+          </button>
+        </div>
+
+        <!-- Tab 1: Plataformas & SOP -->
+        <div id="inline-tab-platforms" class="tab-pane active">
+          <div class="glass-card" style="padding: 1.25rem; margin-bottom: 1.25rem;">
+            <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-traffic-light" style="color: var(--cyan);"></i> Estado de Producción
+            </div>
+            <select 
+              class="platform-field-select" 
+              id="inline-plat-status-${data.id}" 
+              onchange="if(typeof saveInfluencerOpsConfig === 'function') { const val = this.value; const s = document.getElementById('plat-status-${data.id}'); if(s) s.value = val; saveInfluencerOpsConfig('${data.id}', false); }"
+            >
+              <option value="Activo / Producción Live" ${opsConfig.status === 'Activo / Producción Live' ? 'selected' : ''}>🟢 Activo / Producción Live</option>
+              <option value="Fase de Calibración & Testing" ${opsConfig.status === 'Fase de Calibración & Testing' ? 'selected' : ''}>🟡 Fase de Calibración & Testing</option>
+              <option value="Validado / Rentable" ${opsConfig.status === 'Validado / Rentable' ? 'selected' : ''}>💎 Validado / Rentable</option>
+              <option value="En Concepto (Q2)" ${opsConfig.status === 'En Concepto (Q2)' ? 'selected' : ''}>⚪ En Concepto (Q2)</option>
+              <option value="Pausado Temporalmente" ${opsConfig.status === 'Pausado Temporalmente' ? 'selected' : ''}>🔴 Pausado Temporalmente</option>
+            </select>
+          </div>
+
+          <div class="platform-sop-card">
+            <div class="platform-sop-title">
+              <i class="fa-solid fa-clipboard-list" style="color: var(--cyan);"></i>
+              Flujo de Trabajo Operativo (SOP Paso a Paso)
+            </div>
+            <textarea 
+              class="platform-sop-textarea" 
+              rows="5"
+              placeholder="1. Prompt visual...\n2. Generación de voz...\n3. Animación...\n4. Edición..."
+              oninput="if(typeof saveInfluencerOpsConfig === 'function') { const s = document.getElementById('plat-sop-${data.id}'); if(s) s.value = this.value; saveInfluencerOpsConfig('${data.id}', false); }"
+            >${opsConfig.sop || ''}</textarea>
+          </div>
+        </div>
+
+        <!-- Tab 2: Guión Piloto -->
+        <div id="inline-tab-pilot" class="tab-pane" style="display: none;">
+          ${data.pilotScript ? `
+            <div class="glass-card" style="padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h4 style="color: #fff; font-size: 1.1rem; margin: 0;">${data.pilotScript.title}</h4>
+                <button class="btn btn-primary btn-sm" onclick="copyFullPilotScript('${data.id}')">
+                  <i class="fa-solid fa-copy"></i> Copiar Guión
+                </button>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">${data.pilotScript.objective}</p>
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                ${data.pilotScript.scenes.map(s => `
+                  <div style="background: rgba(0,0,0,0.3); padding: 0.85rem; border-radius: 6px; border-left: 3px solid #ec4899;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #ec4899; margin-bottom: 0.3rem;">
+                      <span>ESCENA ${s.num}: ${s.name}</span>
+                      <span>${s.time}</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0.4rem;">${s.visual}</div>
+                    <div style="font-size: 0.78rem; color: #f472b6;"><strong>Voz:</strong> «${s.voice}»</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : `
+            <p style="color: var(--text-muted); padding: 1.5rem; text-align: center;">No hay guión piloto configurado aún.</p>
+          `}
+        </div>
+
+        <!-- Tab 3: Prompts Técnicos por Escena -->
+        <div id="inline-tab-technical" class="tab-pane" style="display: none;">
+          <div class="glass-card" style="padding: 1.25rem;">
+            <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-code" style="color: var(--purple);"></i> Prompts Maestros para Generación Visual
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              ${data.scenes ? Object.entries(data.scenes).map(([scKey, sc]) => `
+                <div style="background: rgba(0,0,0,0.3); padding: 0.85rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                    <strong style="color: var(--cyan); font-size: 0.82rem; text-transform: uppercase;">${sc.title || scKey}</strong>
+                    <button class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;" onclick="navigator.clipboard.writeText('${(sc.prompt || '').replace(/'/g, "\\'")}'); alert('Prompt copiado al portapapeles');">
+                      <i class="fa-solid fa-copy"></i> Copiar
+                    </button>
+                  </div>
+                  <div style="font-family: monospace; font-size: 0.75rem; color: #94a3b8; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 4px; line-height: 1.4; word-break: break-all;">
+                    ${sc.prompt || 'Sin prompt registrado'}
+                  </div>
+                </div>
+              `).join('') : '<p style="color: var(--text-muted); font-size: 0.85rem;">No hay escenas registradas.</p>'}
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Accesorios B-Roll Zero-Face -->
+        ${data.accessories ? `
+          <div id="inline-tab-accessories" class="tab-pane" style="display: none;">
+            <div class="glass-card" style="padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h4 style="color: #fff; font-size: 1.05rem; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                  <i class="fa-solid fa-gem" style="color: #f59e0b;"></i> Accesorios & Bodegones (Zero-Face)
+                </h4>
+                <span style="font-size: 0.7rem; font-weight: 700; color: #10b981; background: rgba(16,185,129,0.15); padding: 0.2rem 0.5rem; border-radius: 4px;">
+                  Cero Deformación Facial
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.45;">
+                Prompts de bodegones y texturas calibrados para intercalar en el montaje sin gastar créditos en animación facial.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                ${data.accessories.map(acc => `
+                  <div style="background: rgba(0,0,0,0.3); padding: 0.85rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); border-left: 3px solid #f59e0b;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                      <strong style="color: #fff; font-size: 0.85rem;"><i class="${acc.icon}" style="color: #f59e0b; margin-right: 4px;"></i> ${acc.name}</strong>
+                      <span style="font-size: 0.68rem; color: #f59e0b; background: rgba(245,158,11,0.15); padding: 0.15rem 0.4rem; border-radius: 4px;">${acc.category}</span>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.5rem;">${acc.concept}</div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
+                      <span style="font-size: 0.68rem; font-weight: 700; color: var(--cyan); text-transform: uppercase;">Flux Prompt:</span>
+                      <button class="btn btn-secondary btn-sm" style="font-size: 0.68rem; padding: 0.15rem 0.4rem;" onclick="navigator.clipboard.writeText('${acc.promptImg.replace(/'/g, "\\'")}'); alert('Prompt de imagen copiado');">
+                        <i class="fa-solid fa-copy"></i> Copiar
+                      </button>
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.72rem; color: #cbd5e1; background: rgba(0,0,0,0.4); padding: 0.45rem; border-radius: 4px; line-height: 1.35; margin-bottom: 0.5rem; word-break: break-all;">
+                      ${acc.promptImg}
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
+                      <span style="font-size: 0.68rem; font-weight: 700; color: #ec4899; text-transform: uppercase;">Higgsfield Motion:</span>
+                      <button class="btn btn-secondary btn-sm" style="font-size: 0.68rem; padding: 0.15rem 0.4rem;" onclick="navigator.clipboard.writeText('${acc.promptMotion.replace(/'/g, "\\'")}'); alert('Motion prompt copiado');">
+                        <i class="fa-solid fa-copy"></i> Copiar
+                      </button>
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.72rem; color: #f472b6; background: rgba(0,0,0,0.4); padding: 0.45rem; border-radius: 4px; line-height: 1.35; word-break: break-all;">
+                      ${acc.promptMotion}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Tab 4: Briefing & Calibración -->
+        <div id="inline-tab-calibration" class="tab-pane" style="display: none;">
+          <div class="glass-card" style="padding: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h4 style="color: #fff; font-size: 1.05rem; margin: 0;">Respuestas del Briefing Operativo</h4>
+              <button class="btn btn-secondary btn-sm" onclick="copyConsolidatedBriefing('${data.id}')">
+                <i class="fa-solid fa-copy"></i> Copiar Briefing
+              </button>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              ${defaultCalibrationQuestions.map(q => {
+                const ans = getCalibrationAnswer(data.id, q.id);
+                return `
+                  <div style="background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 6px;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--purple); margin-bottom: 0.25rem;">${q.title}</div>
+                    <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.4;">${ans ? ans : '<em style="color: #64748b;">(Sin respuesta)</em>'}</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  `;
+
+  drawer.classList.add('active');
+  drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function switchInlineTab(btn, targetPaneId) {
+  const container = btn.closest('.cockpit-main-stage');
+  if (!container) return;
+  const allBtns = container.querySelectorAll('.cockpit-tab-btn');
+  const allPanes = container.querySelectorAll('.tab-pane');
+  allBtns.forEach(b => b.classList.remove('active'));
+  allPanes.forEach(p => { p.style.display = 'none'; p.classList.remove('active'); });
+
+  btn.classList.add('active');
+  const target = document.getElementById(targetPaneId);
+  if (target) {
+    target.style.display = 'block';
+    target.classList.add('active');
+  }
+}
+
+function closeAdminInlineCockpit() {
+  const drawer = document.getElementById('admin-inline-cockpit-drawer');
+  if (drawer) drawer.classList.remove('active');
+}
+
+// Global Alias: openInfluencerCockpit
+function openInfluencerCockpit(influencerId) {
+  if (isTeamAuthenticated()) {
+    showTeamView('influencer-ops');
+    openAdminInlineCockpit(influencerId);
+  } else {
+    pendingTeamTab = 'influencer-cockpit:' + influencerId;
+    openAuthModal('influencer-cockpit:' + influencerId);
+  }
+}
+
+// Micro-Cinema Matrix Renderer for Admin Panel
+function renderTeamMicroCinemaMatrix() {
+  const container = document.getElementById('team-microcinema-matrix-container');
+  if (!container) return;
+
+  const list = typeof microCinemaData !== 'undefined' ? Object.values(microCinemaData) : [];
+  if (list.length === 0) {
+    container.innerHTML = '<p style="color: var(--text-muted); text-align: center;">No hay sagas de micro-cinema cargadas.</p>';
+    return;
+  }
+
+  container.innerHTML = list.map(h => `
+    <div class="microcinema-admin-card glass-card">
+      <img src="${h.image}" alt="${h.title}" class="microcinema-admin-thumb" />
+      <div class="microcinema-admin-info">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <div>
+            <span style="font-size: 0.72rem; font-weight: 800; color: ${h.ratingColor}; background: ${h.ratingBg}; padding: 0.2rem 0.6rem; border-radius: 12px; border: 1px solid ${h.ratingBorder}; margin-right: 0.5rem;">
+              ${h.rating}
+            </span>
+            <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--cyan); font-weight: 700;">
+              ${h.archetype}
+            </span>
+            <h4 style="color: #fff; font-family: var(--font-heading); font-size: 1.25rem; margin: 0.25rem 0 0 0;">
+              ${h.title}
+            </h4>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="navigator.clipboard.writeText('${h.hook.replace(/'/g, "\\'")}'); alert('¡Hook copiado para ${h.name}!');" class="btn btn-secondary btn-sm" style="font-size: 0.75rem;">
+              <i class="fa-solid fa-copy"></i> Copiar Hook
+            </button>
+            <button onclick="openMicroCinemaModal('${h.id}')" class="btn btn-primary btn-sm" style="font-size: 0.75rem; background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+              <i class="fa-solid fa-clapperboard"></i> Ficha & Guión
+            </button>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 0.85rem;">
+          ${h.synopsis}
+        </p>
+
+        <!-- Hook de Grabación -->
+        <div style="background: rgba(0,0,0,0.35); padding: 0.75rem 1rem; border-radius: 6px; border-left: 3px solid ${h.isAdult ? '#ec4899' : 'var(--cyan)'}; margin-bottom: 0.85rem;">
+          <div style="font-size: 0.72rem; font-weight: 700; color: ${h.isAdult ? '#f472b6' : 'var(--cyan)'}; text-transform: uppercase; margin-bottom: 0.25rem;">
+            <i class="fa-solid fa-quote-left"></i> Hook Maestro de Retención (00-03s):
+          </div>
+          <div style="font-size: 0.82rem; color: #fff; font-style: italic;">
+            ${h.hook}
+          </div>
+        </div>
+
+        <!-- Metadata & Pipeline -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.78rem;">
+          <div style="background: rgba(255,255,255,0.02); padding: 0.5rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: var(--cyan);"><i class="fa-solid fa-microchip"></i> Stack:</strong> ${h.productionTech}
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 0.5rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: #10b981;"><i class="fa-solid fa-chart-line"></i> Monetización:</strong> ${h.targetRPM}
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 0.5rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: #eab308;"><i class="fa-solid fa-handshake"></i> Co-protagonista:</strong> ${h.companion}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
