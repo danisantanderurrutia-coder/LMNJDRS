@@ -3103,6 +3103,13 @@ function handleRoute() {
       openAuthModal('microcinema-ops');
       showPublicView();
     }
+  } else if (hash === '#content-pipeline' || hash === '#alina-pipeline' || hash === '#master-pipeline') {
+    if (isTeamAuthenticated()) {
+      showTeamView('content-pipeline');
+    } else {
+      openAuthModal('content-pipeline');
+      showPublicView();
+    }
   } else if (hash === '#asesorias') {
     renderAdvisoriesPage();
     showDynamicView();
@@ -3228,6 +3235,7 @@ function switchTeamTab(tab) {
   const btnYoutubeStudio = document.getElementById('btn-team-tab-youtube-studio');
   const btnManual = document.getElementById('btn-team-tab-manual');
   const btnMicroCinemaOps = document.getElementById('btn-team-tab-microcinema-ops');
+  const btnContentPipeline = document.getElementById('btn-team-tab-content-pipeline');
 
   const paneGantt = document.getElementById('team-pane-gantt');
   const panePipeline = document.getElementById('team-pane-pipeline');
@@ -3237,9 +3245,10 @@ function switchTeamTab(tab) {
   const paneYoutubeStudio = document.getElementById('team-pane-youtube-studio');
   const paneManual = document.getElementById('team-pane-manual');
   const paneMicroCinemaOps = document.getElementById('team-pane-microcinema-ops');
+  const paneContentPipeline = document.getElementById('team-pane-content-pipeline');
 
-  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnManual, btnMicroCinemaOps].forEach(b => { if (b) b.classList.remove('active'); });
-  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneManual, paneMicroCinemaOps].forEach(p => { if (p) p.classList.remove('active-pane'); });
+  [btnGantt, btnPipeline, btnCopys, btnMembers, btnInfluencerOps, btnYoutubeStudio, btnManual, btnMicroCinemaOps, btnContentPipeline].forEach(b => { if (b) b.classList.remove('active'); });
+  [paneGantt, panePipeline, paneCopys, paneMembers, paneInfluencerOps, paneYoutubeStudio, paneManual, paneMicroCinemaOps, paneContentPipeline].forEach(p => { if (p) p.classList.remove('active-pane'); });
 
   if (tab === 'gantt') {
     if (btnGantt) btnGantt.classList.add('active');
@@ -3272,6 +3281,11 @@ function switchTeamTab(tab) {
     if (paneMicroCinemaOps) paneMicroCinemaOps.classList.add('active-pane');
     if (window.location.hash !== '#team-microcinema') window.location.hash = '#team-microcinema';
     renderTeamMicroCinemaMatrix();
+  } else if (tab === 'content-pipeline' || tab === 'alina-pipeline') {
+    if (btnContentPipeline) btnContentPipeline.classList.add('active');
+    if (paneContentPipeline) paneContentPipeline.classList.add('active-pane');
+    if (window.location.hash !== '#content-pipeline') window.location.hash = '#content-pipeline';
+    renderMasterContentPipeline();
   } else {
     // Default tab: 'members' (Posición 1: Equipo Fundador & Roles)
     if (btnMembers) btnMembers.classList.add('active');
@@ -4828,6 +4842,11 @@ function renderInfluencerCockpit(id) {
           <button class="mode-btn" onclick="setInfluencerViewMode('${data.id}', 'product')" title="Ver Ficha Comercial Pública de Producto"><i class="fa-solid fa-eye"></i> Ficha Producto</button>
           <button class="mode-btn active" title="Cockpit operativo privado de producción (SOP, Prompts y Briefing)"><i class="fa-solid fa-sliders"></i> Cockpit Operativo 🔒</button>
         </div>
+        ${data.id === 'alina' ? `
+          <button class="btn btn-primary btn-sm" onclick="showTeamView('content-pipeline')" style="background: linear-gradient(135deg, #f59e0b, #ec4899); border: none; font-size: 0.78rem;" title="Abrir Master Content Pipeline de Alina">
+            <i class="fa-solid fa-clapperboard"></i> Master Content Pipeline 🎬
+          </button>
+        ` : ''}
         <button class="btn btn-secondary btn-sm" onclick="showTeamView('influencer-ops')">
           <i class="fa-solid fa-table-list"></i> Matriz Operativa
         </button>
@@ -11795,6 +11814,19 @@ function openAdminInlineCockpit(influencerId) {
   const opsConfig = typeof getInfluencerOpsConfig === 'function' ? getInfluencerOpsConfig(cleanId) : { status: 'Activo / Producción Live', sop: '' };
 
   body.innerHTML = `
+    ${cleanId === 'alina' ? `
+      <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(236, 72, 153, 0.1) 100%); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 0.85rem 1.25rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <strong style="color: #fff; font-size: 0.92rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-industry" style="color: #f59e0b;"></i> Master Content Pipeline Activo para Alina
+          </strong>
+          <span style="font-size: 0.78rem; color: #cbd5e1;">Arco narrativo mensual, los 4 formatos de rodaje, locaciones fijas y protocolo Zero-Waste calibrado.</span>
+        </div>
+        <button onclick="closeAdminInlineCockpit(); switchTeamTab('content-pipeline');" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, #f59e0b, #ec4899); border: none; font-size: 0.78rem;">
+          <i class="fa-solid fa-clapperboard"></i> Abrir Master Pipeline
+        </button>
+      </div>
+    ` : ''}
     <!-- Production Cockpit Inline Layout -->
     <div class="cockpit-container" style="margin-top: 1rem;">
       <!-- Left Rail: Identity, Specs, Voice & LoRA Consistency -->
@@ -12130,4 +12162,742 @@ function renderTeamMicroCinemaMatrix() {
     </div>
   `).join('');
 }
+
+// ==========================================================================
+// 10. MASTER CONTENT PIPELINE: PILOTO INDUSTRIAL (ALINA VAN DIJK)
+// ==========================================================================
+
+window.contentPipelineState = window.contentPipelineState || {
+  chapter: 1,
+  format: 'podcast',
+  location: 'loft',
+  checklist: [false, false, false, false, false, false]
+};
+
+const pipelineAlinaData = {
+  narrativeArc: {
+    title: "El Arte de Ceder el Control: De la Fatiga Ejecutiva al Placer Consciente",
+    duration: "Mes 1 (4 Semanas de Producción & Conversión)",
+    protagonist: "Alina Van Dijk (28 años • Sexología Clínica & Dominatrix Consciente)",
+    route: "Ámsterdam ➔ Barcelona (Base Estudio) ➔ Tulum (Retiro Sensorial)",
+    coreThesis: "Los hombres exitosos y creadores toman más de 35.000 decisiones al día y sufren de agotamiento cognitivo crónico. Alina no vende pornografía; vende el alivio psicológico de ceder el control a una figura de autoridad empática, combinando educación erótica, dominación consensuada y relajación binaural.",
+    monthlyTarget: "500 suscriptores en Telegram VIP + 80 miembros en Fanvue VIP ($25/m) + 35 PPV personalizados"
+  },
+
+  chapters: {
+    1: {
+      number: 1,
+      week: "Semana 1",
+      title: "La Sobrecarga de Decidir",
+      subtitle: "Fascinación Intelectual & Desmitificación de la Sumisión",
+      status: "🟢 Listo para Rodaje",
+      stage: "Top of Funnel (Atracción SFW en X, Reels & TikTok)",
+      synopsis: "Alina se presenta desde su loft de Barcelona. Aborda por qué los líderes y mentes analíticas fantasean con no tener que tomar decisiones. Desmitifica la sumisión como un acto supremo de confianza y descanso mental.",
+      hook: "«Hoy tomaste demasiadas decisiones difíciles por otros. Esta noche... decide no decidir nada. Deja que mi voz se encargue de todo.»",
+      audioTone: "Voz pausada, cercana, confesional con cadencia hipnótica. ElevenLabs pitch: 0.98, rate: 0.95.",
+      conversionGoal: "Captación a Telegram VIP gratuito mediante enlace en bio y audio de muestra binaural.",
+      recommendedFormat: "podcast",
+      recommendedLocation: "loft"
+    },
+    2: {
+      number: 2,
+      week: "Semana 2",
+      title: "Respira Conmigo: Apaga el Ruido",
+      subtitle: "Vulnerabilidad Sensorial & Desconexión en Tulum",
+      status: "🟡 En Pre-Producción",
+      stage: "Middle of Funnel (Calentamiento & Validación)",
+      synopsis: "El ruido mental no se apaga con lógica; se apaga con el cuerpo y la respiración. Alina se traslada visualmente a la luz cálida de Tulum, guiando ejercicios de respiración rítmica que inducen trance relajante.",
+      hook: "«Inhala despacio... uno, dos, tres, cuatro. Ahora suelta el aire despacio. ¿Sientes cómo tus hombros caen? Bien. Ahora quédate ahí y no pienses.»",
+      audioTone: "Susurros rítmicos muy cercanos al micrófono, respiraciones perceptibles, sonido 3D envolvente.",
+      conversionGoal: "Lanzamiento del primer Set Sensorial 4K + Sesión de audio de 8 min en Fanvue VIP ($25/mes).",
+      recommendedFormat: "selfie_walking",
+      recommendedLocation: "tulum"
+    },
+    3: {
+      number: 3,
+      week: "Semana 3",
+      title: "La Regla del Poder Consensuado",
+      subtitle: "Tensión Psicológica & Dominación Boudoir",
+      status: "⚪ Planificado",
+      stage: "Bottom of Funnel (Monetización Premium & PPV)",
+      synopsis: "Alina asume su rol de Dominatrix psicológica en el boudoir chiaroscuro. Se exploran fetiches, disciplina consentida y el placer de obedecer instrucciones sensoriales precisas.",
+      hook: "«No te asusta obedecer. Te asusta admitir lo mucho que disfrutas cuando alguien tiene el control absoluto de tus fantasías. Mírame a los ojos.»",
+      audioTone: "Voz firme, dominante pero cálida, seguridad implacable, silencios deliberados de 2 segundos.",
+      conversionGoal: "Venta de paquetes de mensajes privados PPV ($45-$120 USD) con audios personalizados de dominación mental.",
+      recommendedFormat: "podcast",
+      recommendedLocation: "boudoir"
+    },
+    4: {
+      number: 4,
+      week: "Semana 4",
+      title: "El Círculo Íntimo",
+      subtitle: "Santuario Privado & Pertenencia Exclusiva",
+      status: "⚪ Planificado",
+      stage: "Retention & LTV (Cierre de Ciclo Mensual)",
+      synopsis: "Reflexión nocturna en la terraza penthouse de Barcelona. Alina celebra a la comunidad que se atrevió a soltar el control sin culpa. Oferta de acceso anual y consolidación de miembros fundadores.",
+      hook: "«Llegamos al final del mes. Quienes entendieron este lenguaje ya están adentro conmigo. ¿Tú vas a seguir mirando desde afuera?»",
+      audioTone: "Complicidad íntima, tono nocturno relajado con copa de vino, gratitud sensual.",
+      conversionGoal: "Renovación mensual automática en Fanvue + Membresía Anual con 2 meses de descuento.",
+      recommendedFormat: "photos_exterior",
+      recommendedLocation: "terrace"
+    }
+  },
+
+  formats: {
+    podcast: {
+      id: "podcast",
+      name: "Podcast Grabado en Casa («The Mind Sanctuary»)",
+      icon: "fa-solid fa-microphone-lines",
+      badge: "High Retention Talking-Head",
+      badgeColor: "#ec4899",
+      desc: "Formato confesionario íntimo con audífonos over-ear de monitorización y micrófono Shure SM7B sobre brazo articulado. Enfoque en psicología del deseo, presencia magnética y lipsync quirúrgico.",
+      aspectRatio: "16:9 y 9:16",
+      idealDuration: "30 a 60 segundos",
+      creditCostHiggsfield: "12 a 18 créditos (tomas de 5s estables)",
+      productionProtocol: "1. Render frontal en Flux.1 con boca cerrada neutra ➔ 2. Audio en ElevenLabs (Voice ID: Alina-Hypno-v1) ➔ 3. Sincronización labial en LivePortrait o Hedra ➔ 4. Subtítulos dinámicos de alto contraste en CapCut/Premiere.",
+      riskFactor: "Bajo (el encuadre frontal cerrado y la inmovilidad del torso garantizan 0% de deformaciones corporales)."
+    },
+    photos_exterior: {
+      id: "photos_exterior",
+      name: "Fotos en Exterior & Balcón (Anclas de Alta Fidelidad)",
+      icon: "fa-solid fa-camera-retro",
+      badge: "0 Créditos Video • Consistencia 100%",
+      badgeColor: "#10b981",
+      desc: "Imágenes fijas ultra-definidas que sirven como anclas de consistencia facial, portadas de carruseles en Instagram, posts en X y miniaturas para videos verticales.",
+      aspectRatio: "4:5 (Instagram) y 16:9 (X / YouTube)",
+      idealDuration: "Estático (0 segundos de video)",
+      creditCostHiggsfield: "0 créditos (render local o Flux API económico)",
+      productionProtocol: "1. Generación directa en Flux.1 Dev con peso LoRA 0.82 ➔ 2. Selección de las 3 mejores expresiones ➔ 3. Upscaling sutil a 4K ➔ 4. Publicación en feed con micro-ensayo reflexivo y enlace al bio.",
+      riskFactor: "Cero (no hay riesgo temporal; control total de anatomía antes de publicar)."
+    },
+    selfie_walking: {
+      id: "selfie_walking",
+      name: "Walking Selfie en Exterior (Tomas Ultra-Cortas 2-4s)",
+      icon: "fa-solid fa-mobile-screen-button",
+      badge: "Cero Drifting de Fondo",
+      badgeColor: "#38bdf8",
+      desc: "Sensación de cercanía instantánea en formato vertical tipo historia de Instagram o TikTok. La cámara frontal de teléfono en mano se mueve suavemente mientras camina despacio.",
+      aspectRatio: "9:16 vertical",
+      idealDuration: "2.5 a 3.5 segundos estrictos",
+      creditCostHiggsfield: "8 a 10 créditos por toma",
+      productionProtocol: "1. Render de imagen base en ángulo selfie (brazo ligeramente extendido) ➔ 2. Motion Prompt con movimiento de mano estabilizado (handheld bob) y brisa en el pelo ➔ 3. Cortar en el segundo 3.0 antes de que el fondo empiece a deformarse ➔ 4. Voz en off susurrada.",
+      riskFactor: "Medio-Bajo (siempre que la toma no exceda los 4 segundos; el corte rápido mantiene la ilusión perfecta)."
+    },
+    dance_tiktok: {
+      id: "dance_tiktok",
+      name: "Videos Bailando / TikTok Trends (Motion Mimicry)",
+      icon: "fa-solid fa-music",
+      badge: "Anti-Deformación Anatómica",
+      badgeColor: "#f59e0b",
+      desc: "Para capturar el algoritmo de TikTok y Reels sin destruir las piernas ni los brazos de Alina. Utiliza micro-movimientos rítmicos o transferencia de esqueleto sobre video real.",
+      aspectRatio: "9:16 vertical",
+      idealDuration: "5 a 10 segundos",
+      creditCostHiggsfield: "15 a 25 créditos",
+      productionProtocol: "OPCIÓN A: Swaying rítmico de caderas con pies estáticos en el suelo y manos apoyadas en cintura. OPCIÓN B (Motion Transfer): Grabar a una bailarina humana y mapear la pose esquelética en MimicMotion/LivePortrait sobre el modelo de Alina.",
+      riskFactor: "Medio (jamás pedir saltos o cruces rápidos de brazos en Text-to-Video; seguir el protocolo de pies fijos)."
+    }
+  },
+
+  locations: {
+    loft: {
+      id: "loft",
+      code: "SET-01",
+      name: "Barcelona Dark Loft Studio («The Sanctuary»)",
+      icon: "fa-solid fa-couch",
+      tag: "Studio & Podcasting",
+      desc: "Paredes de ladrillo visto oscuro, estantería de madera maciza con libros de psicología y sexología clínica, lámpara cálida vintage tipo Edison, micrófono Shure SM7B en brazo metálico articulado, sillón Chesterfield.",
+      promptTokens: "dark industrial Barcelona loft interior, exposed aged dark brick wall, warm ambient filament Edison bulb lamp, rustic mahogany bookshelves filled with vintage leatherbound clinical psychology and sexology books, cozy intimate study atmosphere, soft golden shadows, premium architectural aesthetics",
+      lighting: "Chiaroscuro cálido (3200K), luz de recorte suave en cabello cobrizo, fondo en penumbra.",
+      bestFor: "Podcast, confesionarios de voz, reflexiones íntimas, sesiones de audio binaural."
+    },
+    terrace: {
+      id: "terrace",
+      code: "SET-02",
+      name: "Eixample Terrace (Golden Hour Sunset)",
+      icon: "fa-solid fa-city",
+      tag: "Exterior Urbano Sofisticado",
+      desc: "Terraza barcelonesa con forja modernista negra, vistas panorámicas a la ciudad bajo luz dorada del atardecer, copas de vino de cristal sobre mesa de hierro forjado.",
+      promptTokens: "opulent Barcelona Eixample penthouse terrace, black ornate wrought-iron balcony railing, panoramic Mediterranean city skyline at golden hour sunset, soft peach and lilac evening sky, subtle urban depth, Mediterranean elegance",
+      lighting: "Luz natural rasante de atardecer (Golden Hour • 4500K), reflejos dorados y contraluz suave.",
+      bestFor: "Fotos editoriales de exterior, walking selfies, cierres de capítulo y lifestyle cosmopolita."
+    },
+    tulum: {
+      id: "tulum",
+      code: "SET-03",
+      name: "Tulum Jungle Villa & Deck",
+      icon: "fa-solid fa-tree",
+      tag: "Naturaleza Sensorial & Relajación",
+      desc: "Madera de teca envejecida, hojas tropicales gigantes de platanera y palmeras, lino crudo blanco, luz solar natural filtrada a través del follaje selvático.",
+      promptTokens: "luxury eco-villa teakwood deck in Tulum jungle, lush oversized monstera and palm foliage background, soft dappled natural morning sunlight filtering through leaves, bohemian white linen drapes, serene tropical paradise, organic aesthetic",
+      lighting: "Luz solar diurna tamizada por hojas verdes (Dappled light • 5600K), ambiente orgánico fresco.",
+      bestFor: "Walking selfies vacacionales, ejercicios de respiración, sets de bikini/lino y contenido sensorial."
+    },
+    boudoir: {
+      id: "boudoir",
+      code: "SET-04",
+      name: "Boudoir Velvet & Chiaroscuro (Midnight Sessions)",
+      icon: "fa-solid fa-moon",
+      tag: "Erotismo Consciente & Dominación",
+      desc: "Cabecero tapizado en terciopelo verde esmeralda o negro noche, sábanas de satén oscuro arrugadas con elegancia, luz trémula de velas aromáticas, sombras tenebristas pronunciadas.",
+      promptTokens: "high-end moody private boudoir, emerald green velvet tufted headboard, wrinkled dark charcoal silk bedding, soft warm flickering candlelight, deep dramatic chiaroscuro shadows, luxurious seductive private suite interior, mysterious atmosphere",
+      lighting: "Luz de vela íntima (2200K) con sombras profundas, alta carga de misterio y erotismo.",
+      bestFor: "Dominación psicológica, fetiches elegantes, audios eróticos 3D y sets premium Fanvue."
+    }
+  },
+
+  consistencyLock: {
+    name: "Alina Van Dijk • Master Facial Token Lock",
+    age: "28 años",
+    ethnicity: "Neerlandesa-Latina (Ámsterdam / Barcelona)",
+    hair: "Pelirrojo cobrizo natural intenso, ondas suaves o moño alto despeinado con mechones sueltos",
+    eyes: "Verde esmeralda penetrante con pestañas naturales definidas",
+    skin: "Pecas naturales esparcidas sobre el puente de la nariz y pómulos, micro-poros visibles fotorrealistas",
+    lips: "Labios carnosos naturales con tinte mate carmesí sutil",
+    physique: "Elegante, atlética femenina, hombros definidos, porte seguro",
+    tokenSnippet: "28yo Dutch-Latin woman Alina Van Dijk, vivid copper red hair with natural soft waves, vivid emerald green eyes, light natural freckles dusting the bridge of nose and upper cheeks, full naturally pigmented crimson lips, authentic photorealistic skin texture with visible micro-pores, refined facial bone structure, magnetic and commanding yet empathetic gaze, unposed raw photographic capture",
+    negativeTokens: "deformed, extra fingers, cartoon, plastic skin, blur, cross-eyed, bad anatomy, over-smoothed skin, third arm, fused limbs, distorted ears"
+  },
+
+  zeroWasteDoctrine: [
+    {
+      num: "01",
+      rule: "Regla de Entrada Limpia (Garbage In = Garbage Out)",
+      desc: "Si la imagen base de Flux.1 tiene un solo dedo dudoso o resolución inferior a 2K, jamás se anima en Higgsfield. Cada defecto estático se multiplica x10 en video.",
+      severity: "Crítica"
+    },
+    {
+      num: "02",
+      rule: "Límite del Ángulo Ciego (< 25° de rotación)",
+      desc: "Nunca pedir que el personaje gire la cabeza más de 25° respecto al plano inicial. Si la IA no ve la otra oreja en la foto, la inventará derretida.",
+      severity: "Crítica"
+    },
+    {
+      num: "03",
+      rule: "Motion Strength Cap (2.0 a 3.5 en Retratos)",
+      desc: "En los sliders de movimiento de Higgsfield o Kling (escala 1-10), fijar entre 2.0 y 3.5. Arriba de 4.0 el transformador temporal desintegra el rostro.",
+      severity: "Alta"
+    },
+    {
+      num: "04",
+      rule: "Regla «Cuerpo Fijo, Cámara Móvil»",
+      desc: "En lugar de pedirle a Alina que camine 10 metros, que la cámara haga un slow push-in (dolly suave) o un rack focus mientras ella respira con serenidad.",
+      severity: "Alta"
+    },
+    {
+      num: "05",
+      rule: "Blindaje de Manos (Hands-Free Prompts)",
+      desc: "Las manos nunca deben tocarse la cara ni cruzarse entre sí ni jugar con el pelo. Deben reposar en la mesa, en la cintura o sujetar un objeto estático.",
+      severity: "Crítica"
+    },
+    {
+      num: "06",
+      rule: "Fórmula 1:2 con B-Roll de Accesorios",
+      desc: "1 plano de rostro (5s) + 2 planos de accesorios/bodegones (10s) = 15s de Reel con 0% de deformación y 70% de ahorro en créditos.",
+      severity: "Media"
+    },
+    {
+      num: "07",
+      rule: "Micro-Tomas de 2 a 4 Segundos Máximo",
+      desc: "El error temporal de los transformers se dispara tras el segundo 4. Los micro-clips de 3 segundos no sufren deformación y dan un ritmo ágil de montaje.",
+      severity: "Alta"
+    },
+    {
+      num: "08",
+      rule: "Lip-sync Dedicado vs. Prompt de Habla",
+      desc: "Nunca escribir «she talks to camera» en Higgsfield. Generar el plano estable con boca cerrada y aplicar sincronización labial con LivePortrait o Hedra.",
+      severity: "Crítica"
+    },
+    {
+      num: "09",
+      rule: "Generación en 1080p + Escalado Local en 4K",
+      desc: "No pagar el sobrecoste de 4K en la nube. Generar tomas en 1080p y escalarlas localmente con Topaz Video AI o Upscayl para ahorrar 75% de créditos.",
+      severity: "Media"
+    },
+    {
+      num: "10",
+      rule: "Checklist Pre-Flight Obligatorio",
+      desc: "Nadie en el equipo puede apretar «Generate» sin verificar los 6 puntos de control del protocolo.",
+      severity: "Operativa"
+    }
+  ]
+};
+
+function selectPipelineChapter(chapNum) {
+  window.contentPipelineState.chapter = parseInt(chapNum, 10);
+  const chap = pipelineAlinaData.chapters[window.contentPipelineState.chapter];
+  if (chap && chap.recommendedFormat) window.contentPipelineState.format = chap.recommendedFormat;
+  if (chap && chap.recommendedLocation) window.contentPipelineState.location = chap.recommendedLocation;
+  renderMasterContentPipeline();
+}
+
+function selectPipelineFormat(formatId) {
+  window.contentPipelineState.format = formatId;
+  renderMasterContentPipeline();
+}
+
+function selectPipelineLocation(locationId) {
+  window.contentPipelineState.location = locationId;
+  renderMasterContentPipeline();
+}
+
+function togglePipelineCheck(index) {
+  if (!window.contentPipelineState.checklist) window.contentPipelineState.checklist = [false, false, false, false, false, false];
+  window.contentPipelineState.checklist[index] = !window.contentPipelineState.checklist[index];
+  renderMasterContentPipeline();
+}
+
+function resetPipelineChecklist() {
+  window.contentPipelineState.checklist = [false, false, false, false, false, false];
+  renderMasterContentPipeline();
+}
+
+function copyPipelineFullPackage() {
+  const state = window.contentPipelineState;
+  const chap = pipelineAlinaData.chapters[state.chapter];
+  const fmt = pipelineAlinaData.formats[state.format];
+  const loc = pipelineAlinaData.locations[state.location];
+  const lock = pipelineAlinaData.consistencyLock;
+
+  const pkg = `=== FICHA DE RODAJE INDUSTRIAL: ALINA VAN DIJK ===
+CAPÍTULO: ${chap.number} - ${chap.title} (${chap.week})
+ETAPA: ${chap.stage}
+OBJETIVO: ${chap.conversionGoal}
+
+FORMATO: ${fmt.name}
+DURACIÓN: ${fmt.idealDuration}
+MOTOR DE LIPSYNC: ${fmt.lipsyncTool || 'N/A'}
+
+LOCACIÓN FIJA: ${loc.code} - ${loc.name}
+ILUMINACIÓN: ${loc.lighting}
+
+[1] PROMPT IMAGEN BASE (Flux.1 Dev 4K):
+${lock.tokenSnippet}, ${loc.promptTokens}, ${fmt.desc}, 85mm f/1.4 portrait lens, cinematic atmosphere, Hasselblad color science, raw photorealistic capture --ar ${state.format === 'photos_exterior' ? '4:5' : '9:16'}
+
+[2] MOTION PROMPT (Higgsfield I2V / Kling 3.0):
+${state.format === 'podcast' ? 'Very subtle slow push-in, micro chest breathing, intense steady eye contact with camera, gentle blink, stationary body posture --motion 2' : state.format === 'selfie_walking' ? 'Gentle handheld front camera walking motion, slight natural breathing bob, wind moving red hair softly, subject looking into camera with subtle smile, 3 seconds duration max --motion 3' : state.format === 'dance_tiktok' ? 'Subtle rhythmic sensual hip swaying to slow deep house beat, gentle shoulder groove, feet firmly planted on floor, steady body structure, no rapid limb crossing, smooth fluid motion --motion 3' : 'N/A (Asset fotográfico)'}
+
+[3] GUIÓN DE LOCUCIÓN (ElevenLabs Voice ID: Alina-Hypno-v1):
+${chap.hook}
+
+[4] PROTOCOLO ZERO-WASTE REQUERIDO:
+- Motion Strength: 2.0 a 3.5
+- Duración de toma: ${fmt.idealDuration}
+- Montaje con 2 planos de B-Roll de Accesorios (Cuero, Café, Libros o Shibari).
+===================================================`;
+
+  navigator.clipboard.writeText(pkg);
+  alert('¡Ficha completa de rodaje copiada al portapapeles!');
+}
+
+function renderMasterContentPipeline() {
+  const container = document.getElementById('master-content-pipeline-container');
+  if (!container) return;
+
+  const state = window.contentPipelineState;
+  const currentChapter = pipelineAlinaData.chapters[state.chapter] || pipelineAlinaData.chapters[1];
+  const currentFormat = pipelineAlinaData.formats[state.format] || pipelineAlinaData.formats.podcast;
+  const currentLocation = pipelineAlinaData.locations[state.location] || pipelineAlinaData.locations.loft;
+  const lock = pipelineAlinaData.consistencyLock;
+
+  const checklistItems = [
+    { label: "Imagen Base en Flux 2K aprobada sin defectos anatómicos en dedos u ojos", rule: "Regla 01" },
+    { label: "Slider de movimiento (Motion Strength) fijado estrictamente entre 2.0 y 3.5", rule: "Regla 03" },
+    { label: "Manos ancladas o fuera del plano (sin contacto con rostro ni cabello)", rule: "Regla 05" },
+    { label: "Tomas de video limitadas a un máximo estricto de 2.5 a 4.0 segundos", rule: "Regla 07" },
+    { label: "Dos planos de Accesorios B-Roll (Zero-Face) listos para intercalar", rule: "Regla 06" },
+    { label: "Locución de ElevenLabs generada para montaje de Lipsync dedicado", rule: "Regla 08" }
+  ];
+
+  const checks = state.checklist || [false, false, false, false, false, false];
+  const checkedCount = checks.filter(Boolean).length;
+  const safetyPercent = Math.round((checkedCount / checklistItems.length) * 100);
+
+  // Dynamic Prompt Assembly
+  const assembledImgPrompt = `${lock.tokenSnippet}, situated in ${currentLocation.promptTokens}, ${state.format === 'podcast' ? 'wearing sleek black turtleneck, wearing professional matte black studio monitoring over-ear headphones, talking gently in front of a high-end Shure SM7B dynamic microphone on an articulated boom arm' : state.format === 'selfie_walking' ? 'handheld front-camera walking selfie angle, candid natural expression, loose copper hair gently blowing in wind' : state.format === 'dance_tiktok' ? 'full body standing in sleek dark rib-knit jumpsuit, gentle confident smile, hands resting near hips' : 'leaning gracefully against railing, holding glass of wine, elegant relaxed posture'}, 85mm portrait lens, f/1.4 shallow depth of field, Hasselblad color science, hyper-realistic skin texture, authentic micro-pores, natural soft shadows, master photographic quality --ar ${state.format === 'photos_exterior' ? '4:5' : '9:16'}`;
+
+  const assembledMotionPrompt = state.format === 'podcast' 
+    ? "Very subtle slow push-in, micro chest breathing, intense steady eye contact with camera, gentle blink, stationary body posture --motion 2"
+    : state.format === 'selfie_walking'
+    ? "Gentle handheld front camera walking motion, slight natural breathing bob, wind moving red hair softly, subject looking into camera with subtle smile, 3 seconds duration max --motion 3"
+    : state.format === 'dance_tiktok'
+    ? "Subtle rhythmic sensual hip swaying to slow deep house beat, gentle shoulder groove, feet firmly planted on floor, steady body structure, no rapid limb crossing, smooth fluid motion --motion 3"
+    : "N/A - Asset fotográfico estático (0 créditos de video).";
+
+  container.innerHTML = `
+    <!-- 1. HERO BANNER -->
+    <div class="content-pipeline-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <span class="pipeline-badge-pill" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4);">
+            <i class="fa-solid fa-industry"></i> Piloto de Producción Industrial • Motor de Contenido V1
+          </span>
+          <h2 style="font-family: var(--font-heading); font-size: 1.85rem; color: #fff; margin: 0 0 0.4rem 0;">
+            Master Content Pipeline: Alina Van Dijk
+          </h2>
+          <p style="color: #cbd5e1; font-size: 0.92rem; max-width: 820px; line-height: 1.55; margin: 0;">
+            Centro de mando operativo para producir todo el contenido audiovisual del mes sin quemar créditos en Higgsfield. 
+            Estandariza los <strong>4 formatos oficiales</strong> (Podcast en casa, Walking Selfie 3s, Fotos Exterior y Baile TikTok) con <strong>locaciones fijas</strong> y consistencia facial sellada.
+          </p>
+        </div>
+        <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+          <button onclick="copyPipelineFullPackage()" class="btn btn-primary" style="background: linear-gradient(135deg, #f59e0b, #ec4899); border: none; font-size: 0.85rem;">
+            <i class="fa-solid fa-copy"></i> Copiar Ficha Completa de Rodaje
+          </button>
+          <a href="#influencer/alina/cockpit" class="btn btn-secondary" style="font-size: 0.85rem;">
+            <i class="fa-solid fa-sliders"></i> Ver Cockpit de Alina
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.85rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08);">
+        <div style="background: rgba(0,0,0,0.3); padding: 0.65rem 0.85rem; border-radius: 6px;">
+          <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Arco Narrativo:</span>
+          <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">El Arte de Ceder el Control</div>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); padding: 0.65rem 0.85rem; border-radius: 6px;">
+          <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Presupuesto Asignado:</span>
+          <div style="font-size: 0.85rem; font-weight: 700; color: #f59e0b;">1.000 Créditos (33% Ultra)</div>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); padding: 0.65rem 0.85rem; border-radius: 6px;">
+          <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Fórmula de Montaje:</span>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--cyan);">1 Plano Rostro : 2 Accesorios</div>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); padding: 0.65rem 0.85rem; border-radius: 6px;">
+          <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Blindaje Pre-Flight:</span>
+          <div style="font-size: 0.85rem; font-weight: 700; color: ${safetyPercent >= 80 ? '#10b981' : safetyPercent >= 50 ? '#f59e0b' : '#ef4444'};">
+            ${safetyPercent}% Seguro (${checkedCount}/6 checks)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SELECTOR DE CAPÍTULO Y ARCO NARRATIVO -->
+    <div class="glass-card" style="padding: 1.5rem; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: var(--purple); text-transform: uppercase;">
+            <i class="fa-solid fa-timeline"></i> Cronograma de Producción Mensual
+          </span>
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin: 0.2rem 0 0 0;">
+            Arco Narrativo: Selecciona el Capítulo en Rodaje
+          </h3>
+        </div>
+        <span style="font-size: 0.78rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.3rem 0.75rem; border-radius: 999px;">
+          Peak semanal: Viernes a Domingo
+        </span>
+      </div>
+
+      <!-- Segmented Chapters Selector -->
+      <div class="pipeline-nav-segmented">
+        ${Object.values(pipelineAlinaData.chapters).map(c => `
+          <button class="pipeline-nav-btn ${state.chapter === c.number ? 'active' : ''}" onclick="selectPipelineChapter(${c.number})">
+            <span style="font-weight: 800;">${c.week}:</span> ${c.title.split(':')[0]}
+          </button>
+        `).join('')}
+      </div>
+
+      <!-- Active Chapter Detail Box -->
+      <div style="background: rgba(0,0,0,0.35); border-left: 3px solid #f59e0b; padding: 1.25rem; border-radius: 6px; display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem;">
+            <span style="font-size: 0.75rem; font-weight: 800; background: rgba(245, 158, 11, 0.2); color: #f59e0b; padding: 0.2rem 0.55rem; border-radius: 4px;">
+              CAPÍTULO ${currentChapter.number} • ${currentChapter.week.toUpperCase()}
+            </span>
+            <span style="font-size: 0.78rem; color: var(--cyan); font-weight: 700;">
+              ${currentChapter.stage}
+            </span>
+          </div>
+          <h4 style="color: #fff; font-size: 1.15rem; margin: 0 0 0.5rem 0;">${currentChapter.title} — <span style="font-size: 0.95rem; font-weight: normal; color: var(--text-muted);">${currentChapter.subtitle}</span></h4>
+          <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 0.75rem;">
+            ${currentChapter.synopsis}
+          </p>
+          <div style="background: rgba(0,0,0,0.4); padding: 0.75rem 1rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); font-style: italic; font-size: 0.85rem; color: #f472b6;">
+            <strong><i class="fa-solid fa-quote-left"></i> Hook de Locución:</strong> ${currentChapter.hook}
+          </div>
+        </div>
+
+        <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 1.25rem; font-size: 0.82rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="margin-bottom: 0.6rem;">
+              <strong style="color: #fff; display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Objetivo Comercial:</strong>
+              <span style="color: #10b981; font-weight: 700;">${currentChapter.conversionGoal}</span>
+            </div>
+            <div style="margin-bottom: 0.6rem;">
+              <strong style="color: #fff; display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Inflexión de Voz (ElevenLabs):</strong>
+              <span style="color: #cbd5e1;">${currentChapter.audioTone}</span>
+            </div>
+          </div>
+          <div style="font-size: 0.75rem; color: #94a3b8; background: rgba(255,255,255,0.02); padding: 0.4rem 0.6rem; border-radius: 4px;">
+            Recomendado: <strong>${pipelineAlinaData.formats[currentChapter.recommendedFormat].name.split('(')[0]}</strong> en <strong>${pipelineAlinaData.locations[currentChapter.recommendedLocation].name.split('(')[0]}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. FORMATOS DE PRODUCCIÓN CALIBRADOS (4 CARDS) -->
+    <div style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: #ec4899; text-transform: uppercase;">
+            <i class="fa-solid fa-clapperboard"></i> Mecánica de Producción Audiovisual
+          </span>
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin: 0.2rem 0 0 0;">
+            Selecciona el Formato de Grabación
+          </h3>
+        </div>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Haz clic para calibrar la ficha técnica</span>
+      </div>
+
+      <div class="pipeline-format-grid">
+        ${Object.values(pipelineAlinaData.formats).map(f => `
+          <div class="pipeline-card-interactive ${state.format === f.id ? 'active' : ''}" onclick="selectPipelineFormat('${f.id}')">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: ${f.badgeColor};">
+                  <i class="${f.icon}"></i>
+                </div>
+                <span style="font-size: 0.68rem; font-weight: 800; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(255,255,255,0.08); color: ${f.badgeColor};">
+                  ${f.badge}
+                </span>
+              </div>
+              <h4 style="color: #fff; font-size: 1rem; margin: 0 0 0.35rem 0;">${f.name}</h4>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.45; margin-bottom: 0.75rem;">
+                ${f.desc}
+              </p>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.65rem; font-size: 0.74rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                <span style="color: var(--text-muted);">Duración:</span>
+                <strong style="color: #fff;">${f.idealDuration}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                <span style="color: var(--text-muted);">Costo Higgsfield:</span>
+                <strong style="color: #f59e0b;">${f.creditCostHiggsfield}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-muted);">Riesgo de Deformación:</span>
+                <strong style="color: ${f.riskFactor.includes('Bajo') || f.riskFactor.includes('Cero') ? '#10b981' : '#f59e0b'};">${f.riskFactor.split('(')[0]}</strong>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- 4. LOCACIONES FIJAS (FIXED SETS) -->
+    <div style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: var(--cyan); text-transform: uppercase;">
+            <i class="fa-solid fa-map-pin"></i> Arquitectura de Sets Fijos
+          </span>
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin: 0.2rem 0 0 0;">
+            Locaciones Oficiales de Alina (Fondos Sellados)
+          </h3>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+          Mantener los fondos estables evita que el personaje parezca saltar entre dimensiones
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+        ${Object.values(pipelineAlinaData.locations).map(loc => `
+          <div class="pipeline-card-interactive ${state.location === loc.id ? 'active' : ''}" onclick="selectPipelineLocation('${loc.id}')">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <span style="font-size: 0.7rem; font-weight: 800; color: var(--cyan); background: rgba(6, 182, 212, 0.15); padding: 0.15rem 0.45rem; border-radius: 4px;">
+                  ${loc.code}
+                </span>
+                <span style="font-size: 0.72rem; color: #f59e0b; font-weight: 700;">
+                  ${loc.tag}
+                </span>
+              </div>
+              <h4 style="color: #fff; font-size: 0.98rem; margin: 0 0 0.35rem 0; display: flex; align-items: center; gap: 0.4rem;">
+                <i class="${loc.icon}"></i> ${loc.name}
+              </h4>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.45; margin-bottom: 0.65rem;">
+                ${loc.desc}
+              </p>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.3); padding: 0.5rem 0.65rem; border-radius: 4px; font-size: 0.72rem; border-left: 2px solid var(--cyan);">
+              <strong style="color: #fff;">Iluminación:</strong> <span style="color: #cbd5e1;">${loc.lighting}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- 5. GENERADOR INTERACTIVO DE FICHAS DE RODAJE (SHOOTING STUDIO) -->
+    <div class="glass-card" style="padding: 1.75rem; margin-bottom: 2rem; border-color: rgba(245, 158, 11, 0.4); background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08) 0%, rgba(14, 18, 34, 0.98) 100%);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: #f59e0b; text-transform: uppercase;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generador Técnico en Tiempo Real
+          </span>
+          <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin: 0.2rem 0 0 0;">
+            Ficha de Rodaje Activa: [Capítulo ${currentChapter.number}] + [${currentFormat.name.split('(')[0]}] + [${currentLocation.code}]
+          </h3>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button onclick="navigator.clipboard.writeText('${assembledImgPrompt.replace(/'/g, "\\'")}'); alert('¡Prompt de imagen Flux copiado!');" class="btn btn-secondary btn-sm" style="font-size: 0.75rem;">
+            <i class="fa-solid fa-copy"></i> Copiar Prompt Flux
+          </button>
+          <button onclick="navigator.clipboard.writeText('${assembledMotionPrompt.replace(/'/g, "\\'")}'); alert('¡Motion Prompt copiado!');" class="btn btn-secondary btn-sm" style="font-size: 0.75rem;">
+            <i class="fa-solid fa-video"></i> Copiar Motion Prompt
+          </button>
+          <button onclick="navigator.clipboard.writeText('${currentChapter.hook.replace(/'/g, "\\'")}'); alert('¡Guion de locución copiado!');" class="btn btn-primary btn-sm" style="font-size: 0.75rem; background: linear-gradient(135deg, #ec4899, #8b5cf6); border: none;">
+            <i class="fa-solid fa-microphone"></i> Copiar Guión
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Script & Prompt Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem;">
+        
+        <!-- Bloque 1: Guion de Voz ElevenLabs -->
+        <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.72rem; font-weight: 800; color: #ec4899; text-transform: uppercase;">
+              <i class="fa-solid fa-microphone-lines"></i> Guión de Locución & Lip-sync
+            </span>
+            <span style="font-size: 0.7rem; color: #cbd5e1; background: rgba(236,72,153,0.15); padding: 0.15rem 0.5rem; border-radius: 4px;">
+              Voice ID: Alina-Hypno-v1
+            </span>
+          </div>
+          <div style="font-size: 0.86rem; color: #fff; line-height: 1.6; font-style: italic; background: rgba(0,0,0,0.3); padding: 0.85rem; border-radius: 6px; border-left: 3px solid #ec4899; margin-bottom: 0.85rem;">
+            «${currentChapter.hook.replace(/[«»]/g, '')}»
+          </div>
+          <div style="font-size: 0.76rem; color: #94a3b8; line-height: 1.4;">
+            <strong>Pipeline de Voz:</strong> ElevenLabs ➔ Descarga WAV 24-bit ➔ Inyectar con imagen base en <strong>${currentFormat.lipsyncTool || 'LivePortrait'}</strong> con threshold de boca neutro.
+          </div>
+        </div>
+
+        <!-- Bloque 2: Prompt Flux.1 Dev (Keyframe) -->
+        <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.72rem; font-weight: 800; color: var(--cyan); text-transform: uppercase;">
+              <i class="fa-solid fa-image"></i> Prompt Imagen Base (Flux.1 Dev)
+            </span>
+            <span style="font-size: 0.7rem; color: var(--cyan); background: rgba(6,182,212,0.15); padding: 0.15rem 0.5rem; border-radius: 4px;">
+              LoRA Alina (0.82)
+            </span>
+          </div>
+          <div class="pipeline-prompt-display" style="max-height: 120px; overflow-y: auto;">
+            ${assembledImgPrompt}
+          </div>
+          <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 0.5rem;">
+            <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> Incluye tokens de consistencia inalterables: cabello cobrizo, ojos verde esmeralda y pecas en puente nasal.
+          </div>
+        </div>
+
+        <!-- Bloque 3: Motion Prompt Higgsfield / Kling -->
+        <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.72rem; font-weight: 800; color: #f59e0b; text-transform: uppercase;">
+              <i class="fa-solid fa-video"></i> Motion Prompt (Higgsfield I2V / Kling)
+            </span>
+            <span style="font-size: 0.7rem; color: #f59e0b; background: rgba(245,158,11,0.15); padding: 0.15rem 0.5rem; border-radius: 4px;">
+              Motion 2.0 - 3.0
+            </span>
+          </div>
+          <div class="pipeline-prompt-display" style="color: #fcd34d;">
+            ${assembledMotionPrompt}
+          </div>
+          <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 0.5rem;">
+            <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b;"></i> Restricción estricta: No añadir verbos de acción complejos para evitar deformación facial.
+          </div>
+        </div>
+
+        <!-- Bloque 4: Planos de Inserción B-Roll (Accesorios) -->
+        <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.72rem; font-weight: 800; color: #a855f7; text-transform: uppercase;">
+              <i class="fa-solid fa-gem"></i> Accesorios B-Roll (Fórmula 1:2)
+            </span>
+            <span style="font-size: 0.7rem; color: #10b981; background: rgba(16,185,129,0.15); padding: 0.15rem 0.5rem; border-radius: 4px;">
+              0% Deformación Cara
+            </span>
+          </div>
+          <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.45; margin-bottom: 0.65rem;">
+            Para este capítulo, intercalar el plano de Alina con los siguientes bodegones táctiles:
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.78rem;">
+            <div style="background: rgba(255,255,255,0.03); padding: 0.4rem 0.6rem; border-radius: 4px;">
+              <strong style="color: #f59e0b;">☕ Accesorio 1:</strong> Taza de espresso con vapor ascendente en mesa de teca/mármol.
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 0.4rem 0.6rem; border-radius: 4px;">
+              <strong style="color: #ec4899;">🖤 Accesorio 2:</strong> Gargantilla de cuero o antifaz con reflejo de vela en satén negro.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 6. PROTOCOLO ZERO-WASTE AMPLIADO & CHECKLIST INTERACTIVO -->
+    <div class="glass-card" style="padding: 1.75rem; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: #10b981; text-transform: uppercase;">
+            <i class="fa-solid fa-shield-halved"></i> Control de Pérdidas & Optimización de Saldo
+          </span>
+          <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin: 0.2rem 0 0 0;">
+            Protocolo Zero-Waste: Checklist Pre-Flight de Rodaje
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">
+            Marca cada verificación antes de tocar el botón de "Generate" en Higgsfield para garantizar 0 créditos desperdiciados:
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button onclick="resetPipelineChecklist()" class="btn btn-secondary btn-sm" style="font-size: 0.75rem;">
+            <i class="fa-solid fa-rotate-left"></i> Reiniciar Checks
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Checklist -->
+      <div class="pipeline-checklist-grid">
+        ${checklistItems.map((item, idx) => `
+          <div class="pipeline-check-item ${checks[idx] ? 'checked' : ''}" onclick="togglePipelineCheck(${idx})">
+            <div class="pipeline-checkbox-custom">
+              ${checks[idx] ? '<i class="fa-solid fa-check"></i>' : ''}
+            </div>
+            <div>
+              <div style="font-size: 0.84rem; font-weight: 600; color: ${checks[idx] ? '#fff' : '#cbd5e1'}; line-height: 1.4;">
+                ${item.label}
+              </div>
+              <span style="font-size: 0.68rem; color: ${checks[idx] ? '#10b981' : '#94a3b8'}; font-weight: 700; text-transform: uppercase;">
+                ${item.rule} • ${checks[idx] ? 'Verificado' : 'Pendiente de Validar'}
+              </span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- The 10 Laws Accordion / Summary Grid -->
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);">
+        <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-scroll" style="color: #f59e0b;"></i> Los 10 Mandamientos Anti-Quema de Créditos
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem;">
+          ${pipelineAlinaData.zeroWasteDoctrine.map(law => `
+            <div style="background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: 6px; border-left: 3px solid ${law.severity === 'Crítica' ? '#ef4444' : law.severity === 'Alta' ? '#f59e0b' : '#38bdf8'}; font-size: 0.8rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                <strong style="color: #fff;">${law.num}. ${law.rule}</strong>
+                <span style="font-size: 0.65rem; padding: 0.1rem 0.35rem; border-radius: 4px; background: rgba(255,255,255,0.08); color: ${law.severity === 'Crítica' ? '#ef4444' : law.severity === 'Alta' ? '#f59e0b' : '#38bdf8'}; font-weight: 800;">
+                  ${law.severity}
+                </span>
+              </div>
+              <div style="color: #94a3b8; line-height: 1.4;">${law.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 
